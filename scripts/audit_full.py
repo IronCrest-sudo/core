@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-vortacraftmc - comprehensive consistency audit.
+vortaforge - comprehensive consistency audit.
 
 Audits the whole organization, not just the working tree:
 
@@ -16,10 +16,10 @@ Audits the whole organization, not just the working tree:
   I. Community health    README, license, contributing, issue templates
 
 Usage:
-    python3 scripts/audit_full.py --org vortacraftmc
-    python3 scripts/audit_full.py --org vortacraftmc --json
-    python3 scripts/audit_full.py --org vortacraftmc --fix [--dry-run]
-    python3 scripts/audit_full.py --org vortacraftmc --log audit-run.log
+    python3 scripts/audit_full.py --org vortaforge
+    python3 scripts/audit_full.py --org vortaforge --json
+    python3 scripts/audit_full.py --org vortaforge --fix [--dry-run]
+    python3 scripts/audit_full.py --org vortaforge --log audit-run.log
 
 The token is read from VC_TOKEN or GH_TOKEN, or from a file given by
 VC_TOKEN_FILE. It is never printed and never put on a command line.
@@ -73,7 +73,7 @@ def gh(path, method="GET", body=None, expect=(200, 201, 204)):
         req = urllib.request.Request(url, data=data, method=method)
         req.add_header("Accept", "application/vnd.github+json")
         req.add_header("X-GitHub-Api-Version", "2022-11-28")
-        req.add_header("User-Agent", "vortacraftmc-consistency-audit")
+        req.add_header("User-Agent", "vortaforge-consistency-audit")
         if TOKEN:
             req.add_header("Authorization", f"Bearer {TOKEN}")
         try:
@@ -463,19 +463,19 @@ def audit_cross_refs(org, repos, workdir):
     if not os.path.isdir(local):
         return
     rc, text, _ = sh(["git", "-C", local, "grep", "-nI", "-E",
-                      r"github\.com/vortacraftmc/[A-Za-z0-9._-]+"])
+                      r"github\.com/vortaforge/[A-Za-z0-9._-]+"])
     if rc != 0:
         return
     known = {r.split("/")[1] for r in repos}
     seen = set()
     for line in text.splitlines():
-        for m in re.finditer(r"github\.com/vortacraftmc/([A-Za-z0-9._\-]+)", line):
+        for m in re.finditer(r"github\.com/vortaforge/([A-Za-z0-9._\-]+)", line):
             name = m.group(1).rstrip(".)")
             if name in known or name in seen:
                 continue
             seen.add(name)
             add("I", "medium", "xref.unknown-repo", line.split(":")[0],
-                f"references vortacraftmc/{name}, which does not exist in the org")
+                f"references vortaforge/{name}, which does not exist in the org")
 
 
 # --------------------------------------------------------------------------- #
@@ -536,7 +536,7 @@ def apply_fixes(dry_run):
 def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--org", default="vortacraftmc")
+    ap.add_argument("--org", default="vortaforge")
     ap.add_argument("--workdir", default=os.getcwd(),
                     help="directory containing local clones (for categories G/H)")
     ap.add_argument("--json", action="store_true")
@@ -565,7 +565,7 @@ def main():
         return 1
 
     out("=" * 78)
-    out(f"VORTACRAFTMC CONSISTENCY AUDIT  org={args.org}  {time.strftime('%F %T')}")
+    out(f"VORTAFORGE CONSISTENCY AUDIT  org={args.org}  {time.strftime('%F %T')}")
     out("=" * 78)
     out(f"\nrepositories: {len(repos)}\n")
 

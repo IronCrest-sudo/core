@@ -1,1 +1,0 @@
-$execute store result storage macroengine:engine config.$(key) int 1 run scoreboard players set $cfg_tmp macroengine.tmp $(value)

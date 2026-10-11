@@ -175,3 +175,33 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
 
 `banner.png` was a JPEG with a `.png` extension and a long EXIF description string. It is now a real PNG (same 1408x736 picture, no metadata). The image itself was not redesigned.
+
+## macroEngine: `api/store/show` and `api/store/player/show`
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/macroEngine-Datapack-v26.3/data/macroengine/function/api/store/show.mcfunction`, `.../api/store/player/show.mcfunction` | New. Call `get` / `player/get` and print the value to `@s` with an NBT `tellraw` (`interpret: false`). `get` itself stays silent. |
+| `packs/macroEngine-Datapack-v26.3/docs/store.md` | Documents `show` and printing `out.value` after `get`. |
+
+- **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0) passed.
+- **Not verified:** nothing was run in a Minecraft server.
+
+## macroEngine: store/data merge, placeholder module removed, functional config; org references
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/macroEngine-Datapack-v26.3/.../api/data/*` | Moved to `api/store/nbt/*`; the scratch keys are now `macroengine:store nbt.value` / `nbt.result` (was `macroengine:data value` / `result`). `docs/data.md` merged into `docs/store.md`. There was no `api/nbt` module. |
+| `.../api/placeholder/**`, `.../core/internal/api/placeholder/**`, `docs/placeholder.md` | Removed. `to_plain` resolved `{selector:"@s"}` through a text_display, where `@s` is the display and not the player; `send*` and `actionbar*` only printed to chat. |
+| `.../core/internal/api/store/_tok_score*`, `_player_name`, `_tok_ent` | `%score:obj%` reads the scoreboard directly; `%player%` resolves a tagged selector through a short-lived text_display and keeps only the string; new `%health%`, `%food%`, `%xp_level%`, `%dimension%` read entity data. |
+| `.../api/store/convert`, `render_all`, `show`, `player/show` | New. Strings, ints, bytes and lists of strings only; `show` prints with an NBT `tellraw`. |
+| `.../api/title/show_p`, `actionbar_p`, `core/internal/api/title/_apply` | Rebuilt on `api/store/render`; titles are plain strings printed with `interpret: false`. |
+| `.../config.mcfunction`, `core/config/*`, `core/tick*`, `core/tick/dispatch`, `systems/log/set_level` | Config keys `enabled` and `namespace_allowlist` removed (nothing read them); `tick_rate`, `hud_rate`, `admin_rate`, `log_level`, `reload_warn` now drive the tick, dispatch and log systems. `exec`, `score_get`, `score_set`, `set_int`, `set_default`, `has`, `delete`, `config/tick_cfg` and the `macroengine.config` objective removed. See `docs/config.md`. |
+| Workflows, scripts, `settings.gradle`, `pack.mcmeta` descriptions, README | Stale `vortacraftmc` / `VortaCraftMC` references changed to `vortaforge` / `VortaForge`. |
+
+- **Kept on purpose:** runtime identifiers (`data/vortacraftmc/`, `#vortacraftmc.*` fake players, `com.vortacraftmc`; CLAUDE.md rule 8) and provenance text (`runtoolkit -> vortacraftmc -> vortaforge`, "Original source: Runtoolkit", NOTICE source URLs, `archived/archive.json`).
+- **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`.
+- **Not verified:** nothing was run in a Minecraft server. In particular `%player%`, the `tick_rate` divider and the new config functions were never executed in game.

@@ -18,7 +18,7 @@
 
 ![macroEngine layers](docs/media/architecture.svg)
 
-- **API layer** (`api/`) — stable public entry points: `cmd`, `cb` (callback queue), `color`, `gamerule`, `interaction`, `data`, `item`, `macro`, `perm`, `placeholder`, `title`, `toggle`, `trigger`, `wand`
+- **API layer** (`api/`) — stable public entry points: `cmd`, `cb` (callback queue), `color`, `gamerule`, `interaction`, `item`, `macro`, `perm`, `store`, `title`, `toggle`, `trigger`, `wand`
 - **Systems layer** (`systems/`) — internal utility modules: `math`, `string`, `nbt`, `logic`, `geo`, `flag`, `hook`, `log`, `rate_limit`, `sound`, `uuid`, `color`
 - **Input system** (`input/`) — capture player-provided values via writable book, sign, lectern, name tag, or command block minecart, with shared validation (`input/validate`) for int/float/bool/tag-safe strings
 - **Toggle system** — per-module runtime enable/disable for `cb`, `perm`, `geo`, `wand`, `interaction`, and `hook` modules
@@ -30,10 +30,9 @@
 - **Deterministic RNG** (`systems/rng/`) — `seed`, `state`, `next`, `int`, `chance`, `pick`. Seeding makes randomised behaviour reproducible, which the previous generator could not do: it kept an undocumented `_rng_state` key with no way to set it. `systems/math/random` is now a thin wrapper over `systems/rng/int`, so there is one generator rather than two
 - **Text-component rendering** (`systems/text/`) — helpers for NBT-backed components. On 26.1+ a `{"storage":...,"nbt":...}` component renders a string *with its quotes* and a number or boolean *with vanilla colouring* unless `interpret` and `plain` are both set. Every such component in this pack now sets both explicitly; `scripts/fix_text_components.py` at the repository root enforces it
 
-- **Store module** (`api/store/`) — storage-based variables, per-player values and multilingual message templates that return plain strings; see [`docs/store.md`](docs/store.md). It replaces the deprecated placeholder module.
-- **Placeholder module (deprecated)** (`api/placeholder/`) — `%player%`, `%score:<objective>%`, `%nl%`, `%%` and your own `%name%` tokens (text component, string or array values) resolve to a text component list built on `core/internal/text`. Untrusted text is never substituted into a command or JSON string, so chat/sign/book input is safe; see [`docs/placeholder.md`](docs/placeholder.md)
-- **Title / action bar with placeholders** (`api/title/*_p`, plus `clear`, `reset`, `times`; see [`docs/title.md`](docs/title.md)) — storage-driven (no quote/backslash breakage), per-recipient placeholder resolution
-- **Data helpers** (`api/data/`, see [`docs/data.md`](docs/data.md)) — `get`, `set`, `set_default`, `append`, `merge`, `remove`, `exists`, `count`, `copy`, `add`, `toggle`, `pop`, `shift` over any storage/path; values pass through storage so nothing needs escaping. Migration notes: [`docs/migrating-from-data-api.md`](docs/migrating-from-data-api.md)
+- **Store module** (`api/store/`) — storage-based variables, per-player values, raw NBT helpers (`api/store/nbt/*`: `get`, `set`, `set_default`, `append`, `merge`, `remove`, `exists`, `count`, `copy`, `add`, `toggle`, `pop`, `shift` over any storage/path) and multilingual message templates (`render`, `render_all`, `convert`, `show`) that return plain strings; see [`docs/store.md`](docs/store.md). It replaced the old `api/data` and `api/placeholder` modules. Untrusted text is never substituted into a command or JSON string, so chat/sign/book input is safe. Migration notes: [`docs/migrating-from-data-api.md`](docs/migrating-from-data-api.md)
+- **Title / action bar with tokens** (`api/title/*_p`, plus `clear`, `reset`, `times`; see [`docs/title.md`](docs/title.md)) — storage-driven (no quote/backslash breakage), rendered with `api/store/render` per recipient
+- **Runtime config** (`core/config/*`, see [`docs/config.md`](docs/config.md)) — `tick_rate`, `hud_rate`, `admin_rate`, `log_level` and `reload_warn`; every key changes engine behaviour
 
 ---
 

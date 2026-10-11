@@ -10,6 +10,7 @@ function macroengine:core/internal/load/loader/other
 
 # Re-apply config after storages (storages may reset defaults)
 function macroengine:config
+function macroengine:core/config/apply
 
 # Run macroengine:core/internal/load/final function
 function macroengine:core/internal/load/final

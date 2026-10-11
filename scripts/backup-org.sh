@@ -12,7 +12,7 @@
 #                                           # verify an existing archive only
 #
 # Settings (override with environment variables):
-#   ORG=vortacraftmc  BACKUP_DIR=~/backup/ORG  OUT_DIR=~/backup-out
+#   ORG=vortaforge  BACKUP_DIR=~/backup/ORG  OUT_DIR=~/backup-out
 #   ENCRYPT=none|7z|gpg  INCLUDE_SOURCE=1|0    WITH_HOOKS=0|1
 #   KEEP=7            PIP_BREAK_SYSTEM=0|1
 #   JOBS=4            # parallel `git clone` workers for plain source copies
@@ -109,7 +109,7 @@ STRICT=0
 # Environment defaults first, so a flag simply overwrites the variable it
 # stands for. BACKUP_DIR is deliberately NOT defaulted here: its default is
 # derived from ORG, and --org has to be parsed first for that to be right.
-ORG="${ORG:-vortacraftmc}"
+ORG="${ORG:-vortaforge}"
 OUT_DIR="${OUT_DIR:-$HOME/backup-out}"
 ENCRYPT="${ENCRYPT:-none}"
 INCLUDE_SOURCE="${INCLUDE_SOURCE:-1}"

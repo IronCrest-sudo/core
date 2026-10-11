@@ -34,7 +34,7 @@ jobs:
           # Fine-grained PAT or GitHub App token.
           # The token must be able to read organization members.
           GH_TOKEN: ${{ secrets.ORG_READ_TOKEN }}
-          ORG: vortacraftmc
+          ORG: vortaforge
         shell: bash
         run: |
           set -euo pipefail
@@ -215,4 +215,4 @@ jobs:
             --base main \
             --head chore/codeowners-sync \
             --title "chore: update CODEOWNERS owner list" \
-            --body "Auto-generated. The CODEOWNERS list was synchronized from the members of the vortacraftmc organization. Please review and merge this PR."
+            --body "Auto-generated. The CODEOWNERS list was synchronized from the members of the vortaforge organization. Please review and merge this PR."

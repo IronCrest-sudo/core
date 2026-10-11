@@ -15,7 +15,7 @@
 #
 set -euo pipefail
 
-ORG="vortacraftmc"
+ORG="vortaforge"
 REPO="core"
 API="https://api.github.com"
 

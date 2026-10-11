@@ -1,6 +1,6 @@
 # vortaforge/core
 
-Monorepo for VortaCraftMC: Fabric mods, Minecraft datapacks and resource
+Monorepo for VortaForge: Fabric mods, Minecraft datapacks and resource
 packs, plus the datapack tooling built around them.
 
 <!--

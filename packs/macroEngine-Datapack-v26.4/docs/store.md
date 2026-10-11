@@ -57,10 +57,6 @@ values are rejected (render returns 0) so raw NBT never leaks into a message.
 
 You can also pass `in.template` instead of `in.name` to render a one-off string.
 
-## Self test
-
-`/function macroengine:api/store/selftest` (as a player) checks set/add, name rejection and render.
-
 ## Migrating from `api/placeholder/*`
 
 | Old | New |

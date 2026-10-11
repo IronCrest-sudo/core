@@ -120,10 +120,23 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 
 | Path | Change |
 |---|---|
-| `packs/macroEngine-Datapack-v26.4/data/macroengine/function/api/store/**` | New public module: global and per-player variables (`set/get/has/remove/add/default`), multilingual templates (`text/define`, `text/remove`) and `render`, which returns a plain string. `selftest` added. |
+| `packs/macroEngine-Datapack-v26.4/data/macroengine/function/api/store/**` | New public module: global and per-player variables (`set/get/has/remove/add/default`), multilingual templates (`text/define`, `text/remove`) and `render`, which returns a plain string. |
 | `.../core/internal/api/store/**` | Internals. Names and language keys go through `systems/validate/safe_name` before any macro line; player keys are built from the UUID ints only. |
 | `.../api/placeholder/*` | Marked deprecated in the file header; most functions now print a one-time admin notice. Behaviour is unchanged. `parse`, `actionbar*` and `load` stay silent because `api/title/*_p` and `setup` still call them. |
 | `docs/store.md`, `README.md` | Documentation and migration table. |
 
 - **Verified:** Mecha 0.101.0 parses the new files without errors (the only two errors in the pack are the existing `time query minecraft:day` lines, which this Mecha version does not know).
-- **Not verified:** nothing was run in a Minecraft server. In particular `%player%` and `%score:...%` rely on the existing `to_plain` helper (text_display trick), and `api/store/selftest` has never been executed. Treat the module as untested until someone runs `selftest` in-game.
+- **Not verified:** nothing was run in a Minecraft server. In particular `%player%` and `%score:...%` rely on the existing `to_plain` helper (text_display trick) and the module has never been executed. Treat it as untested.
+
+## SEO files, CLAUDE.md and removal of the store self-test
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `index.html` | Meta description, robots, canonical, Open Graph/Twitter tags, JSON-LD (`SoftwareSourceCode`), `<noscript>` summary and a "not affiliated with Mojang/Microsoft" footer line. |
+| `robots.txt`, `sitemap.xml` | New; point at `https://vortaforge.github.io/core/`. |
+| `CLAUDE.md` | New project guidance for Claude Code. |
+| `packs/macroEngine-Datapack-v26.4/.../api/store/selftest.mcfunction` | Removed at the maintainer's request (no in-game tests). |
+
+- **Not verified:** how Google indexes the page (Search Console not available); JSON-LD and sitemap were only parsed for well-formedness. The target Pages site does not exist yet.

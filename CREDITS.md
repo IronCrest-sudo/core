@@ -96,3 +96,20 @@ maintainer (review status: _pending at the time of writing - update when reviewe
 
 - **Not verified:** Gradle build and CI run; the target org does not exist yet, so no link was checked online.
 
+
+## License alignment: Unlicense everywhere
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+Decision (maintainer): the project is Unlicense; older repos that carried MIT are private and archived.
+
+| File(s) | Change |
+|---|---|
+| `scripts/origin_watermarks.py` + 20 `_vc_origin.mcfunction` | Header now says Unlicense instead of MIT; regenerated, `--check` passes. |
+| `packs/{DailyBonus,LeftClickDetection,InteractionClickDetection,cmdTunnel-datapack,QuickShare}/NOTICE` | MIT line replaced with Unlicense. |
+| `scripts/gui_generator/pyproject.toml` | `license` and trove classifier changed to Unlicense. |
+| `examples/opmod-example` | `LICENSE` replaced with the root Unlicense text; `fabric.mod.json` license set to Unlicense (was CC0-1.0). |
+| `packs/macroEngine-Datapack-v26.4/README.md` | Removed the note about the inconsistent MIT header, which no longer applies. |
+
+- **Left as is on purpose:** third-party MIT/other licenses (`THIRD_PARTY_LICENSES.md`, `jszip.min.js`, `package-lock.json`).
+- **Not verified:** legal effect; this is not legal advice.

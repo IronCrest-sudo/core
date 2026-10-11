@@ -1,4 +1,5 @@
 # macroengine:api/placeholder/to_plain
+# DEPRECATED (26.4): use macroengine:api/store/render (plain strings, storage based); see docs/store.md.
 # Public entry: resolve any text component to a plain string in storage.
 # No tellraw. Output is always a string type.
 #
@@ -11,4 +12,5 @@
 #   data modify storage macroengine:placeholder in.component set value {selector:"@s"}
 #   function macroengine:api/placeholder/to_plain
 
+function macroengine:core/internal/api/store/_deprecated_placeholder
 return run function macroengine:core/internal/api/placeholder/to_plain

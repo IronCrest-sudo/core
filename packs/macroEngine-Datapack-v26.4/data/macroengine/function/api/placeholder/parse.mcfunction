@@ -1,4 +1,5 @@
 # ─────────────────────────────────────────────────────────────────
+# DEPRECATED (26.4): use macroengine:api/store/render (plain strings, storage based); see docs/store.md.
 # macroengine:api/placeholder/parse
 # Turns text containing %placeholders% into a ready-to-use text component list.
 #

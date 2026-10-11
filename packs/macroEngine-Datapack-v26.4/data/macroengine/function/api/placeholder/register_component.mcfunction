@@ -1,4 +1,5 @@
 # macroengine:api/placeholder/register_component [MACRO]
+# DEPRECATED (26.4): use macroengine:api/store/render (plain strings, storage based); see docs/store.md.
 # Registers %name% as an arbitrary text component (colours, hover, click,
 # translate, gradients ...). The component is read from storage, so it needs no
 # string escaping at all. A string or an array is accepted too and is handled
@@ -10,4 +11,5 @@
 # Usage:
 #   data modify storage macroengine:placeholder in.component set value {text:"VIP",color:"gold",bold:true}
 #   function macroengine:api/placeholder/register_component {name:"rank"}
+function macroengine:core/internal/api/store/_deprecated_placeholder
 $data modify storage macroengine:placeholder reg.$(name) set from storage macroengine:placeholder in.component

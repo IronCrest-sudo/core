@@ -1,4 +1,5 @@
 # macroengine:api/placeholder/register_string [MACRO]
+# DEPRECATED (26.4): use macroengine:api/store/render (plain strings, storage based); see docs/store.md.
 # Registers %name% as a plain string. Unlike register_text the value is read from
 # storage, so it may contain double quotes, backslashes or braces without any escaping.
 #
@@ -9,6 +10,7 @@
 # Usage:
 #   data modify storage macroengine:placeholder in.string set value "Say \"hi\" to {everyone}"
 #   function macroengine:api/placeholder/register_string {name:"greeting"}
+function macroengine:core/internal/api/store/_deprecated_placeholder
 execute unless data storage macroengine:placeholder in.string run return 0
 $data modify storage macroengine:placeholder reg.$(name) set from storage macroengine:placeholder in.string
 return 1

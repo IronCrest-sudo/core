@@ -1,4 +1,5 @@
 # macroengine:api/placeholder/load
+# DEPRECATED (26.4): kept only so the old api/placeholder/* and api/title/*_p keep working. New code: api/store/*.
 # Registers the built-in placeholders. Idempotent; called from macroengine:setup.
 #
 # Built-ins (all resolve for the executor, i.e. @s):

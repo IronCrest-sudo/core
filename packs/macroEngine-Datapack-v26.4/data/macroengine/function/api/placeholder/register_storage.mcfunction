@@ -1,4 +1,5 @@
 # macroengine:api/placeholder/register_storage [MACRO]
+# DEPRECATED (26.4): use macroengine:api/store/render (plain strings, storage based); see docs/store.md.
 # Registers %name% as an NBT value read from a command storage. Rendered with
 # plain+interpret=false so strings have no quotes and numbers no type colouring.
 #
@@ -6,4 +7,5 @@
 #
 # Usage:
 #   function macroengine:api/placeholder/register_storage {name:"motd",storage:"mypack:data",path:"motd"}
+function macroengine:core/internal/api/store/_deprecated_placeholder
 $data modify storage macroengine:placeholder reg.$(name) set value {storage:"$(storage)",nbt:"$(path)",plain:true,interpret:false}

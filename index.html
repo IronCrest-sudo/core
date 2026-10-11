@@ -1398,7 +1398,7 @@
       showBanner(
         el.warningBanner,
         el.warningDetail,
-        "<ul>" + errors.map(function (e) { return "<li>" + e + "</li>"; }).join("") + "</ul>"
+        "<ul>" + errors.map(function (e) { return "<li>" + escapeHtml(e) + "</li>"; }).join("") + "</ul>"
       );
     }
 

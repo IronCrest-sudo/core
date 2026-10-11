@@ -73,3 +73,14 @@ maintainer (review status: _pending at the time of writing - update when reviewe
   all changed `.gradle` files, compilation of the Fabric-facing code (`*Mod.java`, `PlayerManagerMixin`)
   against Minecraft 1.21.1 Yarn mappings, and runtime behaviour in a real server. Treat these as
   needing a CI run and a manual server test before release.
+
+## index.html: escape error messages in the warning banner
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| File | Change |
+|---|---|
+| `index.html` | `errors` entries (which can contain `err.message` and the release `tag_name` returned by the GitHub API) were concatenated into `innerHTML` unescaped; each entry now goes through `escapeHtml()` before rendering. |
+
+- **Not verified:** rendering in a real browser; only the string replacement and its uniqueness were checked.
+

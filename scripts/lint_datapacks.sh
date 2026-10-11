@@ -26,8 +26,8 @@ IGNORE_PATHS=(
     "packs/cmdTunnel-datapack/*"
     # Uses the 26.x `time query minecraft:day` form, which Mecha's grammar
     # (v0.101.0) does not know yet. Only these two files are skipped.
-    "packs/macroEngine-Datapack-v26.4/data/macroengine/function/world/time_phase.mcfunction"
-    "packs/macroEngine-Datapack-v26.4/data/macroengine/function/world/get_time.mcfunction"
+    "packs/macroEngine-Datapack-v26.3/data/macroengine/function/world/time_phase.mcfunction"
+    "packs/macroEngine-Datapack-v26.3/data/macroengine/function/world/get_time.mcfunction"
 )
 
 echo "::group::🚫 Ignoring paths"

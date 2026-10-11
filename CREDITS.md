@@ -21,6 +21,20 @@ when reviewed_.
 - Verified: repo-wide grep shows no remaining reader of `multiCommands.type` / `.active`; `scripts/lint_datapacks.sh` (Mecha 0.101.0) passes.
 - **Not verified:** runtime behaviour in a real Minecraft server. Datapacks or tools outside this repository that read `macroengine:engine multiCommands.*` would be affected.
 
+## 2026-10-11 - retarget to Minecraft 26.3
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/macroEngine-{Datapack,Resourcepack}-v26.3/` | Renamed from `-v26.4`; `pack.mcmeta` now data pack format 121.0 / resource pack format 97.1; version string `v26.3`, meta score 263; README updated |
+| `packs/{DailyBonus,QuickShare,DevTools-Datapack,RTWrapper-v1.0.1,guikit-datapack,guikit-demo}/pack.mcmeta` | format 122 -> 121 |
+| `packs/LeftClickDetection/pack.mcmeta` | `supported_formats` array -> object form |
+| `index.html`, `scripts/*`, docs | path and label updates for the rename |
+
+Verification: Mecha lint, `audit_repo.py`, `check_archive.py` and the `index.html` zip-list check pass.
+**Not verified:** loading on a real Minecraft 26.3 server; that nothing in the 26.4-snapshot content relies on data pack format 122 features; Fabric/Gradle builds.
+
 ## 2026-10-07 - fix: release assets not found (`packs-latest`)
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update

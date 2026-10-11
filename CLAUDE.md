@@ -7,7 +7,7 @@ Guidance for Claude / Claude Code when working in `vortaforge/core`. Read it bef
 A monorepo of Minecraft Java Edition projects: Fabric mods (`mods/`), datapacks and resource packs
 (`packs/`), tooling (`scripts/`), examples (`examples/`) and read-only reference material (`archived/`).
 It is an independent project, not affiliated with Mojang or Microsoft. Everything is released under the
-Unlicense (`LICENSE`); third-party code keeps its own license (`packs/macroEngine-Datapack-v26.4/THIRD_PARTY_LICENSES.md`).
+Unlicense (`LICENSE`); third-party code keeps its own license (`packs/macroEngine-Datapack-v26.3/THIRD_PARTY_LICENSES.md`).
 
 Publishing history: `runtoolkit` -> `vortacraftmc` -> `vortaforge`. The older organizations are archived and stay
 as they are.
@@ -36,7 +36,7 @@ as they are.
 | Path | Contents |
 |---|---|
 | `mods/` | Fabric mods (Gradle subprojects, each with its own `build.gradle` and Minecraft/Java version) |
-| `packs/` | Datapacks and resource packs; `macroEngine-Datapack-v26.4` is the largest; `merge-manifest.json` drives the merged datapack |
+| `packs/` | Datapacks and resource packs; `macroEngine-Datapack-v26.3` is the largest; `merge-manifest.json` drives the merged datapack |
 | `scripts/` | `lint_datapacks.sh` (Mecha), `origin_watermarks.py`, `gui_generator`, `dpgen`, `dp-depman`, audit helpers |
 | `examples/` | Example mods |
 | `archived/` | Reference only. Do not deploy and do not fix |

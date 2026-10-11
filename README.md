@@ -86,7 +86,7 @@ enforcing on 2026-10-07. Set `LINT_WARN_ONLY=1` for a one-off advisory run.)
 
 The datapack lint still skips the paths listed in `IGNORE_PATHS` at the top of
 `scripts/lint_datapacks.sh` (`archived/*`, `packs/cmdTunnel-datapack/*` and two
-26.x `time query` files in `macroEngine-Datapack-v26.4`). Mecha only checks
+26.x `time query` files in `macroEngine-Datapack-v26.3`). Mecha only checks
 command *syntax* — it does not load the pack, so a green run is not proof that a
 datapack behaves correctly.
 

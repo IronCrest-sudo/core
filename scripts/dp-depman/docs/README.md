@@ -40,7 +40,7 @@ your-project/
     // Production dependency — resolved from GitHub Releases
     "dataLib": {
       "source": "github",
-      "repo": "vortacraftmc/core",
+      "repo": "vortaforge/core",
       "version": ">=26.2.0",
       "asset": "dataLib.zip"   // optional; first .zip asset used if omitted
     },

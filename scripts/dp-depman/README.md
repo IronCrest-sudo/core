@@ -25,7 +25,7 @@ Declare dependencies in `datapack_depends.json`, resolve from GitHub Releases or
   "dependencies": {
     "dataLib": {
       "source": "github",
-      "repo": "vortacraftmc/core",
+      "repo": "vortaforge/core",
       "version": ">=26.2.0",
       "asset": "dataLib.zip"
     }
@@ -55,7 +55,7 @@ Requires `GITHUB_TOKEN` for private repos or to avoid rate limits.
 ```json
 "dataLib": {
   "source": "github",
-  "repo": "vortacraftmc/core",
+  "repo": "vortaforge/core",
   "version": "*",
   "asset": "dataLib-dp-datapacks-dataLib.zip"
 }
@@ -76,7 +76,7 @@ computed hash of what was downloaded, but nothing is checked against it.
 ```json
 "dataLib": {
   "source": "github",
-  "repo": "vortacraftmc/core",
+  "repo": "vortaforge/core",
   "version": ">=26.2.0",
   "asset": "dataLib.zip",
   "sha256": "3b1c...64 hex chars...9e2f"

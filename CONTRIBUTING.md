@@ -1,4 +1,4 @@
-# Contributing to vortacraftmc/core
+# Contributing to vortaforge/core
 
 Thanks for your interest in contributing to this project.
 
@@ -70,7 +70,7 @@ probably two commits. Reference related issues or PRs in the body
 
 ## Security
 
-This project follows a security-first development philosophy, particularly around Minecraft datapack macro injection risks and namespace isolation. If you find a security issue, do **not** open a public issue - use [GitHub's private vulnerability reporting](https://github.com/vortacraftmc/core/security/advisories/new), and fall back to a detail-free public issue only if that is unavailable to you. The full procedure, including what must not be included in a report, is in [SECURITY.md](SECURITY.md).
+This project follows a security-first development philosophy, particularly around Minecraft datapack macro injection risks and namespace isolation. If you find a security issue, do **not** open a public issue - use [GitHub's private vulnerability reporting](https://github.com/vortaforge/core/security/advisories/new), and fall back to a detail-free public issue only if that is unavailable to you. The full procedure, including what must not be included in a report, is in [SECURITY.md](SECURITY.md).
 
 ## Provenance watermark (`_vc_origin.mcfunction`)
 

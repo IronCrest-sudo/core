@@ -3,10 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vortacraftmc/core</title>
-  <meta property="og:title" content="vortacraftmc/core">
-  <meta property="og:description" content="Consolidated Fabric mods, datapacks & tools">
-  <meta property="og:image" content="https://vortacraftmc.github.io/core/banner.png">
+  <title>vortaforge/core - Fabric mods, datapacks and tools for Minecraft Java</title>
+  <meta name="description" content="Fabric mods, Minecraft datapacks, resource packs and datapack tooling in one repository. Free and public domain (Unlicense). Independent project, not affiliated with Mojang or Microsoft.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://vortaforge.github.io/core/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="VortaForge">
+  <meta property="og:url" content="https://vortaforge.github.io/core/">
+  <meta property="og:title" content="vortaforge/core - Fabric mods, datapacks and tools">
+  <meta property="og:description" content="Fabric mods, Minecraft datapacks, resource packs and datapack tooling in one repository. Free and public domain (Unlicense). Independent project, not affiliated with Mojang or Microsoft.">
+  <meta property="og:image" content="https://vortaforge.github.io/core/banner.png">
+  <meta property="og:image:alt" content="vortaforge/core banner">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="vortaforge/core">
+  <meta name="twitter:description" content="Fabric mods, Minecraft datapacks, resource packs and datapack tooling in one repository. Free and public domain (Unlicense). Independent project, not affiliated with Mojang or Microsoft.">
+  <meta name="twitter:image" content="https://vortaforge.github.io/core/banner.png">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareSourceCode",
+  "name": "vortaforge/core",
+  "description": "Fabric mods, Minecraft datapacks, resource packs and datapack tooling in one repository. Free and public domain (Unlicense). Independent project, not affiliated with Mojang or Microsoft.",
+  "url": "https://vortaforge.github.io/core/",
+  "codeRepository": "https://github.com/vortaforge/core",
+  "license": "https://unlicense.org/",
+  "programmingLanguage": [
+    "Java",
+    "mcfunction",
+    "Python",
+    "JavaScript"
+  ],
+  "isAccessibleForFree": true,
+  "publisher": {
+    "@type": "Organization",
+    "name": "VortaForge",
+    "url": "https://github.com/vortaforge"
+  }
+}
+  </script>
   <style>
     :root {
       --bg: #0d1117;
@@ -364,6 +398,7 @@
       margin-top: 64px;
     }
     footer a { color: var(--accent); }
+    footer .disclaimer { margin: 12px 0 0; font-size: 12px; }
     code {
       background: var(--card);
       border: 1px solid var(--border);
@@ -437,13 +472,19 @@
     <button type="button" class="toast-close" id="dl-toast-close" aria-label="Dismiss">&times;</button>
   </div>
 
-  <img class="banner" src="banner.png" alt="vortacraftmc/core" onerror="this.style.display='none'">
+  <img class="banner" src="banner.png" alt="vortaforge/core" onerror="this.style.display='none'">
+
+  <noscript>
+    <p>vortaforge/core is a monorepo of Fabric mods, Minecraft datapacks, resource packs and datapack
+    tooling. The download list on this page needs JavaScript. Without it, use
+    <a href="https://github.com/vortaforge/core/releases">github.com/vortaforge/core/releases</a>.</p>
+  </noscript>
 
   <main>
     <!-- The page had no <h1>: the section headings below are <h2> with nothing
          above them, so screen-reader users got no document title and crawlers
          fell back to <title> plus the banner image. -->
-    <h1 class="page-title">vortacraftmc/core</h1>
+    <h1 class="page-title">vortaforge/core</h1>
     <p class="lead">
       Monorepo for VortaCraftMC: Fabric mods, Minecraft datapacks and resource
       packs, plus the datapack tooling built around them. Download the latest
@@ -517,21 +558,22 @@
     <div class="grid" id="mods-grid"></div>
 
     <footer>
-      <a href="https://github.com/vortacraftmc/core" target="_blank" rel="noopener noreferrer">
-        github.com/vortacraftmc/core
+      <a href="https://github.com/vortaforge/core" target="_blank" rel="noopener noreferrer">
+        github.com/vortaforge/core
       </a>
       &nbsp;·&nbsp;
       <!-- The Wiki link was removed: the repository has has_wiki = false, so
            GitHub only ever answered with a "wiki is disabled" page. Replaced
            with the two destinations a reader of a download page actually
            wants next. -->
-      <a href="https://github.com/vortacraftmc/core/releases" target="_blank" rel="noopener noreferrer">Releases</a>
+      <a href="https://github.com/vortaforge/core/releases" target="_blank" rel="noopener noreferrer">Releases</a>
       &nbsp;·&nbsp;
-      <a href="https://github.com/vortacraftmc/core/issues" target="_blank" rel="noopener noreferrer">Issues</a>
+      <a href="https://github.com/vortaforge/core/issues" target="_blank" rel="noopener noreferrer">Issues</a>
       &nbsp;·&nbsp;
-      <a href="https://github.com/vortacraftmc/core/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">Security</a>
+      <a href="https://github.com/vortaforge/core/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">Security</a>
       &nbsp;·&nbsp;
-      <a href="https://github.com/vortacraftmc/core/fork" target="_blank" rel="noopener noreferrer">Fork</a>
+      <a href="https://github.com/vortaforge/core/fork" target="_blank" rel="noopener noreferrer">Fork</a>
+      <p class="disclaimer">Independent project. Not an official Minecraft product and not affiliated with or endorsed by Mojang or Microsoft.</p>
     </footer>
   </main>
 
@@ -539,7 +581,7 @@
 (function () {
   "use strict";
 
-  const OWNER = "vortacraftmc";
+  const OWNER = "vortaforge";
   const REPO = "core";
   const RELEASE_TAG = "packs-latest";
   const RELEASE_BASE =
@@ -555,7 +597,7 @@
   const FETCH_TIMEOUT_MS = 12000;
   const HEAD_TIMEOUT_MS = 8000;
   const OVERALL_TIMEOUT_MS = 20000;
-  const CACHE_KEY = "vortacraftmc-core-site-cache-v1";
+  const CACHE_KEY = "vortaforge-core-site-cache-v1";
   const CACHE_MAX_AGE_MS = 15 * 60 * 1000; // 15 min — this content doesn't change minute to minute
   const AUTO_REFRESH_MS = 5 * 60 * 1000; // re-check GitHub every 5 min while the tab is open
   const VISIBILITY_REFRESH_THRESHOLD_MS = 2 * 60 * 1000; // re-check on tab refocus if stale
@@ -581,7 +623,7 @@
   // that 404'd:
   //   - "BorderPing" and "inv_gui" have never existed under packs/
   //     (inv_gui was also claimed in README.md's history - see that file)
-  //   - both macroEngine entries said v26.3; the directories are v26.4, so
+  //   - both macroEngine entries and the directories are v26.3, so
   //     the zip names never matched what zipPacks produces
   //   - DevTools-Datapack was missing entirely
   const FALLBACK_PACKS = [
@@ -592,8 +634,8 @@
     { name: "guikit-demo", zip: "guikit-demo.zip" },
     { name: "InteractionClickDetection", zip: "InteractionClickDetection.zip" },
     { name: "LeftClickDetection", zip: "LeftClickDetection.zip" },
-    { name: "macroEngine (Datapack, v26.4)", zip: "macroEngine-Datapack-v26.4.zip" },
-    { name: "macroEngine (Resource pack, v26.4)", zip: "macroEngine-Resourcepack-v26.4.zip" },
+    { name: "macroEngine (Datapack, v26.3)", zip: "macroEngine-Datapack-v26.3.zip" },
+    { name: "macroEngine (Resource pack, v26.3)", zip: "macroEngine-Resourcepack-v26.3.zip" },
     { name: "QuickShare", zip: "QuickShare.zip" },
     { name: "RTWrapper (1.21.1)", zip: "RTWrapper-1.21.1.zip" },
     { name: "RTWrapper (v1.0.1)", zip: "RTWrapper-v1.0.1.zip" },
@@ -1398,7 +1440,7 @@
       showBanner(
         el.warningBanner,
         el.warningDetail,
-        "<ul>" + errors.map(function (e) { return "<li>" + e + "</li>"; }).join("") + "</ul>"
+        "<ul>" + errors.map(function (e) { return "<li>" + escapeHtml(e) + "</li>"; }).join("") + "</ul>"
       );
     }
 

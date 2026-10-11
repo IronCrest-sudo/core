@@ -33,7 +33,7 @@ java {
 // pulls in and why it's `apply from:` rather than a precompiled plugin. A
 // projectDir-relative path is used (not ${rootDir}) so this also resolves
 // correctly when built standalone via this project's own settings.gradle,
-// where rootDir would point here instead of at vortacraftmc/core's root.
+// where rootDir would point here instead of at vortaforge/core's root.
 // One extra `../` versus mods/*/build.gradle's copy of this line, since this
 // project sits one directory deeper (packs/RTWrapper/rtwrapper-fabric).
 apply from: "${projectDir}/../../../build-logic/shared-fabric-mod.gradle"

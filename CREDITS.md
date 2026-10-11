@@ -21,6 +21,20 @@ when reviewed_.
 - Verified: repo-wide grep shows no remaining reader of `multiCommands.type` / `.active`; `scripts/lint_datapacks.sh` (Mecha 0.101.0) passes.
 - **Not verified:** runtime behaviour in a real Minecraft server. Datapacks or tools outside this repository that read `macroengine:engine multiCommands.*` would be affected.
 
+## 2026-10-11 - retarget to Minecraft 26.3
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/macroEngine-{Datapack,Resourcepack}-v26.3/` | Renamed from `-v26.4`; `pack.mcmeta` now data pack format 121.0 / resource pack format 97.1; version string `v26.3`, meta score 263; README updated |
+| `packs/{DailyBonus,QuickShare,DevTools-Datapack,RTWrapper-v1.0.1,guikit-datapack,guikit-demo}/pack.mcmeta` | format 122 -> 121 |
+| `packs/LeftClickDetection/pack.mcmeta` | `supported_formats` array -> object form |
+| `index.html`, `scripts/*`, docs | path and label updates for the rename |
+
+Verification: Mecha lint, `audit_repo.py`, `check_archive.py` and the `index.html` zip-list check pass.
+**Not verified:** loading on a real Minecraft 26.3 server; that nothing in the 26.4-snapshot content relies on data pack format 122 features; Fabric/Gradle builds.
+
 ## 2026-10-07 - fix: release assets not found (`packs-latest`)
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
@@ -73,3 +87,91 @@ maintainer (review status: _pending at the time of writing - update when reviewe
   all changed `.gradle` files, compilation of the Fabric-facing code (`*Mod.java`, `PlayerManagerMixin`)
   against Minecraft 1.21.1 Yarn mappings, and runtime behaviour in a real server. Treat these as
   needing a CI run and a manual server test before release.
+
+## index.html: escape error messages in the warning banner
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| File | Change |
+|---|---|
+| `index.html` | `errors` entries (which can contain `err.message` and the release `tag_name` returned by the GitHub API) were concatenated into `innerHTML` unescaped; each entry now goes through `escapeHtml()` before rendering. |
+
+- **Not verified:** rendering in a real browser; only the string replacement and its uniqueness were checked.
+
+## Organization migration to vortaforge (links and provenance text)
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Area | Change |
+|---|---|
+| Repo URLs | `github.com/vortacraftmc/...`, `vortacraftmc/core` and `vortacraftmc.github.io` replaced with the `vortaforge` equivalents in docs, scripts, Gradle files, `index.html` (`OWNER`, cache key) and metadata. |
+| Provenance | `scripts/origin_watermarks.py` template now states runtoolkit -> vortacraftmc -> vortaforge; all 20 `_vc_origin.mcfunction` files regenerated with `--write`, `--check` passes. |
+| Deliberately unchanged | Datapack namespaces (`data/vortacraftmc/`), scoreboard fake players (`#vortacraftmc.*`) and the Java package `com.vortacraftmc`: renaming them would break existing worlds or APIs and needs a separate migration decision. The `runtoolkit` origin statements are kept on purpose. |
+
+- **Not verified:** Gradle build and CI run; the target org does not exist yet, so no link was checked online.
+
+
+## License alignment: Unlicense everywhere
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+Decision (maintainer): the project is Unlicense; older repos that carried MIT are private and archived.
+
+| File(s) | Change |
+|---|---|
+| `scripts/origin_watermarks.py` + 20 `_vc_origin.mcfunction` | Header now says Unlicense instead of MIT; regenerated, `--check` passes. |
+| `packs/{DailyBonus,LeftClickDetection,InteractionClickDetection,cmdTunnel-datapack,QuickShare}/NOTICE` | MIT line replaced with Unlicense. |
+| `scripts/gui_generator/pyproject.toml` | `license` and trove classifier changed to Unlicense. |
+| `examples/opmod-example` | `LICENSE` replaced with the root Unlicense text; `fabric.mod.json` license set to Unlicense (was CC0-1.0). |
+| `packs/macroEngine-Datapack-v26.4/README.md` | Removed the note about the inconsistent MIT header, which no longer applies. |
+
+- **Left as is on purpose:** third-party MIT/other licenses (`THIRD_PARTY_LICENSES.md`, `jszip.min.js`, `package-lock.json`).
+- **Not verified:** legal effect; this is not legal advice.
+
+## macroEngine: storage-based `api/store/*` module, `api/placeholder/*` deprecated
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/macroEngine-Datapack-v26.4/data/macroengine/function/api/store/**` | New public module: global and per-player variables (`set/get/has/remove/add/default`), multilingual templates (`text/define`, `text/remove`) and `render`, which returns a plain string. |
+| `.../core/internal/api/store/**` | Internals. Names and language keys go through `systems/validate/safe_name` before any macro line; player keys are built from the UUID ints only. |
+| `.../api/placeholder/*` | Marked deprecated in the file header; most functions now print a one-time admin notice. Behaviour is unchanged. `parse`, `actionbar*` and `load` stay silent because `api/title/*_p` and `setup` still call them. |
+| `docs/store.md`, `README.md` | Documentation and migration table. |
+
+- **Verified:** Mecha 0.101.0 parses the new files without errors (the only two errors in the pack are the existing `time query minecraft:day` lines, which this Mecha version does not know).
+- **Not verified:** nothing was run in a Minecraft server. In particular `%player%` and `%score:...%` rely on the existing `to_plain` helper (text_display trick) and the module has never been executed. Treat it as untested.
+
+## SEO files, CLAUDE.md and removal of the store self-test
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `index.html` | Meta description, robots, canonical, Open Graph/Twitter tags, JSON-LD (`SoftwareSourceCode`), `<noscript>` summary and a "not affiliated with Mojang/Microsoft" footer line. |
+| `robots.txt`, `sitemap.xml` | New; point at `https://vortaforge.github.io/core/`. |
+| `CLAUDE.md` | New project guidance for Claude Code. |
+| `packs/macroEngine-Datapack-v26.4/.../api/store/selftest.mcfunction` | Removed at the maintainer's request (no in-game tests). |
+
+- **Not verified:** how Google indexes the page (Search Console not available); JSON-LD and sitemap were only parsed for well-formedness. The target Pages site does not exist yet.
+
+## Authors, copyright lines and contact metadata
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `mods/*/fabric.mod.json`, `packs/RTWrapper/rtwrapper-fabric/.../fabric.mod.json` | `authors` entry `vortacraftmc` -> `VortaForge` (the `Runtoolkit (original source)` credit is kept); `contact.sources` now `https://github.com/vortaforge/core`. `datapack-fixer` gained a `contact` block. |
+| `packs/*/NOTICE`, `scripts/origin_watermarks.py` (+ 20 regenerated watermark headers) | Copyright holder now `Legends11 / VortaForge (formerly Runtoolkit)` / `VortaForge (formerly Runtoolkit)`. |
+| `packs/DailyBonus`, `packs/QuickShare` `pack.mcmeta` | Description credits VortaForge. |
+| `scripts/gui_generator/pyproject.toml`, `scripts/dpgen/package.json` | Author set to `VortaForge`. |
+| `packs/macroEngine-Datapack-v26.4/README.md` | Maintainer links point at VortaForge. |
+
+- **Left as is:** `TEMPLATE-MOD` and `opmod-example` placeholder authors (`Me!`, `you`), third-party copyright (`THIRD_PARTY_LICENSES.md`), `maven_group` / Java packages (`com.vortacraftmc`).
+- **Maintainer to confirm:** the exact legal name to use as copyright holder; I used the existing `Legends11 / ...` form from the older NOTICE files.
+
+## banner.png converted to a real PNG
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+`banner.png` was a JPEG with a `.png` extension and a long EXIF description string. It is now a real PNG (same 1408x736 picture, no metadata). The image itself was not redesigned.

@@ -29,7 +29,7 @@ SUBMODULE_DIR    = Path("deps")
 # <dep_id>.json schema (e.g. dataLib.json):
 #   {
 #     "source":  "github" | "submodule",
-#     "repo":    "vortacraftmc/core",      ← github only
+#     "repo":    "vortaforge/core",      ← github only
 #     "url":     "https://github.com/...",  ← submodule only
 #     "path":    "deps/dataLib",            ← submodule only (optional)
 #     "version": ">=6.0.0",

@@ -10,7 +10,7 @@
 	],
 	"contact": {},
 
-	"license": "CC0-1.0",
+	"license": "Unlicense",
 
 	"environment": "*",
 	"entrypoints": {

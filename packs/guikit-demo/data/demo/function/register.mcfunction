@@ -34,7 +34,7 @@ data modify storage guikit:btn defs."demo:lvl" set value {cmd:'tellraw @s {"text
 # composite condition (all of ...) + a score cost: charged only when every element passes, before cmd runs
 data modify storage guikit:btn defs."demo:combo" set value {cmd:"give @s minecraft:diamond 1", cost:{obj:"demo.coins", amount:3}, poor:"You need 3 coins.", deny:"VIP with XP level 1+ only.", cond:{type:"all", of:[{type:"tag", tag:"vip"}, {type:"level", min:1}]}, locked_item:"minecraft:iron_bars"}
 # link
-data modify storage guikit:btn defs."demo:link" set value {url:"https://github.com/vortacraftmc/core/tree/main/packs/guikit-datapack", close:1b}
+data modify storage guikit:btn defs."demo:link" set value {url:"https://github.com/vortaforge/core/tree/main/packs/guikit-datapack", close:1b}
 
 # --- meter definition (see README "Widget: clickable meter / rating bar")
 data modify storage guikit:mtr defs."demo:rating" set value {obj:"demo.rating", width:5, max:5, full:"minecraft:lime_dye", empty:"minecraft:gray_dye", name:{text:" "}}

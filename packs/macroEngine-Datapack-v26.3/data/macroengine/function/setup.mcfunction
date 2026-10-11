@@ -5,7 +5,6 @@
 
 # Step 1: Internal Text Module
 function macroengine:core/internal/text/load
-function macroengine:api/placeholder/load
 
 # Step 2: Player Enumeration
 function macroengine:core/internal/player/enumerate

@@ -20,7 +20,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'vortacraftmc-core'
+rootProject.name = 'vortaforge-core'
 
 // -----------------------------------------------------------------------
 // Roots to scan for subprojects. Each entry is a top-level directory
@@ -46,7 +46,7 @@ def EXCLUDED_PROJECT_DIRS = [
 def DEBUG = startParameter.projectProperties.get('debugSettings') == '1'
 def debugLog = { String msg -> if (DEBUG) println "[settings:debug] ${msg}" }
 
-println "[settings] vortacraftmc-core: discovering subprojects under ${SCAN_ROOTS.join(', ')}"
+println "[settings] vortaforge-core: discovering subprojects under ${SCAN_ROOTS.join(', ')}"
 
 // -----------------------------------------------------------------------
 // Recursively finds every build.gradle / build.gradle.kts under `base`

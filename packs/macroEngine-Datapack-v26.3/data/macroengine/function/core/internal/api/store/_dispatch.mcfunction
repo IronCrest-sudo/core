@@ -4,6 +4,10 @@ execute if data storage macroengine:store tmp{nm:"nl"} run data modify storage m
 execute if data storage macroengine:store tmp{nm:"percent"} run data modify storage macroengine:store tmp.val set value "%"
 execute if data storage macroengine:store tmp{nm:"player"} run function macroengine:core/internal/api/store/_player_name
 execute if data storage macroengine:store tmp{nm:"name"} run function macroengine:core/internal/api/store/_player_name
+execute if data storage macroengine:store tmp{nm:"health"} run function macroengine:core/internal/api/store/_tok_ent
+execute if data storage macroengine:store tmp{nm:"food"} run function macroengine:core/internal/api/store/_tok_ent
+execute if data storage macroengine:store tmp{nm:"xp_level"} run function macroengine:core/internal/api/store/_tok_ent
+execute if data storage macroengine:store tmp{nm:"dimension"} run function macroengine:core/internal/api/store/_tok_ent
 execute if data storage macroengine:store tmp.val run return 1
 
 # prefixed tokens: g:  p:  (2 chars) and score: (6 chars); the rest must be a safe name

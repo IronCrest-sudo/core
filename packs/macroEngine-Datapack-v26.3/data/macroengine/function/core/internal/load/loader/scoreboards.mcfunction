@@ -69,9 +69,6 @@ scoreboard objectives add macroengine.hook_fish dummy
 scoreboard objectives add macroengine.log_level dummy
 execute unless score #macroengine.log_level macroengine.log_level matches 0.. run scoreboard players set #macroengine.log_level macroengine.log_level 3
 
-# Config scoreboard — fast integer config values (no storage lookup needed)
-scoreboard objectives add macroengine.config dummy
-
 # Gamerule module — scratch scoreboard for numeric range checks
 scoreboard objectives add macroengine.gamerule dummy
 

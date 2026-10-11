@@ -100,7 +100,6 @@ scoreboard players reset $epoch macroengine.time
 # ── reverse of loader/scoreboards ────────────────────────────────────────
 scoreboard objectives remove macroengine.state
 scoreboard objectives remove macroengine.gamerule
-scoreboard objectives remove macroengine.config
 scoreboard objectives remove macroengine.log_level
 scoreboard objectives remove macroengine.hook_fish
 scoreboard objectives remove macroengine.hook_eat

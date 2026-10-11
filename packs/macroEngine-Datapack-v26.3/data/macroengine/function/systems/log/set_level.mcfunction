@@ -8,4 +8,5 @@
 #   4 = debug (all)
 execute unless entity @s[tag=macroengine.admin] run return 0
 $scoreboard players set #macroengine.log_level macroengine.log_level $(level)
+execute store result storage macroengine:engine config.log_level int 1 run scoreboard players get #macroengine.log_level macroengine.log_level
 $tellraw @s ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"Log level set to ","color":"gray"},{"text":"$(level)","color":"white","bold":true}]

@@ -1,6 +1,6 @@
 {
   "pack": {
-    "description": "vortacraftmc DevTools | selftests and debug helpers (development only, never ship)",
+    "description": "VortaForge DevTools | selftests and debug helpers (development only, never ship)",
     "min_format": [
       121,
       0

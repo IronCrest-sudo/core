@@ -2,7 +2,7 @@
 
 Two generations live side by side. The older functions (`show`, `show_raw`, `broadcast`, `actionbar`)
 build their text from macro arguments and are unchanged. The `*_p` functions below read **storage**,
-so any text is safe, and they understand `%placeholders%` (see [placeholder.md](placeholder.md)).
+so any text is safe, and they understand `%tokens%` rendered by `api/store/render` (see [store.md](store.md)).
 
 ## Input
 
@@ -10,8 +10,8 @@ so any text is safe, and they understand `%placeholders%` (see [placeholder.md](
 
 | Key | Meaning | Default |
 |---|---|---|
-| `title` | string with `%placeholders%` | empty |
-| `subtitle` | string with `%placeholders%` | empty |
+| `title` | string with `%tokens%` | empty |
+| `subtitle` | string with `%tokens%` | empty |
 | `fade_in` / `stay` / `fade_out` | ticks | 10 / 70 / 20 |
 | `text` | action bar text (`actionbar_*` functions only) | empty |
 
@@ -33,7 +33,7 @@ so any text is safe, and they understand `%placeholders%` (see [placeholder.md](
 | `times` | `player`, `fade_in`, `stay`, `fade_out` | sets timing only |
 | `clear` / `reset` | `player` | clears the title / also resets timing |
 
-Placeholders resolve **per viewer** in the "all", team, tag and area variants, because each viewer
+Tokens resolve **per viewer** in the "all", team, tag and area variants, because each viewer
 runs the function as themselves.
 
 ## Examples
@@ -62,4 +62,4 @@ execute as Steve run function macroengine:api/title/show_p
 
 * Plain, fixed text from a command: `show` / `broadcast`.
 * Hand-written JSON components (gradients, translate): `show_raw`.
-* Text that contains user input or placeholders: the `*_p` functions.
+* Text that contains user input or tokens: the `*_p` functions.

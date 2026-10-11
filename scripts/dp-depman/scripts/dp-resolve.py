@@ -212,7 +212,7 @@ def resolve_modrinth(dep_id: str, dep_cfg: dict, token: str | None) -> dict:
     log(f"Checking Modrinth project: {project}")
     url = f"https://api.modrinth.com/v2/project/{project}/version"
     req = urllib.request.Request(url)
-    req.add_header("User-Agent", "dp-depman/1.0 (vortacraftmc)")
+    req.add_header("User-Agent", "dp-depman/1.0 (vortaforge)")
     if token:
         req.add_header("Authorization", token)
     try:

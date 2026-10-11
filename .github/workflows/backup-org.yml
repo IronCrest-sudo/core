@@ -24,7 +24,7 @@
 #                          with encrypt=none.
 #
 # Optional repo/environment variable:
-#   BACKUP_ORG             Organization to back up. Defaults to vortacraftmc
+#   BACKUP_ORG             Organization to back up. Defaults to vortaforge
 #                          (the script's own default) when unset.
 #
 # Manual-trigger only by default, same reasoning as CODEOWNERS Sync's
@@ -68,7 +68,7 @@ jobs:
       contents: read
 
     env:
-      ORG: ${{ vars.BACKUP_ORG || 'vortacraftmc' }}
+      ORG: ${{ vars.BACKUP_ORG || 'vortaforge' }}
       ENCRYPT: ${{ inputs.encrypt || 'gpg' }}
       INCLUDE_SOURCE: ${{ (inputs.include_source && '1') || '0' }}
       JOBS: "2" # matches the standard ubuntu-latest runner's 2 vCPUs

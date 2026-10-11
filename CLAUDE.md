@@ -63,7 +63,7 @@ know yet). They are not bugs in the pack.
 - **Never substitute untrusted text into a macro line.** Validate names with `systems/validate/safe_name` while the
   value is still data in storage, then pass it as a macro argument. See `api/perm/require` and `api/store/*`.
 - Prefer storage in, storage out. Plain strings over text components unless the caller needs a component.
-- `api/placeholder/*` is deprecated; new code uses `api/store/*` (`docs/store.md`).
+- `api/store/*` is the single storage module (variables, `api/store/nbt/*`, templates); the old `api/placeholder/*` and `api/data/*` modules are gone (`docs/store.md`).
 - Keep `pack.mcmeta` `min_format`/`max_format` in sync with the targeted Minecraft version; do not guess pack formats.
 
 ## Java / Gradle conventions

@@ -15,6 +15,7 @@
 #   %p:name%       per-player value of the executor (api/store/player/set)
 #   %score:obj%    scoreboard value of the executor
 #   %player%       executor name        %nl%  line break        %%  a literal percent
+#   %health% %food% %xp_level% %dimension%   executor values (players only), as strings
 #   Unknown or unclosed %...% stays as written. Nested %...% inside values is not parsed.
 # Plain strings in, plain strings out. Nothing here ever builds a text component.
 # Names are checked with systems/validate/safe_name while they are still data in storage,

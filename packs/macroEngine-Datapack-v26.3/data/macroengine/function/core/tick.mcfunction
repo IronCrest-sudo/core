@@ -5,20 +5,24 @@
 # core/tick/dispatch.mcfunction with fixed rates (see that file).
 # Do NOT add per-system logic here — add it to dispatch.mcfunction instead.
 #
-# Merged in from the former macroengine.main:macroengine/tick (runtoolkit
-# dispatch removed — this function is now called directly via
-# #minecraft:tick, see data/minecraft/tags/function/tick.json).
-# minecraft:tick, see data/minecraft/tags/function/tick.json).
+# Merged in from the former macroengine.main:macroengine/tick; this function is called
+# directly via #minecraft:tick, see data/minecraft/tags/function/tick.json.
+
+# Runtime config: fill and apply anything missing (worlds loaded by an older version)
+function macroengine:core/config/ensure
 
 # Config-level pause guard (separate from the storage-level pause below)
 execute if score #vortacraftmc.packs.macroengine.config.tick.pause macroengine.meta matches 1 run return 0
 
-# Ensure tick config defaults exist (idempotent, only fills missing keys)
-execute unless score #vortacraftmc.packs.macroengine.config.tick.rate macroengine.meta matches 1.. run function macroengine:config/tick_cfg
+# Config not applied yet (before the first load finished): nothing to do
+execute unless score #vortacraftmc.packs.macroengine.config.tick.rate macroengine.meta matches 1.. run return 0
 
-# If tick.rate is not >= 1, skip the real tick work and run the no-op once instead
-execute if score #vortacraftmc.packs.macroengine.config.tick.rate macroengine.meta matches ..0 run function macroengine:core/empty
-execute if score #vortacraftmc.packs.macroengine.config.tick.rate macroengine.meta matches ..0 run return 0
+# tick_rate: run the engine once every N game ticks (core/config/apply keeps the rate >= 1)
+scoreboard players add #gt_ctr macroengine.tick 1
+execute if score #gt_ctr macroengine.tick matches 2000000000.. run scoreboard players set #gt_ctr macroengine.tick 0
+scoreboard players operation #gt_mod macroengine.tick = #gt_ctr macroengine.tick
+scoreboard players operation #gt_mod macroengine.tick %= #vortacraftmc.packs.macroengine.config.tick.rate macroengine.meta
+execute unless score #gt_mod macroengine.tick matches 0 run return 0
 
 # Guard: no players online → nothing to process
 execute unless entity @a run return 0
@@ -33,6 +37,6 @@ execute if data storage macroengine:engine tick{paused:1b} run return 0
 
 # Per-player input polling (writable book, command block minecart, etc.) —
 # independent of the dispatch chain below.
-execute as @a if score #vortacraftmc.packs.macroengine.config.tick.rate macroengine.meta matches 1.. run function #macroengine:loop
+execute as @a run function #macroengine:loop
 
 function macroengine:core/tick/dispatch

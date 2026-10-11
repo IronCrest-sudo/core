@@ -64,5 +64,5 @@ jar {
 // precompiled plugin. A projectDir-relative path is used (not ${rootDir})
 // so this also resolves correctly if this mod is ever built standalone via
 // its own settings.gradle, where rootDir would point here instead of at
-// vortacraftmc/core's root.
+// vortaforge/core's root.
 apply from: "${projectDir}/../../build-logic/shared-fabric-mod.gradle"

@@ -15,7 +15,7 @@ If you find a security issue in any project under this repository (Fabric
 mods, datapacks, or helper scripts), please report it privately rather than
 opening a public issue.
 
-- Preferred: use [GitHub's private vulnerability reporting](https://github.com/vortacraftmc/core/security/advisories/new)
+- Preferred: use [GitHub's private vulnerability reporting](https://github.com/vortaforge/core/security/advisories/new)
   for this repo.
 - If that's not available to you, open an issue with minimal detail
   (e.g. "possible command injection in X, details sent privately") and we'll

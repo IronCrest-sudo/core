@@ -1,5 +1,5 @@
 // =============================================================================
-// vortacraftmc/core - build-logic/shared-fabric-mod.gradle
+// vortaforge/core - build-logic/shared-fabric-mod.gradle
 //
 // Shared script, applied with an `apply from:` line pointing back at this
 // file - the exact relative path differs by depth (mods/*/build.gradle uses

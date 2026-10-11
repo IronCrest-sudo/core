@@ -4,7 +4,7 @@
   "target": "Java Edition 26.3",
   "pack_format": 107,
   "namespace": "rtwrapper",
-  "links": ["https://github.com/vortacraftmc/core"],
+  "links": ["https://github.com/vortaforge/core"],
   "variant_dispatch": true,
   "version": "v1.0.0",
   "command_params": {

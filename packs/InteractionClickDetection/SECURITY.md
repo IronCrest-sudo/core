@@ -27,7 +27,7 @@ repository-wide rules on this.
 | 1.0.0 | 1.20.x (`pack_format: 26`) | No longer updated. Superseded by `packs/LeftClickDetection`. |
 
 The whole repository is under a maintenance pause - see
-[Project status](https://github.com/vortacraftmc/core#project-status-maintenance-paused).
+[Project status](https://github.com/vortaforge/core#project-status-maintenance-paused).
 No version of anything here is currently supported, and reports may go
 unanswered. This file describes what *would* be in scope, not a service level.
 
@@ -40,7 +40,7 @@ unanswered. This file describes what *would* be in scope, not a service level.
 ## Reporting a vulnerability
 
 Do **not** open a public issue. Use
-[GitHub's private vulnerability reporting](https://github.com/vortacraftmc/core/security/advisories/new)
+[GitHub's private vulnerability reporting](https://github.com/vortaforge/core/security/advisories/new)
 for the repository, and include the pack path, the affected function, and what
 an attacker who can trigger it would actually achieve.
 

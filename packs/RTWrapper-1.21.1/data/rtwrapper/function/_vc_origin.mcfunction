@@ -1,5 +1,5 @@
 # ==============================================================================
-# vortacraftmc/core - Provenance Watermark
+# vortaforge/core - Provenance Watermark
 #
 # File: _vc_origin.mcfunction
 # watermark-version: 2
@@ -9,10 +9,10 @@
 #
 # Description:
 #   This file serves as a permanent origin watermark for this datapack within
-#   the vortacraftmc/core monorepo repository.
+#   the vortaforge/core monorepo repository.
 #
 #   Original source: Runtoolkit (runtoolkit/suite, now archived; the
-#   organization was retired in favor of vortacraftmc). This project is derived
+#   organization was retired; its projects moved to vortacraftmc and then to vortaforge). This project is derived
 #   from Runtoolkit's work; the original copyright notice is retained below.
 #
 # Build Workflow Rules:

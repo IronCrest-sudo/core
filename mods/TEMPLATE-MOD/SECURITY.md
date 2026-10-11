@@ -15,7 +15,7 @@ to be asking about.
 ## Response expectations
 
 **None are currently promised.** The repository is under a maintenance pause
-(see [Project status](https://github.com/vortacraftmc/core#project-status-maintenance-paused)),
+(see [Project status](https://github.com/vortaforge/core#project-status-maintenance-paused)),
 and the root [SECURITY.md](../../SECURITY.md) states that reports may not be
 read or answered and that no fixes should be expected. This file previously
 promised an acknowledgement within 72 hours and a status update within 7 days,
@@ -27,6 +27,6 @@ cannot meet.
 
 **Do not open a public GitHub issue for security vulnerabilities.**
 
-Report vulnerabilities privately via [GitHub's private vulnerability reporting](https://github.com/vortacraftmc/core/security/advisories/new).
+Report vulnerabilities privately via [GitHub's private vulnerability reporting](https://github.com/vortaforge/core/security/advisories/new).
 
 Declined reports will receive a brief explanation.

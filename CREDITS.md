@@ -84,3 +84,15 @@ maintainer (review status: _pending at the time of writing - update when reviewe
 
 - **Not verified:** rendering in a real browser; only the string replacement and its uniqueness were checked.
 
+## Organization migration to vortaforge (links and provenance text)
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Area | Change |
+|---|---|
+| Repo URLs | `github.com/vortacraftmc/...`, `vortacraftmc/core` and `vortacraftmc.github.io` replaced with the `vortaforge` equivalents in docs, scripts, Gradle files, `index.html` (`OWNER`, cache key) and metadata. |
+| Provenance | `scripts/origin_watermarks.py` template now states runtoolkit -> vortacraftmc -> vortaforge; all 20 `_vc_origin.mcfunction` files regenerated with `--write`, `--check` passes. |
+| Deliberately unchanged | Datapack namespaces (`data/vortacraftmc/`), scoreboard fake players (`#vortacraftmc.*`) and the Java package `com.vortacraftmc`: renaming them would break existing worlds or APIs and needs a separate migration decision. The `runtoolkit` origin statements are kept on purpose. |
+
+- **Not verified:** Gradle build and CI run; the target org does not exist yet, so no link was checked online.
+

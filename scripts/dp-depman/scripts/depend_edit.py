@@ -46,7 +46,7 @@ def validate_dep(dep_id: str, dep_cfg: dict):
 
     if source == "github":
         if not dep_cfg.get("repo"):
-            errors.append("'repo' is required for source=github (e.g. 'vortacraftmc/core')")
+            errors.append("'repo' is required for source=github (e.g. 'vortaforge/core')")
         elif "/" not in dep_cfg["repo"]:
             errors.append(f"'repo' must be 'owner/name', got: {dep_cfg['repo']!r}")
 
@@ -214,13 +214,13 @@ def main():
         epilog="""
 Examples:
   # Add a GitHub dependency
-  depend_edit.py add dataLib --source github --repo vortacraftmc/core --version '>=6.0.0' --asset dataLib-full.zip
+  depend_edit.py add dataLib --source github --repo vortaforge/core --version '>=6.0.0' --asset dataLib-full.zip
 
   # Add a GitHub dependency with a pinned SHA-256 (verified on every download)
-  depend_edit.py add dataLib --source github --repo vortacraftmc/core --version '>=6.0.0' --asset dataLib-full.zip --sha256 <64-char-hex>
+  depend_edit.py add dataLib --source github --repo vortaforge/core --version '>=6.0.0' --asset dataLib-full.zip --sha256 <64-char-hex>
 
   # Add a submodule dependency
-  depend_edit.py add cbplus --source submodule --url https://github.com/vortacraftmc/CBPlus.git --version '>=1.0.0'
+  depend_edit.py add cbplus --source submodule --url https://github.com/vortaforge/CBPlus.git --version '>=1.0.0'
 
   # Update the version constraint
   depend_edit.py update dataLib --version '>=6.1.0'
@@ -229,7 +229,7 @@ Examples:
   depend_edit.py update dataLib --asset dataLib-full.zip
 
   # Replace entire dep from JSON
-  depend_edit.py set dataLib '{"source":"github","repo":"vortacraftmc/core","version":">=6.0.0","asset":"dataLib-full.zip"}'
+  depend_edit.py set dataLib '{"source":"github","repo":"vortaforge/core","version":">=6.0.0","asset":"dataLib-full.zip"}'
 
   # Show a dependency
   depend_edit.py show dataLib

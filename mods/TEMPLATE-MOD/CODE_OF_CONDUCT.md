@@ -29,7 +29,7 @@ Two problems with this section before it was rewritten:
 
 Report a Code of Conduct violation by contacting a repository maintainer
 directly, or by emailing the address on their GitHub profile. Use
-[private vulnerability reporting](https://github.com/vortacraftmc/core/security/advisories/new)
+[private vulnerability reporting](https://github.com/vortaforge/core/security/advisories/new)
 only for security issues - see [SECURITY.md](SECURITY.md).
 
 ## Scope

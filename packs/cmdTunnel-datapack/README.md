@@ -1,6 +1,6 @@
 # cmdTunnel-datapack
 
-> ⚠️ **Archived.** This pack is archived and no longer maintained. The `vortacraftmc/core` datapacks are being superseded by [Fabric](https://fabricmc.net/) mods. Existing worlds using this pack will continue to work, but no new features or fixes are planned.
+> ⚠️ **Archived.** This pack is archived and no longer maintained. The `vortaforge/core` datapacks are being superseded by [Fabric](https://fabricmc.net/) mods. Existing worlds using this pack will continue to work, but no new features or fixes are planned.
 
 cmdTunnel is a Minecraft datapack system that executes commands stored in storage using a temporary command block pipeline.
 

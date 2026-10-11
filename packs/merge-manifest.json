@@ -1,5 +1,5 @@
 {
-  "_comment": "merge-manifest for the vortacraftmc/core mergeDatapacks task (this is the live manifest used for the release build). Only 'output' + 'include' are required; everything else below shows its default. Keep output.min_format/max_format equal to the format of the included packs: the task only compares the included packs with each other, not with this output value.",
+  "_comment": "merge-manifest for the vortaforge/core mergeDatapacks task (this is the live manifest used for the release build). Only 'output' + 'include' are required; everything else below shows its default. Keep output.min_format/max_format equal to the format of the included packs: the task only compares the included packs with each other, not with this output value.",
   "output": {
     "name": "merged-datapack",
     "description": "Merged vortacraftmc datapack",

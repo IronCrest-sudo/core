@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-vortacraftmc/core - repository consistency audit tool.
+vortaforge/core - repository consistency audit tool.
 
 Usage:
     python3 scripts/audit_repo.py                      # human-readable report
@@ -803,7 +803,7 @@ def audit_docs():
             for target in link_re.findall(line):
                 if target.startswith(("http://", "https://")):
                     path, _, frag = target.partition("#")
-                    m = re.match(r"https://github\.com/vortacraftmc/core(?:/(?:blob|tree)/[^/]+)?(/.*)?$", path)
+                    m = re.match(r"https://github\.com/vortaforge/core(?:/(?:blob|tree)/[^/]+)?(/.*)?$", path)
                     if not m:
                         continue
                     if "/security/advisories" in path or "/new/" in path:
@@ -1120,7 +1120,7 @@ def main():
         counts[f["severity"]] += 1
 
     print("=" * 78)
-    print("vortacraftmc/core AUDIT REPORT")
+    print("vortaforge/core AUDIT REPORT")
     print("=" * 78)
     print(f"packs: {len(pack_info)}  |  findings: {len(FINDINGS)}  |  "
           + ("  ".join(f"{ICONS[k]} {k}: {counts[k]}" for k in ORDER if counts[k]) or "clean"))

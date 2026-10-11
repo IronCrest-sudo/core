@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>vortacraftmc/core</title>
-  <meta property="og:title" content="vortacraftmc/core">
+  <title>vortaforge/core</title>
+  <meta property="og:title" content="vortaforge/core">
   <meta property="og:description" content="Consolidated Fabric mods, datapacks & tools">
-  <meta property="og:image" content="https://vortacraftmc.github.io/core/banner.png">
+  <meta property="og:image" content="https://vortaforge.github.io/core/banner.png">
   <style>
     :root {
       --bg: #0d1117;
@@ -437,13 +437,13 @@
     <button type="button" class="toast-close" id="dl-toast-close" aria-label="Dismiss">&times;</button>
   </div>
 
-  <img class="banner" src="banner.png" alt="vortacraftmc/core" onerror="this.style.display='none'">
+  <img class="banner" src="banner.png" alt="vortaforge/core" onerror="this.style.display='none'">
 
   <main>
     <!-- The page had no <h1>: the section headings below are <h2> with nothing
          above them, so screen-reader users got no document title and crawlers
          fell back to <title> plus the banner image. -->
-    <h1 class="page-title">vortacraftmc/core</h1>
+    <h1 class="page-title">vortaforge/core</h1>
     <p class="lead">
       Monorepo for VortaCraftMC: Fabric mods, Minecraft datapacks and resource
       packs, plus the datapack tooling built around them. Download the latest
@@ -517,21 +517,21 @@
     <div class="grid" id="mods-grid"></div>
 
     <footer>
-      <a href="https://github.com/vortacraftmc/core" target="_blank" rel="noopener noreferrer">
-        github.com/vortacraftmc/core
+      <a href="https://github.com/vortaforge/core" target="_blank" rel="noopener noreferrer">
+        github.com/vortaforge/core
       </a>
       &nbsp;·&nbsp;
       <!-- The Wiki link was removed: the repository has has_wiki = false, so
            GitHub only ever answered with a "wiki is disabled" page. Replaced
            with the two destinations a reader of a download page actually
            wants next. -->
-      <a href="https://github.com/vortacraftmc/core/releases" target="_blank" rel="noopener noreferrer">Releases</a>
+      <a href="https://github.com/vortaforge/core/releases" target="_blank" rel="noopener noreferrer">Releases</a>
       &nbsp;·&nbsp;
-      <a href="https://github.com/vortacraftmc/core/issues" target="_blank" rel="noopener noreferrer">Issues</a>
+      <a href="https://github.com/vortaforge/core/issues" target="_blank" rel="noopener noreferrer">Issues</a>
       &nbsp;·&nbsp;
-      <a href="https://github.com/vortacraftmc/core/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">Security</a>
+      <a href="https://github.com/vortaforge/core/blob/main/SECURITY.md" target="_blank" rel="noopener noreferrer">Security</a>
       &nbsp;·&nbsp;
-      <a href="https://github.com/vortacraftmc/core/fork" target="_blank" rel="noopener noreferrer">Fork</a>
+      <a href="https://github.com/vortaforge/core/fork" target="_blank" rel="noopener noreferrer">Fork</a>
     </footer>
   </main>
 
@@ -539,7 +539,7 @@
 (function () {
   "use strict";
 
-  const OWNER = "vortacraftmc";
+  const OWNER = "vortaforge";
   const REPO = "core";
   const RELEASE_TAG = "packs-latest";
   const RELEASE_BASE =
@@ -555,7 +555,7 @@
   const FETCH_TIMEOUT_MS = 12000;
   const HEAD_TIMEOUT_MS = 8000;
   const OVERALL_TIMEOUT_MS = 20000;
-  const CACHE_KEY = "vortacraftmc-core-site-cache-v1";
+  const CACHE_KEY = "vortaforge-core-site-cache-v1";
   const CACHE_MAX_AGE_MS = 15 * 60 * 1000; // 15 min — this content doesn't change minute to minute
   const AUTO_REFRESH_MS = 5 * 60 * 1000; // re-check GitHub every 5 min while the tab is open
   const VISIBILITY_REFRESH_THRESHOLD_MS = 2 * 60 * 1000; // re-check on tab refocus if stale

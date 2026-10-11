@@ -1,4 +1,4 @@
-# vortacraftmc/core
+# vortaforge/core
 
 Monorepo for VortaCraftMC: Fabric mods, Minecraft datapacks and resource
 packs, plus the datapack tooling built around them.
@@ -7,11 +7,11 @@ packs, plus the datapack tooling built around them.
 This opening line is the repository's GitHub description verbatim. Change one,
 change the other:
   curl -X PATCH -H "Authorization: Bearer $TOKEN" \
-    https://api.github.com/repos/vortacraftmc/core \
+    https://api.github.com/repos/vortaforge/core \
     -d '{"description": "<the new line>"}'
 They had already drifted apart once ("Consolidated monorepo for the
 vortacraftmc ecosystem."), which is circular - the organization *is*
-vortacraftmc, so the description said nothing about what is in here.
+the project name, so the description said nothing about what is in here.
 -->
 
 ## Project status (maintenance paused)
@@ -96,7 +96,7 @@ This monorepo consolidates projects that were previously scattered across
 individual repositories under the `runtoolkit` GitHub organization
 (TunnelScript, LeftClickDetection, dp-depman, RTWrapper, datapack-fixer, template-datapack, InteractionClickDetection,
 cmdTunnel-datapack, dpgen, TEMPLATE-MOD, macroEngine, guigen). That
-organization has since been retired in favor of `vortacraftmc`; the old repos
+organization has since been retired; its projects moved to `vortacraftmc` and then to `vortaforge`. The old repos
 are archived with a pointer to this monorepo, and are not otherwise
 maintained.
 
@@ -111,6 +111,6 @@ maintained.
 > rather than kept as a caveat about absent code.
 
 **Original source:** this project originated as [`runtoolkit/suite`](https://github.com/runtoolkit/suite)
-by **Runtoolkit**. It is maintained here as `vortacraftmc/core`; the original
+by **Runtoolkit**. It is maintained here as `vortaforge/core`; the original
 copyright notices in each `LICENSE`/`NOTICE` file are preserved.
 

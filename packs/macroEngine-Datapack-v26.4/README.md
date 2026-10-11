@@ -2,7 +2,7 @@
 
 **macroEngine** is a macro/module framework datapack for Minecraft Java Edition, providing a large library of reusable command-based systems (math, string, NBT, geo, permissions, UUID cache, hooks, rate limiting, and more) plus a multi-source text/value input system (books, signs, lecterns, name tags, command block minecarts).
 
-> Maintained by: [vortacraftmc](https://github.com/vortacraftmc) — repository [`vortacraftmc/core`](https://github.com/vortacraftmc/core), path `packs/macroEngine-Datapack-v26.4`
+> Maintained by: [vortacraftmc](https://github.com/vortacraftmc) — repository [`vortaforge/core`](https://github.com/vortaforge/core), path `packs/macroEngine-Datapack-v26.4`
 > Former owner: Runtoolkit (`runtoolkit` organization and `runtoolkit/suite`, retired/archived; original source, not maintained)
 > Minecraft: **26.4-snapshot-1** (`pack_format` / `min_format`–`max_format` **122**)
 > 
@@ -69,7 +69,7 @@ Internal systems under `systems/` are used by API functions and are not intended
 
 ## Notes
 
-- This is the 26.4-snapshot-1 build of macroEngine, derived from the 26.3 pack of the archived `runtoolkit/suite` monorepo (`packs/macroEngine-Datapack-v26.3`). Development continues in `vortacraftmc/core`; do not file issues or PRs against `runtoolkit/*`.
+- This is the 26.4-snapshot-1 build of macroEngine, derived from the 26.3 pack of the archived `runtoolkit/suite` monorepo (`packs/macroEngine-Datapack-v26.3`). Development continues in `vortaforge/core`; do not file issues or PRs against `runtoolkit/*`.
 
 ---
 

@@ -20,7 +20,7 @@
   "dependencies": {
     "dataLib": {
       "source": "github",
-      "repo": "vortacraftmc/core",
+      "repo": "vortaforge/core",
       "version": "*",
       "asset": "dataLib-dp-datapacks-dataLib.zip"
     }

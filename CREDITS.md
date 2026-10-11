@@ -155,3 +155,9 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 
 - **Left as is:** `TEMPLATE-MOD` and `opmod-example` placeholder authors (`Me!`, `you`), third-party copyright (`THIRD_PARTY_LICENSES.md`), `maven_group` / Java packages (`com.vortacraftmc`).
 - **Maintainer to confirm:** the exact legal name to use as copyright holder; I used the existing `Legends11 / ...` form from the older NOTICE files.
+
+## banner.png converted to a real PNG
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+`banner.png` was a JPEG with a `.png` extension and a long EXIF description string. It is now a real PNG (same 1408x736 picture, no metadata). The image itself was not redesigned.

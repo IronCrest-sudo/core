@@ -5,9 +5,14 @@
   "name": "Datapack Fixer",
   "description": "Server-safe diagnostics and backed-up, version-gated repairs for datapack syntax migrations.",
   "authors": [
-    "vortacraftmc",
+    "VortaForge",
     "Runtoolkit (original source)"
   ],
+  "contact": {
+    "homepage": "https://github.com/vortaforge/core",
+    "issues": "https://github.com/vortaforge/core/issues",
+    "sources": "https://github.com/vortaforge/core"
+  },
   "environment": "*",
   "entrypoints": {
     "main": [

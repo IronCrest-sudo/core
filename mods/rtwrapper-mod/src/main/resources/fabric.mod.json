@@ -4,9 +4,9 @@
   "version": "${version}",
   "name": "RTWrapper",
   "description": "A custom-command wrapper/queue mod with a gated permission system, audit log, and Chest GUI. Rewritten from scratch in Java, inspired by the command-queueing idea of the original RTWrapper datapack.",
-  "authors": ["vortacraftmc", "Runtoolkit (original source)"],
+  "authors": ["VortaForge", "Runtoolkit (original source)"],
   "contact": {
-    "sources": "https://github.com/vortacraftmc"
+    "sources": "https://github.com/vortaforge/core"
   },
   "license": "Unlicense",
   "icon": "assets/rtwrapper/icon.png",

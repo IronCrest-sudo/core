@@ -140,3 +140,18 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 | `packs/macroEngine-Datapack-v26.4/.../api/store/selftest.mcfunction` | Removed at the maintainer's request (no in-game tests). |
 
 - **Not verified:** how Google indexes the page (Search Console not available); JSON-LD and sitemap were only parsed for well-formedness. The target Pages site does not exist yet.
+
+## Authors, copyright lines and contact metadata
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `mods/*/fabric.mod.json`, `packs/RTWrapper/rtwrapper-fabric/.../fabric.mod.json` | `authors` entry `vortacraftmc` -> `VortaForge` (the `Runtoolkit (original source)` credit is kept); `contact.sources` now `https://github.com/vortaforge/core`. `datapack-fixer` gained a `contact` block. |
+| `packs/*/NOTICE`, `scripts/origin_watermarks.py` (+ 20 regenerated watermark headers) | Copyright holder now `Legends11 / VortaForge (formerly Runtoolkit)` / `VortaForge (formerly Runtoolkit)`. |
+| `packs/DailyBonus`, `packs/QuickShare` `pack.mcmeta` | Description credits VortaForge. |
+| `scripts/gui_generator/pyproject.toml`, `scripts/dpgen/package.json` | Author set to `VortaForge`. |
+| `packs/macroEngine-Datapack-v26.4/README.md` | Maintainer links point at VortaForge. |
+
+- **Left as is:** `TEMPLATE-MOD` and `opmod-example` placeholder authors (`Me!`, `you`), third-party copyright (`THIRD_PARTY_LICENSES.md`), `maven_group` / Java packages (`com.vortacraftmc`).
+- **Maintainer to confirm:** the exact legal name to use as copyright holder; I used the existing `Legends11 / ...` form from the older NOTICE files.

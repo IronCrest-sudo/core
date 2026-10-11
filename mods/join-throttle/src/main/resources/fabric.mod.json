@@ -4,9 +4,9 @@
   "version": "${version}",
   "name": "Join Throttle",
   "description": "Server-side reconnect-flood protection: limits how often one address may complete login within a time window, so connect/disconnect spam cannot repeatedly load players into the world or flood the chat with join messages.",
-  "authors": ["vortacraftmc"],
+  "authors": ["VortaForge"],
   "contact": {
-    "sources": "https://github.com/vortacraftmc"
+    "sources": "https://github.com/vortaforge/core"
   },
   "license": "Unlicense",
   "environment": "server",

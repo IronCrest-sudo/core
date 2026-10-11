@@ -13,8 +13,13 @@ on:
     types: [created]
   discussion:
     types: [created]
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
   schedule:
-    - cron: "0 9 * * *" # Her gün UTC saati ile 09:00'da çalışır
+    - cron: "0 9 * * *" # Runs every day at 09:00 UTC
 
 jobs:
   decide:
@@ -43,8 +48,8 @@ jobs:
             let number = 0;
             let isDiscussion = false;
 
-            if (event === "schedule") {
-              console.log("Triggered by schedule. Skipping individual issue/PR processing.");
+            if (event === "schedule" || event === "push" || event === "workflow_dispatch") {
+              console.log(`Triggered by ${event}. Skipping individual issue/PR processing.`);
               return;
             } else if (event === "issues" || event === "issue_comment") {
               if (context.payload.issue) {
@@ -123,7 +128,6 @@ jobs:
 
             const issue_number = number;
 
-            // Discussions için ayrı API gerektirdiğinden genel issue yorumu ve etiketleme adımları atlanabilir veya uyarlanabilir
             if (!isDiscussion) {
               if (decision.comment) {
                 await github.rest.issues.createComment({

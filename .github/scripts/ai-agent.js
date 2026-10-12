@@ -51,7 +51,7 @@ const WRITE_BLOCKLIST = [
 
 /** Binaries never allowed via run_command. */
 const BINARY_BLOCKLIST = new Set([
-  "unlink", "dd", "mkfs" "parted",
+  "unlink", "dd", "mkfs", "parted",
  "chgrp","doas",
   "nc", "ncat", "netcat", "ssh", "scp", "sftp",
   "zsh", "dash", "ksh", "csh", "tcsh", "fish",

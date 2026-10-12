@@ -23,6 +23,7 @@
 # macroengine:systems/rate_limit/check.
 # ======================================================================================
 
+execute if data storage macroengine:engine modules{audit:0b} run return 0
 data modify storage macroengine:audit entry set value {action:"unknown",detail:""}
 execute if data storage macroengine:audit in.action run data modify storage macroengine:audit entry.action set from storage macroengine:audit in.action
 execute if data storage macroengine:audit in.detail run data modify storage macroengine:audit entry.detail set from storage macroengine:audit in.detail

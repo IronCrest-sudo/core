@@ -14,6 +14,7 @@
 # → macroengine:output result = "apples"
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{string:0b} run return 0
 $scoreboard players set #plr_c macroengine.tmp $(count)
 execute store result storage macroengine:output count int 1 run scoreboard players get #plr_c macroengine.tmp
 

@@ -15,4 +15,5 @@
 #
 # Use case: writing UUID to entity NBT (e.g. Owner field)
 # ============================================================
+execute if data storage macroengine:engine modules{uuid:0b} run return 0
 function macroengine:core/internal/systems/uuid/recall_arr_read with storage macroengine:input

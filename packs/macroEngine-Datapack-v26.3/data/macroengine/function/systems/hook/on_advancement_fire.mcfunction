@@ -20,4 +20,5 @@
 # function macroengine:systems/hook/bind
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{hook:0b} run return 0
 function macroengine:core/internal/systems/hook/on_advancement_fire with storage macroengine:input {}

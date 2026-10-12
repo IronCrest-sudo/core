@@ -14,6 +14,7 @@
 # macroengine:output result = 20
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set $avg_c macroengine.tmp $(count)
 
 execute if score $avg_c macroengine.tmp matches ..0 run data modify storage macroengine:output result set value 0

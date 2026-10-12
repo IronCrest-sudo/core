@@ -15,6 +15,7 @@
 # 1000000000 → "1B"
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{string:0b} run return 0
 $scoreboard players set $fn_v macroengine.tmp $(value)
 execute store result storage macroengine:output value int 1 run scoreboard players get $fn_v macroengine.tmp
 

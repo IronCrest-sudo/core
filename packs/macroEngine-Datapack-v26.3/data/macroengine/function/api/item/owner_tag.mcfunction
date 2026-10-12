@@ -20,6 +20,7 @@
 # to player entity data (fails silently); all mutation goes through the
 # item component system via /item modify instead.
 
+execute if data storage macroengine:engine modules{item:0b} run return 0
 data modify storage macroengine:output found set value 0b
 
 $execute unless entity @a[name=$(player),limit=1] run return 0

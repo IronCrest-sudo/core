@@ -1,3 +1,4 @@
+execute if data storage macroengine:engine modules{trigger:0b} run return 0
 execute unless data storage macroengine:engine trigger_binds run return 0
 
 data modify storage macroengine:engine _tc_unbind set from storage macroengine:engine trigger_binds

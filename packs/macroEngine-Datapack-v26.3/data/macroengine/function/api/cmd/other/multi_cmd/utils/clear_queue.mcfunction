@@ -3,4 +3,5 @@
 # Clear the queue
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{cmd:0b} run return 0
 data remove storage macroengine:engine _mcmd_queue

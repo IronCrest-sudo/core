@@ -1,4 +1,5 @@
 # Add forceload
+execute if data storage macroengine:engine modules{cmd:0b} run return 0
 forceload add 0 0
 
 # Execute command from storage using marker + command block

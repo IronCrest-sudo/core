@@ -13,4 +13,5 @@
 # macroengine:input value → UUID hex string
 # (value unchanged if key not found)
 # ============================================================
+execute if data storage macroengine:engine modules{uuid:0b} run return 0
 function macroengine:core/internal/systems/uuid/recall_read with storage macroengine:input

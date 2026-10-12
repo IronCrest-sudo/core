@@ -11,5 +11,6 @@
 #   -- or --
 #   data modify storage macroengine:input cmd set value "say I ate something"
 #   function macroengine:systems/hook/on_eat
+execute if data storage macroengine:engine modules{hook:0b} run return 0
 data modify storage macroengine:input event set value "eat"
 function macroengine:systems/hook/bind

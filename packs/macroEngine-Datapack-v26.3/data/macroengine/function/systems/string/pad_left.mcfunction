@@ -1,3 +1,4 @@
+execute if data storage macroengine:engine modules{string:0b} run return 0
 $scoreboard players set $pl_v macroengine.tmp $(value)
 $scoreboard players set $pl_w macroengine.tmp $(width)
 

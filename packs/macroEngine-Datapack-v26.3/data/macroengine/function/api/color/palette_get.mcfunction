@@ -12,5 +12,6 @@
 #   data get storage macroengine:output result
 
 
+execute if data storage macroengine:engine modules{color:0b} run return 0
 data modify storage macroengine:output result set value ""
 $execute if data storage macroengine:engine color.palette.$(key) run data modify storage macroengine:output result set from storage macroengine:engine color.palette.$(key)

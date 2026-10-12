@@ -7,6 +7,7 @@
 # Implementation: static dispatch to internal/repeat_N which sets the literal string.
 # Each internal file uses a single $data modify line with N $(char) expansions.
 
+execute if data storage macroengine:engine modules{string:0b} run return 0
 data modify storage macroengine:output result set value ""
 
 $scoreboard players set $sr_n macroengine.tmp $(count)

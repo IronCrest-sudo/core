@@ -126,11 +126,6 @@ execute unless data storage macroengine:engine wand_cooldowns run data modify st
 # Enable a module:   /function macroengine:api/toggle/<name>/true
 # List module states: /function macroengine:api/toggle/list
 # ─────────────────────────────────────────────────────────────────
-execute unless data storage macroengine:engine modules.hook run data modify storage macroengine:engine modules.hook set value 1b
-execute unless data storage macroengine:engine modules.interaction run data modify storage macroengine:engine modules.interaction set value 1b
-execute unless data storage macroengine:engine modules.perm run data modify storage macroengine:engine modules.perm set value 1b
-execute unless data storage macroengine:engine modules.wand run data modify storage macroengine:engine modules.wand set value 1b
-execute unless data storage macroengine:engine modules.geo run data modify storage macroengine:engine modules.geo set value 1b
 
 # ─────────────────────────────────────────────────────────────────
 # cb module init
@@ -142,7 +137,6 @@ data modify storage macroengine:engine cb_queue set value []
 data remove storage macroengine:engine _cb_last
 data remove storage macroengine:engine _cb_work
 data remove storage macroengine:engine _cb_entry
-execute unless data storage macroengine:engine modules.cb run data modify storage macroengine:engine modules.cb set value 1b
 
 # ─────────────────────────────────────────────────────────────────
 # Color API init

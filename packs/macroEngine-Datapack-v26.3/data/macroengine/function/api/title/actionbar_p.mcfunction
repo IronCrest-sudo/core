@@ -7,6 +7,7 @@
 # Usage:
 #   data modify storage macroengine:title in set value {text:"HP %health% | %player%"}
 #   function macroengine:api/title/actionbar_p
+execute if data storage macroengine:engine modules{title:0b} run return 0
 data remove storage macroengine:store in
 data modify storage macroengine:store in.template set value ""
 execute if data storage macroengine:title in.text run data modify storage macroengine:store in.template set from storage macroengine:title in.text

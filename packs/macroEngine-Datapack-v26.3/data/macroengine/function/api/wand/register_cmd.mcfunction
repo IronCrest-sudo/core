@@ -6,5 +6,6 @@
 #   tag → custom_data tag name
 #   cmd → raw command to run
 # ─────────────────────────────────────────────────────────────────
+execute if data storage macroengine:engine modules{wand:0b} run return 0
 execute unless data storage macroengine:engine wand_binds run data modify storage macroengine:engine wand_binds set value []
 function macroengine:core/internal/api/wand/register_cmd_do with storage macroengine:input {}

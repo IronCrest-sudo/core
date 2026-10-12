@@ -7,4 +7,5 @@
 # OUTPUT: macroengine:output result (int)
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 function macroengine:core/internal/systems/math/vec/dot_exec with storage macroengine:engine _vec_dot_tmp

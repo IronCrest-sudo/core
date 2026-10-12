@@ -1,5 +1,6 @@
 # Block found!
 # Increment hook.placed scoreboard
+execute if data storage macroengine:engine modules{hook:0b} run return 0
 scoreboard players add @s macroengine.hook_placed 1
 
 # Write to hook event storage (other systems can listen)

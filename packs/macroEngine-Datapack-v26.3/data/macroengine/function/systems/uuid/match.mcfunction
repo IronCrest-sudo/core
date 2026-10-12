@@ -17,6 +17,7 @@
 
 # Save expected UUID string to temporary field
 # (from_entity call overwrites macroengine:input value)
+execute if data storage macroengine:engine modules{uuid:0b} run return 0
 data modify storage macroengine:uuid _match_target set from storage macroengine:input value
 
 # Convert @s UUID to string → macroengine:input value

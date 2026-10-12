@@ -8,4 +8,5 @@
 #
 # Usage:
 #   function macroengine:api/color/palette_delete {key:"brand"}
+execute if data storage macroengine:engine modules{color:0b} run return 0
 $data remove storage macroengine:engine color.palette.$(key)

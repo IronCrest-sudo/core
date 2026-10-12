@@ -18,5 +18,6 @@
 #   function macroengine:api/title/broadcast {title:"Server restart in 5 min",\
 #     subtitle:"Save your progress!",color:"red",sub_color:"yellow",\
 #     fade_in:20,stay:100,fade_out:20}$title @a times $(fade_in) $(stay) $(fade_out)
+execute if data storage macroengine:engine modules{title:0b} run return 0
 $title @a title {"text":"$(title)","color":"$(color)"}
 $title @a subtitle {"text":"$(subtitle)","color":"$(sub_color)"}

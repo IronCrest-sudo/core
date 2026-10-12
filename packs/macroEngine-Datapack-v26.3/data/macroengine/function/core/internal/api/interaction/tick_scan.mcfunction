@@ -1,5 +1,8 @@
 # Module toggle guard — skips this module when disabled via macroengine:api/toggle/interaction/false
 execute unless data storage macroengine:engine {modules:{interaction:1b}} run return 0
+scoreboard players operation #scan_mod macroengine.tick = #tick_ctr macroengine.tick
+scoreboard players operation #scan_mod macroengine.tick %= #interaction_interval macroengine.tick
+execute unless score #scan_mod macroengine.tick matches 0 run return 0
 
 execute unless entity @e[type=minecraft:interaction,tag=macroengine.interaction,limit=1] run return 0
 

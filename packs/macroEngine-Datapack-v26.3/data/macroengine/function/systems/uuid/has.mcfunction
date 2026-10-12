@@ -13,5 +13,6 @@
 # OUTPUT:
 # $uuid.has macroengine.tmp → 1 (found) or 0 (not found)
 # ============================================================
+execute if data storage macroengine:engine modules{uuid:0b} run return 0
 scoreboard players set $uuid.has macroengine.tmp 0
 function macroengine:core/internal/systems/uuid/has_check with storage macroengine:input

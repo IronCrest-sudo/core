@@ -14,4 +14,5 @@
 #
 # Output → macroengine:output result 1b=ALLOWED 0b=DENIED
 
+execute if data storage macroengine:engine modules{rate_limit:0b} run return 0
 $function macroengine:systems/rate_limit/check {key:"channel:$(id)"}

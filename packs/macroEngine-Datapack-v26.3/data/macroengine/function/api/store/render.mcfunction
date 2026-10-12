@@ -20,6 +20,7 @@
 # Plain strings in, plain strings out. Nothing here ever builds a text component.
 # Names are checked with systems/validate/safe_name while they are still data in storage,
 # before they reach a macro line (see api/perm/require for the same pattern).
+execute if data storage macroengine:engine modules{store:0b} run return 0
 data remove storage macroengine:store out.string
 data remove storage macroengine:store tmp
 execute if data storage macroengine:store in.template run data modify storage macroengine:store tmp.tpl set from storage macroengine:store in.template
@@ -27,6 +28,10 @@ execute unless data storage macroengine:store tmp.tpl unless function macroengin
 execute unless data storage macroengine:store tmp.tpl run function macroengine:core/internal/api/store/_find_tpl
 execute unless data storage macroengine:store tmp.tpl run return 0
 
+execute store result score #st_n macroengine.tmp run data get storage macroengine:store tmp.tpl
+execute store result score #st_max macroengine.tmp run data get storage macroengine:engine config.store_max_template
+execute if score #st_max macroengine.tmp matches ..0 run scoreboard players set #st_max macroengine.tmp 8192
+execute if score #st_n macroengine.tmp > #st_max macroengine.tmp run return 0
 data modify storage macroengine:text s set from storage macroengine:store tmp.tpl
 data modify storage macroengine:text sep set value "%"
 data modify storage macroengine:text keep_empty set value 1b
@@ -34,6 +39,12 @@ data modify storage macroengine:text n set value 0
 function macroengine:core/internal/text/split
 data modify storage macroengine:store tmp.segs set from storage macroengine:text out
 function macroengine:core/internal/text/reset
+execute store result score #st_n macroengine.tmp run data get storage macroengine:store tmp.segs
+execute store result score #st_max macroengine.tmp run data get storage macroengine:engine config.store_max_tokens
+execute if score #st_max macroengine.tmp matches ..0 run scoreboard players set #st_max macroengine.tmp 128
+scoreboard players operation #st_max macroengine.tmp += #st_max macroengine.tmp
+scoreboard players add #st_max macroengine.tmp 1
+execute if score #st_n macroengine.tmp > #st_max macroengine.tmp run return 0
 
 data modify storage macroengine:store tmp.frags set value []
 scoreboard players set #st_mode macroengine.tmp 0

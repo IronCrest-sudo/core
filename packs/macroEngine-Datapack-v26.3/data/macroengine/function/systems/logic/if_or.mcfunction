@@ -9,6 +9,7 @@
 #   $(b)    -> second operand score value (non-zero = true)
 #   $(func) -> function id to run via #macroengine:internal/dispatch if a || b
 
+execute if data storage macroengine:engine modules{logic:0b} run return 0
 $scoreboard players set $if_or_a macroengine.tmp $(a)
 $scoreboard players set $if_or_b macroengine.tmp $(b)
 $data modify storage macroengine:engine _dispatch.func set value "$(func)"

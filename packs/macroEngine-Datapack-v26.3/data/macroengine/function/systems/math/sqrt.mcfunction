@@ -1,3 +1,4 @@
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set $sqrt_n macroengine.tmp $(value)
 
 execute if score $sqrt_n macroengine.tmp matches ..0 run data modify storage macroengine:output result set value 0

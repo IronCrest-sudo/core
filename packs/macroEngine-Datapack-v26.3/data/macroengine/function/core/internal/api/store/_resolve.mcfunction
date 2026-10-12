@@ -9,6 +9,7 @@ execute unless data storage macroengine:store tmp.val run function macroengine:c
 execute if data storage macroengine:store tmp.val run data modify storage macroengine:store tmp.frags append from storage macroengine:store tmp.val
 execute if data storage macroengine:store tmp.val run return 1
 # unknown: keep "%name%" exactly as written
+execute if data storage macroengine:engine config{store_keep_unknown:0b} run return 1
 data modify storage macroengine:store tmp.frags append value "%"
 data modify storage macroengine:store tmp.frags append from storage macroengine:store tmp.nm
 data modify storage macroengine:store tmp.frags append value "%"

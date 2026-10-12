@@ -16,6 +16,7 @@
 # ============================================================
 
 # Read int[4] array directly from macroengine:input value
+execute if data storage macroengine:engine modules{uuid:0b} run return 0
 execute store result score $uuid.0 macroengine.tmp run data get storage macroengine:input value[0]
 execute store result score $uuid.1 macroengine.tmp run data get storage macroengine:input value[1]
 execute store result score $uuid.2 macroengine.tmp run data get storage macroengine:input value[2]

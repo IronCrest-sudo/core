@@ -41,10 +41,12 @@ execute unless data storage macroengine:validate tmp.value run data modify stora
 execute unless data storage macroengine:validate tmp.value run return 0
 
 execute store result score #macroengine.vs_len macroengine.tmp run data get storage macroengine:validate tmp.value
+execute store result score #macroengine.vs_max macroengine.tmp run data get storage macroengine:engine config.validate_max_name
+execute if score #macroengine.vs_max macroengine.tmp matches ..0 run scoreboard players set #macroengine.vs_max macroengine.tmp 64
 execute if score #macroengine.vs_len macroengine.tmp matches ..0 run data modify storage macroengine:validate out.error set value "empty"
 execute if score #macroengine.vs_len macroengine.tmp matches ..0 run return 0
-execute if score #macroengine.vs_len macroengine.tmp matches 65.. run data modify storage macroengine:validate out.error set value "too long (max 64)"
-execute if score #macroengine.vs_len macroengine.tmp matches 65.. run return 0
+execute if score #macroengine.vs_len macroengine.tmp > #macroengine.vs_max macroengine.tmp run data modify storage macroengine:validate out.error set value "too long (config validate_max_name)"
+execute if score #macroengine.vs_len macroengine.tmp > #macroengine.vs_max macroengine.tmp run return 0
 
 data modify storage macroengine:validate tmp.bad set value 0b
 data modify storage macroengine:text s set from storage macroengine:validate tmp.value

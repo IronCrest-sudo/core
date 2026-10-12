@@ -10,6 +10,7 @@
 # Call:
 #   function macroengine:api/item/durability_overlay {player:"Steve",slot:"weapon.mainhand",value:50}
 
+execute if data storage macroengine:engine modules{item:0b} run return 0
 data modify storage macroengine:output found set value 0b
 
 $execute unless entity @a[name=$(player),limit=1] run return 0

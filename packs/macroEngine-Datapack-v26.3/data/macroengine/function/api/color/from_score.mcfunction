@@ -26,6 +26,7 @@
 #   data get storage macroengine:output result
 
 # Default: high_color
+execute if data storage macroengine:engine modules{color:0b} run return 0
 $data modify storage macroengine:output result set value "$(high_color)"
 
 # Override with low or mid if score is below threshold

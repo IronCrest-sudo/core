@@ -17,4 +17,5 @@
 # Output: "Points 42" (42 from scoreboard)
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{string:0b} run return 0
 $tellraw $(target) ["",{"text":"$(label)","color":"gray"},{"text":"  ","color":"#555555"},{"score":{"name":"$(player)","objective":"$(objective)"},"color":"$(color)","bold":true}]

@@ -18,6 +18,7 @@
 # macroengine:output result = 2000000
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set $md_a macroengine.tmp $(a)
 $scoreboard players set $md_b macroengine.tmp $(b)
 $scoreboard players set $md_c macroengine.tmp $(c)

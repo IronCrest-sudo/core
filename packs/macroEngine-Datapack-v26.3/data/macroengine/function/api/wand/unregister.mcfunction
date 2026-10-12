@@ -10,4 +10,5 @@
 # function macroengine:api/wand/unregister
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{wand:0b} run return 0
 function macroengine:core/internal/api/wand/unregister_exec with storage macroengine:input {}

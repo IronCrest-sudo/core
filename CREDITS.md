@@ -205,3 +205,20 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 - **Kept on purpose:** runtime identifiers (`data/vortacraftmc/`, `#vortacraftmc.*` fake players, `com.vortacraftmc`; CLAUDE.md rule 8) and provenance text (`runtoolkit -> vortacraftmc -> vortaforge`, "Original source: Runtoolkit", NOTICE source URLs, `archived/archive.json`).
 - **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`.
 - **Not verified:** nothing was run in a Minecraft server. In particular `%player%`, the `tick_rate` divider and the new config functions were never executed in game.
+
+## macroEngine: `systems/nbt` removed, schema-driven runtime config
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `.../systems/nbt/*`, `.../core/internal/systems/nbt/*` | Removed. Nothing in the repo called them; `api/store/nbt/*` covers the same ground except `first`, `move` and `swap`, which now have no equivalent. |
+| `.../config.mcfunction`, `core/config/*` | 54 config keys with a schema (`config_schema`): module switches, tick systems and rates, handler intervals, queue depth, store limits and token switches, title defaults, name length. `set` and `get` are table-driven and validate against the schema; `ensure` uses a revision marker (`config_rev`). |
+| 376 files under `api/<module>/` and `systems/<module>/` | One guard line each: `execute if data storage macroengine:engine modules{<module>:0b} run return 0`. `validate`, `toggle`, `flag` and `systems/color` are not guarded. |
+| `systems/flag/toggle_system`, `.../flip` | Rewritten. The old `exec` flipped the score 1 to 0 and back to 1 in one call, so it never toggled anything. |
+| `api/toggle/<module>/true,false` | Write `config.module_<module>` and apply it. |
+| Scans, queue, store, title, validator | The hook, geo, interaction, wand and perm-trigger scans honour `*_interval`; the queue honours `queue_max_depth`; `api/store/render`, `_dispatch`, `_resolve`, `_find_tpl`, `api/title/show_p` and `safe_name` read their limits from the config. |
+
+- **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`.
+- **Not verified:** nothing was run in a Minecraft server. The module guards, the `%` interval counters and every `core/config/*` function are untested in game.
+

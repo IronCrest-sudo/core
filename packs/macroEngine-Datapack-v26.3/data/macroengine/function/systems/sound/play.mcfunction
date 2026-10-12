@@ -17,4 +17,5 @@
 #      target:"@a",volume:1.0f,pitch:1.0f}
 #   function macroengine:systems/sound/play with storage macroengine:input sound
 
+execute if data storage macroengine:engine modules{sound:0b} run return 0
 $playsound $(sound) $(category) $(target) ~ ~ ~ $(volume) $(pitch)

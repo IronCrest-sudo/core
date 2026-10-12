@@ -17,6 +17,7 @@
 # ============================================================
 
 # Build UUID string → macroengine:input value
+execute if data storage macroengine:engine modules{uuid:0b} run return 0
 function macroengine:systems/uuid/from_entity
 
 # Also save array form (from_entity already filled _work)

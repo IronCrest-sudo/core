@@ -19,4 +19,5 @@
 # Usage:  function macroengine:systems/math/random {min:1,max:6}
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $function macroengine:systems/rng/int {min:$(min),max:$(max)}

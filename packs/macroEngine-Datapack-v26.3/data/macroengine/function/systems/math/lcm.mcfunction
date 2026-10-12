@@ -12,6 +12,7 @@
 # macroengine:output result = 24
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set $lcm_a macroengine.tmp $(a)
 $scoreboard players set $lcm_b macroengine.tmp $(b)
 

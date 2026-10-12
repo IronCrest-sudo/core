@@ -20,4 +20,5 @@
 # Removing a rule: function macroengine:systems/rate_limit/delete {key:"..."}
 # Listing rules: function macroengine:systems/rate_limit/list
 
+execute if data storage macroengine:engine modules{rate_limit:0b} run return 0
 $data modify storage macroengine:engine rate_limit.rules.$(key) set value {limit:$(limit),window:$(window),hits:[]}

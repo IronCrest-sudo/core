@@ -1,3 +1,4 @@
+execute if data storage macroengine:engine modules{string:0b} run return 0
 $scoreboard players set $ft_t macroengine.tmp $(ticks)
 
 scoreboard players set $ft_20 macroengine.tmp 20

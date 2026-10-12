@@ -23,6 +23,7 @@
 #   function macroengine:api/color/lerp {gradient:"sunset",step:2}
 #   # → macroengine:output result = "#FFAA00"
 
+execute if data storage macroengine:engine modules{color:0b} run return 0
 data modify storage macroengine:output result set value ""
 $data modify storage macroengine:engine _color_lerp_tmp set value {gradient:"$(gradient)",step:$(step)}
 $execute if data storage macroengine:engine color.gradients.$(gradient) run function macroengine:core/internal/systems/color/lerp_exec with storage macroengine:engine _color_lerp_tmp

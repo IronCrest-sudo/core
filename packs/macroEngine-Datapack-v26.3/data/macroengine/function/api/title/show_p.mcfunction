@@ -9,15 +9,19 @@
 #   title     string with %tokens%   (default: empty)
 #   subtitle  string with %tokens%   (default: empty)
 #   args      compound for %name% tokens (see api/store/render)
-#   fade_in   ticks (default 10)   stay ticks (default 70)   fade_out ticks (default 20)
+#   fade_in, stay, fade_out   ticks (defaults come from config title_fade_in / title_stay / title_fade_out)
 # NOTE: uses macroengine:store in/out while it runs.
 #
 # Usage:
 #   data modify storage macroengine:title in set value {title:"Welcome %player%",subtitle:"Coins: %score:coins%"}
 #   function macroengine:api/title/show_p
 #   (to address another player:  execute as Steve run function macroengine:api/title/show_p)
+execute if data storage macroengine:engine modules{title:0b} run return 0
+execute unless data storage macroengine:title in.fade_in run data modify storage macroengine:title in.fade_in set from storage macroengine:engine config.title_fade_in
 execute unless data storage macroengine:title in.fade_in run data modify storage macroengine:title in.fade_in set value 10
+execute unless data storage macroengine:title in.stay run data modify storage macroengine:title in.stay set from storage macroengine:engine config.title_stay
 execute unless data storage macroengine:title in.stay run data modify storage macroengine:title in.stay set value 70
+execute unless data storage macroengine:title in.fade_out run data modify storage macroengine:title in.fade_out set from storage macroengine:engine config.title_fade_out
 execute unless data storage macroengine:title in.fade_out run data modify storage macroengine:title in.fade_out set value 20
 
 data remove storage macroengine:store in

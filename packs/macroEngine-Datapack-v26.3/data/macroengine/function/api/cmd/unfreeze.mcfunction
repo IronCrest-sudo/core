@@ -15,4 +15,5 @@
 #   function macroengine:api/cmd/unfreeze {player:"Steve"}
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{cmd:0b} run return 0
 $execute as @a[name=$(player),tag=macroengine.frozen,limit=1] run function macroengine:core/internal/api/cmd/freeze/remove

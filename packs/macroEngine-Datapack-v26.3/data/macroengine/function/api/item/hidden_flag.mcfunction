@@ -21,6 +21,7 @@
 # name twice, both entries persist; readers should treat the LAST matching
 # entry as authoritative if that matters for your use case.
 
+execute if data storage macroengine:engine modules{item:0b} run return 0
 data modify storage macroengine:output found set value 0b
 
 $execute unless entity @a[name=$(player),limit=1] run return 0

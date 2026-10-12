@@ -14,6 +14,7 @@
 # ============================================================
 
 # Copy entity UUID as int[4] to working storage
+execute if data storage macroengine:engine modules{uuid:0b} run return 0
 data modify storage macroengine:uuid _work set from entity @s UUID
 
 # Load four ints to scoreboard (without writing scores to entity)

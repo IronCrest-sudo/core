@@ -18,6 +18,7 @@
 #   macroengine:output ready     -> 1b if cooldown has expired (or was never set)
 #   macroengine:output remaining -> ticks remaining (0 if ready)
 
+execute if data storage macroengine:engine modules{item:0b} run return 0
 data modify storage macroengine:output found set value 0b
 data modify storage macroengine:output ready set value 0b
 data modify storage macroengine:output remaining set value 0

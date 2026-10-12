@@ -8,6 +8,7 @@
 # Usage:  function macroengine:systems/rng/chance {percent:25}
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{rng:0b} run return 0
 $scoreboard players set $rng_pct macroengine.tmp $(percent)
 
 execute if score $rng_pct macroengine.tmp matches ..0 run data modify storage macroengine:output result set value 0

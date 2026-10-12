@@ -7,6 +7,7 @@
 # selector → entity selector (default: @s)
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{cmd:0b} run return 0
 execute unless data storage macroengine:input selector run data modify storage macroengine:input selector set value "@s"
 
 data modify storage macroengine:engine _mcmd_queue set from storage macroengine:input list

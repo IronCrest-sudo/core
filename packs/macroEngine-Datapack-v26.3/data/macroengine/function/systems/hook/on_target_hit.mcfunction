@@ -11,5 +11,6 @@
 #   -- or --
 #   data modify storage macroengine:input cmd set value "say Target hit"
 #   function macroengine:systems/hook/on_target_hit
+execute if data storage macroengine:engine modules{hook:0b} run return 0
 data modify storage macroengine:input event set value "target_hit"
 function macroengine:systems/hook/bind

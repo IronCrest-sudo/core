@@ -7,6 +7,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Convert strings to {func:"..."} format
+execute if data storage macroengine:engine modules{cmd:0b} run return 0
 data modify storage macroengine:engine _mcmd_queue set value []
 function macroengine:core/internal/api/cmd/other/multi_cmd/func_convert_loop
 

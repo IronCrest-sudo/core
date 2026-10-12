@@ -12,6 +12,7 @@
 # Usage:  function macroengine:systems/rng/pick {list:["a","b","c"]}
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{rng:0b} run return 0
 $data modify storage macroengine:engine _rng_list set value $(list)
 
 execute store result score $rng_len macroengine.tmp run data get storage macroengine:engine _rng_list

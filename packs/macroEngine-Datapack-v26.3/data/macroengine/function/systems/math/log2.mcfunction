@@ -1,3 +1,4 @@
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set $lg2_v macroengine.tmp $(value)
 
 execute if score $lg2_v macroengine.tmp matches ..0 run data modify storage macroengine:output result set value -1

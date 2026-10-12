@@ -17,6 +17,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Verify required inputs
+execute if data storage macroengine:engine modules{cb:0b} run return 0
 execute unless data storage macroengine:input cb.cmd run tellraw @s [{"text":"[MACROENGINE/cb] ","color":"#00AAAA","bold":true},{"text":"cb.cmd not set","color":"red"}]
 execute unless data storage macroengine:input cb.cmd run return 0
 execute unless data storage macroengine:input cb.delay run tellraw @s [{"text":"[MACROENGINE/cb] ","color":"#00AAAA","bold":true},{"text":"cb.delay not set","color":"red"}]

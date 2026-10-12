@@ -12,6 +12,7 @@
 # macroengine:output result = 600
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set $s3_a macroengine.tmp $(a)
 $scoreboard players set $s3_b macroengine.tmp $(b)
 $scoreboard players set $s3_c macroengine.tmp $(c)

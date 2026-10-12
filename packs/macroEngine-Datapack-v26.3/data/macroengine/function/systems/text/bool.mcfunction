@@ -11,6 +11,7 @@
 # Usage:  function macroengine:systems/text/bool {storage:"macroengine:engine",path:"tick.paused"}
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{text:0b} run return 0
 $execute store success score $text_bool_ok macroengine.tmp run data get storage $(storage) $(path)
 execute if score $text_bool_ok macroengine.tmp matches 0 run tellraw @s [{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"no","color":"red"}]
 $execute if score $text_bool_ok macroengine.tmp matches 1 store result score $text_bool_val macroengine.tmp run data get storage $(storage) $(path)

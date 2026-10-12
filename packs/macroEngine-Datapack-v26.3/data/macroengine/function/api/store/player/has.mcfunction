@@ -8,6 +8,7 @@
 # Plain strings in, plain strings out. Nothing here ever builds a text component.
 # Names are checked with systems/validate/safe_name while they are still data in storage,
 # before they reach a macro line (see api/perm/require for the same pattern).
+execute if data storage macroengine:engine modules{store:0b} run return 0
 data remove storage macroengine:store tmp
 execute unless function macroengine:core/internal/api/store/_name run return 0
 execute unless function macroengine:core/internal/api/store/_uuid run return 0

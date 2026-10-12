@@ -22,6 +22,7 @@
 # {n:22} → suffix="nd" {n:103}→ suffix="rd"
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{string:0b} run return 0
 $scoreboard players set $ord_n macroengine.tmp $(n)
 execute store result storage macroengine:output n int 1 run scoreboard players get $ord_n macroengine.tmp
 

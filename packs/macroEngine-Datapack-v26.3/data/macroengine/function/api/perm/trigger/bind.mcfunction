@@ -1,3 +1,4 @@
+execute if data storage macroengine:engine modules{perm:0b} run return 0
 $scoreboard objectives add $(name) trigger
 
 $execute unless data storage macroengine:engine perm_triggers.$(name) run data modify storage macroengine:engine perm_triggers.$(name) set value []

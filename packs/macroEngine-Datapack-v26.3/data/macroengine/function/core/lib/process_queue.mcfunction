@@ -1,5 +1,5 @@
 scoreboard players add $pq_depth macroengine.tmp 1
-execute if score $pq_depth macroengine.tmp matches 257.. run return 0
+execute if score $pq_depth macroengine.tmp > #queue_cap macroengine.tick run return 0
 
 execute unless data storage macroengine:engine queue[0] run return 0
 

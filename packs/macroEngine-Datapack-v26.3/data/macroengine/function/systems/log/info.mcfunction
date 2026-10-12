@@ -1,6 +1,7 @@
 # macroengine:systems/log/info
 # Usage: $function macroengine:systems/log/info {message:"[System] Something happened"}
 # Level: 3
+execute if data storage macroengine:engine modules{log:0b} run return 0
 $data modify storage macroengine:engine _log_add_tmp.message set value "$(message)"
 data modify storage macroengine:engine _log_add_tmp.level set value "INFO"
 data modify storage macroengine:engine _log_add_tmp.color set value "gray"

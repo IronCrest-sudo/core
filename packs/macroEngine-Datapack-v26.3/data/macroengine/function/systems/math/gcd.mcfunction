@@ -11,6 +11,7 @@
 # macroengine:output result = 6
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set $gcd_a macroengine.tmp $(a)
 $scoreboard players set $gcd_b macroengine.tmp $(b)
 

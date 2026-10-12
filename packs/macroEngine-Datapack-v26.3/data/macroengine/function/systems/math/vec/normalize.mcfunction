@@ -9,4 +9,5 @@
 # If length=0, zero vector — returns x,y,z=0.
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 function macroengine:core/internal/systems/math/vec/normalize_exec with storage macroengine:input {}

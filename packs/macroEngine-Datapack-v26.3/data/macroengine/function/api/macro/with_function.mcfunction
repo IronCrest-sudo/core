@@ -22,6 +22,7 @@
 # ─────────────────────────────────────────────
 
 # Run provider function — it writes its output to _macro_pipe
+execute if data storage macroengine:engine modules{macro:0b} run return 0
 $function $(source)
 
 # Pass pipe to consumer as macro source

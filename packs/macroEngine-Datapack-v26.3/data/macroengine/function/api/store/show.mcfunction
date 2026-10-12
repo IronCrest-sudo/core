@@ -12,6 +12,7 @@
 # Usage:
 #   data modify storage macroengine:store in set value {name:"shop.price"}
 #   function macroengine:api/store/show
+execute if data storage macroengine:engine modules{store:0b} run return 0
 execute store success score #st_show macroengine.tmp run function macroengine:api/store/get
 execute if score #st_show macroengine.tmp matches 0 run tellraw @s ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"store: value is not set, or in.name is missing or invalid","color":"yellow"}]
 execute if score #st_show macroengine.tmp matches 0 run return 0

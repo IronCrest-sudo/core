@@ -20,6 +20,7 @@
 #   # → macroengine:output result = "red"  (not in palette, returned as-is)
 
 # Default: return input value
+execute if data storage macroengine:engine modules{color:0b} run return 0
 $data modify storage macroengine:output result set value "$(color)"
 
 # Override if palette has this key — write color key into temp so resolve_exec can access it

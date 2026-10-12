@@ -5,6 +5,7 @@
 # Usage:
 #   function macroengine:api/color/palette_list
 
+execute if data storage macroengine:engine modules{color:0b} run return 0
 execute unless entity @s[tag=macroengine.admin] run return 0
 
 tellraw @s ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"━━━ Color Palette ","color":"aqua"},{"text":"━━━━━━━━━━━","color":"#555555"}]

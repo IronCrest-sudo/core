@@ -10,6 +10,7 @@
 # Usage:
 #   data modify storage macroengine:store in set value {template:"Hi %player%, coins: %score:coins%"}
 #   function macroengine:api/store/render_all
+execute if data storage macroengine:engine modules{store:0b} run return 0
 data remove storage macroengine:store all
 data modify storage macroengine:store all.entries set value []
 execute as @a run function macroengine:core/internal/api/store/_all_one

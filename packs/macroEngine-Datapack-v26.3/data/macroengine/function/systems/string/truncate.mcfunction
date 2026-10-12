@@ -17,6 +17,7 @@
 # → actionbar: "Hello Wor..."
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{string:0b} run return 0
 $data modify storage macroengine:output text set value $(text)
 $data modify storage macroengine:engine _trunc_t set value $(truncated)
 

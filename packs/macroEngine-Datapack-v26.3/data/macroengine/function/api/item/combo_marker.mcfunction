@@ -13,6 +13,7 @@
 # (e.g. via a player-scoped scoreboard objective) — this function only
 # writes the given value onto the item, it does not track state itself.
 
+execute if data storage macroengine:engine modules{item:0b} run return 0
 data modify storage macroengine:output found set value 0b
 
 $execute unless entity @a[name=$(player),limit=1] run return 0

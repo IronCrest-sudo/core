@@ -9,4 +9,5 @@
 # result=0 for zero vectors.
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 function macroengine:core/internal/systems/math/vec/angle_exec with storage macroengine:input {}

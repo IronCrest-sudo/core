@@ -12,6 +12,7 @@
 # macroengine:output result → 0b=ready (no cooldown), 1b=cooldown active
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{wand:0b} run return 0
 data modify storage macroengine:output result set value 0b
 
 $execute unless data storage macroengine:engine wand_cooldowns.$(player).$(tag) run return 0

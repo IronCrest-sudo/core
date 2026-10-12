@@ -1,3 +1,4 @@
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set $clamp_v macroengine.tmp $(value)
 $scoreboard players set $clamp_lo macroengine.tmp $(min)
 $scoreboard players set $clamp_hi macroengine.tmp $(max)

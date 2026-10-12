@@ -15,6 +15,7 @@
 # → macroengine:output result = 30
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set #rnd_v macroengine.tmp $(value)
 $scoreboard players set #rnd_s macroengine.tmp $(step)
 

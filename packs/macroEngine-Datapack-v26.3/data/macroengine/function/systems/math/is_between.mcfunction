@@ -12,6 +12,7 @@
 # macroengine:output result = 1b
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set $ib_v macroengine.tmp $(value)
 $scoreboard players set $ib_lo macroengine.tmp $(min)
 $scoreboard players set $ib_hi macroengine.tmp $(max)

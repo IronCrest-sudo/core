@@ -11,6 +11,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Copy list to queue
+execute if data storage macroengine:engine modules{cmd:0b} run return 0
 data modify storage macroengine:engine _mcmd_queue set from storage macroengine:input list
 
 # Set default options

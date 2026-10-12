@@ -18,6 +18,7 @@
 # ─────────────────────────────────────────────
 
 # Clear pipe
+execute if data storage macroengine:engine modules{macro:0b} run return 0
 data remove storage macroengine:engine _macro_pipe
 
 # Default: not completed

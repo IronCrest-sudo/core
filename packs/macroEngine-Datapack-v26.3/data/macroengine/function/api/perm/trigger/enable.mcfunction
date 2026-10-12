@@ -1,3 +1,4 @@
+execute if data storage macroengine:engine modules{perm:0b} run return 0
 scoreboard players set $pte_pid macroengine.tmp 0
 $execute store result score $pte_pid macroengine.tmp run data get storage macroengine:engine player_pids.$(player)
 execute if score $pte_pid macroengine.tmp matches 0 run return 0

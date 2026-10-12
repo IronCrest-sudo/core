@@ -28,6 +28,7 @@
 #       before making other macroengine calls if you need them later.
 # ─────────────────────────────────────────────────────────────────
 
+execute if data storage macroengine:engine modules{string:0b} run return 0
 $scoreboard players set $fc_x macroengine.tmp $(x)
 $scoreboard players set $fc_y macroengine.tmp $(y)
 $scoreboard players set $fc_z macroengine.tmp $(z)

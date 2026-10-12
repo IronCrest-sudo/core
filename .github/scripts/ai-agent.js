@@ -354,8 +354,8 @@ const TOOLS = {
       let m;
       while ((m = re.exec(html)) !== null && results.length < n) {
         const link = m[1].replace(/&amp;/g, "&");
-        const title = m[2].replace(/<[^>]+>/g, "").trim();
-        const snippet = (m[3] || "").replace(/<[^>]+>/g, "").trim();
+        const title = m[2].replace(/[<>]/g, "").trim();
+        const snippet = (m[3] || "").replace(/[<>]/g, "").trim();
         if (title) results.push({ title, link, snippet: snippet.slice(0, 280) });
       }
 

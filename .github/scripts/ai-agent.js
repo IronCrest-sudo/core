@@ -65,9 +65,11 @@ const BINARY_BLOCKLIST = new Set([
 /** Argument substrings that are rejected (command injection / destructive). */
 const ARG_BLOCKLIST = [
   "--no-permission-root",
-  "-R 777", "rm -f, "> /dev/sda",
-  "-R 777", " -type f -exec rm {} \;",
-  "| sudo"
+  "-R 777",
+  "rm -f",
+  "> /dev/sda",
+  " -type f -exec rm {} \\;",
+  "| sudo",
 ];
 
 // Named checks remain fixed (model only picks the name).

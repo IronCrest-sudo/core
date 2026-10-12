@@ -5,28 +5,27 @@
     "description": "Merged VortaForge datapack",
     "_comment": "min_format/max_format required for format 82+ (25w31a+); pack_format optional/legacy-only.",
     "min_format": [
-      122,
+      121,
       1
     ],
     "max_format": [
-      122,
+      121,
       1
     ]
   },
   "include": [
     "guikit-datapack",
-    "macroEngine-Datapack-v26.3",
-    "RTWrapper-v1.0.1"
+    "macroEngine-Datapack-v26.3"
   ],
   "exclude": [],
   "allowMismatchedFormats": false,
   "_gatedLoad": "true (default): route every pack's minecraft:load/tick hooks through a generated <namespace>:load/:tick gatekeeper with per-pack toggles, debug and status. false = legacy plain union-merge of the load/tick tags.",
   "gatedLoad": true,
-  "_namespace": "Namespace for generated gatekeeper files (default vcm_core). Must be lowercase [a-z0-9_.-]+ and not 'minecraft'.",
-  "namespace": "vcm_core",
-  "_debugDefault": "Initial debug-message state (default false). Players toggle at runtime with /function vcm_core:debug/on|off|toggle.",
+  "_namespace": "Namespace for generated gatekeeper files (default vf). Must be lowercase [a-z0-9_.-]+ and not 'minecraft'.",
+  "namespace": "vf",
+  "_debugDefault": "Initial debug-message state (default false). Players toggle at runtime with /function vf:debug/on|off|toggle.",
   "debugDefault": false,
-  "_killSwitch": "true (default, needs gatedLoad): also generate the global /function vcm_core:enable_all|disable_all kill-switch.",
+  "_killSwitch": "true (default, needs gatedLoad): also generate the global /function vf:enable_all|disable_all kill-switch.",
   "killSwitch": true,
   "_loadErrorHandling": "true (default): build-time load/tick reference validation + runtime error log (api/report_error, errors, errors_clear) + per-pack load markers for status.",
   "loadErrorHandling": true,

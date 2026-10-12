@@ -170,7 +170,6 @@ do not clear `guikit:lib` from that pack.
 
 Click detection is still “the widget item landed in the inventory”.
 `clear` is filtered by `custom_data~{guikit:{w:1b}}` and only runs after a count.
-See `guikit:internal/selftest` (now in `packs/DevTools-Datapack`) if a world wipes inventories — that bug was never proven.
 
 ## Limits
 

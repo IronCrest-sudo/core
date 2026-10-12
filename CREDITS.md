@@ -28,7 +28,7 @@ when reviewed_.
 | Path | Change |
 |---|---|
 | `packs/macroEngine-{Datapack,Resourcepack}-v26.3/` | Renamed from `-v26.4`; `pack.mcmeta` now data pack format 121.0 / resource pack format 97.1; version string `v26.3`, meta score 263; README updated |
-| `packs/{DailyBonus,QuickShare,DevTools-Datapack,RTWrapper-v1.0.1,guikit-datapack,guikit-demo}/pack.mcmeta` | format 122 -> 121 |
+| `packs/{DailyBonus,QuickShare,RTWrapper-v1.0.1,guikit-datapack,guikit-demo}/pack.mcmeta` | format 122 -> 121 |
 | `packs/LeftClickDetection/pack.mcmeta` | `supported_formats` array -> object form |
 | `index.html`, `scripts/*`, docs | path and label updates for the rename |
 

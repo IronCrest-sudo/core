@@ -3,6 +3,21 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-12 - docs: fix stale function paths in macroEngine usage comments
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+### Changed (AI-assisted edit)
+
+| File | Change |
+|---|---|
+| `packs/macroEngine-Datapack-v26.3/.../api/cmd/time_of.mcfunction` | Usage comment named the old `ame:clock_handler`; now `macroengine:api/cmd/time_of`. |
+| `.../api/macro/with_advancement`, `with_function`, `with_score` | Usage comments pointed to `macroengine:engine/macro/...`; now `macroengine:api/macro/...`. |
+
+- **Verified:** Mecha 0.101.0 on the macroEngine datapack (comment-only change, no command lines touched).
+- **Not verified:** nothing was run in a Minecraft server. Known and left unchanged: `api/cmd/other/action_run` substitutes `$(player)`, `$(type)`, `$(arguments)` into a macro line without `systems/validate/safe_name`; `systems/rate_limit/config` documents `delete` and `list` functions that do not exist.
+
 ## 2026-10-10 - refactor: remove dead `multiCommands` storage writes in macroEngine
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update

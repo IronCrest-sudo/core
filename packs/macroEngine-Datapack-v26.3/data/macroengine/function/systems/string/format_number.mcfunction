@@ -2,17 +2,27 @@
 # macroengine:systems/string/format_number
 # Converts large numbers to readable abbreviations.
 #  Input : $(value) → integer
-# Output: macroengine:output text → abbreviated text (storage string)
-# macroengine:output value → original value
+# Output: macroengine:output value → original value
 # macroengine:output suffix → k / M / B / "" suffix
-# macroengine:output short → abbreviated integer part
+# macroengine:output short → abbreviated integer part (see note below)
+#
+# NOTE: there is no "text" output — mcfunction alone cannot join a
+# number and a string into one storage string. Combine short+suffix
+# yourself via tellraw, the same way format_coords/ordinal do:
+#   function macroengine:systems/string/format_number {value:2500000}
+#   tellraw @a ["",
+#     {"plain":true ,"storage":"macroengine:output","nbt":"short"},
+#     {"plain":true ,"storage":"macroengine:output","nbt":"suffix","color":"gold"}]
+#   → 2500000 → short=25, suffix="M" → displays "25M"
+#     (short keeps one implied decimal digit above 999 — divide by 10
+#      yourself if you want "2.5M" instead of "25M")
 #
 # Examples:
-# 500 → "500"
-# 1500 → "1.5k"
-# 1000000 → "1M"
-# 2500000 → "2.5M"
-# 1000000000 → "1B"
+# 500 → short=500, suffix=""
+# 1500 → short=15, suffix="k"
+# 1000000 → short=10, suffix="M"
+# 2500000 → short=25, suffix="M"
+# 1000000000 → short=10, suffix="B"
 # ─────────────────────────────────────────────────────────────────
 
 execute if data storage macroengine:engine modules{string:0b} run return 0

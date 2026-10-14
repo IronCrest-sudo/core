@@ -7,7 +7,7 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:player_head",
-          "functions": [
+          "modifier": [
             {
               "type": "minecraft:fill_player_head",
               "entity": "this"

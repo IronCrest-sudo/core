@@ -285,3 +285,18 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 - **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`. The Gradle build was not run.
 - **Not verified:** nothing was run in a Minecraft server. The re-run of the load entries after approval is untested in game (double initialization is possible for load code that is not idempotent).
 
+## Datapacks: Gate 3 (per-player consent)
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/{guikit-datapack,macroEngine-Datapack-v26.3,RTWrapper-v1.0.1}/data/<ns>/function/gate/*` | New: `consent_tick`, `consent_prompt`, `consent_grant`, `consent_reset`, `set/3_on`, `set/3_off`. `version` creates the `<ns>.consent` trigger and the `gate.3` default (on); `status` prints `gate.3`. |
+| The same 2166 functions | Second gate line: `execute if entity @s[type=minecraft:player] unless entity @s[tag=<ns>.consented] unless score #<ns>.gate.3 vortaforge.gate matches 0 run return 0`. Functions that run as a player who has not consented do nothing. |
+| `core/tick` of each pack | Calls `<ns>:gate/consent_tick` for every player without the `<ns>.consented` tag (prompt once, then `/trigger <ns>.consent set 1`). |
+
+- **Defaults:** gate 3 on. Every player must agree once before pack functions run as them; server-context functions (tick, load) are not affected.
+- **Limits:** consent is a tag plus a trigger, not authentication. Withdrawal is an operator function (`gate/consent_reset`), there is no player-side withdraw trigger yet. Datapack gates are removable plain text. Gate 4 (age declaration, a self-declaration and not verification) is not part of this PR.
+- **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`. The Gradle build was not run.
+- **Not verified:** nothing was run in a Minecraft server. The `as @a[tag=!...]` loop and the prompt flow are untested in game.
+

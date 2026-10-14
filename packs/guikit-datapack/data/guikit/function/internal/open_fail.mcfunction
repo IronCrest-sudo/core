@@ -3,6 +3,7 @@
 # entity type tag #guikit:container (then the cart could never be bound to its owner and would
 # live forever). Remove it and roll the half-opened state back.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 execute store result storage guikit:ctx uid int 1 run scoreboard players get @s guikit.uid
 function guikit:internal/summon/unbind with storage guikit:ctx
 kill @e[tag=guikit.new,distance=..1]

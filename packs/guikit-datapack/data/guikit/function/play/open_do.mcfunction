@@ -1,5 +1,6 @@
 # macro: $(id)
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 $execute unless data storage guikit:lib menus.$(id) run tellraw @s {"text":"[guikit] That menu does not exist.","color":"red"}
 $execute unless data storage guikit:lib menus.$(id) run return 0
 $execute unless data storage guikit:reg menus."guikit:m/$(id)" run function guikit:runtime/sync_one {id:"$(id)"}

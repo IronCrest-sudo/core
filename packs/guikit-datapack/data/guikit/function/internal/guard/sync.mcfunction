@@ -4,6 +4,7 @@
 # grows upward, so riding would not cover the click. Same position + a larger box does.
 # Hidden by killing it (not by teleporting below the world, which deletes the entity).
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 scoreboard players operation #guid guikit.tmp = @s guikit.uid
 execute unless score #guid guikit.tmp matches 1.. run return 0
 scoreboard players set #others guikit.tmp 0

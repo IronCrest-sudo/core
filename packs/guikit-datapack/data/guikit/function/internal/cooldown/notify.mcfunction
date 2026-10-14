@@ -11,6 +11,7 @@
 # guikit.cd counts ticks; 20 ticks = 1 second. Shown rounded UP so the player never sees "0s"
 # while a cooldown is still running.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 scoreboard players operation #cdleft guikit.tmp = @s guikit.cd
 scoreboard players add #cdleft guikit.tmp 19
 scoreboard players set #cd20 guikit.tmp 20

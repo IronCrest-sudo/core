@@ -10,5 +10,6 @@
 # The redraw happens on the player's next tick_player run (dirty is picked up there), so a
 # handler may call this several times in one tick and the menu is still drawn only once.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 execute unless score @s guikit.uid matches 1.. run return 0
 scoreboard players set @s guikit.dirty 1

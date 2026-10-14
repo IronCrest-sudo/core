@@ -3,6 +3,7 @@
 # scratch storage is cleared key by key. Call this BEFORE `data merge storage guikit:in {...}`
 # so keys from a previous widget call (wrap, min, max, delta, ...) can never leak.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 data remove storage guikit:in color
 data remove storage guikit:in count
 data remove storage guikit:in delta

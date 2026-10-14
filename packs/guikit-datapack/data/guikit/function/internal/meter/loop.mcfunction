@@ -2,6 +2,7 @@
 # clickable "meter" cells instead of static "progress" ones). Reads score #f/#i/#left guikit.tmp
 # set by internal/progress_calc, and storage guikit:pg set by widget/meter_draw.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 execute if score #left guikit.tmp matches ..0 run return 0
 scoreboard players operation #d guikit.tmp = #f guikit.tmp
 scoreboard players operation #d guikit.tmp -= #i guikit.tmp

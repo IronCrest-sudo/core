@@ -11,6 +11,7 @@
 # scaling as widget/progress: filled = obj * width / max). Cell i's clickable id is "<id>_i" --
 # click it with widget/meter_probe (ONE registration per meter, not per cell).
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 function guikit:internal/clear/mtr
 $data modify storage guikit:mtr cur set from storage guikit:mtr defs."$(id)"
 execute unless data storage guikit:mtr cur run return 0

@@ -2,6 +2,7 @@
 # Same idea as clear_in / clear_w, for storage guikit:cond. Call it BEFORE `data merge storage guikit:cond {...}`.
 # When you add a new key to a cond type, add it here too.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 data remove storage guikit:cond adv
 data remove storage guikit:cond dim
 data remove storage guikit:cond item

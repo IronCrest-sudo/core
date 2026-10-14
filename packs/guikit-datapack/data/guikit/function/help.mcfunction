@@ -1,3 +1,4 @@
 # guikit :: help
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 tellraw @s [{"text":"[guikit] ","color":"gold"},{"text":"In-game editor\n","color":"white"},{"text":"Operators: ","color":"gray"},{"text":"/function guikit:editor/open\n","color":"aqua"},{"text":"Players: ","color":"gray"},{"text":"/trigger guikit.open\n","color":"aqua"},{"text":"Menus are saved in the world (storage guikit:lib), not in function files.\n","color":"gray"},{"text":"Backup: ","color":"gray"},{"text":"/data get storage guikit:lib\\n","color":"aqua"},{"text":"v5: /trigger guikit.last reopens your last menu, guikit.close closes it; api/close_all; conds dimension + weather. v4: guikit.goto/sort/filter, Click rules, Rename icon.","color":"gray"}]

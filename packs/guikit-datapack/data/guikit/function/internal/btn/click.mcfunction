@@ -10,6 +10,7 @@
 #   close:1b         close the menu after the command
 #   locked_item:"minecraft:barrier"   look when cond fails or the cost is not affordable (widget/button)
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 data remove storage guikit:btn cur
 $data modify storage guikit:btn cur set from storage guikit:btn defs."$(id)"
 execute unless data storage guikit:btn cur run return 0

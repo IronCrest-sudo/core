@@ -6,8 +6,10 @@
 # Non-bypassable enforcement belongs in a Fabric mod.
 scoreboard objectives add vortaforge.gate dummy
 scoreboard objectives add rtwrapper.permit trigger
+scoreboard objectives add rtwrapper.consent trigger
 execute unless score #rtwrapper.gate.1 vortaforge.gate = #rtwrapper.gate.1 vortaforge.gate run scoreboard players set #rtwrapper.gate.1 vortaforge.gate 1
 execute unless score #rtwrapper.gate.2 vortaforge.gate = #rtwrapper.gate.2 vortaforge.gate run scoreboard players set #rtwrapper.gate.2 vortaforge.gate 1
+execute unless score #rtwrapper.gate.3 vortaforge.gate = #rtwrapper.gate.3 vortaforge.gate run scoreboard players set #rtwrapper.gate.3 vortaforge.gate 1
 execute unless score #rtwrapper.installed vortaforge.gate = #rtwrapper.installed vortaforge.gate run scoreboard players set #rtwrapper.installed vortaforge.gate 0
 scoreboard players set #rtwrapper.expected vortaforge.gate 1
 scoreboard players set #rtwrapper.version vortaforge.gate 0

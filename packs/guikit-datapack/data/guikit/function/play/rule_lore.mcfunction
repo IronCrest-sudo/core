@@ -1,5 +1,6 @@
 # Append click-rule lines onto guikit:w lore. Does not write them back into the menu.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 execute if data storage guikit:work w{confirm:1b} run data modify storage guikit:w lore append value {text:"Click twice to confirm",color:"gold",italic:false}
 execute if data storage guikit:work w{need:"vip"} run data modify storage guikit:w lore append value {text:"Requires the vip tag",color:"light_purple",italic:false}
 execute if data storage guikit:work w{need:"member"} run data modify storage guikit:w lore append value {text:"Requires the member tag",color:"light_purple",italic:false}

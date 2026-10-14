@@ -7,6 +7,7 @@
 # If the definition has a `cond` and it fails right now, the item is swapped for `locked_item`
 # (default minecraft:barrier). The click handler re-checks the condition, so the look is cosmetic only.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 data modify storage guikit:w type set value "button"
 function guikit:internal/btn/visual with storage guikit:w
 function guikit:widget/draw

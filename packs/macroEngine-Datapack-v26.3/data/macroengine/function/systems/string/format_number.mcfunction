@@ -26,6 +26,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=macroengine.consented] unless score #macroengine.gate.3 vortaforge.gate matches 0 run return 0
 execute if data storage macroengine:engine modules{string:0b} run return 0
 $scoreboard players set $fn_v macroengine.tmp $(value)
 execute store result storage macroengine:output value int 1 run scoreboard players get $fn_v macroengine.tmp

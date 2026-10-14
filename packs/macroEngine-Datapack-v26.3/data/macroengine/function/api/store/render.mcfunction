@@ -21,6 +21,7 @@
 # Names are checked with systems/validate/safe_name while they are still data in storage,
 # before they reach a macro line (see api/perm/require for the same pattern).
 execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=macroengine.consented] unless score #macroengine.gate.3 vortaforge.gate matches 0 run return 0
 execute if data storage macroengine:engine modules{store:0b} run return 0
 data remove storage macroengine:store out.string
 data remove storage macroengine:store tmp

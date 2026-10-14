@@ -16,5 +16,6 @@
 # literal if required.
 # ======================================================================================
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if entity @s[type=minecraft:player] run function macroengine:input/private/lectern_ray_start
 execute unless entity @s[type=minecraft:player] run return fail

@@ -9,6 +9,7 @@
 # Usage:  function macroengine:systems/rng/seed {seed:12345}
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{rng:0b} run return 0
 $scoreboard players set $rng_seed macroengine.tmp $(seed)
 execute store result storage macroengine:engine rng.state int 1 run scoreboard players get $rng_seed macroengine.tmp

@@ -1,5 +1,6 @@
 # Macro: called with storage rtwrapper:runtime trigger_cur (objective, reset_mode, action).
 # Executor context (@s) is the player whose trigger fired.
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 data modify storage rtwrapper:api request set from storage rtwrapper:runtime trigger_cur.action
 function rtwrapper:api/run
 

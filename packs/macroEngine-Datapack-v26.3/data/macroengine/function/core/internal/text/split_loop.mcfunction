@@ -1,4 +1,5 @@
 # macroengine:core/internal/text/split_loop [INTERNAL] one segment per separator match
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:text idx[0] run return 0
 execute store result score #tx_k macroengine.tmp run data get storage macroengine:text idx[0]
 scoreboard players operation #tx_a macroengine.tmp = #tx_pos macroengine.tmp

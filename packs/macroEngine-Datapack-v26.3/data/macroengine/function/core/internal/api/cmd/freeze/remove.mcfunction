@@ -9,6 +9,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Store this player's PID so we can match it against anchor stands
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 scoreboard players operation $freeze_rm macroengine.tmp = @s macroengine.pid
 
 # Kill the matching anchor stand

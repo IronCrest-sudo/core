@@ -1,5 +1,6 @@
 # guikit :: internal/sweep/foreign_cart     as cart
 # Widget olmayan (custom_data guikit.w:1b tasimayan) her slotu bosalt.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute unless items entity @s container.0 *[custom_data~{guikit:{w:1b}}] run item replace entity @s container.0 with air
 execute unless items entity @s container.1 *[custom_data~{guikit:{w:1b}}] run item replace entity @s container.1 with air
 execute unless items entity @s container.2 *[custom_data~{guikit:{w:1b}}] run item replace entity @s container.2 with air

@@ -1,4 +1,5 @@
 # guikit :: internal/click_handle   as player, ONLY called when the GUI-item count is >= 1
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function #guikit:probe
 
 # remove only widget items, and only if any are still there (a handler may have closed the menu,

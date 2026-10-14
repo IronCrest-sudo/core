@@ -11,6 +11,7 @@
 # Usage:  function macroengine:systems/text/bool {storage:"macroengine:engine",path:"tick.paused"}
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{text:0b} run return 0
 $execute store success score $text_bool_ok macroengine.tmp run data get storage $(storage) $(path)
 execute if score $text_bool_ok macroengine.tmp matches 0 run tellraw @s [{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"no","color":"red"}]

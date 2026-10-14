@@ -3,6 +3,7 @@
 # without affecting player scores unexpectedly; operators can `/scoreboard objectives
 # remove <obj>` manually if desired).
 # Required storage keys: trigger.objective (string).
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 execute unless data storage rtwrapper:api trigger.objective run return fail
 function rtwrapper:core/trigger/unregister_apply with storage rtwrapper:api trigger
 data remove storage rtwrapper:api trigger

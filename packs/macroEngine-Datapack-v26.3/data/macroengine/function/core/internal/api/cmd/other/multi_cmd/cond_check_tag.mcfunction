@@ -5,5 +5,6 @@
 #   condition.tag = {name:"admin",has:1b|0b} has:0b asserts the tag is ABSENT
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine _mcmd_cond_eval.tag{} run function macroengine:core/internal/api/cmd/other/multi_cmd/cond_tag_simple
 execute if data storage macroengine:engine _mcmd_cond_eval.tag{} run function macroengine:core/internal/api/cmd/other/multi_cmd/cond_tag_object

@@ -7,5 +7,6 @@
 # Usage:  function macroengine:systems/text/show_to {storage:"macroengine:engine",path:"flags",target:"@a[tag=macroengine.admin]"}
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{text:0b} run return 0
 $tellraw $(target) [{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"storage":"$(storage)","nbt":"$(path)","plain":true,"interpret":false,"color":"white"}]

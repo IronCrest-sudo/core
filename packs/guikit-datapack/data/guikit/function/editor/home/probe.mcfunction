@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #hit guikit.tmp 0
 function guikit:editor/home/probe_tools
 execute if score #hit guikit.tmp matches 1.. run return 0

@@ -1,4 +1,5 @@
 # as interaction. Backup for a click the advancement did not clear.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players operation #guid guikit.tmp = @s guikit.uid
 scoreboard players set #gdone guikit.tmp 0
 execute if data entity @s interaction on target run function guikit:internal/guard/from_player

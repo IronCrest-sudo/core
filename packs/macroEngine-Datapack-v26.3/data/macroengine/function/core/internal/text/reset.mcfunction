@@ -1,5 +1,6 @@
 # macroengine:core/internal/text/reset
 # Drops the working buffers of the text module. Callers copy their result out first.
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data remove storage macroengine:text s
 data remove storage macroengine:text needle
 data remove storage macroengine:text rep

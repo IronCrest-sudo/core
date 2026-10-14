@@ -3,6 +3,7 @@
 # INPUT (macro args): $(list) — command list; $(options) — options compound
 #
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{cmd:0b} run return 0
 $data merge storage macroengine:input {list:$(list),options:$(options)}
 

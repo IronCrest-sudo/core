@@ -17,6 +17,7 @@
 # ============================================================
 
 # Build UUID string → macroengine:input value
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{uuid:0b} run return 0
 function macroengine:systems/uuid/from_entity
 

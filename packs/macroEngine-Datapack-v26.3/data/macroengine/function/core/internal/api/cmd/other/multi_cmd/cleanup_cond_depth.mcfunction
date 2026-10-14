@@ -5,6 +5,7 @@
 # list below covers every key they can create.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 function macroengine:core/internal/api/cmd/other/multi_cmd/cleanup_cond_depth_one {d:0}
 function macroengine:core/internal/api/cmd/other/multi_cmd/cleanup_cond_depth_one {d:1}
 function macroengine:core/internal/api/cmd/other/multi_cmd/cleanup_cond_depth_one {d:2}

@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if score $rn_i macroengine.tmp >= $rn_n macroengine.tmp run return 0
 
 execute store result score $repeat_i macroengine.tmp run scoreboard players get $rn_i macroengine.tmp

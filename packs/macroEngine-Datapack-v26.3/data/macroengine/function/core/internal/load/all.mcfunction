@@ -1,6 +1,7 @@
 # macroengine:core/internal/load/all — full init pipeline (no fork / rt_origin / confirm gates)
 
 # forceload classic marker chunk (legacy features)
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 forceload add -30000000 1600
 
 # Load scoreboards, storages and other systems

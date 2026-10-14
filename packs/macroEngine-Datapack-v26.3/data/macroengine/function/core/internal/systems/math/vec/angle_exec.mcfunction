@@ -2,6 +2,7 @@
 # INPUT: $(ax), $(ay), $(az), $(bx), $(by), $(bz)
 # RULE: Lines without $(var) must NOT have a $ prefix.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 function macroengine:core/lib/input_push
 
 $data modify storage macroengine:engine _vec_dot_tmp ax set value $(ax)

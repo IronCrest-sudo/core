@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $execute store result score $tr_f macroengine.tmp run data get storage macroengine:engine players.$(from).$(key)
 $scoreboard players set $tr_a macroengine.tmp $(amount)
 scoreboard players operation $tr_f macroengine.tmp -= $tr_a macroengine.tmp

@@ -1,4 +1,5 @@
 # macro: $(seconds)
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:editor/load_state
 $scoreboard players set #sec guikit.tmp $(seconds)
 scoreboard players set #t20 guikit.tmp 20

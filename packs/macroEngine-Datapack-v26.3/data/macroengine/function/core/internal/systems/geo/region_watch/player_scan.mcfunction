@@ -2,6 +2,7 @@
 # @s = the player to check
 # Reads coordinates to storage, then iterates all regions.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:engine _rw_iter set from storage macroengine:engine region_watches
 
 # Write player coordinates to _rw_player (int truncation, consistent with geo module)

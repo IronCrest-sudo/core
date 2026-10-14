@@ -6,6 +6,7 @@
 #   data merge storage guikit:in {menu:"ns:id"}
 #   function guikit:api/open
 
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #ok guikit.const 0
 
 # validate BEFORE touching any state

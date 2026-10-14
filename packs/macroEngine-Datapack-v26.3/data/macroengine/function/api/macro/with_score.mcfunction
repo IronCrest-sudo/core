@@ -18,6 +18,7 @@
 # ─────────────────────────────────────────────
 
 # Write score into pipe under the requested variable name
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{macro:0b} run return 0
 $execute store result storage macroengine:engine _macro_pipe.$(var) int 1 run scoreboard players get $(player) $(objective)
 

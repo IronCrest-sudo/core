@@ -1,4 +1,5 @@
 # macroengine:core/internal/api/store/_tok_p [INTERNAL]  token %p:name%
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless entity @s[type=player] run return 0
 data modify storage macroengine:store tmp.rest set string storage macroengine:store tmp.nm 2
 data remove storage macroengine:validate in

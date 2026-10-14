@@ -1,4 +1,5 @@
 # macro: $(container)     dialog option id, mapped to a fixed container name
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 $data modify storage guikit:ed ctype set value "$(container)"
 execute if data storage guikit:ed {ctype:"chest"} run function guikit:editor/ui/set_container_chest with storage guikit:ed cur
 execute if data storage guikit:ed {ctype:"hopper"} run function guikit:editor/ui/set_container_hopper with storage guikit:ed cur

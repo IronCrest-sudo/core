@@ -13,6 +13,7 @@
 # OUTPUT:
 # $uuid.has macroengine.tmp → 1 (found) or 0 (not found)
 # ============================================================
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{uuid:0b} run return 0
 scoreboard players set $uuid.has macroengine.tmp 0
 function macroengine:core/internal/systems/uuid/has_check with storage macroengine:input

@@ -9,6 +9,7 @@
 #   poor:"..."       message when the cost cannot be paid (no double quotes). Default "You can't afford that."
 #   close:1b         close the menu after the command
 #   locked_item:"minecraft:barrier"   look when cond fails or the cost is not affordable (widget/button)
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 data remove storage guikit:btn cur
 $data modify storage guikit:btn cur set from storage guikit:btn defs."$(id)"
 execute unless data storage guikit:btn cur run return 0

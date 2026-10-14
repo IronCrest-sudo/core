@@ -34,6 +34,7 @@
 #            using it as a number/bool/tag-safe literal.
 # ======================================================================================
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:input anvil.player set from entity @s UUID
 
 # --- Copy cursor item into a throwaway container entity, right on top of the player ---

@@ -4,6 +4,7 @@
 # player field present → execute as that player (skipped if offline).
 # player field absent  → run in server context.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:engine _wq_job set from storage macroengine:engine work_queue[0]
 data remove storage macroengine:engine work_queue[0]
 

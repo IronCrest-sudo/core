@@ -35,5 +35,6 @@
 # screen, only by this chain of evidence.
 # ======================================================================================
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless entity @a[tag=macroengine.anvil_session] run return 0
 execute as @a[tag=macroengine.anvil_session] at @s run function macroengine:input/private/anvil_tick

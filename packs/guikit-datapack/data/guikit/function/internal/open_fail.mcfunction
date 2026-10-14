@@ -2,6 +2,7 @@
 # The summon produced no usable cart: unknown entity id, or an entity that is not in the
 # entity type tag #guikit:container (then the cart could never be bound to its owner and would
 # live forever). Remove it and roll the half-opened state back.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute store result storage guikit:ctx uid int 1 run scoreboard players get @s guikit.uid
 function guikit:internal/summon/unbind with storage guikit:ctx
 kill @e[tag=guikit.new,distance=..1]

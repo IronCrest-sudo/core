@@ -5,6 +5,7 @@
 # Output: macroengine:output string.result — resulting string
 # Dep:    macroengine:core/internal/text (in-house)
 # On failure (e.g. the string contains a quote or backslash) string.result is left unset.
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:text s set from storage macroengine:input string
 data modify storage macroengine:text ins set from storage macroengine:input insertion
 data modify storage macroengine:text at set from storage macroengine:input index

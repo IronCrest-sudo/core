@@ -1,4 +1,5 @@
 # macroengine:core/internal/text/case_loop [INTERNAL] one character per call
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 scoreboard players operation #tx_a macroengine.tmp = #tx_i macroengine.tmp
 scoreboard players operation #tx_b macroengine.tmp = #tx_i macroengine.tmp
 scoreboard players add #tx_b macroengine.tmp 1

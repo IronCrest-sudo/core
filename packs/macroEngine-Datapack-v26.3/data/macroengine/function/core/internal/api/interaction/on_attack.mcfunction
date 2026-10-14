@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 tag @s add macroengine.ia_active
 
 data modify storage macroengine:engine _ia_iter set from storage macroengine:engine interaction_binds.attack

@@ -1,4 +1,5 @@
 # macroengine:systems/flag/list_systems — List all tick systems with their current on/off state
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 tellraw @s [{"text":"[DL] Tick Systems","color":"gold","bold":true}]
 tellraw @s [{"text":"time: ","color":"gray"},{"score":{"name":"#sys_time","objective":"macroengine.tick_flags"},"color":"yellow"}]
 tellraw @s [{"text":"player: ","color":"gray"},{"score":{"name":"#sys_player","objective":"macroengine.tick_flags"},"color":"yellow"}]

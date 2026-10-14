@@ -21,6 +21,7 @@
 #   execute as @p run function macroengine:api/store/render
 #   function macroengine:api/store/convert
 #   data modify storage mypack:data msg set from storage macroengine:store conv.string
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{store:0b} run return 0
 data remove storage macroengine:store conv
 execute unless data storage macroengine:store out.string run return 0

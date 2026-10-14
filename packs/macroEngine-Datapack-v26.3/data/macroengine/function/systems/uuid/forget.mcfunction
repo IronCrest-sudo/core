@@ -9,5 +9,6 @@
 # INPUT:
 # macroengine:input key → name of the key to delete
 # ============================================================
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{uuid:0b} run return 0
 function macroengine:core/internal/systems/uuid/forget_key with storage macroengine:input

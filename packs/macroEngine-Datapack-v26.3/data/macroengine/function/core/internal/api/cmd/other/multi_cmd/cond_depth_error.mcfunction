@@ -4,6 +4,7 @@
 # reports 0 (not passed) so an over-deep tree can never silently pass.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 scoreboard players set $mcmd_cond_result macroengine.tmp 0
 
 tellraw @a[tag=macroengine.admin] ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"condition nesting exceeds the depth limit; treating it as not passed","color":"red"}]

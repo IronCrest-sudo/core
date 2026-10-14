@@ -3,6 +3,7 @@
 # at macroengine:engine color._names for O(1) validate checks.
 # Also initializes the color namespace in storage.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine color run data modify storage macroengine:engine color set value {}
 execute unless data storage macroengine:engine color.palette run data modify storage macroengine:engine color.palette set value {}
 execute unless data storage macroengine:engine color.gradients run data modify storage macroengine:engine color.gradients set value {}

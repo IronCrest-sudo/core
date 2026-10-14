@@ -1,4 +1,5 @@
 # macroengine:world/time_phase — 26.3 World Clocks
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute store result score $tp_t macroengine.tmp run time query minecraft:day
 execute store result storage macroengine:output daytime int 1 run scoreboard players get $tp_t macroengine.tmp
 data modify storage macroengine:output is_day set value 0b

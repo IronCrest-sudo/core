@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{math:0b} run return 0
 $scoreboard players set $sign_v macroengine.tmp $(value)
 execute if score $sign_v macroengine.tmp matches 1.. run data modify storage macroengine:output result set value 1

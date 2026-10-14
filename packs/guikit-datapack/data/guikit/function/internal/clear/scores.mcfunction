@@ -1,5 +1,6 @@
 # guikit :: internal/cleanup_scores
 # Resets the transient fake-player scores. Permanent ones (#version, #next_uid in guikit.const) are kept.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players reset #uid guikit.tmp
 scoreboard players reset #found guikit.tmp
 scoreboard players reset #hit guikit.tmp

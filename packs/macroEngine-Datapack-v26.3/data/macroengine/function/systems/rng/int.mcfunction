@@ -12,6 +12,7 @@
 # Usage:  function macroengine:systems/rng/int {min:1,max:6}
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{rng:0b} run return 0
 $scoreboard players set $rng_min macroengine.tmp $(min)
 $scoreboard players set $rng_max macroengine.tmp $(max)

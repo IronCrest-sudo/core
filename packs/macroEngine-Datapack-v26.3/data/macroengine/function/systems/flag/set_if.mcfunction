@@ -14,6 +14,7 @@
 # function macroengine:systems/flag/set_if {key:"night_mode",score_holder:"$time",objective:"macroengine.tmp",matches:"..12000"}
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:output result set value 0b
 $execute if score $(score_holder) $(objective) matches $(matches) run data modify storage macroengine:engine flags.$(key) set value 1b
 $execute if score $(score_holder) $(objective) matches $(matches) run data modify storage macroengine:output result set value 1b

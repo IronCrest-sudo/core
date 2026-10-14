@@ -11,6 +11,7 @@
 # this file is only reached from the generic check path.
 # In that case, just check if rule exists and exit if it does.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $execute if data storage macroengine:engine rate_limit.rules.$(ensure_key) run return 0
 
 # Rule absent. If this looks like a player key the wrapper already pre-seeded it.

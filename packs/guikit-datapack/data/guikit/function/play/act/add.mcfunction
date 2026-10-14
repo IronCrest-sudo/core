@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute store result storage guikit:work pid int 1 run scoreboard players get @s guikit.pid
 data modify storage guikit:work key set from storage guikit:work w.key
 execute store result storage guikit:work delta int 1 run data get storage guikit:work w.delta

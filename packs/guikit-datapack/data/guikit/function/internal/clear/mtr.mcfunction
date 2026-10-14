@@ -2,6 +2,7 @@
 # Clears the guikit:mtr scratch storage before a fresh defs lookup, so stale keys from a
 # previous meter_draw / meter_probe call (obj, max, width, id, c, cur) can never leak into the
 # next one. Same idea as internal/clear_in / internal/clear_w.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 data remove storage guikit:mtr cur
 data remove storage guikit:mtr obj
 data remove storage guikit:mtr max

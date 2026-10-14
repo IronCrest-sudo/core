@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 scoreboard players add $pq_depth macroengine.tmp 1
 execute if score $pq_depth macroengine.tmp > #queue_cap macroengine.tick run return 0
 

@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute if data storage guikit:work w{snd:"click"} run playsound minecraft:ui.button.click ui @s ~ ~ ~ 1 1
 execute if data storage guikit:work w{snd:"orb"} run playsound minecraft:entity.experience_orb.pickup ui @s ~ ~ ~ 1 1
 execute if data storage guikit:work w{snd:"pling"} run playsound minecraft:block.note_block.pling ui @s ~ ~ ~ 1 1

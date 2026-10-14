@@ -3,4 +3,5 @@
 # forward the trigger into the internal dispatch tag, which other packs
 # may extend. Fired when left-click (attack) detection fired for @s.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 function #macroengine:core/internal/player/internal/attack_click_entity

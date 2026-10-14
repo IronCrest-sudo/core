@@ -7,6 +7,7 @@
 # If same id exists, filter it out first, then append.
 
 # Varsa sil (unregister_filter pattern)
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:engine _rw_unbind_id set from storage macroengine:input id
 data modify storage macroengine:engine _rw_new set value []
 data modify storage macroengine:engine _rw_src set from storage macroengine:engine region_watches

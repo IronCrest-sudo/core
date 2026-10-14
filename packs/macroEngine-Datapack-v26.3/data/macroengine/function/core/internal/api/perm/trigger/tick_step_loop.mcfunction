@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine _pt_names_tmp[0] run return 0
 
 data modify storage macroengine:engine _pt_tick_ctx set from storage macroengine:engine _pt_names_tmp[0]

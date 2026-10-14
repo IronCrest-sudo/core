@@ -2,6 +2,7 @@
 # macroengine:input/private/lectern_ray_loop  [INTERNAL]
 # ======================================================================================
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if block ~ ~ ~ minecraft:lectern run return run function macroengine:input/private/lectern_capture
 
 scoreboard players add @s macroengine.tmp 1

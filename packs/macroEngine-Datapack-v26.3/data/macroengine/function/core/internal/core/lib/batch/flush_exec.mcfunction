@@ -3,6 +3,7 @@
 # For each item, delay = floor(idx * spread_over / total) is computed.
 # Item'lar tek tek process_queue'ya eklenir — slice storage gerekmez.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $execute unless data storage macroengine:engine batches.$(id) run return 0
 
 # Load total and spread_over values to score

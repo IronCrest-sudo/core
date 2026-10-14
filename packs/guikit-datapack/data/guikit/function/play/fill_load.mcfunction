@@ -1,4 +1,5 @@
 # macro: $(menu_id) $(page)
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 data remove storage guikit:work menu
 $data modify storage guikit:work menu set from storage guikit:lib menus.$(menu_id)
 execute unless data storage guikit:work menu run return 0

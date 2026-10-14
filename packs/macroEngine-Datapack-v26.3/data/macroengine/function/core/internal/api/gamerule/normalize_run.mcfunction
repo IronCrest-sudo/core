@@ -1,5 +1,6 @@
 # macroengine:core/internal/api/gamerule/normalize_run  [INTERNAL]
 # Called by normalize, which resets the text buffers afterwards.
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:text s set from storage macroengine:input rule
 data modify storage macroengine:text needle set value " "
 data modify storage macroengine:text rep set value "_"

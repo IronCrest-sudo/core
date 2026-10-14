@@ -1,5 +1,6 @@
 # macro: $(id)     as player     (called by widget/button with storage guikit:w)
 # Swaps guikit:w item for the definition's locked_item when its cond currently fails.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 data remove storage guikit:btn cur
 $data modify storage guikit:btn cur set from storage guikit:btn defs."$(id)"
 execute unless data storage guikit:btn cur.cond unless data storage guikit:btn cur.cost run return 0

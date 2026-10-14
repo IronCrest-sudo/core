@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute store result score $next_pid macroengine.tmp run data get storage macroengine:engine _pid_seq
 
 scoreboard players add $next_pid macroengine.tmp 1

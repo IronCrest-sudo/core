@@ -1,4 +1,5 @@
 # draws guikit:work.w if its slot is inside the editable area (0-25 and < container slots)
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute store result score #slot guikit.tmp run data get storage guikit:work w.slot
 execute if score #slot guikit.tmp matches 26.. run return 0
 execute if score #slot guikit.tmp >= #limit guikit.tmp run return 0

@@ -4,6 +4,7 @@
 # Usage:  function macroengine:api/toggle/list
 # Caller: macroengine.admin tag required
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless entity @s[tag=macroengine.admin] run return 0
 
 tellraw @s ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"━━━ Module States ━━━━━━━━━━━━━━━","color":"#555555"}]

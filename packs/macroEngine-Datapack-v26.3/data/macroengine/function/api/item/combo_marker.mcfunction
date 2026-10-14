@@ -13,6 +13,7 @@
 # (e.g. via a player-scoped scoreboard objective) — this function only
 # writes the given value onto the item, it does not track state itself.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{item:0b} run return 0
 data modify storage macroengine:output found set value 0b
 

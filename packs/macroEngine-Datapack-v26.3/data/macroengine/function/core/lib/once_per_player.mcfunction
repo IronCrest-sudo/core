@@ -8,6 +8,7 @@
 # Output: macroengine:output ran → 1b (ran) / 0b (already done)
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:output ran set value 0b
 
 $execute if data storage macroengine:engine once_per_player.$(player).$(key) run return 0

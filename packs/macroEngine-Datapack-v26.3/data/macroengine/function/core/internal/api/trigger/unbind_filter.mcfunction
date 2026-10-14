@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine _tc_unbind[0] run return 0
 
 execute store result score $tc_fval macroengine.tmp run data get storage macroengine:engine _tc_unbind[0].value

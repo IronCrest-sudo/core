@@ -1,4 +1,5 @@
 # Module toggle guard — skips this module when disabled via macroengine:api/toggle/interaction/false
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine {modules:{interaction:1b}} run return 0
 scoreboard players operation #scan_mod macroengine.tick = #tick_ctr macroengine.tick
 scoreboard players operation #scan_mod macroengine.tick %= #interaction_interval macroengine.tick

@@ -4,6 +4,7 @@
 # guikit:in is deliberately NOT cleared here: api/open calls api/close in the middle of its own
 # run (to close a previous menu) and still needs guikit:in {menu,page,timer} afterwards.
 # The caller owns guikit:in (see internal/clear_in, called before every `data merge storage guikit:in`).
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:internal/clear/w
 function guikit:internal/clear/cond
 function guikit:internal/clear/tmp

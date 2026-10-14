@@ -3,6 +3,7 @@
 # Each entry gets ticks_left = (index + 1) * interval.
 
 # Init sequence state
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:engine _cb_seq set from storage macroengine:input cb
 execute store result score #cb_seq_idx macroengine.tmp run data get storage macroengine:engine _cb_seq.interval
 scoreboard players set #cb_seq_step macroengine.tmp 0

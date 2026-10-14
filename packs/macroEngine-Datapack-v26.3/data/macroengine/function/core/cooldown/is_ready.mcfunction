@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:input player set value "$(player)"
 $data modify storage macroengine:input key set value "$(key)"
 function macroengine:core/cooldown/check with storage macroengine:input {}

@@ -4,5 +4,6 @@
 # option in the group calls this with its own literal `value` (menu code decides which slot maps
 # to which value, exactly like widget/toggle / widget/cycle -- no separate defs registry, unlike
 # widget/button or widget/meter).
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:internal/radio_set with storage guikit:in
 scoreboard players set @s guikit.dirty 1

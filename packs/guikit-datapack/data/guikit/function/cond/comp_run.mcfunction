@@ -2,6 +2,7 @@
 # Walks the list guikit:cond of, loading each element into guikit:cond and running cond/check on it.
 # One level only: an element that is itself all/any is not evaluated and counts as FAILED. A missing
 # `of` fails (return 0, `not` is not applied). Result in #cond guikit.tmp, also returned.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute store success score #cnot guikit.tmp if data storage guikit:cond {not:1b}
 data remove storage guikit:cnd items
 data modify storage guikit:cnd items set from storage guikit:cond of

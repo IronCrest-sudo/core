@@ -1,6 +1,7 @@
 # macroengine:systems/math/vec/internal/sub_exec [MACRO]
 # INPUT: $(ax), $(ay), $(az), $(bx), $(by), $(bz)
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $scoreboard players set $vx macroengine.tmp $(ax)
 $scoreboard players set $vy macroengine.tmp $(ay)
 $scoreboard players set $vz macroengine.tmp $(az)

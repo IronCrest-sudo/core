@@ -4,6 +4,7 @@
 # guikit:btn cur is NOT cleared here on purpose: api/close can run from INSIDE btn_click
 # (button cmd "function guikit:api/close"), which still reads `cur` afterwards.
 # It is cleared at the end of btn_click and on load (see internal/clear_btn_cur).
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 data remove storage guikit:ctx menu
 data remove storage guikit:ctx alias
 data remove storage guikit:ctx ctype

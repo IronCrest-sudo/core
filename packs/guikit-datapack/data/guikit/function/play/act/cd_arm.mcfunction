@@ -1,4 +1,5 @@
 # Start the per-player cooldown after a click that was allowed to run.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute unless data storage guikit:work w.cd run return 0
 execute unless score #acted guikit.tmp matches 1.. run return 0
 function guikit:runtime/ensure_pid

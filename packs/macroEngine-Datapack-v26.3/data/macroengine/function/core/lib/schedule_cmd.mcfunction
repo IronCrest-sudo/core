@@ -8,6 +8,7 @@
 # interval — repeat interval in ticks
 # ─────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $execute if data storage macroengine:engine schedules.$(key) run data remove storage macroengine:engine schedules.$(key)
 
 $data modify storage macroengine:engine schedules.$(key).cmd set value "$(cmd)"

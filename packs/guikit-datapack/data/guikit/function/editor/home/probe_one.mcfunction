@@ -1,4 +1,5 @@
 # macro: $(id)
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 $execute store result score #hit guikit.tmp run clear @s *[custom_data~{guikit:{w:1b,id:"hm$(id)"}}] 0
 execute unless score #hit guikit.tmp matches 1.. run return 0
 data modify storage guikit:ed cur.menu set from storage guikit:work id

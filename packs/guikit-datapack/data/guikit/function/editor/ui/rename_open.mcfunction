@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:editor/load_state
 scoreboard players set #b guikit.tmp -1
 execute store result score #b guikit.tmp run data get storage guikit:ed cur.slot

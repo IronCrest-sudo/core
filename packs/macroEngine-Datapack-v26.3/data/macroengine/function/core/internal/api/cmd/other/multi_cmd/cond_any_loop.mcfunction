@@ -4,6 +4,7 @@
 # time and stops as soon as one child passes.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $execute unless data storage macroengine:engine _mcmd_any_list_$(d)[0] run return 0
 $execute if score $mcmd_any_pass_$(d) macroengine.tmp matches 1 run return 0
 

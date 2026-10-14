@@ -9,5 +9,6 @@
 #   data modify storage macroengine:input tag set value "my_interact"
 #   data modify storage macroengine:input func set value "mypack:on_attack"
 #   function macroengine:api/interaction/bind_attack with storage macroengine:input {}
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{interaction:0b} run return 0
 function macroengine:core/internal/api/interaction/bind_attack_do with storage macroengine:input {}

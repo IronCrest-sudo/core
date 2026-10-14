@@ -28,6 +28,7 @@
 # inputItem:"writable_book" distinguishes this from other input:1b
 # carriers (name_tag, anvil) that used to share the same bare flag and
 # could cross-trigger each other's capture.
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute as @a[tag=macroengine.book_captured] unless entity @s[nbt={SelectedItem:{components:{"minecraft:custom_data":{macroengine:{input:1b,inputItem:"writable_book"}}}}}] run tag @s remove macroengine.book_captured
 
 # Fast exit — skip entirely if no player is holding the marked book

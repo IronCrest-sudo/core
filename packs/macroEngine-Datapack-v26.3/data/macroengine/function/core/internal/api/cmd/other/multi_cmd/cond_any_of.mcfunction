@@ -4,6 +4,7 @@
 # pass. Short-circuits on the first success.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 function macroengine:core/internal/api/cmd/other/multi_cmd/cond_depth_arg
 
 execute if score $mcmd_cond_depth macroengine.tmp matches 8.. run function macroengine:core/internal/api/cmd/other/multi_cmd/cond_depth_error

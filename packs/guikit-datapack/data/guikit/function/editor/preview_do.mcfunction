@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 tag @s remove guikit.preview
 function guikit:editor/load_state
 function guikit:play/open_id with storage guikit:ed cur

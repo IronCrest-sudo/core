@@ -1,4 +1,5 @@
 # macroengine:api/wand/list — Shows registered wand binds.
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{wand:0b} run return 0
 tellraw @s ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"━━━ Wand Binds ","color":"aqua"},{"text":"━━━━━━━━━━━━━━━","color":"#555555"}]
 execute unless data storage macroengine:engine wand_binds[0] run tellraw @s ["",{"text":" ","color":"#555555"},{"text":"(no wand binds)","color":"gray","italic":true}]

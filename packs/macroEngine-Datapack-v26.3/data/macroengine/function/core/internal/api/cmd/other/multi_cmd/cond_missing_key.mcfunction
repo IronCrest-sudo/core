@@ -5,6 +5,7 @@
 # so fail closed and say why.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 scoreboard players set $mcmd_cond_result macroengine.tmp 0
 
 tellraw @a[tag=macroengine.admin] ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"condition is missing a required key; treating it as not passed","color":"red"}]

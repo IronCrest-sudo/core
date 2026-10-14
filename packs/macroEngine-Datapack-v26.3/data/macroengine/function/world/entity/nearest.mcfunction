@@ -10,5 +10,6 @@
 #         $(func)   → function to run as the nearest entity
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:engine _dispatch.func set value "$(func)"
 $execute as @a[name=$(player),limit=1] at @s run execute as @e[type=$(type),sort=nearest,limit=1,distance=..$(radius)] at @s run function #macroengine:internal/dispatch

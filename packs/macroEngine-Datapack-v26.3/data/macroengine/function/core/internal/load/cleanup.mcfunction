@@ -20,6 +20,7 @@
 # it's undone by dropping the storage that held the pids (player_pids /
 # _pid_seq), further down where loader/storages is reversed.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 tag @s remove macroengine.admin
 
 # text module: working buffers and lookup tables

@@ -3,6 +3,7 @@
 # Other packs may read macroengine:engine config / macroengine.meta scores; do not hardcode.
 
 # ── Version (263 = 26.3) ──────────────────────────────────────────
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 scoreboard objectives add macroengine.meta dummy
 scoreboard players set #vortacraftmc.packs.macroengine.version macroengine.meta 263
 

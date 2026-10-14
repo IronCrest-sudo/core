@@ -1,4 +1,5 @@
 # macroengine:core/internal/text/join_round [INTERNAL] one reduction round, repeats until one entry is left
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:text nl set value []
 function macroengine:core/internal/text/join_take
 data modify storage macroengine:text pc set from storage macroengine:text nl

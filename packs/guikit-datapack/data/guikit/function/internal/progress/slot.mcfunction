@@ -1,5 +1,6 @@
 # macro: $(slot) $(cell) $(item) $(id) $(name)
 # absolute slot = slot + cell  (done by scoreboard, then draw)
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 $scoreboard players set #abs guikit.tmp $(slot)
 $scoreboard players add #abs guikit.tmp $(cell)
 execute store result storage guikit:pg abs int 1 run scoreboard players get #abs guikit.tmp

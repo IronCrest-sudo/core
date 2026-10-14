@@ -5,6 +5,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Wrap string into object
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:engine _mcmd_exec set value {}
 data modify storage macroengine:engine _mcmd_exec.cmd set from storage macroengine:engine _mcmd_current
 

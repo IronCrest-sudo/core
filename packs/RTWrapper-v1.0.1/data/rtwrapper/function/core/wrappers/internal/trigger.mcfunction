@@ -1,6 +1,7 @@
 # RTWrapper generated named-parameter dispatcher for /trigger.
 # Provide contiguous parameters in this order:
 # objective, action, value
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 scoreboard players set #pc rtw.status 0
 execute if data storage rtwrapper:runtime current.params.objective run scoreboard players set #pc rtw.status 1
 execute if data storage rtwrapper:runtime current.params.action run scoreboard players set #pc rtw.status 2

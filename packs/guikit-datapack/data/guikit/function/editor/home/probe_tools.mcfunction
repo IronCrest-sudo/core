@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute store result score #hit guikit.tmp run clear @s *[custom_data~{guikit:{w:1b,id:"hnew"}}] 0
 execute if score #hit guikit.tmp matches 1.. run return run function guikit:editor/create
 execute store result score #hit guikit.tmp run clear @s *[custom_data~{guikit:{w:1b,id:"hclose"}}] 0

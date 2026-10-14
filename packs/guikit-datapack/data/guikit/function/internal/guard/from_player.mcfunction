@@ -1,4 +1,5 @@
 # as the clicking player. #guid is the guard's uid (the cart owner).
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #gdone guikit.tmp 1
 scoreboard players set #own guikit.tmp 0
 execute if score @s guikit.uid = #guid guikit.tmp run scoreboard players set #own guikit.tmp 1

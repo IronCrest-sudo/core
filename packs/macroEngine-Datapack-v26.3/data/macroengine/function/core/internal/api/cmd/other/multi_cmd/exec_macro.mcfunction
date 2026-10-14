@@ -4,6 +4,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Pass raw command to pipeline input
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:input raw_command set value "$(cmd)"
 
 # Execute security pipeline (which sets up isolation, validates, checks canary)

@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:runtime/ensure_pid
 execute store result storage guikit:ctx pid int 1 run scoreboard players get @s guikit.pid
 function guikit:editor/load_state_do with storage guikit:ctx

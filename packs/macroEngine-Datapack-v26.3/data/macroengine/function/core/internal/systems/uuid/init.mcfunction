@@ -5,6 +5,7 @@
 # ============================================================
 
 # Division constant (lives in macroengine.tmp scoreboard, uuid module specific)
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 scoreboard players set $uuid.256 macroengine.tmp 256
 
 # Byte → 2-character hex string lookup table (00-ff, 256 entries)

@@ -1,6 +1,7 @@
 # guikit :: cond/load_cur     copies the condition compound in storage guikit:cnd cur into guikit:cond, key by key
 # (a root-level `data modify storage X {} set from ...` is avoided on purpose, see README "Validation status").
 # Call internal/clear_cond first. Keep this list in sync with internal/clear_cond.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute if data storage guikit:cnd cur.type run data modify storage guikit:cond type set from storage guikit:cnd cur.type
 execute if data storage guikit:cnd cur.obj run data modify storage guikit:cond obj set from storage guikit:cnd cur.obj
 execute if data storage guikit:cnd cur.min run data modify storage guikit:cond min set from storage guikit:cnd cur.min

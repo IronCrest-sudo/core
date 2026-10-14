@@ -21,6 +21,7 @@
 # This is a load-time operation — call from a load tag or init function.
 
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{color:0b} run return 0
 execute unless data storage macroengine:engine color.gradients run data modify storage macroengine:engine color.gradients set value {}
 $data modify storage macroengine:engine color.gradients.$(name) set value $(colors)

@@ -3,5 +3,6 @@
 # re-runs the full init pipeline, discarding any live engine state
 # that macroengine:core/internal/load/all's "unless data" guards would otherwise preserve.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data remove storage macroengine:engine global.loaded
 function macroengine:core/internal/load/all

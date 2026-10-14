@@ -1,4 +1,5 @@
 # key suffix m<n>_<page>_<slot> — per-player prefix is added at click time
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute store result score #n guikit.tmp run data get storage guikit:work menu.n
 execute store result score #page guikit.tmp run data get storage guikit:ed cur.page
 execute store result score #slot guikit.tmp run data get storage guikit:ed cur.slot

@@ -8,6 +8,7 @@
 # ======================================================================================
 
 # Already submitted this hold-session
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if entity @s[tag=macroengine.name_tag_captured] run return 0
 
 # No custom name yet (still default "Name Tag") — wait for anvil rename

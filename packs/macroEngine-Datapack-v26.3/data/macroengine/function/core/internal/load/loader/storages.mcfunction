@@ -28,6 +28,7 @@
 #   (b) was cleaned up via core/internal/load/cleanup (cleanup removed global).
 # In both cases, initializing with 'unless data' guards is safe.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless score $epoch macroengine.time matches -2147483648..2147483647 run scoreboard players set $epoch macroengine.time 0
 scoreboard players set $tick macroengine.tmp 0
 

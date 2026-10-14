@@ -1,4 +1,5 @@
 # macroengine:core/internal/text/case [INTERNAL] maps every character of s through table macroengine:text tbl
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data remove storage macroengine:text err
 data remove storage macroengine:text out
 execute store result score #tx_len macroengine.tmp run data get storage macroengine:text s

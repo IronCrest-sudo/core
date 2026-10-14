@@ -31,6 +31,7 @@
 # --- INT 0 (first 4 bytes of UUID, fields 0..3) ---
 
 # byte 0 — LSB
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 scoreboard players operation $uuid.a macroengine.tmp = $uuid.0 macroengine.tmp
 scoreboard players operation $uuid.a macroengine.tmp %= $uuid.256 macroengine.tmp
 scoreboard players operation $uuid.0 macroengine.tmp /= $uuid.256 macroengine.tmp

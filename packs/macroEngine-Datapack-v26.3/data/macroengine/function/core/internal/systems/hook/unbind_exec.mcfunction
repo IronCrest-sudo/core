@@ -2,6 +2,7 @@
 # INPUT: $(event)
 # Filters all binds belonging to $(event) from hook_binds.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:engine _hook_unbinds set from storage macroengine:engine hook_binds
 data modify storage macroengine:engine hook_binds set value []
 $data modify storage macroengine:engine _hook_filter_event set value "$(event)"

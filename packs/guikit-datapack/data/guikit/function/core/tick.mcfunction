@@ -1,4 +1,5 @@
 # guikit :: tick
+execute unless score #guikit.version vortaforge.gate matches 1 run return 0
 scoreboard players add #tick guikit.const 1
 execute as @a[scores={guikit.gmsg=1..}] run scoreboard players remove @s guikit.gmsg 1
 scoreboard players enable @a guikit.ack

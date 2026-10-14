@@ -9,6 +9,7 @@
 # directly via #minecraft:tick, see data/minecraft/tags/function/tick.json.
 
 # Runtime config: fill and apply anything missing (worlds loaded by an older version)
+execute unless score #macroengine.version vortaforge.gate matches 1 run return 0
 function macroengine:core/config/ensure
 
 # Config-level pause guard (separate from the storage-level pause below)

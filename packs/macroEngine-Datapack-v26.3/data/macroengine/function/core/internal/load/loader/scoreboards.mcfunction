@@ -12,6 +12,11 @@ scoreboard objectives add macroengine.pre_version dummy
 scoreboard objectives add macroengine.pid dummy
 scoreboard objectives add macroengine.freeze_id dummy
 
+# predicate/health_below_half and predicate/is_hungry read these via "scores" —
+# vanilla's health/food criteria keep them synced automatically, no tick code needed
+scoreboard objectives add macroengine.health health
+scoreboard objectives add macroengine.food food
+
 # Wand module — carrot_on_a_stick right-click tracker
 scoreboard objectives add macroengine.rightClick minecraft.used:minecraft.carrot_on_a_stick
 

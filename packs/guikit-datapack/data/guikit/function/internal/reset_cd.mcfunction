@@ -5,6 +5,7 @@
 # the open GUI does NOT reset the timer any more.
 # The advancement is granted only once, so it has to be revoked here or it could never fire again.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 advancement revoke @s only guikit:interact_cart
 # A non-owner click must not refresh this player's timeout, and must not count as the owner's.
 scoreboard players set #own guikit.tmp 0

@@ -1,5 +1,6 @@
 # macro: $(src) $(name) $(lore)     src is typed or held; name/lore are stored as strings, never executed
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 function guikit:editor/load_state
 scoreboard players set #b guikit.tmp -1
 execute store result score #b guikit.tmp run data get storage guikit:ed cur.slot

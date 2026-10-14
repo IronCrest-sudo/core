@@ -5,6 +5,7 @@
 
 # --- AABB test: return early if outside any axis ---
 execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=macroengine.consented] unless score #macroengine.gate.3 vortaforge.gate matches 0 run return 0
 execute store result score $rwx macroengine.tmp run data get storage macroengine:engine _rw_player.x
 execute store result score $rwy macroengine.tmp run data get storage macroengine:engine _rw_player.y
 execute store result score $rwz macroengine.tmp run data get storage macroengine:engine _rw_player.z

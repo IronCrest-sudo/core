@@ -3,6 +3,7 @@
 #                     empty:"minecraft:gray_stained_glass_pane", id:"bar1", name:{text:" "}}
 # Draws `width` cells starting at `slot`. Cell i (0-based) is full when i < filled.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 function guikit:internal/progress/calc with storage guikit:w
 # working copy
 data modify storage guikit:pg cur set value 0

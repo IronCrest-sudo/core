@@ -1,5 +1,6 @@
 # key suffix m<n>_<page>_<slot> — per-player prefix is added at click time
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 execute store result score #n guikit.tmp run data get storage guikit:work menu.n
 execute store result score #page guikit.tmp run data get storage guikit:ed cur.page
 execute store result score #slot guikit.tmp run data get storage guikit:ed cur.slot

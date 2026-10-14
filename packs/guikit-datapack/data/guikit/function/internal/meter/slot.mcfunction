@@ -2,6 +2,7 @@
 # Same shape as internal/progress_slot, but type "meter" (clickable) and the cell's id is
 # "<id>_<cell>" so widget/meter_probe can test each cell individually.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 $scoreboard players set #abs guikit.tmp $(slot)
 $scoreboard players add #abs guikit.tmp $(cell)
 execute store result storage guikit:pg abs int 1 run scoreboard players get #abs guikit.tmp

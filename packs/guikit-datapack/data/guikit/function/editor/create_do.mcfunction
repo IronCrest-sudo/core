@@ -1,5 +1,6 @@
 # macro: $(n)
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 $data modify storage guikit:lib menus.m$(n) set value {n:$(n),name:"Menu $(n)",container:"chest_minecart",timer:900,published:1b,pages:[{widgets:[]}]}
 $data modify storage guikit:lib order append value "m$(n)"
 $function guikit:runtime/sync_one {id:"m$(n)"}

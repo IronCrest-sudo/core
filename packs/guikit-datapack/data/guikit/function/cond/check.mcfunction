@@ -22,6 +22,7 @@
 #
 # One small function per type (no big execute chains), same as the rest of the pack.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 scoreboard players set #cond guikit.tmp 0
 execute if data storage guikit:cond {type:"all"} run function guikit:cond/t_all
 execute if data storage guikit:cond {type:"any"} run function guikit:cond/t_any

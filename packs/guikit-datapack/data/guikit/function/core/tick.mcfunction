@@ -1,6 +1,8 @@
 # guikit :: tick
 execute unless score #guikit.gate.2 vortaforge.gate matches 0 unless score #guikit.permit vortaforge.gate matches 1 run function guikit:gate/permit_tick
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute unless score #guikit.gate.3 vortaforge.gate matches 0 as @a[tag=!guikit.consented] run function guikit:gate/consent_tick
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 scoreboard players add #tick guikit.const 1
 execute as @a[scores={guikit.gmsg=1..}] run scoreboard players remove @s guikit.gmsg 1
 scoreboard players enable @a guikit.ack

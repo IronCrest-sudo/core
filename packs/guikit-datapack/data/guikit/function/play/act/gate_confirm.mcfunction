@@ -1,5 +1,6 @@
 # Second click on the same page+slot within 2 seconds (40 ticks) runs the action.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 execute unless data storage guikit:work w{confirm:1b} run return 0
 execute store result score #page guikit.tmp run data get storage guikit:work page
 execute store result score #slot guikit.tmp run data get storage guikit:work w.slot

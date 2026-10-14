@@ -15,6 +15,7 @@
 # be summoned and filled with `item replace entity`, and Minecraft has no ender chest / barrel
 # entity.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 data modify storage guikit:reg containers set value {}
 data modify storage guikit:reg containers.chest_minecart set value {entity:"chest_minecart", slots:27, pad:"minecraft:gray_stained_glass_pane"}
 data modify storage guikit:reg containers.hopper_minecart set value {entity:"hopper_minecart", slots:5, pad:"minecraft:gray_stained_glass_pane"}

@@ -1,6 +1,7 @@
 # as player. Drop widget items that were drawn for a different owner.
 # A stolen stack still has the click id, so it must be gone before probe.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 scoreboard players set #purged guikit.tmp 0
 execute store result storage guikit:ctx own int 1 run scoreboard players get @s guikit.uid
 execute if items entity @s player.cursor *[custom_data~{guikit:{w:1b}}] run function guikit:internal/guard/purge_cursor with storage guikit:ctx

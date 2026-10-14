@@ -1,6 +1,7 @@
 # macro: $(menu)     as player, at player     (called by api/open)
 # 1. container name comes from the registered menu, default chest_minecart
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
+execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 $data modify storage guikit:ctx ctype set from storage guikit:reg menus."$(menu)".container
 execute unless data storage guikit:ctx ctype run data modify storage guikit:ctx ctype set value "chest_minecart"
 

@@ -252,3 +252,19 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 - **Not covered:** legacy packs (`pack_format` below 48, `functions/` directory naming), `guikit-demo` (no tick entry), `archived/`.
 - **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`.
 - **Not verified:** nothing was run in a Minecraft server. Load order and `return 0` behavior in game are untested.
+
+## Datapacks: Gate 2 (trigger permission), toggles, simple packs excluded
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/{guikit-datapack,macroEngine-Datapack-v26.3,RTWrapper-v1.0.1}/data/<ns>/function/gate/*` | `version` rewritten as a real version gate (downgrade protection: inactive when the world was last saved by a newer pack version). New: `permit_prompt`, `permit_tick`, `permit_grant` (approval through `/trigger <ns>.permit set 1`, no cheats, no `allowCommands`, no `/op`), `approve`, `revoke`, `status`, `set/1_on`, `1_off`, `2_on`, `2_off`. |
+| Load entries (`core/load`, `setup`, RTWrapper `core/trigger_load`) | The version gate now also ends the load function with `return 0`. |
+| Tick entries (`core/tick`, RTWrapper `core/trigger_tick`) | Version check, permission check and the permission tick, each bound to `return 0` and each skippable with `gate/set/N_off`. |
+| `packs/DailyBonus`, `packs/QuickShare` | Gate 1 removed again: no input handling, no macros, no command execution, so no gate. |
+
+- **Defaults:** both gates on. An updated world stays inactive until a player approves with `/trigger <ns>.permit set 1` (or an operator runs `<ns>:gate/approve`).
+- **Limits:** `/trigger` is not authenticated; on a server with untrusted players any player can approve. Datapack gates are removable plain text; real enforcement belongs in a Fabric mod. Gate 3 (per-player consent) and Gate 4 (age declaration, a self-declaration, not verification) are not part of this PR.
+- **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`.
+- **Not verified:** nothing was run in a Minecraft server. `click_event` text, `/trigger` flow, load order and `return 0` behavior are untested in game.

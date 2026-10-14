@@ -5,7 +5,6 @@
 # Note: this is IN-GAME days (tied to gameTime, which only advances while
 # the server is running and the player is online), not real calendar days —
 # vanilla has no server-side wall-clock time source available to a datapack.
-execute unless score #dailybonus.version vortaforge.gate matches 1 run return 0
 execute store result score #day db_gameday run time query gametime
 scoreboard players operation #day db_gameday /= #const24000 db_gameday
 execute as @a if score @s db_last_day < #day db_gameday run function dailybonus:grant

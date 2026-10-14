@@ -5,6 +5,7 @@
 
 # Step 1: Internal Text Module
 function macroengine:gate/version
+execute unless score #macroengine.gate.1 vortaforge.gate matches 0 unless score #macroengine.version vortaforge.gate matches 1 run return 0
 function macroengine:core/internal/text/load
 
 # Step 2: Player Enumeration

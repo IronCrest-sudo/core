@@ -1,9 +1,18 @@
-# Gate 1 - version gate (vortaforge/core).
-# Called first from macroengine:setup. Declares that this pack's entry points may run.
-# Every tick entry point starts with:
-#   execute unless score #macroengine.version vortaforge.gate matches 1 run return 0
-# so a pack that was not (re)loaded through its own load function stays inert.
-# This is a safeguard against partial or mixed installs, not a sandbox: anyone
-# who can edit the pack can remove the line. Real enforcement belongs in a Fabric mod.
+# Gate 1 - version gate (vortaforge/core). Called first from macroengine:setup.
+# Refuses to run when this world was last loaded by a NEWER version of this pack
+# (downgrade protection). A first install or an upgrade passes and records the version.
+# Toggle: function macroengine:gate/set/1_off | 1_on. Default: on.
+# Safeguard, not a sandbox: a datapack is plain text and the checks can be deleted.
+# Non-bypassable enforcement belongs in a Fabric mod.
 scoreboard objectives add vortaforge.gate dummy
-scoreboard players set #macroengine.version vortaforge.gate 1
+scoreboard objectives add macroengine.permit trigger
+execute unless score #macroengine.gate.1 vortaforge.gate = #macroengine.gate.1 vortaforge.gate run scoreboard players set #macroengine.gate.1 vortaforge.gate 1
+execute unless score #macroengine.gate.2 vortaforge.gate = #macroengine.gate.2 vortaforge.gate run scoreboard players set #macroengine.gate.2 vortaforge.gate 1
+execute unless score #macroengine.installed vortaforge.gate = #macroengine.installed vortaforge.gate run scoreboard players set #macroengine.installed vortaforge.gate 0
+scoreboard players set #macroengine.expected vortaforge.gate 1
+scoreboard players set #macroengine.version vortaforge.gate 0
+execute if score #macroengine.installed vortaforge.gate <= #macroengine.expected vortaforge.gate run scoreboard players set #macroengine.version vortaforge.gate 1
+execute if score #macroengine.version vortaforge.gate matches 1 run scoreboard players operation #macroengine.installed vortaforge.gate = #macroengine.expected vortaforge.gate
+execute if score #macroengine.version vortaforge.gate matches 0 if score #macroengine.gate.1 vortaforge.gate matches 0 run scoreboard players set #macroengine.version vortaforge.gate 1
+execute if score #macroengine.version vortaforge.gate matches 0 run tellraw @a {"text":"[macroengine] This world was saved with a newer version of this datapack. macroengine stays inactive (version gate).","color":"red"}
+execute if score #macroengine.version vortaforge.gate matches 1 unless score #macroengine.gate.2 vortaforge.gate matches 0 unless score #macroengine.permit vortaforge.gate matches 1 run function macroengine:gate/permit_prompt

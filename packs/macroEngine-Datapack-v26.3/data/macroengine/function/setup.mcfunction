@@ -4,6 +4,7 @@
 # Initialization
 
 # Step 1: Internal Text Module
+function macroengine:gate/version
 function macroengine:core/internal/text/load
 
 # Step 2: Player Enumeration

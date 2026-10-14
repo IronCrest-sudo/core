@@ -1,6 +1,7 @@
 # RTWrapper core bootstrap.
 # Scoreboards are intentionally stable fake-player state; existing values are not overwritten.
 
+function rtwrapper:gate/version
 execute if data storage rtwrapper:meta {loaded:1b} run return 0
 
 scoreboard objectives add rtw.config dummy

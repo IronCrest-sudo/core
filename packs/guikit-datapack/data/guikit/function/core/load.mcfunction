@@ -1,4 +1,5 @@
 # guikit :: load
+function guikit:gate/version
 scoreboard objectives add guikit.timer dummy
 scoreboard objectives add guikit.tmax dummy
 scoreboard objectives add guikit.click dummy

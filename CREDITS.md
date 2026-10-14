@@ -237,3 +237,18 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 - **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`.
 - **Not verified:** nothing was run in a Minecraft server. The module guards, the `%` interval counters and every `core/config/*` function are untested in game.
 
+
+## Datapacks: Gate 1 (version gate) on format-121 packs
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/{DailyBonus,QuickShare,guikit-datapack,macroEngine-Datapack-v26.3,RTWrapper-v1.0.1}/data/<ns>/function/gate/version.mcfunction` | New. Creates the `vortaforge.gate` objective and sets `#<ns>.version` to 1. |
+| Each pack's load entry (`load`, `core/load`, `setup`) | First executable line calls `<ns>:gate/version`. |
+| Each pack's tick entry (`tick`, `core/tick`, `core/trigger_tick`) | First executable line: `execute unless score #<ns>.version vortaforge.gate matches 1 run return 0`. |
+
+- **What it is:** a safeguard against partial or mixed installs (tick running without the pack's own load). It is not a sandbox and not tamper-proof: a datapack is plain text and the line can be deleted. Non-bypassable checks belong in a Fabric mod. Gates 2-4 (permission check, player consent, age declaration) are planned in later PRs; the age gate can only be a player's own declaration, not verification.
+- **Not covered:** legacy packs (`pack_format` below 48, `functions/` directory naming), `guikit-demo` (no tick entry), `archived/`.
+- **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`.
+- **Not verified:** nothing was run in a Minecraft server. Load order and `return 0` behavior in game are untested.

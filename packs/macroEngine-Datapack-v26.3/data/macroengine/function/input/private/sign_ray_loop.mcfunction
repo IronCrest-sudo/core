@@ -1,4 +1,5 @@
 # Hit any sign-like block
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if block ~ ~ ~ #minecraft:all_signs run return run function macroengine:input/private/sign_capture
 execute if block ~ ~ ~ #minecraft:signs run return run function macroengine:input/private/sign_capture
 execute if block ~ ~ ~ #minecraft:wall_signs run return run function macroengine:input/private/sign_capture

@@ -20,6 +20,7 @@
 #   # → macroengine:output result = "red"  (not in palette, returned as-is)
 
 # Default: return input value
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{color:0b} run return 0
 $data modify storage macroengine:output result set value "$(color)"
 

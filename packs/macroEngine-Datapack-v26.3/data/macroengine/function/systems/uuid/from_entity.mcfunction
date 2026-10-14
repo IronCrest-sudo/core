@@ -14,6 +14,7 @@
 # ============================================================
 
 # Copy entity UUID as int[4] to working storage
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{uuid:0b} run return 0
 data modify storage macroengine:uuid _work set from entity @s UUID
 

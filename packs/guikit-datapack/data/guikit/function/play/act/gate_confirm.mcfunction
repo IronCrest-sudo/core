@@ -1,4 +1,5 @@
 # Second click on the same page+slot within 2 seconds (40 ticks) runs the action.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute unless data storage guikit:work w{confirm:1b} run return 0
 execute store result score #page guikit.tmp run data get storage guikit:work page
 execute store result score #slot guikit.tmp run data get storage guikit:work w.slot

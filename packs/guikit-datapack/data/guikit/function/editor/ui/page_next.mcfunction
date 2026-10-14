@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:editor/load_state
 execute store result score #page guikit.tmp run data get storage guikit:ed cur.page
 execute if score #page guikit.tmp matches 8.. run tellraw @s {"text":"[guikit] Page limit is 9.","color":"red"}

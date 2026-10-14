@@ -1,4 +1,5 @@
 # macroengine:core/internal/text/num_scan_loop [INTERNAL] every character except the decimal point must be a digit
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless score #tx_i macroengine.tmp < #tx_len macroengine.tmp run return 1
 execute if score #tx_i macroengine.tmp = #tx_dotpos macroengine.tmp run scoreboard players add #tx_i macroengine.tmp 1
 execute unless score #tx_i macroengine.tmp < #tx_len macroengine.tmp run return 1

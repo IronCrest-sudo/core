@@ -5,6 +5,7 @@
 # gate (that gate system has been removed).
 
 # Archive banner (score-controlled)
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if score #vortacraftmc.archivedpacks.macroengine macroengine.meta matches 1 run tellraw @s {"text":"[macroengine] This pack is marked archived (#vortacraftmc.archivedpacks.macroengine=1).","color":"red"}
 
 # Already loaded → data-loss prevention notice (NOT a hard gate; does not block)

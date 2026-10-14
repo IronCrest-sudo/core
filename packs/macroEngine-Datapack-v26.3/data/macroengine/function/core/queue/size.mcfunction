@@ -9,4 +9,5 @@
 #   function macroengine:core/queue/size
 #   data get storage macroengine:output queue.size
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute store result storage macroengine:output queue.size int 1 run data get storage macroengine:engine work_queue

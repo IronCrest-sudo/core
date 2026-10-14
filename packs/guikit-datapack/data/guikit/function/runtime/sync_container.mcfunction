@@ -1,4 +1,5 @@
 # guikit :: runtime/sync_container     build cdef from the saved menu (name copied as NBT, not re-macro'd)
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 data modify storage guikit:work cdef set value {entity:"chest_minecart",slots:27,pad:"minecraft:gray_stained_glass_pane"}
 execute if data storage guikit:work menu{container:"hopper_minecart"} run data modify storage guikit:work cdef set value {entity:"hopper_minecart",slots:5,pad:"minecraft:gray_stained_glass_pane"}
 execute if data storage guikit:work menu{container:"barrel"} run data modify storage guikit:work cdef set value {entity:"chest_minecart",slots:27,pad:"minecraft:brown_stained_glass_pane"}

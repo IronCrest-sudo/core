@@ -22,6 +22,7 @@
 # ─────────────────────────────────────────────
 
 # Run provider function — it writes its output to _macro_pipe
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{macro:0b} run return 0
 $function $(source)
 

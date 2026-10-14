@@ -4,6 +4,7 @@
 # enforce. Useful when debugging output that looks wrong.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{text:0b} run return 0
 tellraw @s [{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"━━━ NBT text components (26.1+) ━━━","color":"#555555"}]
 tellraw @s [{"text":"  {storage,nbt}                    ","color":"gray"},{"text":"→  \"Example Text\"  (quotes kept)","color":"red"}]

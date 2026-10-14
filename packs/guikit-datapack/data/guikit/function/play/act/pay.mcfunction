@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:internal/safe_clear
 data modify storage guikit:work pay.item set from storage guikit:work w.cost_item
 data modify storage guikit:work pay.count set from storage guikit:work w.cost_count

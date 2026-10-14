@@ -1,6 +1,7 @@
 # macroEngine player module — drop all state tags before this tick's
 # detection runs. Tags are re-added below when their condition holds.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 tag @s remove player_action.moving
 
 # Movement-state tags

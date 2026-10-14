@@ -13,6 +13,7 @@
 #   function macroengine:api/color/palette_set {key:"danger",value:"red"}
 
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{color:0b} run return 0
 execute unless data storage macroengine:engine color.palette run data modify storage macroengine:engine color.palette set value {}
 $data modify storage macroengine:engine color.palette.$(key) set value "$(value)"

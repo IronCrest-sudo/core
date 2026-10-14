@@ -1,5 +1,6 @@
 # macro: $(pid) $(n) $(page) $(slot)
 # #left is ticks still remaining, or 0. End time is an absolute #tick value.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #left guikit.tmp 0
 scoreboard players set #has guikit.tmp 0
 $execute if score p$(pid)_c$(n)_$(page)_$(slot) guikit.var matches 1.. run scoreboard players set #has guikit.tmp 1

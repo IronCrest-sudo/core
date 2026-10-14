@@ -3,6 +3,7 @@
 # INPUT: $(d) — one nesting depth level
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data remove storage macroengine:engine _mcmd_cond_save_$(d)
 $data remove storage macroengine:engine _mcmd_all_list_$(d)
 $data remove storage macroengine:engine _mcmd_any_list_$(d)

@@ -17,6 +17,7 @@
 # Rule must be pre-registered via macroengine:systems/rate_limit/config.
 # If no rule exists for the key → ALLOWED (fail-open; log warning).
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{rate_limit:0b} run return 0
 data modify storage macroengine:output result set value 1b
 

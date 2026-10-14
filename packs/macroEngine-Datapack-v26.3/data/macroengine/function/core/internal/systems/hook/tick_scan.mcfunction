@@ -3,6 +3,7 @@
 # Runs only if hook_binds is non-empty.
 
 # Module toggle guard — skips this module when disabled via macroengine:api/toggle/hook/false
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine {modules:{hook:1b}} run return 0
 scoreboard players operation #scan_mod macroengine.tick = #tick_ctr macroengine.tick
 scoreboard players operation #scan_mod macroengine.tick %= #hook_interval macroengine.tick

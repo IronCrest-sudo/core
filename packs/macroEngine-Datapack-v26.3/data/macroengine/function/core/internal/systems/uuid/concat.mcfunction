@@ -12,4 +12,5 @@
 # Segment 4 (4 hex): int2 MSB→LSB = [b][a]
 # Segment 5 (12 hex): int2 continued + int3 = [9][8][f][e][d][c]
 # ============================================================
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:input value set value "$(3)$(2)$(1)$(0)-$(7)$(6)-$(5)$(4)-$(b)$(a)-$(9)$(8)$(f)$(e)$(d)$(c)"

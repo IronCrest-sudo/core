@@ -10,4 +10,5 @@
 #   data modify storage macroengine:input queue.rate set value 4
 #   function macroengine:core/queue/set_rate with storage macroengine:input queue
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:engine work_queue_rate set value $(rate)

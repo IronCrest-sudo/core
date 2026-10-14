@@ -6,6 +6,7 @@
 # Preserve the parent condition object: evaluating a child overwrites
 # _mcmd_cond_eval, and cond_eval_core still reads sibling composition
 # keys (any_of / not) from it after this call returns.
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:engine _mcmd_cond_save_$(d) set from storage macroengine:engine _mcmd_cond_eval
 $data modify storage macroengine:engine _mcmd_all_list_$(d) set from storage macroengine:engine _mcmd_cond_eval.all_of
 

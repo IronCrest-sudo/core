@@ -1,3 +1,4 @@
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 execute unless data storage rtwrapper:api batch[0] run return 0
 
 scoreboard players operation #batch_id rtw.status = #processed rtw.status

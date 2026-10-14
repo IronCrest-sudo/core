@@ -1,6 +1,7 @@
 # macroengine:systems/log/add (internal)
 # Called by error/warn/info/debug — do not call directly.
 # Appends to the 30-entry ring buffer in macroengine:engine log_display.
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{log:0b} run return 0
 execute unless data storage macroengine:engine log_display run data modify storage macroengine:engine log_display set value []
 

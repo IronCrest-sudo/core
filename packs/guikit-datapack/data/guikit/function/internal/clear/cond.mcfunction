@@ -1,6 +1,7 @@
 # guikit :: internal/clear_cond
 # Same idea as clear_in / clear_w, for storage guikit:cond. Call it BEFORE `data merge storage guikit:cond {...}`.
 # When you add a new key to a cond type, add it here too.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 data remove storage guikit:cond adv
 data remove storage guikit:cond dim
 data remove storage guikit:cond item

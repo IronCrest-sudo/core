@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:editor/load_state
 function guikit:editor/ui/set_pub_on with storage guikit:ed cur
 data modify storage guikit:work id set from storage guikit:ed cur.menu

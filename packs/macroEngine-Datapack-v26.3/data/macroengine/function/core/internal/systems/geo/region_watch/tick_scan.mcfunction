@@ -3,6 +3,7 @@
 # If region_watches is non-empty, checks all regions for each player.
 
 # Module toggle guard — skips this module when disabled via macroengine:api/toggle/geo/false
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine {modules:{geo:1b}} run return 0
 scoreboard players operation #scan_mod macroengine.tick = #tick_ctr macroengine.tick
 scoreboard players operation #scan_mod macroengine.tick %= #geo_interval macroengine.tick

@@ -1,4 +1,5 @@
 # macro: $(page)
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:internal/clear/w
 data modify storage guikit:w slot set value 19
 data modify storage guikit:w item set value "minecraft:paper"

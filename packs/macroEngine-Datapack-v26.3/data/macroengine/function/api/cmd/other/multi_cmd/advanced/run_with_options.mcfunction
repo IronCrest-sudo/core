@@ -6,6 +6,7 @@
 #   options → {priority_sort:1b, spread_ticks:0, error_mode:"continue", profile:1b, type:"..."}
 #
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{cmd:0b} run return 0
 data modify storage macroengine:engine _mcmd_queue set from storage macroengine:input list
 execute unless data storage macroengine:input options run data modify storage macroengine:input options set value {}

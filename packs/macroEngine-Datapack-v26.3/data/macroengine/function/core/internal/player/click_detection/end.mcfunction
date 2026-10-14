@@ -1,5 +1,6 @@
 
 # copy uuid
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 scoreboard players operation #uuid.0 player_action.data = @s player_action.uuid.0
 scoreboard players operation #uuid.1 player_action.data = @s player_action.uuid.1
 scoreboard players operation #uuid.2 player_action.data = @s player_action.uuid.2

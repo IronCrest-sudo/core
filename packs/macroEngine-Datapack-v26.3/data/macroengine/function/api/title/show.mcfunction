@@ -18,6 +18,7 @@
 # Usage:
 #   function macroengine:api/title/show {player:"Steve",title:"Hello",subtitle:"welcome back",\
 #     color:"gold",sub_color:"gray",fade_in:10,stay:60,fade_out:10}$title @a[name=$(player),limit=1] times $(fade_in) $(stay) $(fade_out)
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{title:0b} run return 0
 $title @a[name=$(player),limit=1] title {"text":"$(title)","color":"$(color)"}
 $title @a[name=$(player),limit=1] subtitle {"text":"$(subtitle)","color":"$(sub_color)"}

@@ -4,6 +4,7 @@
 # computed and added to the queue.
 # func or cmd presence is checked with execute if data.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine _bfl_items[0] run return 0
 
 # delay = floor(idx * spread / total)

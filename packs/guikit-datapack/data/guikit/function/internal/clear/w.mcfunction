@@ -1,5 +1,6 @@
 # guikit :: internal/clear_w
 # Same idea for the widget scratch storage guikit:w (progress leaves obj/width/max/full/empty behind).
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 data remove storage guikit:w empty
 data remove storage guikit:w full
 data remove storage guikit:w id

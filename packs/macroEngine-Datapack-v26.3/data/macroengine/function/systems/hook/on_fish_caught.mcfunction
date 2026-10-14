@@ -11,6 +11,7 @@
 #   -- or --
 #   data modify storage macroengine:input cmd set value "give @s salmon 1"
 #   function macroengine:systems/hook/on_fish_caught
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{hook:0b} run return 0
 data modify storage macroengine:input event set value "fish_caught"
 function macroengine:systems/hook/bind

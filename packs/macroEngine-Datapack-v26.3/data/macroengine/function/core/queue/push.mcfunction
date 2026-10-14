@@ -13,4 +13,5 @@
 #   data modify storage macroengine:input queue.fn set value "mypack:do_thing"
 #   function macroengine:core/queue/push with storage macroengine:input queue
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:engine work_queue append value {fn:"$(fn)"}

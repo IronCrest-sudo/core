@@ -3,6 +3,7 @@
 # Params: player, key
 # Output: macroengine:output result (new expiry epoch tick), 0b if not paused
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:output result set value 0b
 
 $execute unless data storage macroengine:engine paused_cooldowns.$(player).$(key) run return 0

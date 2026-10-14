@@ -5,6 +5,7 @@
 # digits on both sides ("1." and ".5" are rejected as ambiguous rather than guessed at).
 # Delegates to macroengine:core/internal/text/num_check with allow_dot set.
 # ======================================================================================
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:text s set from storage macroengine:input_validate scratch.value
 data modify storage macroengine:text allow_dot set value 1b
 execute store result score #macroengine.NumOk macroengine.tmp run function macroengine:core/internal/text/num_check

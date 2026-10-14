@@ -5,6 +5,7 @@
 # macroengine:core/internal/text/num_check, which walks the string one character at a
 # time and never substitutes the input into a command line.
 # ======================================================================================
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:text s set from storage macroengine:input_validate scratch.value
 data modify storage macroengine:text allow_dot set value 0b
 execute store result score #macroengine.NumOk macroengine.tmp run function macroengine:core/internal/text/num_check

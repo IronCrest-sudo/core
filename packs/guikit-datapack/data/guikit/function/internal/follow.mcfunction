@@ -1,6 +1,7 @@
 # guikit :: follow     as cart (owned by the ticking player)
 # Position context: tick_player runs `at @s` (the player). `execute as <cart>` does NOT
 # change the position, so `tp @s ~ ~ ~` moves the cart exactly onto its owner.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #found guikit.tmp 1
 # Minecarts follow their owner. Boats/rafts are NOT teleported: the owner rides them (see README
 # "Container types", `ride @s mount ...`), teleporting a boat with its rider in every tick fights the ride.

@@ -15,6 +15,7 @@
 # → macroengine:output result = 1b (if either is set)
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:output result_a set value 0b
 data modify storage macroengine:output result_b set value 0b
 data modify storage macroengine:output result set value 0b

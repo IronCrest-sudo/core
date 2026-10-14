@@ -1,6 +1,7 @@
 # RTWrapper generated named-parameter dispatcher for /function.
 # Provide contiguous parameters in this order:
 # function_id, mode, source, path
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 scoreboard players set #pc rtw.status 0
 execute if data storage rtwrapper:runtime current.params.function_id run scoreboard players set #pc rtw.status 1
 execute if data storage rtwrapper:runtime current.params.mode run scoreboard players set #pc rtw.status 2

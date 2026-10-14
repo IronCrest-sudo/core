@@ -14,5 +14,6 @@ scoreboard players set #rtwrapper.version vortaforge.gate 0
 execute if score #rtwrapper.installed vortaforge.gate <= #rtwrapper.expected vortaforge.gate run scoreboard players set #rtwrapper.version vortaforge.gate 1
 execute if score #rtwrapper.version vortaforge.gate matches 1 run scoreboard players operation #rtwrapper.installed vortaforge.gate = #rtwrapper.expected vortaforge.gate
 execute if score #rtwrapper.version vortaforge.gate matches 0 if score #rtwrapper.gate.1 vortaforge.gate matches 0 run scoreboard players set #rtwrapper.version vortaforge.gate 1
+function rtwrapper:gate/refresh
 execute if score #rtwrapper.version vortaforge.gate matches 0 run tellraw @a {"text":"[rtwrapper] This world was saved with a newer version of this datapack. rtwrapper stays inactive (version gate).","color":"red"}
 execute if score #rtwrapper.version vortaforge.gate matches 1 unless score #rtwrapper.gate.2 vortaforge.gate matches 0 unless score #rtwrapper.permit vortaforge.gate matches 1 run function rtwrapper:gate/permit_prompt

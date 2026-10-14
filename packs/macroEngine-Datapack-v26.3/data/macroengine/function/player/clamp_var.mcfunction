@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $execute store result score $cv macroengine.tmp run data get storage macroengine:engine players.$(player).$(key)
 $scoreboard players set $cv_mn macroengine.tmp $(min)
 $scoreboard players set $cv_mx macroengine.tmp $(max)

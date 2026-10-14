@@ -7,6 +7,7 @@
 # of resolving it.
 # ======================================================================================
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:input_validate {scratch:{value:"true"}} run data modify storage macroengine:input_validate result.valid set value 1b
 execute if data storage macroengine:input_validate {scratch:{value:"false"}} run data modify storage macroengine:input_validate result.valid set value 1b
 

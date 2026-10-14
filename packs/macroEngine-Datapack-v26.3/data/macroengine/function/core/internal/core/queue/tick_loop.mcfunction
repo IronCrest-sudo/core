@@ -3,6 +3,7 @@
 # #wq_rate reaches 0 or the queue is empty.
 # Max recursion depth = work_queue_rate (keep ≤ 64 for safety).
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine work_queue[0] run return 0
 execute if score #wq_rate macroengine.tmp matches ..0 run return 0
 

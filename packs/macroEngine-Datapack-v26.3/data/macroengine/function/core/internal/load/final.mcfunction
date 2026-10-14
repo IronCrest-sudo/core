@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:engine global.version set value "v26.3"
 scoreboard players set #vortacraftmc.packs.macroengine.version macroengine.meta 263
 function #macroengine:init

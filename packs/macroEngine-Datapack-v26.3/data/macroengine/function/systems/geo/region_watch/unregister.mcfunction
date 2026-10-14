@@ -7,5 +7,6 @@
 # id → region id
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{geo:0b} run return 0
 function macroengine:core/internal/systems/geo/region_watch/unregister_exec with storage macroengine:input {}

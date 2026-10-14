@@ -6,6 +6,7 @@
 #
 # No-ops (does not duplicate) if the objective is already registered - use
 # rtwrapper:api/trigger/modify to change an existing registration.
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 execute unless data storage rtwrapper:api trigger.objective run return fail
 execute unless data storage rtwrapper:api trigger.action run return fail
 execute unless data storage rtwrapper:api trigger.reset_mode run data modify storage rtwrapper:api trigger.reset_mode set value "value"

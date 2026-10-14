@@ -10,4 +10,5 @@
 #   data modify storage macroengine:input queue set value {fn:"mypack:process_player",player:"<player name>"}
 #   function macroengine:core/queue/push_as with storage macroengine:input queue
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:engine work_queue append value {fn:"$(fn)",player:"$(player)"}

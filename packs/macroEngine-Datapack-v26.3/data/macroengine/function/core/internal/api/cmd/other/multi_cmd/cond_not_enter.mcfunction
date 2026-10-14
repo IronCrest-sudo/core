@@ -7,6 +7,7 @@
 # case so an over-deep tree can never pass.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:engine _mcmd_cond_save_$(d) set from storage macroengine:engine _mcmd_cond_eval
 
 scoreboard players add $mcmd_cond_depth macroengine.tmp 1

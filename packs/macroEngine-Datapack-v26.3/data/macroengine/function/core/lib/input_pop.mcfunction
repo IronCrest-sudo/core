@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data remove storage macroengine:input player
 data remove storage macroengine:input key
 data remove storage macroengine:input value

@@ -1,4 +1,5 @@
 # 1 cycles, 2 oldest, 3 newest. Bare /trigger guikit.sort is 1.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players operation #want guikit.tmp = @s guikit.sort
 scoreboard players set @s guikit.sort 0
 scoreboard players enable @s guikit.sort

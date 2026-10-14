@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $scoreboard players operation $ptd_val macroengine.tmp = @s $(name)
 
 $scoreboard players set @s $(name) 0

@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 forceload add 0 0
 
 data modify storage macroengine:input func set value "macroengine:core/lib/sync_tick"

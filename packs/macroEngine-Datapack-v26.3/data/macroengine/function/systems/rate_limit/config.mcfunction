@@ -20,5 +20,6 @@
 # Removing a rule: function macroengine:systems/rate_limit/delete {key:"..."}
 # Listing rules: function macroengine:systems/rate_limit/list
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{rate_limit:0b} run return 0
 $data modify storage macroengine:engine rate_limit.rules.$(key) set value {limit:$(limit),window:$(window),hits:[]}

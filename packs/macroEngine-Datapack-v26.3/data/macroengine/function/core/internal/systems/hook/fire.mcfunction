@@ -3,6 +3,7 @@
 # @s = the triggering player
 # Copies hook_binds list and dispatches it.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:engine _hook_fire_event set value "$(event)"
 data modify storage macroengine:engine _hook_iter set from storage macroengine:engine hook_binds
 

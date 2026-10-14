@@ -1,4 +1,5 @@
 # macro: $(url)
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:editor/load_state
 function guikit:editor/ui/begin_widget
 data modify storage guikit:ed widget.kind set value "link"

@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute if score @s guikit.bsort matches 1 run data modify storage guikit:w lore append value {text:"Newest first",color:"gray",italic:false}
 execute unless score @s guikit.bsort matches 1 run data modify storage guikit:w lore append value {text:"Oldest first",color:"gray",italic:false}
 execute unless score @s guikit.bfilt matches 1..7 run data modify storage guikit:w lore append value {text:"All containers",color:"gray",italic:false}

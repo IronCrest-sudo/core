@@ -14,5 +14,6 @@ scoreboard players set #guikit.version vortaforge.gate 0
 execute if score #guikit.installed vortaforge.gate <= #guikit.expected vortaforge.gate run scoreboard players set #guikit.version vortaforge.gate 1
 execute if score #guikit.version vortaforge.gate matches 1 run scoreboard players operation #guikit.installed vortaforge.gate = #guikit.expected vortaforge.gate
 execute if score #guikit.version vortaforge.gate matches 0 if score #guikit.gate.1 vortaforge.gate matches 0 run scoreboard players set #guikit.version vortaforge.gate 1
+function guikit:gate/refresh
 execute if score #guikit.version vortaforge.gate matches 0 run tellraw @a {"text":"[guikit] This world was saved with a newer version of this datapack. guikit stays inactive (version gate).","color":"red"}
 execute if score #guikit.version vortaforge.gate matches 1 unless score #guikit.gate.2 vortaforge.gate matches 0 unless score #guikit.permit vortaforge.gate matches 1 run function guikit:gate/permit_prompt

@@ -16,6 +16,7 @@
 # before this runs, so a failing condition skips the whole group.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine _mcmd_current.commands[0] run return 0
 
 # newq  = the group's own items

@@ -3,6 +3,7 @@
 # Compute length via math/distance3d, then ×1000 / length
 # RULE: Lines without $(var) must NOT have a $ prefix.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 function macroengine:core/lib/input_push
 
 data modify storage macroengine:engine _math_d3d_tmp.x1 set value 0

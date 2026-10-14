@@ -1,4 +1,5 @@
 # guikit :: tick_player      as player with an open menu, at player
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players remove @s guikit.timer 1
 execute if score @s guikit.timer matches ..0 run return run function guikit:api/close
 

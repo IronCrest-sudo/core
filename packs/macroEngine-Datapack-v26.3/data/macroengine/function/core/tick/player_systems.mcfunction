@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute as @a[scores={macroengine_run=1..}] run function #macroengine:admin/run
 scoreboard players set @a[scores={macroengine_run=1..}] macroengine_run 0
 scoreboard players enable @a[scores={macroengine_run=-1..}] macroengine_run

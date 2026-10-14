@@ -10,4 +10,5 @@
 # CALL: function macroengine:input/give_anvil_custom {item:"minecraft:iron_ingot"}
 # ======================================================================================
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $give @s $(item)[minecraft:custom_data={macroengine:{input:1b,inputItem:"anvil"}},minecraft:item_name={"text":"Anvil Input"}] 1

@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if score $lg2_v macroengine.tmp matches ..1 run return 0
 
 scoreboard players add $lg2_r macroengine.tmp 1

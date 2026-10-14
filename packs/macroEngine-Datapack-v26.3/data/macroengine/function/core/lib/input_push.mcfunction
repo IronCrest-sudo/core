@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:engine _input_stack append value {}
 
 data modify storage macroengine:engine _input_stack[-1].player set from storage macroengine:input player

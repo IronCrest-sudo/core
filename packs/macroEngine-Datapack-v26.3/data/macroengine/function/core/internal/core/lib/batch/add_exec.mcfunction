@@ -3,6 +3,7 @@
 # func or cmd field existence is checked outside the macro,
 # then the relevant append_func / append_cmd is called — prevents undefined $(func/cmd).
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $execute unless data storage macroengine:engine batches.$(id) run return 0
 
 execute if data storage macroengine:input func run function macroengine:core/internal/core/lib/batch/add_func with storage macroengine:input

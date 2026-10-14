@@ -4,4 +4,5 @@
 # Each entry: {cmd, delay, x, y, z, ticks_left}
 # ticks_left is decremented each tick; fires when it hits 0.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $data modify storage macroengine:engine cb_queue append value {cmd:"$(cmd)",x:$(x),y:$(y),z:$(z),ticks_left:$(delay)}

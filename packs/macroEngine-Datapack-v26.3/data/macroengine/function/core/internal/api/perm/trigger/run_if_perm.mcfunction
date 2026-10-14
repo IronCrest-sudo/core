@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if entity @s[tag=macroengine.admin] run function macroengine:core/internal/api/perm/trigger/exec with storage macroengine:engine _ptd_current
 
 $execute unless entity @s[tag=macroengine.admin] if entity @s[tag=perm.$(perm)] run function macroengine:core/internal/api/perm/trigger/exec with storage macroengine:engine _ptd_current

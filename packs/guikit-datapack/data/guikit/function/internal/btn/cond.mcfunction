@@ -1,5 +1,6 @@
 # guikit :: internal/btn/cond     as player     reads storage guikit:btn cur.cond
 # Result: #cond guikit.tmp = 1 when the button has no condition or it passes, else 0.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #cond guikit.tmp 1
 execute unless data storage guikit:btn cur.cond run return 1
 function guikit:internal/clear/cond

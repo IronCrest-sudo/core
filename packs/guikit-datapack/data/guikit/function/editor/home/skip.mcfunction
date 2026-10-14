@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute unless score #skip guikit.tmp matches 1.. run return 0
 execute unless data storage guikit:work list[0] run return 0
 data remove storage guikit:work list[0]

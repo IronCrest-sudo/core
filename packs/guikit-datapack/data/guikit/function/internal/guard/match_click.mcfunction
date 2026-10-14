@@ -1,4 +1,5 @@
 # as interaction. Player who just clicked is tagged guikit.gclick.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #gmatch guikit.tmp 0
 execute if data entity @s interaction on target if entity @s[tag=guikit.gclick] run scoreboard players set #gmatch guikit.tmp 1
 execute if data entity @s attack on attacker if entity @s[tag=guikit.gclick] run scoreboard players set #gmatch guikit.tmp 1

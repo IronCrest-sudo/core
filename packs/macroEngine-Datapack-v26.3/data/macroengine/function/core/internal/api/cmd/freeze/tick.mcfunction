@@ -11,6 +11,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Fast exit — no frozen players, nothing to do
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless entity @a[tag=macroengine.frozen] run return 0
 
 # Iterate anchor stands and teleport their linked players back

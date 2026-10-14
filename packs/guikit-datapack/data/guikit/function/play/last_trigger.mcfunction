@@ -1,5 +1,6 @@
 # guikit :: play/last_trigger    as player  —  /trigger guikit.last
 # Reopens the most recent menu this player opened. Permission 0, like guikit.open.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set @s guikit.last 0
 scoreboard players enable @s guikit.last
 function guikit:runtime/ensure_pid

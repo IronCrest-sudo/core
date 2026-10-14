@@ -1,3 +1,4 @@
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{perm:0b} run return 0
 scoreboard players set $pc_pid macroengine.tmp 0
 $execute store result score $pc_pid macroengine.tmp run data get storage macroengine:engine player_pids.$(player)

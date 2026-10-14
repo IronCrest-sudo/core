@@ -1,6 +1,6 @@
 # guikit :: load
 function guikit:gate/version
-execute unless score #guikit.gate.1 vortaforge.gate matches 0 unless score #guikit.version vortaforge.gate matches 1 run return 0
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard objectives add guikit.timer dummy
 scoreboard objectives add guikit.tmax dummy
 scoreboard objectives add guikit.click dummy

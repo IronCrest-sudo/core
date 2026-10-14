@@ -13,6 +13,7 @@
 # than being read as 0.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:engine _mcmd_cond_tmp set from storage macroengine:engine _mcmd_cond_eval.score
 
 execute unless data storage macroengine:engine _mcmd_cond_tmp.target run data modify storage macroengine:engine _mcmd_cond_tmp.target set value "@s"

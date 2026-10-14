@@ -10,6 +10,7 @@
 # modulus over the range they actually need.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine rng.state run function macroengine:core/internal/systems/rng/_auto_seed
 
 execute store result score $rng_state macroengine.tmp run data get storage macroengine:engine rng.state

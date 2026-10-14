@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #paid guikit.tmp 1
 execute if data storage guikit:work w.cost_item run function guikit:play/act/pay
 execute if score #paid guikit.tmp matches 0 run scoreboard players set #acted guikit.tmp 0

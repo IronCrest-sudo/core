@@ -14,6 +14,7 @@
 # data get storage macroengine:output result
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:output found set value 0b
 
 $execute unless entity @a[name=$(player),limit=1] run return 0

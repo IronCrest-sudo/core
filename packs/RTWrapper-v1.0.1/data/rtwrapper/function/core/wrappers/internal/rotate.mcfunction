@@ -1,6 +1,7 @@
 # RTWrapper generated named-parameter dispatcher for /rotate.
 # Provide contiguous parameters in this order:
 # target, rotation_or_facing, facing_position, facing_entity, facing_anchor
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 scoreboard players set #pc rtw.status 0
 execute if data storage rtwrapper:runtime current.params.target run scoreboard players set #pc rtw.status 1
 execute if data storage rtwrapper:runtime current.params.rotation_or_facing run scoreboard players set #pc rtw.status 2

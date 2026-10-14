@@ -38,6 +38,7 @@
 # substitutes the input as a whole into a command line.
 # ======================================================================================
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data remove storage macroengine:input_validate result
 data modify storage macroengine:input_validate result.valid set value 0b
 

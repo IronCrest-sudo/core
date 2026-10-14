@@ -2,6 +2,7 @@
 # `data merge` keeps old keys, and `data remove storage X` needs a path, so the
 # scratch storage is cleared key by key. Call this BEFORE `data merge storage guikit:in {...}`
 # so keys from a previous widget call (wrap, min, max, delta, ...) can never leak.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 data remove storage guikit:in color
 data remove storage guikit:in count
 data remove storage guikit:in delta

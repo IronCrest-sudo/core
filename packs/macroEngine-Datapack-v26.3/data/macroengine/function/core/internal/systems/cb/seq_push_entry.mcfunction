@@ -3,6 +3,7 @@
 # Reads: _cb_seq_cmd (string), _cb_delay (score), _cb_seq.{x,y,z}
 
 # Build entry storage
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:engine _cb_seq_entry set from storage macroengine:engine _cb_seq
 data remove storage macroengine:engine _cb_seq_entry.cmds
 data remove storage macroengine:engine _cb_seq_entry.interval

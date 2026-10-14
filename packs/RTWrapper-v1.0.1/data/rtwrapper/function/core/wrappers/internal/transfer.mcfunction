@@ -1,6 +1,7 @@
 # RTWrapper generated named-parameter dispatcher for /transfer.
 # Provide contiguous parameters in this order:
 # hostname, port, players
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 scoreboard players set #pc rtw.status 0
 execute if data storage rtwrapper:runtime current.params.hostname run scoreboard players set #pc rtw.status 1
 execute if data storage rtwrapper:runtime current.params.port run scoreboard players set #pc rtw.status 2

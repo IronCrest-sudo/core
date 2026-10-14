@@ -1,4 +1,5 @@
 # guikit :: cond/comp_step     as player     one element per call, recurses until the list is done or the result is decided
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute unless score #ci guikit.tmp < #cn guikit.tmp run return 0
 execute store result storage guikit:cnd i int 1 run scoreboard players get #ci guikit.tmp
 function guikit:cond/comp_pick with storage guikit:cnd

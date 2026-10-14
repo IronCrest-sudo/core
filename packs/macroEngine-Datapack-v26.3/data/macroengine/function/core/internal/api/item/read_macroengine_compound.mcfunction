@@ -12,5 +12,6 @@
 # Expects: {player:"..."}
 # Produces: storage macroengine:_item_tmp macroengine
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:_item_tmp macroengine set value {}
 $execute as @a[name=$(player),limit=1] run data modify storage macroengine:_item_tmp macroengine set from entity @s SelectedItem.components."minecraft:custom_data".macroengine

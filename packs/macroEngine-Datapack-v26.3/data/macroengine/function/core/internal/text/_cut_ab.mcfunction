@@ -1,5 +1,6 @@
 # macroengine:core/internal/text/_cut_ab
 # win = substring [#tx_a, #tx_b) of storage macroengine:text s. An empty range yields "" directly.
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if score #tx_a macroengine.tmp = #tx_b macroengine.tmp run data modify storage macroengine:text win set value ""
 execute if score #tx_a macroengine.tmp = #tx_b macroengine.tmp run return 1
 execute store result storage macroengine:text arg.a int 1 run scoreboard players get #tx_a macroengine.tmp

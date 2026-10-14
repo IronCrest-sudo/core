@@ -17,6 +17,7 @@
 
 # Save expected UUID string to temporary field
 # (from_entity call overwrites macroengine:input value)
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{uuid:0b} run return 0
 data modify storage macroengine:uuid _match_target set from storage macroengine:input value
 

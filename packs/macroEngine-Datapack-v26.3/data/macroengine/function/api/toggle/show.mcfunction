@@ -18,6 +18,7 @@
 # fixed clickable menu — one Enable/Disable button pair per known module —
 # which is functionally equivalent since the module list is fixed anyway.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless entity @s[tag=macroengine.admin] run return 0
 
 tellraw @s ["",{"text":"═══════ ","color":"dark_gray"},{"text":"macroEngine — Module Toggles","color":"aqua","bold":true},{"text":" ═══════","color":"dark_gray"}]

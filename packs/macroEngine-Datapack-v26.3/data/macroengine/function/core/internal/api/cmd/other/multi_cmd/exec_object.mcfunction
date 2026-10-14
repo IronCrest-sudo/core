@@ -22,6 +22,7 @@
 # so no `return` semantics are involved anywhere in the decision.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine _mcmd_current.condition run function macroengine:core/internal/api/cmd/other/multi_cmd/check_condition
 
 # No condition attached -> always run.

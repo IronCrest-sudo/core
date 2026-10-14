@@ -1,4 +1,5 @@
 # guikit :: editor/home/fill     as player
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:editor/load_state
 scoreboard players set @s guikit.rfiv 20
 function guikit:widget/pad

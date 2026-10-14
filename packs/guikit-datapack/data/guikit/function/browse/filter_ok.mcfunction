@@ -1,4 +1,5 @@
 # #pass = 1 if guikit:work menu belongs in this player's filter. 0 and unset mean all.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #pass guikit.tmp 1
 execute unless score @s guikit.bfilt matches 1..7 run return 0
 scoreboard players set #pass guikit.tmp 0

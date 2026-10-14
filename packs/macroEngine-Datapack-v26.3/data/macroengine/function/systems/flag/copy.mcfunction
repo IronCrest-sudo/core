@@ -14,6 +14,7 @@
 # ─────────────────────────────────────────────────────────────────
 
 # Default: clear destination
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 data modify storage macroengine:output result set value 0b
 
 $execute if data storage macroengine:engine flags.$(from) run data modify storage macroengine:engine flags.$(to) set value 1b

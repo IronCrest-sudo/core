@@ -9,6 +9,7 @@
 #   $(b)    -> second operand score value (non-zero = true)
 #   $(func) -> function id to run via #macroengine:internal/dispatch if a || b
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{logic:0b} run return 0
 $scoreboard players set $if_or_a macroengine.tmp $(a)
 $scoreboard players set $if_or_b macroengine.tmp $(b)

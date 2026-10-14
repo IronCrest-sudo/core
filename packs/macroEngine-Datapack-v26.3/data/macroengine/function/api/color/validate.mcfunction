@@ -23,6 +23,7 @@
 # Note: hex validation only checks that the value starts with "#".
 # Full format validation (#RRGGBB) is not possible in mcfunction alone.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{color:0b} run return 0
 data modify storage macroengine:output result set value 0b
 $data modify storage macroengine:engine _color_validate_tmp set value {color:"$(color)"}

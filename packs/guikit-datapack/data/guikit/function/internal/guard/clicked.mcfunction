@@ -1,4 +1,5 @@
 # as player. Reward of guard_click (right click) and guard_attack (left click).
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 advancement revoke @s only guikit:guard_click
 advancement revoke @s only guikit:guard_attack
 tag @s add guikit.gclick

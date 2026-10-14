@@ -11,6 +11,7 @@
 #   -- or --
 #   data modify storage macroengine:input cmd set value "say A player jumped"
 #   function macroengine:systems/hook/on_jump
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{hook:0b} run return 0
 data modify storage macroengine:input event set value "jumped"
 function macroengine:systems/hook/bind

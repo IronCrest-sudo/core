@@ -1,6 +1,7 @@
 # RTWrapper generated named-parameter dispatcher for /damage.
 # Provide contiguous parameters in this order:
 # target, amount, damage_type, location_or_by, source, cause
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 scoreboard players set #pc rtw.status 0
 execute if data storage rtwrapper:runtime current.params.target run scoreboard players set #pc rtw.status 1
 execute if data storage rtwrapper:runtime current.params.amount run scoreboard players set #pc rtw.status 2

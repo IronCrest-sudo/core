@@ -3,5 +3,6 @@
 # lowercase. Result goes to macroengine:input _gamerule_norm. If the name contains a double
 # quote or a backslash it is left unset, so the macro calls that follow fail instead of
 # running with an unsafe value.
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 function macroengine:core/internal/api/gamerule/normalize_run
 function macroengine:core/internal/text/reset

@@ -3,6 +3,7 @@
 # INPUT (macro args): $(commands) — list of command strings/objects
 #
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{cmd:0b} run return 0
 $data modify storage macroengine:engine _mcmd_queue set value $(commands)
 data modify storage macroengine:engine _mcmd_options set value {error_mode:"continue",profile:0b,spread:0}

@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #len guikit.tmp 0
 execute store result score #len guikit.tmp run data get storage guikit:ed lore_in
 execute unless score #len guikit.tmp matches 1.. run return 0

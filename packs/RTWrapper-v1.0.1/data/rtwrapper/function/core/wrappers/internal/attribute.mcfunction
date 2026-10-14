@@ -1,6 +1,7 @@
 # RTWrapper generated named-parameter dispatcher for /attribute.
 # Provide contiguous parameters in this order:
 # target, attribute, action, value, modifier_id, modifier_value, modifier_operation
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 scoreboard players set #pc rtw.status 0
 execute if data storage rtwrapper:runtime current.params.target run scoreboard players set #pc rtw.status 1
 execute if data storage rtwrapper:runtime current.params.attribute run scoreboard players set #pc rtw.status 2

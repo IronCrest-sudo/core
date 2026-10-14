@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute if score @s guikit.bfilt matches 0 run tellraw @s [{"text":"[guikit] ","color":"gold"},{"text":"Filter: all. ","color":"white"},{"text":"/trigger guikit.filter set 2","color":"aqua","click_event":{"action":"suggest_command","command":"/trigger guikit.filter set 2"}}]
 execute if score @s guikit.bfilt matches 1 run tellraw @s [{"text":"[guikit] ","color":"gold"},{"text":"Filter: chest. ","color":"white"},{"text":"/trigger guikit.filter set 3","color":"aqua","click_event":{"action":"suggest_command","command":"/trigger guikit.filter set 3"}}]
 execute if score @s guikit.bfilt matches 2 run tellraw @s [{"text":"[guikit] ","color":"gold"},{"text":"Filter: hopper. ","color":"white"},{"text":"/trigger guikit.filter set 4","color":"aqua","click_event":{"action":"suggest_command","command":"/trigger guikit.filter set 4"}}]

@@ -3,6 +3,7 @@
 # dispatch accumulated events, let click detection run, zero the counters,
 # then hand over to user hooks.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 function macroengine:core/internal/player/player/remove_tags
 
 # First sight of this player: cache the UUID

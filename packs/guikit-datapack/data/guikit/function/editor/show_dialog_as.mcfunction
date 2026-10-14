@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 tag @s remove guikit.dialog
 function guikit:editor/load_state
 execute if data storage guikit:ed cur{dialog:"slot"} run dialog show @s guikit:slot

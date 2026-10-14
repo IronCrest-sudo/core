@@ -2,6 +2,7 @@
 # Iterates _rw_src list.
 # Copies entries whose id does not match _rw_unbind_id to _rw_new.
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute unless data storage macroengine:engine _rw_src[0] run return 0
 
 data modify storage macroengine:engine _rw_cur set from storage macroengine:engine _rw_src[0]

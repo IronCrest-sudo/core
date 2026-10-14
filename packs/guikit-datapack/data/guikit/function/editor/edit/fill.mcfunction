@@ -1,5 +1,6 @@
 # guikit :: editor/edit/fill     as player
 # No auto-refresh here: replacing the editor chest every second fights the click.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:editor/load_state
 scoreboard players set @s guikit.rfiv 0
 function guikit:editor/read_menu

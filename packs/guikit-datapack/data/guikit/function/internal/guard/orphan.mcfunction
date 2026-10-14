@@ -1,4 +1,5 @@
 # as guard. Kill it if no cart still carries this uid.
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #guid guikit.tmp 0
 scoreboard players operation #guid guikit.tmp = @s guikit.uid
 execute unless score #guid guikit.tmp matches 1.. run return run kill @s

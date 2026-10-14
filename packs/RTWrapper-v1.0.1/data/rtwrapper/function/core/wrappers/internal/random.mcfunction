@@ -1,6 +1,7 @@
 # RTWrapper generated named-parameter dispatcher for /random.
 # Provide contiguous parameters in this order:
 # action, range, sequence
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 scoreboard players set #pc rtw.status 0
 execute if data storage rtwrapper:runtime current.params.action run scoreboard players set #pc rtw.status 1
 execute if data storage rtwrapper:runtime current.params.range run scoreboard players set #pc rtw.status 2

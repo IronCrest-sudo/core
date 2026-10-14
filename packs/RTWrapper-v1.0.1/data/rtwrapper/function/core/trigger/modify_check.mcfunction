@@ -1,5 +1,6 @@
 # Macro: called with storage rtwrapper:api trigger (fields: objective, optional action,
 # optional reset_mode). Fails (no-op) if the objective is not registered.
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 $execute unless data storage rtwrapper:triggers registry[{objective:"$(objective)"}] run return fail
 
 execute if data storage rtwrapper:api trigger.action run function rtwrapper:core/trigger/modify_action with storage rtwrapper:api trigger

@@ -1,4 +1,5 @@
 # append one container line from guikit:work menu.container
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute if data storage guikit:work menu{container:"chest_minecart"} run data modify storage guikit:w lore append value {text:"Chest",color:"dark_gray",italic:false}
 execute if data storage guikit:work menu{container:"hopper_minecart"} run data modify storage guikit:w lore append value {text:"Hopper",color:"dark_gray",italic:false}
 execute if data storage guikit:work menu{container:"barrel"} run data modify storage guikit:w lore append value {text:"Barrel",color:"dark_gray",italic:false}

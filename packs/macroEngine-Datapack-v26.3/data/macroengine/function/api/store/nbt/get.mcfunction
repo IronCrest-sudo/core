@@ -4,6 +4,7 @@
 # RETURN 1 when the path exists (result set), 0 otherwise (result removed).
 #
 # Usage:  function macroengine:api/store/nbt/get {storage:"mypack:data",path:"motd"}
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{store:0b} run return 0
 data remove storage macroengine:store nbt.result
 $execute unless data storage $(storage) $(path) run return 0

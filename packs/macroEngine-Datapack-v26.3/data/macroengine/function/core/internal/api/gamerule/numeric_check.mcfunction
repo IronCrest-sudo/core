@@ -7,5 +7,6 @@
 #   $(gr_matches)   — scoreboard range string, e.g. "5..10" or "1.."
 #   $(gr_on_value)  — function to call if score is in range
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $scoreboard players set #macroengine_gamerule_scratch macroengine.gamerule $(value)
 $execute if score #macroengine_gamerule_scratch macroengine.gamerule matches $(gr_matches) run function $(gr_on_value)

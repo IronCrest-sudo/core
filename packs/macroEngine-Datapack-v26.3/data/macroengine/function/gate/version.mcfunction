@@ -14,5 +14,6 @@ scoreboard players set #macroengine.version vortaforge.gate 0
 execute if score #macroengine.installed vortaforge.gate <= #macroengine.expected vortaforge.gate run scoreboard players set #macroengine.version vortaforge.gate 1
 execute if score #macroengine.version vortaforge.gate matches 1 run scoreboard players operation #macroengine.installed vortaforge.gate = #macroengine.expected vortaforge.gate
 execute if score #macroengine.version vortaforge.gate matches 0 if score #macroengine.gate.1 vortaforge.gate matches 0 run scoreboard players set #macroengine.version vortaforge.gate 1
+function macroengine:gate/refresh
 execute if score #macroengine.version vortaforge.gate matches 0 run tellraw @a {"text":"[macroengine] This world was saved with a newer version of this datapack. macroengine stays inactive (version gate).","color":"red"}
 execute if score #macroengine.version vortaforge.gate matches 1 unless score #macroengine.gate.2 vortaforge.gate matches 0 unless score #macroengine.permit vortaforge.gate matches 1 run function macroengine:gate/permit_prompt

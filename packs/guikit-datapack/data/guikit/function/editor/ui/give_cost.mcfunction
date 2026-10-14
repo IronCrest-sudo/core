@@ -1,4 +1,5 @@
 # macro: $(cost)     only the tokens the give dialog offers
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 $data modify storage guikit:ed cost set value "$(cost)"
 execute if data storage guikit:ed {cost:"none"} run data remove storage guikit:ed cost
 execute if data storage guikit:ed {cost:"none"} run return 0

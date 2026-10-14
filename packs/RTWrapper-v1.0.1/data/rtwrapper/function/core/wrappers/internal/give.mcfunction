@@ -1,6 +1,7 @@
 # RTWrapper generated named-parameter dispatcher for /give.
 # Provide contiguous parameters in this order:
 # target, item, count
+execute unless score #rtwrapper.open vortaforge.gate matches 1 run return 0
 scoreboard players set #pc rtw.status 0
 execute if data storage rtwrapper:runtime current.params.target run scoreboard players set #pc rtw.status 1
 execute if data storage rtwrapper:runtime current.params.item run scoreboard players set #pc rtw.status 2

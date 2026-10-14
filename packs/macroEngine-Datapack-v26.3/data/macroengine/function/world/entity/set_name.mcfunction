@@ -22,4 +22,5 @@
 #       versions without version-specific syntax differences.
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 $execute as @e[tag=$(tag)] run data modify entity @s CustomName set from storage macroengine:input name

@@ -1,4 +1,5 @@
 # guikit :: editor/open_home     as player, at player
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 function guikit:editor/save_state
 data remove storage guikit:ed pending
 data modify storage guikit:ed pending set value {mode:"home",menu:"-",alias:"editor"}

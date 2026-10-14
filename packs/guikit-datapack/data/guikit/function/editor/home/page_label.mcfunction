@@ -1,3 +1,4 @@
+execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 scoreboard players set #show guikit.tmp 1
 execute store result score #lp guikit.tmp run data get storage guikit:ed cur.list_page
 scoreboard players operation #show guikit.tmp += #lp guikit.tmp

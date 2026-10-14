@@ -21,5 +21,6 @@
 # Usage:  function macroengine:systems/text/show {storage:"macroengine:engine",path:"flags"}
 # ─────────────────────────────────────────────────────────────────
 
+execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if data storage macroengine:engine modules{text:0b} run return 0
 $tellraw @s [{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"storage":"$(storage)","nbt":"$(path)","plain":true,"interpret":false,"color":"white"}]

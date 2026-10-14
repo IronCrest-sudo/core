@@ -268,3 +268,20 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 - **Limits:** `/trigger` is not authenticated; on a server with untrusted players any player can approve. Datapack gates are removable plain text; real enforcement belongs in a Fabric mod. Gate 3 (per-player consent) and Gate 4 (age declaration, a self-declaration, not verification) are not part of this PR.
 - **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`.
 - **Not verified:** nothing was run in a Minecraft server. `click_event` text, `/trigger` flow, load order and `return 0` behavior are untested in game.
+
+## Datapacks: gate line in every function of the complex packs
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/{guikit-datapack,macroEngine-Datapack-v26.3,RTWrapper-v1.0.1}/data/*/function/**` (2166 files) | First executable line: `execute unless score #<ns>.open vortaforge.gate matches 1 run return 0`. The separate version and permission return lines are folded into this one line. |
+| `.../gate/refresh` | New. Recomputes `#<ns>.open` (1 only when every enabled gate passes); called from `version`, approve/revoke/grant and the `set/*` toggles. |
+| `.../gate/rerun_load`, `permit_grant`, `approve` | Load entries are blocked while the pack is not approved, so approval schedules a re-run of them one tick later. |
+| `.../gate/status` | Also prints `open`. |
+
+- **Not gated:** `gate/*` itself, `_vc_origin.mcfunction` (watermarks stay comment-only), comment-only files, resource packs, simple packs, legacy packs, `archived/`.
+- **Behavior to know:** a closed gate makes a function return 0, so `execute if function ...` callers (for example `macroengine:api/store/render`) see a failure. Cost: one score check per function call.
+- **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`. The Gradle build was not run.
+- **Not verified:** nothing was run in a Minecraft server. The re-run of the load entries after approval is untested in game (double initialization is possible for load code that is not idempotent).
+

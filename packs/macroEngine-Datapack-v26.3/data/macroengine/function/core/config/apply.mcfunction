@@ -22,6 +22,8 @@ data modify storage macroengine:engine modules.interaction set from storage macr
 data modify storage macroengine:engine modules.item set from storage macroengine:engine config.module_item
 data modify storage macroengine:engine modules.macro set from storage macroengine:engine config.module_macro
 data modify storage macroengine:engine modules.perm set from storage macroengine:engine config.module_perm
+data modify storage macroengine:engine modules.block set from storage macroengine:engine config.module_block
+data modify storage macroengine:engine modules.container set from storage macroengine:engine config.module_container
 data modify storage macroengine:engine modules.store set from storage macroengine:engine config.module_store
 data modify storage macroengine:engine modules.title set from storage macroengine:engine config.module_title
 data modify storage macroengine:engine modules.trigger set from storage macroengine:engine config.module_trigger

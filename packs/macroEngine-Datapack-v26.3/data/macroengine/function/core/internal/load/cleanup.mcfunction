@@ -55,6 +55,8 @@ data remove storage macroengine:engine cb_queue
 data remove storage macroengine:engine modules.geo
 data remove storage macroengine:engine modules.wand
 data remove storage macroengine:engine modules.perm
+data remove storage macroengine:engine modules.block
+data remove storage macroengine:engine modules.container
 data remove storage macroengine:engine modules.interaction
 data remove storage macroengine:engine modules.hook
 

@@ -26,7 +26,7 @@ execute unless data storage macroengine:engine config run data modify storage ma
 
 # Schema: type and range of every key (used by core/config/set)
 data modify storage macroengine:engine config_schema set value {}
-data modify storage macroengine:engine config_schema merge value {module_cb:{t:"bool"},module_cmd:{t:"bool"},module_color:{t:"bool"},module_gamerule:{t:"bool"},module_interaction:{t:"bool"},module_item:{t:"bool"},module_macro:{t:"bool"},module_perm:{t:"bool"}}
+data modify storage macroengine:engine config_schema merge value {module_cb:{t:"bool"},module_cmd:{t:"bool"},module_color:{t:"bool"},module_gamerule:{t:"bool"},module_interaction:{t:"bool"},module_item:{t:"bool"},module_macro:{t:"bool"},module_perm:{t:"bool"},module_block:{t:"bool"},module_container:{t:"bool"}}
 data modify storage macroengine:engine config_schema merge value {module_store:{t:"bool"},module_title:{t:"bool"},module_trigger:{t:"bool"},module_wand:{t:"bool"},module_audit:{t:"bool"},module_geo:{t:"bool"},module_hook:{t:"bool"},module_log:{t:"bool"}}
 data modify storage macroengine:engine config_schema merge value {module_logic:{t:"bool"},module_math:{t:"bool"},module_rate_limit:{t:"bool"},module_rng:{t:"bool"},module_sound:{t:"bool"},module_string:{t:"bool"},module_text:{t:"bool"},module_uuid:{t:"bool"}}
 data modify storage macroengine:engine config_schema merge value {sys_time:{t:"bool"},sys_player:{t:"bool"},sys_queue:{t:"bool"},sys_hud:{t:"bool"},sys_admin:{t:"bool"},tick_rate:{t:"int",min:1,max:1200},hud_rate:{t:"int",min:1,max:1200},admin_rate:{t:"int",min:1,max:1200}}
@@ -57,6 +57,8 @@ execute unless data storage macroengine:engine config.module_interaction run dat
 execute unless data storage macroengine:engine config.module_item run data modify storage macroengine:engine config.module_item set value 1b
 execute unless data storage macroengine:engine config.module_macro run data modify storage macroengine:engine config.module_macro set value 1b
 execute unless data storage macroengine:engine config.module_perm run data modify storage macroengine:engine config.module_perm set value 1b
+execute unless data storage macroengine:engine config.module_block run data modify storage macroengine:engine config.module_block set value 1b
+execute unless data storage macroengine:engine config.module_container run data modify storage macroengine:engine config.module_container set value 1b
 execute unless data storage macroengine:engine config.module_store run data modify storage macroengine:engine config.module_store set value 1b
 execute unless data storage macroengine:engine config.module_title run data modify storage macroengine:engine config.module_title set value 1b
 execute unless data storage macroengine:engine config.module_trigger run data modify storage macroengine:engine config.module_trigger set value 1b

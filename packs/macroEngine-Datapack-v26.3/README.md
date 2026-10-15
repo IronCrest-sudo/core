@@ -18,10 +18,10 @@
 
 ![macroEngine layers](docs/media/architecture.svg)
 
-- **API layer** (`api/`) — stable public entry points: `cmd`, `cb` (callback queue), `color`, `gamerule`, `interaction`, `item`, `macro`, `perm`, `store`, `title`, `toggle`, `trigger`, `wand`
+- **API layer** (`api/`) — stable public entry points: `cmd`, `cb` (callback queue), `color`, `gamerule`, `interaction`, `item`, `macro`, `perm`, `store`, `title`, `toggle`, `trigger`, `wand`, plus `block` (custom block entity interface) and `container` (slot and inventory helpers)
 - **Systems layer** (`systems/`) — internal utility modules: `math`, `string`, `nbt`, `logic`, `geo`, `flag`, `hook`, `log`, `rate_limit`, `sound`, `uuid`, `color`
 - **Input system** (`input/`) — capture player-provided values via writable book, sign, lectern, name tag, or command block minecart, with shared validation (`input/validate`) for int/float/bool/tag-safe strings
-- **Toggle system** — per-module runtime enable/disable for `cb`, `perm`, `geo`, `wand`, `interaction`, and `hook` modules
+- **Toggle system** — per-module runtime enable/disable for `cb`, `perm`, `geo`, `wand`, `interaction`, `hook`, `block`, and `container` modules (`block` and `container` are the two load gates of the new API: `function macroengine:api/toggle/<module>/false` closes one)
 - **Rate limiting** — global, per-player, and per-channel request throttling
 - **Hook system** — bind functions to fire on events such as block break, dimension change, and advancement grant
 - **Item modifiers** (`item_modifier/`) — reusable `item_modifier` definitions for enchanting, glint, lore, tooltip, and rename operations

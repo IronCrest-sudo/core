@@ -8,7 +8,7 @@
 #   /function macroengine:api/toggle/<Module>/<State>
 #   where <State> is "true" (enable) or "false" (disable).
 #
-# Supported modules: hook, interaction, perm, wand, geo, cb
+# Supported modules: hook, interaction, perm, wand, geo, cb, block, container
 #
 # BACKPORT NOTE (1.21.2): the original (26.x) opened this as a native
 # `dialog show` screen with a free-text "Module Name" field and a boolean
@@ -29,3 +29,5 @@ tellraw @s ["",{"text":"perm       ","color":"white"},{"text":"[ON] ","color":"g
 tellraw @s ["",{"text":"wand       ","color":"white"},{"text":"[ON] ","color":"green","bold":true,"click_event":{"action":"run_command","command":"/function macroengine:api/toggle/wand/true"}},{"text":"[OFF]","color":"red","bold":true,"click_event":{"action":"run_command","command":"/function macroengine:api/toggle/wand/false"}}]
 tellraw @s ["",{"text":"geo        ","color":"white"},{"text":"[ON] ","color":"green","bold":true,"click_event":{"action":"run_command","command":"/function macroengine:api/toggle/geo/true"}},{"text":"[OFF]","color":"red","bold":true,"click_event":{"action":"run_command","command":"/function macroengine:api/toggle/geo/false"}}]
 tellraw @s ["",{"text":"cb         ","color":"white"},{"text":"[ON] ","color":"green","bold":true,"click_event":{"action":"run_command","command":"/function macroengine:api/toggle/cb/true"}},{"text":"[OFF]","color":"red","bold":true,"click_event":{"action":"run_command","command":"/function macroengine:api/toggle/cb/false"}}]
+tellraw @s ["",{"text":"block      ","color":"white"},{"text":"[ON] ","color":"green","bold":true,"click_event":{"action":"run_command","command":"/function macroengine:api/toggle/block/true"}},{"text":"[OFF]","color":"red","bold":true,"click_event":{"action":"run_command","command":"/function macroengine:api/toggle/block/false"}}]
+tellraw @s ["",{"text":"container  ","color":"white"},{"text":"[ON] ","color":"green","bold":true,"click_event":{"action":"run_command","command":"/function macroengine:api/toggle/container/true"}},{"text":"[OFF]","color":"red","bold":true,"click_event":{"action":"run_command","command":"/function macroengine:api/toggle/container/false"}}]

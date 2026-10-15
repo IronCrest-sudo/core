@@ -3,6 +3,23 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-15 - feat: macroEngine load gates 4 and 5, two item tags, four block tags
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+### Changed (AI-assisted edit)
+
+| Path (under `packs/macroEngine-Datapack-v26.3/data/macroengine/`) | Change |
+|---|---|
+| `function/gate/load_guard`, `load_begin`, `load_end`, `loads_decay`, `clear_incomplete`, `clear_tripped`, `set/4_on`, `4_off`, `5_on`, `5_off` | New. Gate 4 (incomplete-load gate) and gate 5 (reload-loop gate), both default on. |
+| `function/gate/version`, `refresh`, `status`, `function/setup` | Initialise gates 4/5, call `gate/load_guard`, close `#macroengine.open` for both gates, print their state, bracket the load with `load_begin` / `load_end`. |
+| `tags/item/books`, `tags/item/buckets` | New item tags. |
+| `tags/block/command_blocks`, `chests`, `containers`, `workstations` | New block tags (first block tags in this pack). Not added to `tags/item/all.json`. |
+
+- **Verified:** Mecha 0.101.0 on the pack (without the two files the lint script already ignores) reports no errors; every new JSON file parses.
+- **Not verified:** nothing was run in a Minecraft server (repository rule). Block and item IDs were written from knowledge of vanilla, not checked against a 26.3 registry dump. Gate 4 only detects a setup that did not reach its last line; it does not see a failing command inside a finished setup. The 6-loads-in-1200-ticks threshold for gate 5 is a guess, not measured.
+
 ## 2026-10-12 - docs: fix stale function paths in macroEngine usage comments
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update

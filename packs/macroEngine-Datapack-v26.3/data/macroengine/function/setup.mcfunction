@@ -7,6 +7,7 @@
 function macroengine:gate/version
 execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if entity @s[type=minecraft:player] unless entity @s[tag=macroengine.consented] unless score #macroengine.gate.3 vortaforge.gate matches 0 run return 0
+function macroengine:gate/load_begin
 function macroengine:core/internal/text/load
 
 # Step 2: Player Enumeration
@@ -22,4 +23,5 @@ function macroengine:core/internal/player/init
 function macroengine:core/internal/load/main
 
 # Completion
+function macroengine:gate/load_end
 execute unless entity @a run say [MacroEngine] loaded

@@ -9,6 +9,9 @@
 #   y       (int)     — CB block Y            [default: -64]
 #   z       (int)     — CB block Z            [default: 0]
 #
+# OUTPUT (storage macroengine:output):
+#   cb_id   (int)  — id of the queued entry, usable with api/cb/cancel_id
+#
 # No permission gate — caller is trusted as-is.
 #
 # EXAMPLE:
@@ -29,5 +32,5 @@ execute unless data storage macroengine:input cb.delay run return 0
 function macroengine:core/internal/api/cb/apply_defaults
 
 # Push to delay queue and schedule flush
-function macroengine:core/internal/systems/cb/queue_push with storage macroengine:input cb
+function macroengine:core/internal/systems/cb/queue_push
 data remove storage macroengine:input cb

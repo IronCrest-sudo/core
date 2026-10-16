@@ -10,6 +10,10 @@
 #   y         (int)             — CB block Y  [default: -64]
 #   z         (int)             — CB block Z  [default: 0]
 #
+# OUTPUT (storage macroengine:output):
+#   cb_id   (int)  — one id shared by every step; api/cb/cancel_id cancels the
+#                     steps that have not fired yet
+#
 # No permission gate — caller is trusted as-is.
 #
 # EXAMPLE:

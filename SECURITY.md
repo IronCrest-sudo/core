@@ -1,14 +1,5 @@
 # Security Policy
 
-## Status: maintenance paused
-
-As of 2026-10-04 the maintainer expects to be inactive on GitHub until at least 2027–2028. Until then:
-
-- Security reports (private advisories and issues) may not be read or answered, and no fixes, advisories or releases should be expected. This **overrides** the response targets further down.
-- No version of anything in this repository is supported. Treat all of it as unpatched.
-- You may still report a problem privately; it will be handled if and when maintenance resumes. If it matters to you now, fork the project (Unlicense) and patch your copy.
-- Everything under `archived/` stays reference-only: do not deploy it on a live server without review.
-
 ## Reporting a vulnerability
 
 If you find a security issue in any project under this repository (Fabric
@@ -40,7 +31,7 @@ This repo consolidates multiple projects with different security postures:
 
 | Area | Status |
 |---|---|
-| `mods/` | Fabric mods. Maintenance paused (see Status above). Compiled, type-safe. |
+| `mods/` | Fabric mods. Compiled, type-safe. |
 | `packs/` | 14 live packs (datapacks + the macroEngine resource pack), all under active layout. **Not** archived: `archived/` currently holds no packs at all (see `archived/archive.json`, whose only entry is the retired `runtoolkit/suite` repo with `"path": null`). |
 | `scripts/` | Helper tooling. Treat as lower trust; review before running. |
 | `examples/` | Templates and sample code. Not intended for production use. |

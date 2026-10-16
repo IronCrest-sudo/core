@@ -102,10 +102,6 @@ No. The pack is released under the **Unlicense** (public domain): free, includin
 
 - This is not legal advice.
 
-### Is it still maintained?
-
-Not currently. The maintainer is stepping away and plans to return in 2027-2028, at which point changes will come as a pull request. Until then do not expect fixes; fork it and patch it yourself if you need changes.
-
 ### How is the performance?
 
 Not measured. From the code: while players are online, the `time`, `player` and `queue` systems run **every tick**, `hud` every 2 ticks and `admin` every 4 ticks. `player_systems` also runs NBT-filtered `execute as @e` / `kill @e` scans over all `item` entities every tick, so cost grows with the number of dropped items. Systems you do not use can be turned off with `systems/flag/toggle_system`.
@@ -122,7 +118,6 @@ The diagrams above are generated from the source code. Real in-game captures (in
 
 ## Known Issues
 
-- **Unmaintained until 2027-2028.** No security or compatibility patches will follow before then.
 - **Single target.** Minecraft Java 26.3 (data pack format `121.0`). Other versions are not tested and may not load.
 - **Forceload side effects.** On load the pack runs `forceload add 0 0` and `forceload add -30000000 1600`. Cleanup only runs `forceload remove 0 0`, which also removes a `0 0` forceload the server owner added themselves, and `-30000000 1600` is **never removed** (if it lies outside the world border, the command may fail silently).
 - **Command-executing APIs do not check who is calling.** See "Is it safe?".

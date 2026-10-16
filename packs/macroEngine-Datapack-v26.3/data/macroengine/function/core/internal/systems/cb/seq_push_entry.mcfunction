@@ -11,6 +11,7 @@ data remove storage macroengine:engine _cb_seq_entry.interval
 data modify storage macroengine:engine _cb_seq_entry.cmd set from storage macroengine:engine _cb_seq_cmd
 execute store result storage macroengine:engine _cb_seq_entry.ticks_left int 1 run scoreboard players get #cb_delay macroengine.tmp
 
+execute store result storage macroengine:engine _cb_seq_entry.id int 1 run scoreboard players get #cb_next_id macroengine.tmp
 data modify storage macroengine:engine cb_queue append from storage macroengine:engine _cb_seq_entry
 data remove storage macroengine:engine _cb_seq_entry
 data remove storage macroengine:engine _cb_seq_cmd

@@ -39,7 +39,7 @@
 ## Requirements
 
 - Minecraft Java Edition **26.3**
-- Datapack `min_format`/`max_format`: **122**
+- Datapack `min_format`/`max_format`: **121**
 
 ---
 

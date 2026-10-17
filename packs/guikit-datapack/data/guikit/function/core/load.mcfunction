@@ -1,3 +1,4 @@
+# [TEMPORARILY ARCHIVED] This pack is paused for maintenance. See README.md for status.
 # guikit :: load
 function guikit:gate/version
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0

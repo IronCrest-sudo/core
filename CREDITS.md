@@ -317,3 +317,22 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 - **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0), `scripts/origin_watermarks.py --check`. The Gradle build was not run.
 - **Not verified:** nothing was run in a Minecraft server. The `as @a[tag=!...]` loop and the prompt flow are untested in game.
 
+## Temporary archive notice (maintenance paused)
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `README.md` | New "Project status (maintenance paused)" section listing the packs below. |
+| `packs/guikit-demo/README.md` | New file: archive notice; notes this pack has no `minecraft:load` of its own and hooks into `guikit-datapack`'s tags instead. |
+| `packs/macroEngine-Datapack-v26.3/.../function/setup.mcfunction` | One-line `# [TEMPORARILY ARCHIVED] ...` comment prepended (`macroengine:setup`, the pack's `minecraft:load` target). |
+| `packs/guikit-datapack/.../function/core/load.mcfunction` | Same comment prepended (`guikit:core/load`). |
+| `packs/RTWrapper/datapack/RTWrapper-Datapack/.../function/core/load.mcfunction` | Same comment prepended (`rtwrapper:core/load`). |
+| `packs/RTWrapper-1.21.1/.../function/core/load.mcfunction` | Same comment prepended (`rtwrapper:core/load`). |
+| `packs/RTWrapper-v1.0.1/.../function/core/load.mcfunction` | Same comment prepended (`rtwrapper:core/load`). |
+
+- **Scope:** comment-only edits to existing load/setup functions plus README additions. No logic, scoring, or gating behavior was changed.
+- **Not covered:** `RTWrapper-1.21.1`'s separate `vortacraftmc:core/load` function was left untouched (out of the requested scope).
+- **Verified:** nothing run; these are comment/doc-only changes.
+- **Not verified:** nothing was run in a Minecraft server (not applicable — no executable logic changed).
+

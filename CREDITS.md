@@ -3,6 +3,25 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-18 - fix/ci/test: restore macroEngine watermark, pin remaining actions, add repository tests
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+### Changed (AI-assisted edit)
+
+| Path | Change |
+|---|---|
+| `packs/macroEngine-Datapack-v26.3/data/macroengine/function/_vc_origin.mcfunction` | Restored with `scripts/origin_watermarks.py --write`. Commit `5f2a74b` had deleted it, so `--check` (the first CI step) failed on `main`. Only this one file was written. |
+| `.github/workflows/ai-agent.yml`, `codeql.yml` | `actions/checkout`, `actions/setup-node` and `github/codeql-action/{init,analyze}` pinned by commit SHA (were floating tags), as `CLAUDE.md` requires. SHAs resolved with `git ls-remote` against the upstream repositories. |
+| `scripts/tests/test_repo_invariants.py` | New. Offline regression tests: real tree passes the watermark check; missing/hand-edited watermarks are rejected (on a temporary copy); every workflow `uses:` is SHA-pinned. |
+| `.github/workflows/build.yml` | New required step "Repository tests" (guigenmc pytest suite, `scripts/tests`, `scripts/check_archive.py`), wired into the release gate, diagnostics and the final summary. These tests existed but CI never ran them. |
+| `scripts/lint_datapacks.sh` | Excluded paths are now found with `-prune`, each one is reported once with its `.mcfunction` count, and the summary prints the total number of files excluded from validation. Exit-status behaviour is unchanged. |
+
+- **Verified (run in a sandbox, not in CI):** `origin_watermarks.py --check` (fails before the restore, passes after); `pytest` 69 passed (65 guigenmc + 4 new); the SHA-pin test fails when one action is unpinned again; `scripts/lint_datapacks.sh` with Mecha 0.101.0 exits 0, and exits 1 with a deliberately malformed function (removed afterwards); `check_archive.py`; JSON/YAML parse of every tracked file; `py_compile`, `bash -n` and `node --check` on all scripts.
+- **Not verified:** `./gradlew buildAll`, `build` and `lint` were not run (sandbox has JDK 21, the repo needs JDK 25, and Gradle/Loom downloads are outside the allowed network). The new CI step has not run on GitHub Actions. Nothing was run in a Minecraft server (repository rule).
+- **`mcward==1.4.0` is not integrated:** its CLI (`test`, `bench`, `install`, `start`) downloads and starts a Minecraft server, and it needs Python >= 3.14 (CI uses 3.9 / 3.12). That conflicts with the "no server" rule, so it was only read statically and never executed. Needs a maintainer decision.
+
 ## 2026-10-18 - feat: macroEngine `cb/run_repeating`, `cb/time_left`, `container/info`
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update

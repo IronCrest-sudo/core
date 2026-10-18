@@ -3,6 +3,23 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-18 - feat: macroEngine `cb/run_repeating`, `cb/time_left`, `container/info`
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+### Changed (AI-assisted edit)
+
+| Path (under `packs/macroEngine-Datapack-v26.3/`) | Change |
+|---|---|
+| `data/macroengine/function/api/cb/run_repeating`, `core/internal/api/cb/repeat_build` | New. Repeats one command 1..100 times at a fixed interval by building a `cmds` list and reusing `systems/cb/seq_expand`. |
+| `data/macroengine/function/api/cb/time_left`, `core/internal/systems/cb/time_left_step` | New. Read-only: ticks until the next pending entry of a `cb_id`, plus the pending count. |
+| `data/macroengine/function/api/container/info` | New. Size, used, free, empty, full and first free slot in one call; reuses the existing `_addr`, `_count`, `_size_pick` and `_ff_loop` internals. |
+| `docs/cb.md`, `docs/container.md` | Document the new functions; `container.md` is new and also lists the existing container functions. |
+
+- **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0) passes with the new files. `scripts/origin_watermarks.py --check` still reports the missing macroEngine watermark; that was already the case before this change and is untouched.
+- **Not verified:** nothing was run in a Minecraft server (repository rule). The `first_free` scan and the `time_left` counters were checked by reading the code paths they reuse, not by executing them. `cb_time_left` for an entry pushed back by the fire spacing reports its current counter, not its real fire tick.
+
 ## 2026-10-15 - feat: macroEngine load gates 4 and 5, two item tags, four block tags
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update

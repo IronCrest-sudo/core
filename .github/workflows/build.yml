@@ -284,7 +284,8 @@ jobs:
       # GROUP 3b - offline repository checks (no Minecraft server involved)
       #
       # Runs the guigenmc unit tests, the repository invariant tests
-      # (watermarks, SHA-pinned actions) and the archive registry check.
+      # (watermarks, SHA-pinned actions), the dpgen tests and the archive
+      # registry check.
       # These tests existed but were never run by CI.
       # ==================================================================
       - name: Repository tests
@@ -302,6 +303,7 @@ jobs:
           pip install -q pytest -e ./scripts/gui_generator || ok=0
           python -m pytest -q scripts/gui_generator/tests scripts/tests || ok=0
           python scripts/check_archive.py || ok=0
+          ( cd scripts/dpgen && npm ci --ignore-scripts --no-audit --no-fund && npm test ) || ok=0
 
           if [ "$ok" = 1 ]; then
             printf '%s✔ Repository tests passed%s\n' "$GREEN" "$RESET"

@@ -281,6 +281,37 @@ jobs:
           retention-days: 3
 
       # ==================================================================
+      # GROUP 3b - offline repository checks (no Minecraft server involved)
+      #
+      # Runs the guigenmc unit tests, the repository invariant tests
+      # (watermarks, SHA-pinned actions) and the archive registry check.
+      # These tests existed but were never run by CI.
+      # ==================================================================
+      - name: Repository tests
+        id: repo-tests
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -uo pipefail
+          GREEN=$'\033[1;32m'; RED=$'\033[1;31m'; RESET=$'\033[0m'
+
+          echo "::group::🧪 Repository tests"
+          trap 'echo "::endgroup::"' EXIT
+
+          ok=1
+          pip install -q pytest -e ./scripts/gui_generator || ok=0
+          python -m pytest -q scripts/gui_generator/tests scripts/tests || ok=0
+          python scripts/check_archive.py || ok=0
+
+          if [ "$ok" = 1 ]; then
+            printf '%s✔ Repository tests passed%s\n' "$GREEN" "$RESET"
+          else
+            printf '%s✘ Repository tests failed%s\n' "$RED" "$RESET"
+            echo "::error title=Repository tests::pytest or check_archive.py failed"
+            exit 1
+          fi
+
+      # ==================================================================
       # GROUP 4 - Gradle build
       # ==================================================================
       - name: Build all subprojects
@@ -436,7 +467,9 @@ jobs:
           build_result="${{ steps.build.outcome }}"
           gradle_lint_result="${{ steps.gradle-lint.outcome }}"
           datapack_lint_result="${{ steps.datapack-lint.outcome }}"
+          repo_tests_result="${{ steps.repo-tests.outcome }}"
 
+          printf '%sRepo tests:%s %s\n'      "$YELLOW" "$RESET" "$repo_tests_result"
           printf '%sguigenmc 3.9:%s %s\n'    "$YELLOW" "$RESET" "$g39"
           printf '%sguigenmc 3.12:%s %s\n'   "$YELLOW" "$RESET" "$g312"
           printf '%sguigenmc package:%s %s\n' "$YELLOW" "$RESET" "$gpkg"
@@ -448,6 +481,7 @@ jobs:
           if [ "$g39" = "success" ] &&
              [ "$g312" = "success" ] &&
              [ "$gpkg" = "success" ] &&
+             [ "$repo_tests_result" = "success" ] &&
              [ "$build_result" = "success" ] &&
              [ "$gradle_lint_result" = "success" ] &&
              [ "$datapack_lint_result" = "success" ]; then
@@ -560,6 +594,7 @@ jobs:
           CYAN=$'\033[1;36m'; RESET=$'\033[0m'
 
           grp "🔎 Diagnostics :: step outcomes"
+          printf '%sRepo tests:%s %s\n'       "$CYAN" "$RESET" "${{ steps.repo-tests.outcome }}"
           printf '%sguigenmc 3.9:%s %s\n'     "$CYAN" "$RESET" "${{ steps.guigenmc-39.outcome }}"
           printf '%sguigenmc 3.12:%s %s\n'    "$CYAN" "$RESET" "${{ steps.guigenmc-312.outcome }}"
           printf '%sguigenmc package:%s %s\n' "$CYAN" "$RESET" "${{ steps.guigenmc-pkg.outcome }}"
@@ -607,6 +642,7 @@ jobs:
           build_result="${{ steps.build.outcome }}"
           gradle_lint_result="${{ steps.gradle-lint.outcome }}"
           datapack_lint_result="${{ steps.datapack-lint.outcome }}"
+          repo_tests_result="${{ steps.repo-tests.outcome }}"
           release_allowed="${{ steps.release-gate.outputs.RELEASE_ALLOWED }}"
           publish="${{ steps.release-gate.outputs.PUBLISH }}"
 
@@ -619,6 +655,7 @@ jobs:
             fi
           }
 
+          show "Repository tests"     "$repo_tests_result"
           show "guigenmc Python 3.9"  "$g39"
           show "guigenmc Python 3.12" "$g312"
           show "guigenmc package"     "$gpkg"
@@ -634,6 +671,7 @@ jobs:
             echo ""
             echo "| Component | Result |"
             echo "|---|---|"
+            echo "| Repository tests | $(icon "$repo_tests_result") \`$repo_tests_result\` |"
             echo "| guigenmc Python 3.9 | $(icon "$g39") \`$g39\` |"
             echo "| guigenmc Python 3.12 | $(icon "$g312") \`$g312\` |"
             echo "| guigenmc package | $(icon "$gpkg") \`$gpkg\` |"
@@ -657,7 +695,8 @@ jobs:
 
           # Every checked step uses continue-on-error, so the job would
           # otherwise stay green. Fail it explicitly.
-          if [ "$g39" != "success" ] ||
+          if [ "$repo_tests_result" != "success" ] ||
+             [ "$g39" != "success" ] ||
              [ "$g312" != "success" ] ||
              [ "$gpkg" != "success" ] ||
              [ "$build_result" != "success" ] ||

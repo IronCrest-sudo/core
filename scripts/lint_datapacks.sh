@@ -51,13 +51,19 @@ cd "$TMP_DIR/project" || exit 1
 echo -e "${COLOR_SUBHEADER}▶ Removing Ignored Paths:${COLOR_RESET}"
 REMOVED_FILES=()
 
+EXCLUDED_MCFUNCTION=0
+
 for pattern in "${IGNORE_PATHS[@]}"; do
+    # -prune: report each matched entry once instead of every descendant of an
+    # already-removed directory, so the counts below are not inflated.
     while IFS= read -r -d '' target; do
-        echo -e "${COLOR_MUTED}  │ ├─ Removing:${COLOR_RESET}${target#./}"
-        echo "::notice::Ignoring ${target#./}"
+        count="$(find "$target" -name '*.mcfunction' 2>/dev/null | wc -l)"
+        EXCLUDED_MCFUNCTION=$((EXCLUDED_MCFUNCTION + count))
+        echo -e "${COLOR_MUTED}  │ ├─ Removing:${COLOR_RESET}${target#./} (${count} .mcfunction)"
+        echo "::notice::Ignoring ${target#./} (${count} .mcfunction file(s) not validated)"
         REMOVED_FILES+=("${target#./}")
         rm -rf "$target"
-    done < <(find . -path "./$pattern" -print0 2>/dev/null)
+    done < <(find . -path "./$pattern" -prune -print0 2>/dev/null)
 done
 
 echo "::endgroup::"
@@ -100,6 +106,7 @@ else
     echo -e "  Log: Mecha reported validation errors; this now fails the build unless LINT_WARN_ONLY=1."
 fi
 echo -e "${COLOR_PATH}  Ignored paths count: ${#IGNORE_PATHS[@]}${COLOR_RESET}"
+echo -e "${COLOR_PATH}  Excluded from validation: ${#REMOVED_FILES[@]} path(s), ${EXCLUDED_MCFUNCTION} .mcfunction file(s)${COLOR_RESET}"
 
 echo "::endgroup::"
 

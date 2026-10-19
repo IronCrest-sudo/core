@@ -13,6 +13,8 @@ Context the AI agent reads on every run. Keep it short and factual.
 
 ## Rules
 - Static checks only: lint, build, reading files. Never suggest or run tests on the live server.
+- **Warning:** the only server that is ever started is the isolated, loopback-only Ward test server of
+  `.github/workflows/ward.yml` (`scripts/ward_ci.sh`, GitHub-hosted CI only). An agent never runs it locally.
 - Never delete git history, repositories or organizations. Retire things by hiding or archiving.
 - Never put tokens or secrets into code, comments or logs.
 - In `merge-manifest.json`, `output.min_format` / `output.max_format` must match the format of the included packs.

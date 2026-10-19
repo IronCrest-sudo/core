@@ -97,6 +97,8 @@ or clearly malicious cases, the contributor being blocked from the repo.
 
 ## Before opening a PR
 
+> **⚠️ Warning:** the CI job `ward.yml` starts an isolated, loopback-only Minecraft test server to run Ward datapack tests (see `SECURITY.md`, "Validation tooling"). Do not start a server yourself for a PR check, and never run `scripts/ward_ci.sh` outside GitHub Actions.
+
 - [ ] `./gradlew buildAll` passes
 - [ ] `./gradlew lint` passes
 - [ ] If you touched `packs/`, you've validated the pack loads correctly

@@ -9,6 +9,8 @@ isn't), what a PR should contain, and what will get a PR closed
 tooling for griefing or exploit purposes). This guide assumes you've
 already read it.
 
+> **⚠️ Warning - a Minecraft server is started in exactly one place.** `.github/workflows/ward.yml` (via `scripts/ward_ci.sh`) runs datapack tests with mcward on a throw-away Fabric server on a GitHub-hosted runner. It is bound to `127.0.0.1`, whitelist enforced and empty, verified loopback-only by `scripts/ward_guard.py` before and after the tests, and deleted afterwards. Nothing else in this repository starts, connects to or tests against a Minecraft server. Never run that script on a developer machine, a production host or next to a real world.
+
 ## Getting started
 
 1. Fork or clone the repository.

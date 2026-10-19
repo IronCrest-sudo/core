@@ -50,3 +50,11 @@ one-off fixers from a single audit session whose changes were already
 committed; `check_lock.py` implemented a lock that nothing invoked, against a
 workflow that never existed. If you are looking for one of them, that is why it
 is gone — see the commit that removed them for the evidence.
+
+## Ward test server (CI only)
+
+> **⚠️ Warning - a Minecraft server is started in exactly one place.** `.github/workflows/ward.yml` (via `scripts/ward_ci.sh`) runs datapack tests with mcward on a throw-away Fabric server on a GitHub-hosted runner. It is bound to `127.0.0.1`, whitelist enforced and empty, verified loopback-only by `scripts/ward_guard.py` before and after the tests, and deleted afterwards. Nothing else in this repository starts, connects to or tests against a Minecraft server. Never run that script on a developer machine, a production host or next to a real world.
+
+- `ward_ci.sh` - orchestrates install, lock-down, start, verification, tests and cleanup. Refuses to run outside GitHub Actions.
+- `ward_guard.py` - seeds the locked `server.properties`, verifies loopback-only listeners, discovers packs with Ward tests (stdlib only).
+- `tests/` - offline tests for the guard; the "server" in them is a plain Python socket.

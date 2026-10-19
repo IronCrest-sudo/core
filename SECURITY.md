@@ -55,8 +55,12 @@ actually runs, and what each tool does and does not prove:
 | `python3 scripts/origin_watermarks.py --check` | `build.yml`, step `Check provenance watermark content` | every watermark equals what the template generates for its pack and namespace, and contains only comments (a no-op) | That the pack's code is what the watermark claims; it proves consistency, not authorship |
 | `./gradlew mergeDatapacks` | `build.yml`, step `Build merged datapack` | load/tick reference resolution (`strictLoadRefs`), pack-format agreement across the merged set | Runtime behaviour |
 | `./gradlew buildAll` / `lint` | `build.yml` | the **Gradle** side only (`mods/`) | Anything under `packs/` |
+| `scripts/ward_ci.sh` (mcward 1.4.0, Ward) | `ward.yml` - **starts a Minecraft test server**, CI only | Behaviour of datapack functions through `data/<namespace>/test/**.mcfunction` tests, on an isolated loopback-only server (`scripts/ward_guard.py` proves it before and after) | Anything without a Ward test; mods; multi-player behaviour |
 
-A green CI run therefore says the repository *parses and builds*. It has never
+> **⚠️ Warning:** `ward.yml` is the only place in this repository that starts a Minecraft server. It runs on GitHub-hosted runners only, binds to `127.0.0.1`, enforces an empty whitelist, fails if any socket is reachable outside loopback, and deletes the server afterwards. It downloads Fabric, mods and a JRE from third-party hosts (listed in the workflow header), so a compromised upstream is a supply-chain risk for that job. It has no secrets and a read-only token.
+
+A green CI run therefore says the repository *parses and builds* (and, for packs that
+have Ward tests, that those tests passed). It has never
 said a datapack behaves correctly - that still needs a load test in a real
 world, which is what the `NOTICE.md` checklist asks for.
 

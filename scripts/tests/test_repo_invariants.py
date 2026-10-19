@@ -82,5 +82,56 @@ class WorkflowPinning(unittest.TestCase):
         self.assertEqual(unpinned, [], "actions not pinned by SHA")
 
 
+class WardServerSafetyInvariants(unittest.TestCase):
+    """The Ward job is the one place that starts a Minecraft server. These tests
+    stop later edits from quietly loosening its isolation or dropping its warnings."""
+
+    WARNED_FILES = ["CLAUDE.md", "AGENT.md", "README.md", "CONTRIBUTING.md", "NOTICE.md",
+                    "SECURITY.md", "scripts/README.md", ".github/workflows/ward.yml",
+                    "scripts/ward_ci.sh", "scripts/ward_guard.py"]
+
+    def read(self, rel):
+        with open(os.path.join(ROOT, rel), encoding="utf-8") as fh:
+            return fh.read()
+
+    def test_every_documented_place_carries_the_warning(self):
+        def warned(text):
+            # one paragraph must carry both the word "warning" and a reference to Ward
+            return any("warning" in para.lower() and "ward" in para.lower()
+                       for para in re.split(r"\n\s*\n", text))
+        missing = [f for f in self.WARNED_FILES if not warned(self.read(f))]
+        self.assertEqual(missing, [])
+
+    def test_workflow_stays_isolated(self):
+        wf = self.read(".github/workflows/ward.yml")
+        runners = re.findall(r"(?m)^\s*runs-on:\s*(\S+)", wf)
+        self.assertEqual(runners, ["ubuntu-latest"], "only GitHub-hosted runners")
+        self.assertRegex(wf, r"(?m)^permissions:\n  contents: read$")
+        self.assertNotIn("secrets.", wf)
+        self.assertNotIn("environment:", wf)
+        self.assertRegex(wf, r"(?s)Verify cleanup.*if: always\(\)")
+        self.assertIn('"mcward==${MCWARD_VERSION}"', wf)
+        self.assertRegex(wf, r'MCWARD_VERSION: "1\.4\.0"')
+
+    def test_script_keeps_guards_verification_and_cleanup(self):
+        sh = self.read("scripts/ward_ci.sh")
+        for needle in ("trap cleanup EXIT", "ward_guard.py", 'verify "$ENV_DIR"', '$GUARD seed "$ENV_DIR"',
+                       'GITHUB_ACTIONS:-}" != "true"'):
+            self.assertIn(needle, sh)
+        # verification must happen before the tests start
+        self.assertLess(sh.index('$GUARD verify "$ENV_DIR"'), sh.index("mcward test"))
+        self.assertLess(sh.index('$GUARD seed "$ENV_DIR"'), sh.index("mcward start"))
+
+    def test_locked_properties_cannot_be_loosened(self):
+        sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        import ward_guard
+        locked = ward_guard.LOCKED_PROPERTIES
+        self.assertEqual(locked["server-ip"], "127.0.0.1")
+        for key in ("online-mode", "white-list", "enforce-whitelist"):
+            self.assertEqual(locked[key], "true")
+        for key in ("enable-rcon", "enable-query", "enable-status"):
+            self.assertEqual(locked[key], "false")
+
+
 if __name__ == "__main__":
     unittest.main()

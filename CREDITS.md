@@ -3,6 +3,22 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-19 - fix: macroEngine hover_event field names and missing `plain` on NBT text components
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+### Changed (AI-assisted edit)
+
+| Path (under `packs/macroEngine-Datapack-v26.3/data/macroengine/function/`) | Change |
+|---|---|
+| `systems/string/hover_text`, `systems/string/tag_badge` | **Fix.** `hover_event` / `show_text` still used the pre-1.21.5 `contents` key; it is `value`. The component did not match the 1.21.5+ format. |
+| `systems/string/tooltip_item` | **Fix.** `hover_event` / `show_item` used `contents:{id,Count}`; the 1.21.5+ format is flat `id` and `count`. |
+| `api/store/show`, `api/store/player/show`, `api/title/actionbar_p`, `core/internal/api/title/_apply`, `core/config/list` | **Fix.** Six `nbt` text components lacked `plain` (and in two lines `interpret`/`plain` pairs), so string values printed with quotes on 26.1+. Applied with `scripts/fix_text_components.py --fix`; the script now reports 0 remaining. |
+
+- **Verified:** Mecha 0.101.0 passes on the pack (the two documented `time query` files excluded as in `lint_datapacks.sh`); `scripts/origin_watermarks.py --check` ok; `pytest scripts/tests` 17 passed; every pack JSON file (loot tables, item modifiers, recipes, advancement triggers) checked against the vanilla registries of misode/mcmeta (snapshot 26.4-snapshot-4, slightly newer than 26.3) with no findings; all 1085 `function` references resolve.
+- **Not verified:** nothing was run in a Minecraft server (repository rule). The `hover_event` field names follow the 1.21.5+ text component format and were not exercised in game. No new features were added: the stable commands from 1.21.5 to 26.3 (`/waypoint`, `/dialog`, `/fetchprofile`, `/compute`, `/posteffect`) have no matching API module in this pack.
+
 ## 2026-10-18 - fix/ci/test: restore macroEngine watermark, pin remaining actions, add repository tests
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update

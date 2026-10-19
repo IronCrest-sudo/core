@@ -3,6 +3,22 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-19 - feat: macroEngine `tui/` text UI module
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+### Changed (AI-assisted edit)
+
+| Path (under `packs/macroEngine-Datapack-v26.3/`) | Change |
+|---|---|
+| `data/macroengine/function/tui/{line,header,divider,button}` | New. Print a line, title bar, rule and clickable function button to `@s`. Text is read from `macroengine:tui` storage and rendered with `api/store/render`. |
+| `data/macroengine/function/core/internal/tui/{render_text,render_label,render_hover,button_send}` | New. Internals. `button_send` is the only macro line; its single argument `fn` is validated with `systems/validate/function_id` first. |
+| `docs/tui.md`, `README.md` | New doc; one feature bullet. |
+
+- **Verified:** Mecha 0.101.0 passes with the new files; text components set `interpret:false` and `plain:true`; click/hover use the 1.21.5+ field names.
+- **Not verified:** nothing was run in a Minecraft server (repository rule). The click/hover rendering, the `execute if function` chain into `api/store/render` and the `$tellraw` macro were checked by reading, not executing. The module has no `config` on/off switch.
+
 ## 2026-10-19 - fix: macroEngine hover_event field names and missing `plain` on NBT text components
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update

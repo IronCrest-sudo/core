@@ -32,6 +32,7 @@
 
 - **Store module** (`api/store/`) — storage-based variables, per-player values, raw NBT helpers (`api/store/nbt/*`: `get`, `set`, `set_default`, `append`, `merge`, `remove`, `exists`, `count`, `copy`, `add`, `toggle`, `pop`, `shift` over any storage/path) and multilingual message templates (`render`, `render_all`, `convert`, `show`) that return plain strings; see [`docs/store.md`](docs/store.md). It replaced the old `api/data` and `api/placeholder` modules. Untrusted text is never substituted into a command or JSON string, so chat/sign/book input is safe. Migration notes: [`docs/migrating-from-data-api.md`](docs/migrating-from-data-api.md)
 - **Title / action bar with tokens** (`api/title/*_p`, plus `clear`, `reset`, `times`; see [`docs/title.md`](docs/title.md)) — storage-driven (no quote/backslash breakage), rendered with `api/store/render` per recipient
+- **Text UI** (`tui/`) — `line`, `header`, `divider` and `button` print formatted lines and clickable function buttons to the executor from storage (no text is pasted into a command); see [`docs/tui.md`](docs/tui.md)
 - **Runtime config** (`core/config/*`, see [`docs/config.md`](docs/config.md)) — every behaviour knob is a validated key: module on/off switches, tick systems and rates, handler scan intervals, queue depth, template limits and token switches, title defaults, name length
 
 ---

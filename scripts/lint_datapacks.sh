@@ -28,6 +28,11 @@ IGNORE_PATHS=(
     # (v0.101.0) does not know yet. Only these two files are skipped.
     "packs/macroEngine-Datapack-v26.3/data/macroengine/function/world/time_phase.mcfunction"
     "packs/macroEngine-Datapack-v26.3/data/macroengine/function/world/get_time.mcfunction"
+    # Ward tests (data/<ns>/test/) use the Ward mod's `assert`/`await` commands, which
+    # are not vanilla and which Mecha rejects. They are run by .github/workflows/ward.yml
+    # instead. List each pack's test folder explicitly so a glob can never swallow a
+    # real function folder that happens to be called "test".
+    "packs/DailyBonus/data/dailybonus/test"
 )
 
 echo "::group::🚫 Ignoring paths"

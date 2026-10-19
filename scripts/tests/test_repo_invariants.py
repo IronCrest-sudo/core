@@ -133,5 +133,20 @@ class WardServerSafetyInvariants(unittest.TestCase):
             self.assertEqual(locked[key], "false")
 
 
+class DailyBonusFirstClaim(unittest.TestCase):
+    """Static guard for the unset-score defect (the behavioural proof is the Ward test
+    packs/DailyBonus/data/dailybonus/test/first_login_is_granted.mcfunction, run in CI)."""
+
+    def test_players_without_a_score_are_granted_before_the_comparison(self):
+        base = os.path.join(ROOT, "packs", "DailyBonus", "data", "dailybonus")
+        with open(os.path.join(base, "function", "tick.mcfunction"), encoding="utf-8") as fh:
+            lines = [l.strip() for l in fh if l.strip() and not l.startswith("#")]
+        unset = [i for i, l in enumerate(lines) if "unless score @s db_last_day matches" in l and l.endswith("function dailybonus:grant")]
+        compare = [i for i, l in enumerate(lines) if "if score @s db_last_day < #day db_gameday" in l]
+        self.assertTrue(unset and compare, lines)
+        self.assertLess(unset[0], compare[0], "unset-score grant must run first to avoid a double grant")
+        self.assertTrue(os.path.isfile(os.path.join(base, "test", "first_login_is_granted.mcfunction")))
+
+
 if __name__ == "__main__":
     unittest.main()

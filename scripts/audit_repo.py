@@ -845,9 +845,18 @@ def audit_docs():
                 if frag and tgt.endswith(".md") and frag not in headings(tgt):
                     add("docs.broken-anchor", "medium", p, f"broken anchor: {target}", line=i)
 
-    gradle_txt = read_text(os.path.join(REPO, "build.gradle"))
-    defined = set(re.findall(r"tasks\.register\(\s*['\"]([\w\-]+)['\"]", gradle_txt))
-    defined |= set(re.findall(r"^\s*task\s+([\w\-]+)", gradle_txt, re.M))
+    # Root tasks may be factored into apply-from scripts below build-logic/.
+    # Audit all root-owned Gradle scripts, not only build.gradle, so the docs
+    # checker follows the same task graph Gradle evaluates.
+    gradle_scripts = [os.path.join(REPO, "build.gradle")]
+    build_logic = os.path.join(REPO, "build-logic")
+    if os.path.isdir(build_logic):
+        gradle_scripts.extend(walk(build_logic, {".gradle"}))
+    defined = set()
+    for gradle_script in gradle_scripts:
+        gradle_txt = read_text(gradle_script)
+        defined |= set(re.findall(r"tasks\.register\(\s*['\"]([\w\-]+)['\"]", gradle_txt))
+        defined |= set(re.findall(r"^\s*task\s+([\w\-]+)", gradle_txt, re.M))
     for p in walk(REPO, {".md"}):
         txt = re.sub(r"<!--.*?-->", "", read_text(p), flags=re.S)
         for i, line in enumerate(txt.splitlines(), 1):

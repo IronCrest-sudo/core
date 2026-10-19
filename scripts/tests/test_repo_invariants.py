@@ -82,6 +82,30 @@ class WorkflowPinning(unittest.TestCase):
         self.assertEqual(unpinned, [], "actions not pinned by SHA")
 
 
+class ReusableQualityWorkflowInvariants(unittest.TestCase):
+    """Keep the CI trust boundary explicit when workflows are edited later."""
+
+    def test_read_only_quality_and_artifact_only_publish_are_separated(self):
+        workflows = os.path.join(ROOT, ".github", "workflows")
+        with open(os.path.join(workflows, "build.yml"), encoding="utf-8") as fh:
+            build = fh.read()
+        with open(os.path.join(workflows, "quality.yml"), encoding="utf-8") as fh:
+            quality = fh.read()
+
+        self.assertIn("workflow_call:", quality)
+        self.assertIn("contents: read", quality)
+        self.assertIn("./gradlew ci -PconfirmZip=yes", quality)
+        self.assertIn("SHA256SUMS", quality)
+        self.assertNotIn("softprops/action-gh-release", quality)
+
+        self.assertIn("uses: ./.github/workflows/quality.yml", build)
+        self.assertIn("needs: quality", build)
+        self.assertIn("contents: write", build)
+        self.assertIn("actions/download-artifact@", build)
+        self.assertIn("SHA256SUMS", build)
+        self.assertNotIn("actions/checkout@", build)
+
+
 class WardServerSafetyInvariants(unittest.TestCase):
     """The Ward job is the one place that starts a Minecraft server. These tests
     stop later edits from quietly loosening its isolation or dropping its warnings."""

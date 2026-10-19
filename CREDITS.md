@@ -3,6 +3,20 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-19 - ci: reusable quality gate and artifact-only publishing
+
+**Tool:** Arena.ai Agent Mode, working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `.github/workflows/quality.yml` | New reusable, read-only quality workflow. It runs the canonical Gradle `ci` graph on Java 25/Python 3.12/Node 20, guigenmc Python 3.9 compatibility tests, source/wheel checks, bounded artifacts and an explicit all-jobs gate. Release assets include a SHA-256 manifest. |
+| `.github/workflows/build.yml` | Reduced the public CI entrypoint to a reusable-quality caller and an approval-gated publish job. The only writable job does not check out or execute repository code; it verifies the SHA-256 manifest and publishes only the gated ZIP artifact. |
+| `scripts/audit_repo.py`, `scripts/tests/test_repo_invariants.py` | The documentation audit discovers Gradle tasks in root-owned `build-logic/` scripts; offline regression coverage now guards the reusable-workflow trust boundary as well as SHA-pinned actions. |
+| `README.md`, `CLAUDE.md` | Updated CI documentation to match the reusable quality and artifact-only publication design. |
+
+- **Verified:** YAML parsed with PyYAML; `python3 scripts/audit_repo.py --format github --fail-on high` passed with one existing medium RTWrapper warning; offline regression tests: 18 passed.
+- **Not verified:** GitHub Actions execution, release-environment approval and publishing have not run. No Minecraft server was started.
+
 ## 2026-10-19 - feat(build): project-level Gradle lifecycle tasks
 
 **Tool:** Arena.ai Agent Mode, working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
@@ -13,8 +27,8 @@ AI involvement is visible in the repository itself and not only through commit a
 | `scripts/audit_repo.py` | Pack roots are now discovered recursively from `pack.mcmeta`, aligning the audit with the Gradle pack tasks and validating RTWrapper's nested distributable pack instead of reporting its source container as broken. |
 | `README.md`, `CLAUDE.md`, `AGENT.md` | Documented the canonical Gradle lifecycle commands and their offline-only scope. |
 
-- **Verified:** with JDK 25, `./gradlew tasks --group verification`; `./gradlew checkProvenance auditRepository testRepository checkPacks checkOriginWatermarks checkArchive writeProjectInventory` all passed. `checkPacks` reports 29 existing external-reference warnings; the audit reports one existing medium RTWrapper format warning. Offline Python regression tests: 17 passed.
-- **Not verified:** the full `ci` graph, Fabric compilation/remapping, Mecha, guigenmc pytest and the GitHub Actions workflow have not run in this change. No Minecraft server was started.
+- **Verified:** with JDK 25, `./gradlew tasks --group verification`; `./gradlew verifyProject` passed all 10 offline tasks, including Mecha, 65 guigenmc tests, 5 dpgen tests and 18 repository tests. `checkPacks` reports 29 existing external-reference warnings; the audit reports one existing medium RTWrapper format warning.
+- **Not verified:** `packageProject` reached archive generation and initial Fabric compilation, but the sandbox Gradle daemon was killed during Loom remapping even with one worker and a 1.5 GiB heap cap. The complete package/CI graph and GitHub Actions workflow therefore still need a hosted-runner confirmation. No Minecraft server was started.
 
 ## 2026-10-19 - feat: macroEngine `tui/` text UI module
 

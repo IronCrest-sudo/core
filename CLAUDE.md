@@ -63,8 +63,11 @@ python3 -m pytest scripts/gui_generator/tests scripts/tests   # offline tests; `
 # scripts/ward_ci.sh starts a Minecraft server - CI only (see the warning above); never run it by hand
 ```
 
-CI (`.github/workflows/build.yml`) runs these on Java 25 and Python 3.9 / 3.12. Actions are pinned by commit SHA;
-keep it that way and keep `permissions` minimal.
+CI (`.github/workflows/build.yml`) delegates to the read-only reusable
+`.github/workflows/quality.yml`, whose canonical check is `./gradlew ci
+-PconfirmZip=yes` on Java 25 and Python 3.12; guigenmc also has a Python 3.9
+compatibility job. Only the artifact-only publish job receives write permission.
+Actions are pinned by commit SHA; keep it that way and keep `permissions` minimal.
 
 Known: the pinned Mecha reports two errors on `time query minecraft:day` (26.3 World Clocks syntax it does not
 know yet). They are not bugs in the pack.

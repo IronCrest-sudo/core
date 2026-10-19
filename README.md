@@ -54,19 +54,27 @@ This repo uses Gradle to build all Fabric mod subprojects.
 - JDK 25
 - Gradle Wrapper (included, no separate Gradle install needed)
 
-### Build all subprojects
+### Project lifecycle tasks
+
+The root build exposes project-specific entry points in addition to the
+per-module Gradle tasks:
 
 ```bash
-./gradlew buildAll
+# Offline checks: provenance, audit, tests, datapack syntax and pack metadata.
+# pytest, guigenmc (editable) and Mecha must be installed first.
+./gradlew verifyProject
+
+# Builds Fabric modules, individual pack ZIPs, the merged pack and an inventory.
+./gradlew packageProject -PconfirmZip=yes
+
+# The canonical local CI graph: verifyProject + packageProject.
+./gradlew ci -PconfirmZip=yes
 ```
 
-This runs the build task across every subproject under `mods/` and produces mod JARs. Output JARs land in each subproject's `build/libs/` directory.
-
-### Lint all subprojects
-
-```bash
-./gradlew lint
-```
+`buildAll` and `lint` remain available as focused compatibility tasks: the
+first builds every Gradle subproject, and the second runs configured Checkstyle
+tasks. `writeProjectInventory` writes a deterministic build report at
+`build/reports/repository/project-inventory.json`.
 
 ### Build a single subproject
 

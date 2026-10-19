@@ -20,7 +20,8 @@ out/
 !mods/*/src/*/**/build
 *.patch
 
-# Python / Node tooling artifacts
+# Local toolchains and Python / Node tooling artifacts
+.toolchains/
 __pycache__/
 *.py[cod]
 *.egg-info/

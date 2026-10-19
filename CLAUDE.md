@@ -52,9 +52,12 @@ as they are.
 ## Commands
 
 ```bash
-./gradlew buildAll                      # build every subproject
-./gradlew lint                          # Gradle lint
-scripts/lint_datapacks.sh               # Mecha validation of all datapacks (needs `pip install mecha==0.101.0`)
+./gradlew verifyProject                 # canonical offline validation task graph
+./gradlew packageProject -PconfirmZip=yes # build modules and release archives
+./gradlew ci -PconfirmZip=yes           # verifyProject + packageProject
+./gradlew buildAll                      # focused compatibility task: build every subproject
+./gradlew lint                          # focused compatibility task: Gradle lint
+scripts/lint_datapacks.sh               # Mecha validation (needs `pip install mecha==0.101.0`)
 python3 scripts/origin_watermarks.py --check   # watermark headers up to date; use --write to regenerate
 python3 -m pytest scripts/gui_generator/tests scripts/tests   # offline tests; `npm test` in scripts/dpgen
 # scripts/ward_ci.sh starts a Minecraft server - CI only (see the warning above); never run it by hand

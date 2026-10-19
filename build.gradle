@@ -2214,3 +2214,8 @@ tasks.register('printArchiveList') {
 tasks.named('zipPacks') { dependsOn 'checkArchive' }
 tasks.named('mergeDatapacks') { dependsOn 'checkArchive' }
 tasks.named('check') { dependsOn 'checkArchive' }
+
+// Repository-level verification, packaging and CI entry points live in a
+// dedicated script so this root build stays focused on its existing pack
+// implementation tasks. See `gradlew tasks --group verification`.
+apply from: "$rootDir/build-logic/project-tasks.gradle"

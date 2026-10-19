@@ -1,0 +1,175 @@
+// =============================================================================
+// vortaforge/core - build-logic/project-tasks.gradle
+//
+// Project-level Gradle task graph for this mixed monorepo.  The individual
+// Fabric projects keep ownership of their own toolchains and build files;
+// this script owns only repository-wide checks, packaging and CI entry points.
+//
+// Apply this script from the root build.gradle only.  It intentionally keeps
+// the established buildAll, lint, checkPacks, zipPacks and mergeDatapacks
+// tasks intact so local scripts and downstream automation do not break.
+// =============================================================================
+
+if (project != rootProject) {
+    throw new GradleException('build-logic/project-tasks.gradle must be applied by the root project only.')
+}
+
+def repositoryRoot = rootProject.projectDir
+def reportDirectory = layout.buildDirectory.dir('reports/repository').get().asFile
+def pythonExecutable = providers.gradleProperty('pythonExecutable').getOrElse('python3')
+def npmExecutable = providers.gradleProperty('npmExecutable').getOrElse('npm')
+
+def repositorySources = files(fileTree(repositoryRoot) {
+    // Generated files and local toolchains must never invalidate a source
+    // check, nor accidentally become packaged/reported as project inputs.
+    exclude '.git/**', '.gradle/**', '.toolchains/**', 'build/**', '**/build/**',
+            'node_modules/**', '**/node_modules/**', '.idea/**', '.vscode/**'
+})
+
+def marker = { String name -> new File(reportDirectory, "${name}.ok") }
+def markSuccess = { Task task, File output ->
+    task.outputs.file(output)
+    task.doLast {
+        output.parentFile.mkdirs()
+        // Deliberately deterministic: this is an up-to-date marker, not a log.
+        output.setText('ok\n', 'UTF-8')
+    }
+}
+
+def configureRepositoryInput = { Task task ->
+    task.inputs.files(repositorySources).withPathSensitivity(PathSensitivity.RELATIVE)
+}
+
+// -----------------------------------------------------------------------------
+// Verification tasks
+// -----------------------------------------------------------------------------
+
+tasks.register('checkProvenance', Exec) {
+    group = 'verification'
+    description = 'Verifies generated _vc_origin.mcfunction provenance watermarks without modifying sources.'
+    workingDir repositoryRoot
+    commandLine pythonExecutable, 'scripts/origin_watermarks.py', '--check'
+    configureRepositoryInput(delegate)
+    markSuccess(delegate, marker('provenance'))
+}
+
+tasks.register('auditRepository', Exec) {
+    group = 'verification'
+    description = 'Runs the repository consistency audit and fails for high/critical findings.'
+    workingDir repositoryRoot
+    commandLine pythonExecutable, 'scripts/audit_repo.py', '--format', 'github', '--fail-on', 'high'
+    configureRepositoryInput(delegate)
+    markSuccess(delegate, marker('audit'))
+}
+
+tasks.register('testRepository', Exec) {
+    group = 'verification'
+    description = 'Runs repository-only Python regression tests; does not start Minecraft.'
+    workingDir repositoryRoot
+    commandLine pythonExecutable, '-m', 'unittest', 'discover', '-s', 'scripts/tests', '-v'
+    configureRepositoryInput(delegate)
+    markSuccess(delegate, marker('repository-tests'))
+}
+
+tasks.register('testGuiGenerator', Exec) {
+    group = 'verification'
+    description = 'Runs the guigenmc pytest suite (requires pytest and an editable guigenmc install).'
+    workingDir repositoryRoot
+    commandLine pythonExecutable, '-m', 'pytest', '-q', 'scripts/gui_generator/tests'
+    configureRepositoryInput(delegate)
+    markSuccess(delegate, marker('guigenmc-tests'))
+}
+
+tasks.register('installDpgenDependencies', Exec) {
+    group = 'build setup'
+    description = 'Installs the locked dpgen Node dependencies without lifecycle scripts, audits or funding output.'
+    def dpgenDirectory = new File(repositoryRoot, 'scripts/dpgen')
+    workingDir dpgenDirectory
+    commandLine npmExecutable, 'ci', '--ignore-scripts', '--no-audit', '--no-fund'
+    inputs.files(new File(dpgenDirectory, 'package.json'), new File(dpgenDirectory, 'package-lock.json'))
+            .withPathSensitivity(PathSensitivity.RELATIVE)
+    outputs.dir(new File(dpgenDirectory, 'node_modules'))
+}
+
+tasks.register('testDpgen', Exec) {
+    group = 'verification'
+    description = 'Runs the dpgen Node test suite after installing its locked dependencies.'
+    def dpgenDirectory = new File(repositoryRoot, 'scripts/dpgen')
+    workingDir dpgenDirectory
+    commandLine npmExecutable, 'test'
+    dependsOn 'installDpgenDependencies'
+    configureRepositoryInput(delegate)
+    markSuccess(delegate, marker('dpgen-tests'))
+}
+
+tasks.register('lintDatapacks', Exec) {
+    group = 'verification'
+    description = 'Runs the Mecha datapack syntax validation (requires mecha==0.101.0 on PATH).'
+    workingDir repositoryRoot
+    commandLine 'bash', 'scripts/lint_datapacks.sh'
+    configureRepositoryInput(delegate)
+    markSuccess(delegate, marker('datapack-lint'))
+}
+
+tasks.register('verifyProject') {
+    group = 'verification'
+    description = 'Runs every offline repository verification task. Never starts a Minecraft server.'
+    dependsOn 'checkProvenance', 'auditRepository', 'testRepository', 'testGuiGenerator',
+            'testDpgen', 'lintDatapacks', 'checkPacks', 'checkOriginWatermarks', 'checkArchive'
+}
+
+// -----------------------------------------------------------------------------
+// Packaging and reporting tasks
+// -----------------------------------------------------------------------------
+
+def inventoryOutput = new File(reportDirectory, 'project-inventory.json')
+def repositoryName = rootProject.name
+def projectInventory = rootProject.subprojects.collect { sub ->
+    [path: sub.path, directory: rootProject.relativePath(sub.projectDir)]
+}.sort { left, right -> left.path <=> right.path }
+def packMetadata = fileTree(new File(repositoryRoot, 'packs')) {
+    include '**/pack.mcmeta'
+    exclude '**/build/**'
+}.files.toList().sort { left, right -> left.path <=> right.path }.collect { metadata ->
+    [
+        file: metadata,
+        path: repositoryRoot.toPath().relativize(metadata.parentFile.toPath()).toString().replace(File.separator, '/'),
+    ]
+}
+
+tasks.register('writeProjectInventory') {
+    group = 'reporting'
+    description = 'Writes a deterministic JSON inventory of discovered Gradle subprojects and pack metadata.'
+    inputs.files(packMetadata.collect { it.file }).withPathSensitivity(PathSensitivity.RELATIVE)
+    outputs.file(inventoryOutput)
+    doLast {
+        def packs = packMetadata.collect { descriptor ->
+            def parsed = new groovy.json.JsonSlurper().parse(descriptor.file)
+            def pack = parsed instanceof Map && parsed.pack instanceof Map ? parsed.pack : [:]
+            [
+                path  : descriptor.path,
+                format: pack.containsKey('min_format') ? pack.min_format : pack.pack_format,
+            ]
+        }
+        def inventory = [
+            schemaVersion: 1,
+            project      : repositoryName,
+            subprojects  : projectInventory,
+            packs        : packs,
+        ]
+        inventoryOutput.parentFile.mkdirs()
+        inventoryOutput.setText(groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(inventory)) + '\n', 'UTF-8')
+    }
+}
+
+tasks.register('packageProject') {
+    group = 'distribution'
+    description = 'Builds mod artifacts plus individual and merged datapack release archives (requires -PconfirmZip=yes).'
+    dependsOn 'buildAll', 'zipPacks', 'mergeDatapacks', 'writeProjectInventory'
+}
+
+tasks.register('ci') {
+    group = 'verification'
+    description = 'Canonical CI entry point: offline verification and distributable artifacts (requires -PconfirmZip=yes).'
+    dependsOn 'verifyProject', 'packageProject'
+}

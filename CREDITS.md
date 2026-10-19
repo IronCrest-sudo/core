@@ -3,6 +3,19 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-19 - feat(build): project-level Gradle lifecycle tasks
+
+**Tool:** Arena.ai Agent Mode, working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `build-logic/project-tasks.gradle`, `build.gradle` | New project-specific Gradle task graph: provenance, audit, offline Python tests, guigenmc tests, locked dpgen install/tests, datapack lint, `verifyProject`, `packageProject`, `ci`, and a deterministic project inventory report. Existing task names remain intact for compatibility. |
+| `scripts/audit_repo.py` | Pack roots are now discovered recursively from `pack.mcmeta`, aligning the audit with the Gradle pack tasks and validating RTWrapper's nested distributable pack instead of reporting its source container as broken. |
+| `README.md`, `CLAUDE.md`, `AGENT.md` | Documented the canonical Gradle lifecycle commands and their offline-only scope. |
+
+- **Verified:** with JDK 25, `./gradlew tasks --group verification`; `./gradlew checkProvenance auditRepository testRepository checkPacks checkOriginWatermarks checkArchive writeProjectInventory` all passed. `checkPacks` reports 29 existing external-reference warnings; the audit reports one existing medium RTWrapper format warning. Offline Python regression tests: 17 passed.
+- **Not verified:** the full `ci` graph, Fabric compilation/remapping, Mecha, guigenmc pytest and the GitHub Actions workflow have not run in this change. No Minecraft server was started.
+
 ## 2026-10-19 - feat: macroEngine `tui/` text UI module
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update

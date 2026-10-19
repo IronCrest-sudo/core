@@ -165,7 +165,10 @@ tasks.register('writeProjectInventory') {
 tasks.register('packageProject') {
     group = 'distribution'
     description = 'Builds mod artifacts plus individual and merged datapack release archives (requires -PconfirmZip=yes).'
-    dependsOn 'buildAll', 'zipPacks', 'mergeDatapacks', 'writeProjectInventory'
+    // Root `build` depends on mergeDatapacks and copies its zip into build/dist/.
+    // Keep that lifecycle edge instead of calling mergeDatapacks alone so one
+    // canonical package command produces exactly the release asset locations.
+    dependsOn 'buildAll', 'zipPacks', 'build', 'writeProjectInventory'
 }
 
 tasks.register('ci') {

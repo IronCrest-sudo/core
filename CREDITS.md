@@ -3,6 +3,20 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-20 - docs: macroEngine README overhaul, PlayerAction rewrite plan
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+| Path (under `packs/macroEngine-Datapack-v26.3/`) | Change |
+|---|---|
+| `README.md` | Rewrote the project-history header to cover the full organization chain (runtoolkit → vortacraftmc → VortaForge), both archived and neither deleted; added an explicit AI-disclosure line; expanded Installation into platform-specific sections (manual/UI, Linux/macOS Bash, Windows PowerShell, generic server install, Claude Code/agent-assisted install). |
+| `THIRD_PARTY_LICENSES.md` | Linked the PlayerAction "scheduled for removal" status to the new rewrite plan document. |
+| `docs/playeraction-rewrite-plan.md` | New. A phased plan (not implementation) for removing the `core/internal/player/` PlayerAction dependency, based on reading the current 82-file tree. Separates the dependency into a low-risk namespace-only portion (lifecycle + state/statistics + advancement-relay pairs) and the one subsystem that actually carries PlayerAction-specific technique (click detection via a tracked invisible `interaction` entity). Records two candidate designs for that subsystem without choosing between them, per the maintainer's instruction to leave that decision open. |
+
+- **Verified:** read-through of all 82 files under `core/internal/player/`, its 12 predicates and 27 advancement JSONs, to produce the scope breakdown in the plan document. No code in `core/internal/player/` was changed.
+- **Not verified:** the rewrite plan itself is unimplemented and untested — no click-detection code was written, ported, or run. The Installation section's platform-specific commands (Bash, PowerShell, Claude Code instructions) were written from general knowledge of Minecraft datapack install mechanics and were not executed against a live server in this session. Nothing was run in a Minecraft server.
+
 ## 2026-10-19 - ci: reusable quality gate and artifact-only publishing
 
 **Tool:** Arena.ai Agent Mode, working from a prompt by the maintainer. Review status: _pending - update when reviewed_.

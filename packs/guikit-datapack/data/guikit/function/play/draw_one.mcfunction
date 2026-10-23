@@ -2,6 +2,7 @@ execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 execute store result score #slot guikit.tmp run data get storage guikit:work w.slot
 execute if score #slot guikit.tmp >= @s guikit.slots run return 0
+execute if data storage guikit:work w{kind:"tab"} run function guikit:play/tab_visual
 execute if data storage guikit:work w{kind:"toggle"} run function guikit:play/visual_toggle
 function guikit:internal/clear/w
 data modify storage guikit:w slot set from storage guikit:work w.slot

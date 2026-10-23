@@ -13,6 +13,7 @@ execute if data storage guikit:cnd cur.mode run data modify storage guikit:cond 
 execute if data storage guikit:cnd cur.adv run data modify storage guikit:cond adv set from storage guikit:cnd cur.adv
 execute if data storage guikit:cnd cur.dim run data modify storage guikit:cond dim set from storage guikit:cnd cur.dim
 execute if data storage guikit:cnd cur.weather run data modify storage guikit:cond weather set from storage guikit:cnd cur.weather
+execute if data storage guikit:cnd cur.biome run data modify storage guikit:cond biome set from storage guikit:cnd cur.biome
 execute if data storage guikit:cnd cur.pred run data modify storage guikit:cond pred set from storage guikit:cnd cur.pred
 execute if data storage guikit:cnd cur.not run data modify storage guikit:cond not set from storage guikit:cnd cur.not
 execute if data storage guikit:cnd cur.of run data modify storage guikit:cond of set from storage guikit:cnd cur.of

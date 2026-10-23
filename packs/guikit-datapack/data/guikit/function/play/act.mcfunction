@@ -8,6 +8,7 @@ execute if score #blocked guikit.tmp matches 1.. run return 0
 execute if data storage guikit:work w{kind:"close"} run function guikit:api/close
 execute if data storage guikit:work w{kind:"close"} run scoreboard players set #acted guikit.tmp 0
 execute if data storage guikit:work w{kind:"page"} run function guikit:play/act/page
+execute if data storage guikit:work w{kind:"tab"} run function guikit:play/act/page
 execute if data storage guikit:work w{kind:"open"} run function guikit:play/act/open
 execute if data storage guikit:work w{kind:"give"} run function guikit:play/act/give
 execute if data storage guikit:work w{kind:"tell"} run function guikit:play/act/tell

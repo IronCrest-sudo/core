@@ -3,6 +3,21 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-23 - feat: add ten guikit condition types
+
+**Tool:** Copilot SDK in VS Code, working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/guikit-datapack/data/guikit/function/cond/` | Added biome, health, hunger, air-supply, fire, ground, sneaking, sprinting, swimming, and elytra-flight conditions; wired them into condition dispatch and composition. |
+| `packs/guikit-datapack/data/guikit/predicate/cond/` | New player-state predicates for fire, ground, sneaking, sprinting, swimming, and elytra flight. |
+| `packs/guikit-datapack/data/guikit/dialog/page.json`, `packs/guikit-datapack/data/guikit/function/play/tab_visual.mcfunction` | Added an editor option for page tabs and active-page highlighting. |
+| `packs/guikit-datapack/README.md`, `packs/guikit-datapack/data/guikit/function/help.mcfunction`, `packs/guikit-datapack/pack.mcmeta` | Documented the v6 features and updated the pack version description. |
+
+- **Verified:** `./gradlew verifyProject` passed in a Python 3.12 environment with pytest, Mecha 0.101.0, and the local editable `guigenmc` package; the pinned Mecha datapack lint, `python3 scripts/origin_watermarks.py --check`, and `git diff --check` passed.
+- **Not verified:** no live Minecraft server or bot was started; the repository prohibits local server tests.
+
 ## 2026-10-20 - docs: macroEngine README overhaul, PlayerAction rewrite plan
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
@@ -449,4 +464,3 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 - **Not covered:** `RTWrapper-1.21.1`'s separate `vortacraftmc:core/load` function was left untouched (out of the requested scope).
 - **Verified:** nothing run; these are comment/doc-only changes.
 - **Not verified:** nothing was run in a Minecraft server (not applicable — no executable logic changed).
-

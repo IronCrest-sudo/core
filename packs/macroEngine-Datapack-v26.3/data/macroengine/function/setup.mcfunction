@@ -4,11 +4,15 @@
 
 # Initialization
 
-# Step 1: Internal Text Module
+# Step 0: Load Gate
 function macroengine:gate/version
 execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if entity @s[type=minecraft:player] unless entity @s[tag=macroengine.consented] unless score #macroengine.gate.3 vortaforge.gate matches 0 run return 0
+
+# Step 0.5: Load Begin
 function macroengine:gate/load_begin
+
+# Step 1: Internal Text Module
 function macroengine:core/internal/text/load
 
 # Step 2: Player Enumeration

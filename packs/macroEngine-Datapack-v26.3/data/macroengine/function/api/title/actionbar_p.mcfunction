@@ -15,4 +15,4 @@ data modify storage macroengine:store in.template set value ""
 execute if data storage macroengine:title in.text run data modify storage macroengine:store in.template set from storage macroengine:title in.text
 execute if data storage macroengine:title in.args run data modify storage macroengine:store in.args set from storage macroengine:title in.args
 execute unless function macroengine:api/store/render run return 0
-title @s actionbar {"storage":"macroengine:store","nbt":"out.string","interpret":false}
+title @s actionbar {"storage":"macroengine:store","nbt":"out.string","interpret":false,"plain":true}

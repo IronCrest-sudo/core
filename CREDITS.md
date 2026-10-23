@@ -3,6 +3,120 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-20 - docs: macroEngine README overhaul, PlayerAction rewrite plan
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+| Path (under `packs/macroEngine-Datapack-v26.3/`) | Change |
+|---|---|
+| `README.md` | Rewrote the project-history header to cover the full organization chain (runtoolkit → vortacraftmc → VortaForge), both archived and neither deleted; added an explicit AI-disclosure line; expanded Installation into platform-specific sections (manual/UI, Linux/macOS Bash, Windows PowerShell, generic server install, Claude Code/agent-assisted install). |
+| `THIRD_PARTY_LICENSES.md` | Linked the PlayerAction "scheduled for removal" status to the new rewrite plan document. |
+| `docs/playeraction-rewrite-plan.md` | New. A phased plan (not implementation) for removing the `core/internal/player/` PlayerAction dependency, based on reading the current 82-file tree. Separates the dependency into a low-risk namespace-only portion (lifecycle + state/statistics + advancement-relay pairs) and the one subsystem that actually carries PlayerAction-specific technique (click detection via a tracked invisible `interaction` entity). Records two candidate designs for that subsystem without choosing between them, per the maintainer's instruction to leave that decision open. |
+
+- **Verified:** read-through of all 82 files under `core/internal/player/`, its 12 predicates and 27 advancement JSONs, to produce the scope breakdown in the plan document. No code in `core/internal/player/` was changed.
+- **Not verified:** the rewrite plan itself is unimplemented and untested — no click-detection code was written, ported, or run. The Installation section's platform-specific commands (Bash, PowerShell, Claude Code instructions) were written from general knowledge of Minecraft datapack install mechanics and were not executed against a live server in this session. Nothing was run in a Minecraft server.
+
+## 2026-10-19 - ci: reusable quality gate and artifact-only publishing
+
+**Tool:** Arena.ai Agent Mode, working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `.github/workflows/quality.yml` | New reusable, read-only quality workflow. It runs the canonical Gradle `ci` graph on Java 25/Python 3.12/Node 20, guigenmc Python 3.9 compatibility tests, source/wheel checks, bounded artifacts and an explicit all-jobs gate. Release assets include a SHA-256 manifest. |
+| `.github/workflows/build.yml` | Reduced the public CI entrypoint to a reusable-quality caller and an approval-gated publish job. The only writable job does not check out or execute repository code; it verifies the SHA-256 manifest and publishes only the gated ZIP artifact. |
+| `scripts/audit_repo.py`, `scripts/tests/test_repo_invariants.py` | The documentation audit discovers Gradle tasks in root-owned `build-logic/` scripts; offline regression coverage now guards the reusable-workflow trust boundary as well as SHA-pinned actions. |
+| `README.md`, `CLAUDE.md` | Updated CI documentation to match the reusable quality and artifact-only publication design. |
+
+- **Verified:** YAML parsed with PyYAML; `python3 scripts/audit_repo.py --format github --fail-on high` passed with one existing medium RTWrapper warning; offline regression tests: 18 passed.
+- **Not verified:** GitHub Actions execution, release-environment approval and publishing have not run. No Minecraft server was started.
+
+## 2026-10-19 - feat(build): project-level Gradle lifecycle tasks
+
+**Tool:** Arena.ai Agent Mode, working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `build-logic/project-tasks.gradle`, `build.gradle` | New project-specific Gradle task graph: provenance, audit, offline Python tests, guigenmc tests, locked dpgen install/tests, datapack lint, `verifyProject`, `packageProject`, `ci`, and a deterministic project inventory report. Existing task names remain intact for compatibility. |
+| `scripts/audit_repo.py` | Pack roots are now discovered recursively from `pack.mcmeta`, aligning the audit with the Gradle pack tasks and validating RTWrapper's nested distributable pack instead of reporting its source container as broken. |
+| `README.md`, `CLAUDE.md`, `AGENT.md` | Documented the canonical Gradle lifecycle commands and their offline-only scope. |
+
+- **Verified:** with JDK 25, `./gradlew tasks --group verification`; `./gradlew verifyProject` passed all 10 offline tasks, including Mecha, 65 guigenmc tests, 5 dpgen tests and 18 repository tests. `checkPacks` reports 29 existing external-reference warnings; the audit reports one existing medium RTWrapper format warning.
+- **Not verified:** `packageProject` reached archive generation and initial Fabric compilation, but the sandbox Gradle daemon was killed during Loom remapping even with one worker and a 1.5 GiB heap cap. The complete package/CI graph and GitHub Actions workflow therefore still need a hosted-runner confirmation. No Minecraft server was started.
+
+## 2026-10-19 - feat: macroEngine `tui/` text UI module
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+### Changed (AI-assisted edit)
+
+| Path (under `packs/macroEngine-Datapack-v26.3/`) | Change |
+|---|---|
+| `data/macroengine/function/tui/{line,header,divider,button}` | New. Print a line, title bar, rule and clickable function button to `@s`. Text is read from `macroengine:tui` storage and rendered with `api/store/render`. |
+| `data/macroengine/function/core/internal/tui/{render_text,render_label,render_hover,button_send}` | New. Internals. `button_send` is the only macro line; its single argument `fn` is validated with `systems/validate/function_id` first. |
+| `docs/tui.md`, `README.md` | New doc; one feature bullet. |
+
+- **Verified:** Mecha 0.101.0 passes with the new files; text components set `interpret:false` and `plain:true`; click/hover use the 1.21.5+ field names.
+- **Not verified:** nothing was run in a Minecraft server (repository rule). The click/hover rendering, the `execute if function` chain into `api/store/render` and the `$tellraw` macro were checked by reading, not executing. The module has no `config` on/off switch.
+
+## 2026-10-19 - fix: macroEngine hover_event field names and missing `plain` on NBT text components
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+### Changed (AI-assisted edit)
+
+| Path (under `packs/macroEngine-Datapack-v26.3/data/macroengine/function/`) | Change |
+|---|---|
+| `systems/string/hover_text`, `systems/string/tag_badge` | **Fix.** `hover_event` / `show_text` still used the pre-1.21.5 `contents` key; it is `value`. The component did not match the 1.21.5+ format. |
+| `systems/string/tooltip_item` | **Fix.** `hover_event` / `show_item` used `contents:{id,Count}`; the 1.21.5+ format is flat `id` and `count`. |
+| `api/store/show`, `api/store/player/show`, `api/title/actionbar_p`, `core/internal/api/title/_apply`, `core/config/list` | **Fix.** Six `nbt` text components lacked `plain` (and in two lines `interpret`/`plain` pairs), so string values printed with quotes on 26.1+. Applied with `scripts/fix_text_components.py --fix`; the script now reports 0 remaining. |
+
+- **Verified:** Mecha 0.101.0 passes on the pack (the two documented `time query` files excluded as in `lint_datapacks.sh`); `scripts/origin_watermarks.py --check` ok; `pytest scripts/tests` 17 passed; every pack JSON file (loot tables, item modifiers, recipes, advancement triggers) checked against the vanilla registries of misode/mcmeta (snapshot 26.4-snapshot-4, slightly newer than 26.3) with no findings; all 1085 `function` references resolve.
+- **Not verified:** nothing was run in a Minecraft server (repository rule). The `hover_event` field names follow the 1.21.5+ text component format and were not exercised in game. No new features were added: the stable commands from 1.21.5 to 26.3 (`/waypoint`, `/dialog`, `/fetchprofile`, `/compute`, `/posteffect`) have no matching API module in this pack.
+
+## 2026-10-18 - fix/ci/test: restore macroEngine watermark, pin remaining actions, add repository tests
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+### Changed (AI-assisted edit)
+
+| Path | Change |
+|---|---|
+| `packs/macroEngine-Datapack-v26.3/data/macroengine/function/_vc_origin.mcfunction` | Restored with `scripts/origin_watermarks.py --write`. Commit `5f2a74b` had deleted it, so `--check` (the first CI step) failed on `main`. Only this one file was written. |
+| `.github/workflows/ai-agent.yml`, `codeql.yml` | `actions/checkout`, `actions/setup-node` and `github/codeql-action/{init,analyze}` pinned by commit SHA (were floating tags), as `CLAUDE.md` requires. SHAs resolved with `git ls-remote` against the upstream repositories. |
+| `scripts/tests/test_repo_invariants.py` | New. Offline regression tests: real tree passes the watermark check; missing/hand-edited watermarks are rejected (on a temporary copy); every workflow `uses:` is SHA-pinned. |
+| `.github/workflows/build.yml` | New required step "Repository tests" (guigenmc pytest suite, `scripts/tests`, `scripts/check_archive.py`), wired into the release gate, diagnostics and the final summary. These tests existed but CI never ran them. |
+| `scripts/lint_datapacks.sh` | Excluded paths are now found with `-prune`, each one is reported once with its `.mcfunction` count, and the summary prints the total number of files excluded from validation. Exit-status behaviour is unchanged. |
+| `packs/DailyBonus/data/dailybonus/function/tick.mcfunction` | **Fix.** A player with no `db_last_day` score was never granted (a score comparison against an unset score never succeeds), so the daily bonus could never be claimed for the first time. One line added before the existing comparison; the existing line, namespaces, objectives and loot table are unchanged. Not verified in a running game: the regression is covered by a Ward test that only runs in CI. |
+| `packs/DailyBonus/data/dailybonus/test/*.mcfunction` (3 files) | New Ward tests (load constant, tick day, first login is granted). Excluded from Mecha lint (`scripts/lint_datapacks.sh`) because `assert`/`await` are not vanilla commands; the exclusion is reported like the others. Written from Ward's documentation, never executed. |
+| `.github/workflows/ward.yml`, `scripts/ward_ci.sh`, `scripts/ward_guard.py`, `scripts/tests/test_ward_guard.py` | New. Isolated Ward job (see below); 16 offline tests in `scripts/tests` cover the guard (fake loopback / `0.0.0.0` listeners) and keep the workflow, script and docs from being loosened. |
+| `CLAUDE.md`, `AGENT.md`, `README.md`, `CONTRIBUTING.md`, `NOTICE.md`, `SECURITY.md`, `scripts/README.md` | Rule 7 now names the single Ward exception; warning notes added. |
+| `scripts/dpgen/test/builder.test.js`, `scripts/dpgen/package.json` | New. 5 offline `node:test` tests (examples validate and build, tick/load tags, invalid configs raise `ConfigError`); `npm test` was a placeholder that always failed. Also run by the CI "Repository tests" step. |
+
+- **Verified (run in a sandbox, not in CI):** `origin_watermarks.py --check` (fails before the restore, passes after); `pytest` 81 passed (65 guigenmc + 16 in `scripts/tests`); orchestration against a stub `mcward` in 5 scenarios (loopback pass, `0.0.0.0` aborts before tests, test failure propagates, no tests fails, bypass flag); every negative control failed as intended; `npm test` in `scripts/dpgen` 5 passed (a deliberately wrong expectation made one fail); the SHA-pin test fails when one action is unpinned again; `scripts/lint_datapacks.sh` with Mecha 0.101.0 exits 0, and exits 1 with a deliberately malformed function (removed afterwards); `check_archive.py`; JSON/YAML parse of every tracked file; `py_compile`, `bash -n` and `node --check` on all scripts.
+- **Not verified:** `./gradlew buildAll`, `build` and `lint` were not run (sandbox has JDK 21, the repo needs JDK 25, and Gradle/Loom downloads are outside the allowed network). The new CI step has not run on GitHub Actions. Nothing was run in a Minecraft server (repository rule).
+- **`mcward==1.4.0` is integrated as an isolated, CI-only job (maintainer-authorised exception to the no-server rule):** `.github/workflows/ward.yml` + `scripts/ward_ci.sh` + `scripts/ward_guard.py`. Server bound to `127.0.0.1`, whitelist enforced and empty, online-mode on, status/query/RCON off; seeded before start, proven loopback-only before and after the tests, inbound 25565 dropped when iptables is available, stopped and deleted in an always-run cleanup. Warning notes added to `CLAUDE.md`, `AGENT.md`, `README.md`, `CONTRIBUTING.md`, `NOTICE.md`, `SECURITY.md`, `scripts/README.md`, the workflow and both scripts, guarded by tests. **Never executed against real mcward or a real server** (sandbox: Python 3.12, no Mojang/Modrinth/Adoptium access); only the guard and the orchestration were tested, against a stub `mcward` and plain Python sockets. **The job fails until a pack contains Ward tests** (`data/<ns>/test/**.mcfunction`); none exist. Whether Ward builds exist for 26.3 and whether the server needs the Minecraft EULA (not accepted by the workflow) is unverified.
+
+## 2026-10-18 - feat: macroEngine `cb/run_repeating`, `cb/time_left`, `container/info`
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update
+when reviewed_.
+
+### Changed (AI-assisted edit)
+
+| Path (under `packs/macroEngine-Datapack-v26.3/`) | Change |
+|---|---|
+| `data/macroengine/function/api/cb/run_repeating`, `core/internal/api/cb/repeat_build` | New. Repeats one command 1..100 times at a fixed interval by building a `cmds` list and reusing `systems/cb/seq_expand`. |
+| `data/macroengine/function/api/cb/time_left`, `core/internal/systems/cb/time_left_step` | New. Read-only: ticks until the next pending entry of a `cb_id`, plus the pending count. |
+| `data/macroengine/function/api/container/info` | New. Size, used, free, empty, full and first free slot in one call; reuses the existing `_addr`, `_count`, `_size_pick` and `_ff_loop` internals. |
+| `docs/cb.md`, `docs/container.md` | Document the new functions; `container.md` is new and also lists the existing container functions. |
+
+- **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0) passes with the new files. `scripts/origin_watermarks.py --check` still reports the missing macroEngine watermark; that was already the case before this change and is untouched.
+- **Not verified:** nothing was run in a Minecraft server (repository rule). The `first_free` scan and the `time_left` counters were checked by reading the code paths they reuse, not by executing them. `cb_time_left` for an entry pushed back by the fire spacing reports its current counter, not its real fire tick.
+
 ## 2026-10-15 - feat: macroEngine load gates 4 and 5, two item tags, four block tags
 
 **Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update

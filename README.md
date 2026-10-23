@@ -45,6 +45,8 @@ schema (`archived/archive.schema.json`) enumerates the valid kinds.
 
 ## Building
 
+> **⚠️ Warning - a Minecraft server is started in exactly one place.** `.github/workflows/ward.yml` (via `scripts/ward_ci.sh`) runs datapack tests with mcward on a throw-away Fabric server on a GitHub-hosted runner. It is bound to `127.0.0.1`, whitelist enforced and empty, verified loopback-only by `scripts/ward_guard.py` before and after the tests, and deleted afterwards. Nothing else in this repository starts, connects to or tests against a Minecraft server. Never run that script on a developer machine, a production host or next to a real world.
+
 This repo uses Gradle to build all Fabric mod subprojects.
 
 ### Requirements
@@ -52,19 +54,27 @@ This repo uses Gradle to build all Fabric mod subprojects.
 - JDK 25
 - Gradle Wrapper (included, no separate Gradle install needed)
 
-### Build all subprojects
+### Project lifecycle tasks
+
+The root build exposes project-specific entry points in addition to the
+per-module Gradle tasks:
 
 ```bash
-./gradlew buildAll
+# Offline checks: provenance, audit, tests, datapack syntax and pack metadata.
+# pytest, guigenmc (editable) and Mecha must be installed first.
+./gradlew verifyProject
+
+# Builds Fabric modules, individual pack ZIPs, the merged pack and an inventory.
+./gradlew packageProject -PconfirmZip=yes
+
+# The canonical local CI graph: verifyProject + packageProject.
+./gradlew ci -PconfirmZip=yes
 ```
 
-This runs the build task across every subproject under `mods/` and produces mod JARs. Output JARs land in each subproject's `build/libs/` directory.
-
-### Lint all subprojects
-
-```bash
-./gradlew lint
-```
+`buildAll` and `lint` remain available as focused compatibility tasks: the
+first builds every Gradle subproject, and the second runs configured Checkstyle
+tasks. `writeProjectInventory` writes a deterministic build report at
+`build/reports/repository/project-inventory.json`.
 
 ### Build a single subproject
 
@@ -74,21 +84,21 @@ This runs the build task across every subproject under `mods/` and produces mod 
 
 ### CI
 
-Pushes and pull requests trigger the `build.yml` workflow, named **`CI`**. Its two jobs are `Verify & package` and `Publish release`; the first runs `buildAll` and `lint` across all subprojects and uploads build artifacts. See `.github/workflows/build.yml` for the full pipeline, including the release-publishing job.
+Pushes, pull requests and manual dispatches trigger `build.yml`, named
+**CI**. Its read-only `quality` job calls `quality.yml`, the reusable workflow
+that runs the canonical `./gradlew ci -PconfirmZip=yes` graph, a Python 3.9
+compatibility test for guigenmc, and a guigenmc source/wheel package check.
+Every required job must pass the reusable workflow's explicit quality gate.
 
-The workflow has three checks with **different levels of enforcement**:
+Only a successful `main` push or manual run can reach `publish`. That job has
+`contents: write`, requires the configured `release` environment, does not
+check out or execute repository code, and publishes only the release-candidate
+artifact produced by the read-only quality job. This keeps the code-execution
+and publication capabilities in separate jobs.
 
-| Check | Enforced? | Notes |
-|---|---|---|
-| `build` (`buildAll`) | yes | failure fails the job |
-| Gradle `lint` | yes | step is `continue-on-error`, but "Final summary" re-fails the job |
-| Datapack lint (`scripts/lint_datapacks.sh`, Mecha) | yes | step is `continue-on-error` for diagnostics, but the script propagates Mecha's exit status, so "Release gate" blocks publishing and "Final summary" fails the job |
-
-All three checks are enforced. (The datapack lint used to be advisory only: the
-script ended in an unconditional `exit 0` while the step was `continue-on-error`,
-making it a no-op that could never fail a build. Mecha 0.101.0 validates all
-3681 `.mcfunction` files here and passes with zero errors, so it was made
-enforcing on 2026-10-07. Set `LINT_WARN_ONLY=1` for a one-off advisory run.)
+`verifyProject` enforces provenance, the repository audit, offline tests,
+dpgen tests, datapack syntax, and pack/archive metadata checks. `packageProject`
+builds subprojects and the individual/merged pack archives.
 
 The datapack lint still skips the paths listed in `IGNORE_PATHS` at the top of
 `scripts/lint_datapacks.sh` (`archived/*`, `packs/cmdTunnel-datapack/*` and two

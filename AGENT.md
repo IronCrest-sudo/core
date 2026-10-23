@@ -8,11 +8,15 @@ Context the AI agent reads on every run. Keep it short and factual.
 - `packs/` contains the individual datapacks; `packs/merge-manifest.json` drives the `mergeDatapacks` task.
 
 ## Checks available to the agent
-- `audit`: `python3 scripts/audit_repo.py` (repository structure audit)
-- `lint`: `bash scripts/lint_datapacks.sh` (datapack lint)
+- `verifyProject`: `./gradlew verifyProject` (canonical offline repository validation; requires its Python/Node tools)
+- `audit`: `./gradlew auditRepository` or `python3 scripts/audit_repo.py` (repository structure audit)
+- `lint`: `./gradlew lintDatapacks` or `bash scripts/lint_datapacks.sh` (datapack syntax lint)
+- `packageProject`: `./gradlew packageProject -PconfirmZip=yes` (module and pack release artifacts)
 
 ## Rules
 - Static checks only: lint, build, reading files. Never suggest or run tests on the live server.
+- **Warning:** the only server that is ever started is the isolated, loopback-only Ward test server of
+  `.github/workflows/ward.yml` (`scripts/ward_ci.sh`, GitHub-hosted CI only). An agent never runs it locally.
 - Never delete git history, repositories or organizations. Retire things by hiding or archiving.
 - Never put tokens or secrets into code, comments or logs.
 - In `merge-manifest.json`, `output.min_format` / `output.max_format` must match the format of the included packs.

@@ -18,5 +18,5 @@ execute if data storage macroengine:engine modules{store:0b} run return 0
 execute store success score #st_show macroengine.tmp run function macroengine:api/store/get
 execute if score #st_show macroengine.tmp matches 0 run tellraw @s ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"store: value is not set, or in.name is missing or invalid","color":"yellow"}]
 execute if score #st_show macroengine.tmp matches 0 run return 0
-tellraw @s ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"storage":"macroengine:store","nbt":"in.name","interpret":false,"color":"gray"},{"text":" = ","color":"dark_gray"},{"storage":"macroengine:store","nbt":"out.value","interpret":false,"color":"green"}]
+tellraw @s ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"storage":"macroengine:store","nbt":"in.name","interpret":false,"color":"gray","plain":true},{"text":" = ","color":"dark_gray"},{"storage":"macroengine:store","nbt":"out.value","interpret":false,"color":"green","plain":true}]
 return 1

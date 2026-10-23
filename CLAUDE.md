@@ -26,10 +26,17 @@ as they are.
    and the Turkish letter tables in the text engine are the only non-English content.
 6. **Do not claim something works unless it was run.** Say what was linted, built or only read.
 7. **Do not run tests on or against a Minecraft server.** No self-test functions, no test harnesses that need a game
-   server. Static checks (Mecha, Gradle build, script `--check` modes) are fine.
+   server, no RCON, no live-game smoke tests, and an AI agent never starts a server itself. Static checks (Mecha, Gradle
+   build, script `--check` modes) are fine. **One documented exception:** the CI job `.github/workflows/ward.yml`
+   (`scripts/ward_ci.sh`, mcward pinned to 1.4.0) runs datapack tests on a throw-away server that is loopback-only,
+   whitelist-enforced, verified by `scripts/ward_guard.py` and deleted afterwards. It runs on GitHub-hosted runners only,
+   is never run locally by an agent, and must not be loosened (no non-loopback bind, no open whitelist, no skipped
+   verification, no skipped cleanup).
 8. Do not rename runtime identifiers (datapack namespaces such as `data/vortacraftmc/`, scoreboard fake players such
    as `#vortacraftmc.*`, the Java package `com.vortacraftmc`) without an explicit migration plan: that breaks existing
    worlds and dependents.
+
+> **⚠️ Warning - a Minecraft server is started in exactly one place.** `.github/workflows/ward.yml` (via `scripts/ward_ci.sh`) runs datapack tests with mcward on a throw-away Fabric server on a GitHub-hosted runner. It is bound to `127.0.0.1`, whitelist enforced and empty, verified loopback-only by `scripts/ward_guard.py` before and after the tests, and deleted afterwards. Nothing else in this repository starts, connects to or tests against a Minecraft server. Never run that script on a developer machine, a production host or next to a real world.
 
 ## Layout
 
@@ -45,14 +52,22 @@ as they are.
 ## Commands
 
 ```bash
-./gradlew buildAll                      # build every subproject
-./gradlew lint                          # Gradle lint
-scripts/lint_datapacks.sh               # Mecha validation of all datapacks (needs `pip install mecha==0.101.0`)
+./gradlew verifyProject                 # canonical offline validation task graph
+./gradlew packageProject -PconfirmZip=yes # build modules and release archives
+./gradlew ci -PconfirmZip=yes           # verifyProject + packageProject
+./gradlew buildAll                      # focused compatibility task: build every subproject
+./gradlew lint                          # focused compatibility task: Gradle lint
+scripts/lint_datapacks.sh               # Mecha validation (needs `pip install mecha==0.101.0`)
 python3 scripts/origin_watermarks.py --check   # watermark headers up to date; use --write to regenerate
+python3 -m pytest scripts/gui_generator/tests scripts/tests   # offline tests; `npm test` in scripts/dpgen
+# scripts/ward_ci.sh starts a Minecraft server - CI only (see the warning above); never run it by hand
 ```
 
-CI (`.github/workflows/build.yml`) runs these on Java 25 and Python 3.9 / 3.12. Actions are pinned by commit SHA;
-keep it that way and keep `permissions` minimal.
+CI (`.github/workflows/build.yml`) delegates to the read-only reusable
+`.github/workflows/quality.yml`, whose canonical check is `./gradlew ci
+-PconfirmZip=yes` on Java 25 and Python 3.12; guigenmc also has a Python 3.9
+compatibility job. Only the artifact-only publish job receives write permission.
+Actions are pinned by commit SHA; keep it that way and keep `permissions` minimal.
 
 Known: the pinned Mecha reports two errors on `time query minecraft:day` (26.3 World Clocks syntax it does not
 know yet). They are not bugs in the pack.

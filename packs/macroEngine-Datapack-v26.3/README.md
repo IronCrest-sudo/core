@@ -2,15 +2,15 @@
 
 **macroEngine** is a macro/module framework datapack for Minecraft Java Edition, providing a large library of reusable command-based systems (math, string, NBT, geo, permissions, UUID cache, hooks, rate limiting, and more) plus a multi-source text/value input system (books, signs, lecterns, name tags, command block minecarts).
 
-> Maintained by: [VortaForge](https://github.com/vortaforge) — repository [`vortaforge/core`](https://github.com/vortaforge/core), path `packs/macroEngine-Datapack-v26.3`
-> Former owner: Runtoolkit (`runtoolkit` organization and `runtoolkit/suite`, retired/archived; original source, not maintained)
+> **Project history:** originally developed under the `runtoolkit` organization (`runtoolkit/suite`), later moved to `vortacraftmc`. Both organizations are now archived — kept online and publicly visible, never deleted, but no longer maintained. Active development moved to **VortaForge**, which is itself temporarily archived as of October 2026 while maintainer/process changes (see below) are completed; nothing in this history was deleted or hidden.
+>
 > Minecraft: **26.3** (`min_format` / `max_format` **121.0**)
-> 
-> License: Unlicense
-> 
+>
+> License: Unlicense (third-party components listed in [`THIRD_PARTY_LICENSES.md`](THIRD_PARTY_LICENSES.md))
+>
 > Namespace: `macroengine`
-> 
-> Maintainer: [VortaForge](https://github.com/vortaforge)
+>
+> AI disclosure: portions of this pack's code, documentation and refactoring were produced with AI assistance. This is stated explicitly rather than left to the commit author field — see [`CREDITS.md`](../../CREDITS.md) if present, or the repository's AI-disclosure notes. This is not a statement that every line was AI-written, only that AI assistance was used in this project's development and is not being concealed.
 
 ---
 
@@ -32,6 +32,7 @@
 
 - **Store module** (`api/store/`) — storage-based variables, per-player values, raw NBT helpers (`api/store/nbt/*`: `get`, `set`, `set_default`, `append`, `merge`, `remove`, `exists`, `count`, `copy`, `add`, `toggle`, `pop`, `shift` over any storage/path) and multilingual message templates (`render`, `render_all`, `convert`, `show`) that return plain strings; see [`docs/store.md`](docs/store.md). It replaced the old `api/data` and `api/placeholder` modules. Untrusted text is never substituted into a command or JSON string, so chat/sign/book input is safe. Migration notes: [`docs/migrating-from-data-api.md`](docs/migrating-from-data-api.md)
 - **Title / action bar with tokens** (`api/title/*_p`, plus `clear`, `reset`, `times`; see [`docs/title.md`](docs/title.md)) — storage-driven (no quote/backslash breakage), rendered with `api/store/render` per recipient
+- **Text UI** (`tui/`) — `line`, `header`, `divider` and `button` print formatted lines and clickable function buttons to the executor from storage (no text is pasted into a command); see [`docs/tui.md`](docs/tui.md)
 - **Runtime config** (`core/config/*`, see [`docs/config.md`](docs/config.md)) — every behaviour knob is a validated key: module on/off switches, tick systems and rates, handler scan intervals, queue depth, template limits and token switches, title defaults, name length
 
 ---
@@ -39,15 +40,62 @@
 ## Requirements
 
 - Minecraft Java Edition **26.3**
-- Datapack `min_format`/`max_format`: **122**
+- Datapack `min_format`/`max_format`: **121**
 
 ---
 
 ## Installation
 
-1. Place the datapack folder in your world's `datapacks/` directory (or load it via a server-side pack source).
-2. Run `/reload` or restart the server.
-3. macroEngine initializes automatically via `#macroengine:events/on_load`.
+macroEngine is a datapack: it ships as a folder (or zip) that goes into a world's `datapacks/` directory. There is no separate "installer" — the steps below just cover different ways of getting the folder there and reloading it, for different setups.
+
+### Singleplayer / any OS (manual, UI-based)
+
+1. Download or clone this pack so you have the `macroEngine-Datapack-v26.3` folder (or a zip of it).
+2. Open your world's folder and go into `datapacks/`. In the Minecraft world-select screen this is reachable via **Edit → Open World Folder**.
+3. Copy the `macroEngine-Datapack-v26.3` folder in (or the zip — Minecraft can load zipped datapacks directly, no need to extract).
+4. Load the world (or if already in it, run `/reload`), then run `/datapack list enabled` to confirm `macroengine` is listed.
+
+### Linux / macOS (Bash)
+
+```bash
+# Run from the repository root
+WORLD_DIR="$HOME/.minecraft/saves/YourWorldName"   # adjust to your world path
+cp -r packs/macroEngine-Datapack-v26.3 "$WORLD_DIR/datapacks/"
+```
+
+For a dedicated server (any Linux distribution — Debian/Ubuntu, Fedora/RHEL, Arch, etc. — the steps are identical, since this only touches the world save, not the OS):
+
+```bash
+SERVER_WORLD_DIR="/path/to/server/world"
+cp -r packs/macroEngine-Datapack-v26.3 "$SERVER_WORLD_DIR/datapacks/"
+# Then, from the server console or an operator in-game:
+#   /reload
+```
+
+### Windows (PowerShell)
+
+```powershell
+# Run from the repository root
+$WorldDir = "$env:APPDATA\.minecraft\saves\YourWorldName"   # adjust to your world path
+Copy-Item -Recurse -Path "packs\macroEngine-Datapack-v26.3" -Destination "$WorldDir\datapacks\"
+```
+
+For a Windows-hosted dedicated server, replace `$WorldDir` with the server's world directory and run `/reload` from the console or in-game as an operator afterward.
+
+### Server install, in general
+
+1. Copy the pack folder into the **world's** `datapacks/` directory on the server (not the server's root directory — datapacks are per-world).
+2. Run `/reload` as an operator, or restart the server.
+3. Run `/datapack list enabled` to confirm `macroengine` loaded without errors; check the server log for any function errors on load.
+4. macroEngine initializes automatically via `#macroengine:events/on_load` — no further setup commands are required for the base install.
+
+### Installing via Claude Code (or another coding agent)
+
+If you're scripting the install (e.g. provisioning a test server, or doing it as part of a larger Claude Code task), the operation is just a directory copy plus a `/reload`; there is no build step for the datapack itself. For example, ask Claude Code to:
+
+> "Copy `packs/macroEngine-Datapack-v26.3` from this repo into `<world-path>/datapacks/`, then tell me the server needs a `/reload` or restart to pick it up."
+
+Claude Code (or any agent) can safely automate the file copy; it cannot run `/reload` for you unless it has console/RCON access to the running server — that step still needs an operator.
 
 To check the default tick configuration, see `data/macroengine/function/config/`.
 

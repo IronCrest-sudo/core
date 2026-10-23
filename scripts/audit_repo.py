@@ -168,11 +168,35 @@ def audit_packs():
     pack_info = {}
     pack_hashes = defaultdict(list)
 
-    for entry in sorted(os.listdir(packs_root)):
-        pdir = os.path.join(packs_root, entry)
-        if not os.path.isdir(pdir):
-            continue
+    # A pack root is defined by its pack.mcmeta, not by its depth below packs/.
+    # Most packs are direct children, but RTWrapper deliberately keeps its
+    # distributable datapack below datapack/ alongside Fabric source and docs.
+    # Scanning direct children treated that source container as a broken pack
+    # and, worse, skipped validation of its real nested pack. Discover every
+    # pack.mcmeta instead so Gradle's recursive pack tasks and this audit have
+    # the same definition of a loadable pack.
+    pack_dirs = sorted(
+        {
+            os.path.dirname(meta)
+            for meta in walk(packs_root, {".mcmeta"})
+            if os.path.basename(meta) == "pack.mcmeta"
+        },
+        key=lambda path: os.path.relpath(path, packs_root),
+    )
 
+    # Still diagnose a directory that actually looks like a datapack but has
+    # forgotten its top-level metadata. Directories used only as source/docs
+    # containers are intentionally not reported.
+    for entry in sorted(os.listdir(packs_root)):
+        candidate = os.path.join(packs_root, entry)
+        if (os.path.isdir(candidate)
+                and os.path.isdir(os.path.join(candidate, "data"))
+                and not os.path.isfile(os.path.join(candidate, "pack.mcmeta"))):
+            add("pack.mcmeta-missing", "high", candidate,
+                "data/ exists but no top-level pack.mcmeta makes this directory loadable")
+
+    for pdir in pack_dirs:
+        entry = os.path.relpath(pdir, packs_root).replace(os.sep, "/")
         meta_path = os.path.join(pdir, "pack.mcmeta")
         info = {"dir": entry, "path": pdir, "namespaces": [], "functions": 0, "files": 0,
                 "format": None, "format_raw": {}}
@@ -821,9 +845,18 @@ def audit_docs():
                 if frag and tgt.endswith(".md") and frag not in headings(tgt):
                     add("docs.broken-anchor", "medium", p, f"broken anchor: {target}", line=i)
 
-    gradle_txt = read_text(os.path.join(REPO, "build.gradle"))
-    defined = set(re.findall(r"tasks\.register\(\s*['\"]([\w\-]+)['\"]", gradle_txt))
-    defined |= set(re.findall(r"^\s*task\s+([\w\-]+)", gradle_txt, re.M))
+    # Root tasks may be factored into apply-from scripts below build-logic/.
+    # Audit all root-owned Gradle scripts, not only build.gradle, so the docs
+    # checker follows the same task graph Gradle evaluates.
+    gradle_scripts = [os.path.join(REPO, "build.gradle")]
+    build_logic = os.path.join(REPO, "build-logic")
+    if os.path.isdir(build_logic):
+        gradle_scripts.extend(walk(build_logic, {".gradle"}))
+    defined = set()
+    for gradle_script in gradle_scripts:
+        gradle_txt = read_text(gradle_script)
+        defined |= set(re.findall(r"tasks\.register\(\s*['\"]([\w\-]+)['\"]", gradle_txt))
+        defined |= set(re.findall(r"^\s*task\s+([\w\-]+)", gradle_txt, re.M))
     for p in walk(REPO, {".md"}):
         txt = re.sub(r"<!--.*?-->", "", read_text(p), flags=re.S)
         for i, line in enumerate(txt.splitlines(), 1):

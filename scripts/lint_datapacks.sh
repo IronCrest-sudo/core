@@ -28,6 +28,11 @@ IGNORE_PATHS=(
     # (v0.101.0) does not know yet. Only these two files are skipped.
     "packs/macroEngine-Datapack-v26.3/data/macroengine/function/world/time_phase.mcfunction"
     "packs/macroEngine-Datapack-v26.3/data/macroengine/function/world/get_time.mcfunction"
+    # Ward tests (data/<ns>/test/) use the Ward mod's `assert`/`await` commands, which
+    # are not vanilla and which Mecha rejects. They are run by .github/workflows/ward.yml
+    # instead. List each pack's test folder explicitly so a glob can never swallow a
+    # real function folder that happens to be called "test".
+    "packs/DailyBonus/data/dailybonus/test"
 )
 
 echo "::group::🚫 Ignoring paths"
@@ -51,13 +56,19 @@ cd "$TMP_DIR/project" || exit 1
 echo -e "${COLOR_SUBHEADER}▶ Removing Ignored Paths:${COLOR_RESET}"
 REMOVED_FILES=()
 
+EXCLUDED_MCFUNCTION=0
+
 for pattern in "${IGNORE_PATHS[@]}"; do
+    # -prune: report each matched entry once instead of every descendant of an
+    # already-removed directory, so the counts below are not inflated.
     while IFS= read -r -d '' target; do
-        echo -e "${COLOR_MUTED}  │ ├─ Removing:${COLOR_RESET}${target#./}"
-        echo "::notice::Ignoring ${target#./}"
+        count="$(find "$target" -name '*.mcfunction' 2>/dev/null | wc -l)"
+        EXCLUDED_MCFUNCTION=$((EXCLUDED_MCFUNCTION + count))
+        echo -e "${COLOR_MUTED}  │ ├─ Removing:${COLOR_RESET}${target#./} (${count} .mcfunction)"
+        echo "::notice::Ignoring ${target#./} (${count} .mcfunction file(s) not validated)"
         REMOVED_FILES+=("${target#./}")
         rm -rf "$target"
-    done < <(find . -path "./$pattern" -print0 2>/dev/null)
+    done < <(find . -path "./$pattern" -prune -print0 2>/dev/null)
 done
 
 echo "::endgroup::"
@@ -100,6 +111,7 @@ else
     echo -e "  Log: Mecha reported validation errors; this now fails the build unless LINT_WARN_ONLY=1."
 fi
 echo -e "${COLOR_PATH}  Ignored paths count: ${#IGNORE_PATHS[@]}${COLOR_RESET}"
+echo -e "${COLOR_PATH}  Excluded from validation: ${#REMOVED_FILES[@]} path(s), ${EXCLUDED_MCFUNCTION} .mcfunction file(s)${COLOR_RESET}"
 
 echo "::endgroup::"
 

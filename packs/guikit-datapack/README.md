@@ -6,7 +6,13 @@ A chest minecart is the screen. Left-click is the click. Definitions live in
 
 Target: Minecraft Java **26.3** (`min_format` / `max_format` **121**).
 
-**New in v5:**
+**New in v6:**
+
+- Ten new `guikit:cond` button conditions: `biome`, `health`, `food`, `air`,
+  `on_fire`, `on_ground`, `sneaking`, `sprinting`, `swimming`, and `fall_flying`.
+- Page links can be configured as tabs, which highlight when their target page is open.
+
+**Already in v5:**
 
 - `/trigger guikit.last` — reopens the most recent menu you opened (survives `/reload`; cleared
   automatically if that menu gets deleted).
@@ -68,6 +74,7 @@ Preview is the real menu. Chat suggests `/function guikit:editor/resume` to come
 | Message | Plain tellraw (`interpret:false`) |
 | Close | Closes the menu |
 | Go to page | Pages `0`–`8` |
+| Page tab | Navigates to a page and highlights its icon while that page is open |
 | Open another menu | Picker, no typed ids |
 | Toggle | Per-player on/off, gray dye when off |
 | Counter +1 | Per-player score, clamped, value printed in chat |
@@ -94,9 +101,21 @@ Hand-written button packs (`storage guikit:btn defs`) can gate a button on a con
 | `level` | `[min]`, `[max]` | XP level is in range |
 | `dimension` | `dim` | the player is in that dimension (any dimension id, e.g. `minecraft:the_nether`) |
 | `weather` | `weather` | `clear`, `rain` or `thunder` in the player's dimension |
+| `biome` | `biome` | the player's current biome (any biome id, e.g. `minecraft:plains`) |
+| `health` | `[min]`, `[max]` | health points (20 = 10 hearts) |
+| `food` | `[min]`, `[max]` | hunger points (0–20) |
+| `air` | `[min]`, `[max]` | remaining air supply (0–300 ticks) |
+| `on_fire` | — | the player is burning |
+| `on_ground` | — | the player is on the ground |
+| `sneaking` | — | the player is sneaking |
+| `sprinting` | — | the player is sprinting |
+| `swimming` | — | the player is swimming |
+| `fall_flying` | — | the player is elytra-flying |
 | `all` / `any` | `of:[...]` | every / at least one element passes (leaf types only) |
 
-`not:1b` inverts any of them. Unknown types fail closed. `dimension` and `weather` are new in v5.
+`not:1b` inverts any of them. Unknown types fail closed. Range bounds are optional; omitted bounds
+default to the full non-negative integer range. `dimension` and `weather` were added in v5; the ten
+conditions above were added in v6.
 
 ## Other players
 

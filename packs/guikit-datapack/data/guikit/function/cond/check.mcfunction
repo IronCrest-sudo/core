@@ -11,6 +11,16 @@
 #   level        {[min:N], [max:N]}                    XP level (not a scoreboard); both optional
 #   dimension    {dim:"minecraft:the_nether"}          any dimension id (overworld / the_nether / the_end / ...)
 #   weather      {weather:"clear"}                     clear | rain | thunder, in the player's dimension
+#   biome        {biome:"minecraft:plains"}             biome at the player's position
+#   health       {[min:N], [max:N]}                    health points (20 = 10 hearts)
+#   food         {[min:N], [max:N]}                    hunger points (0..20)
+#   air          {[min:N], [max:N]}                    remaining air supply (0..300 ticks)
+#   on_fire      {}                                     player is burning
+#   on_ground    {}                                     player is on the ground
+#   sneaking     {}                                     player is sneaking
+#   sprinting    {}                                     player is sprinting
+#   swimming     {}                                     player is swimming
+#   fall_flying  {}                                     player is elytra-flying
 #   all / any    {of:[{type:..}, {type:..}]}           every / at least one element passes. Elements must be
 #                                                      leaf types above (a nested all/any counts as failed)
 # `not:1b` inverts the result. Unknown type / missing key = fails (closed).
@@ -24,6 +34,7 @@
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
 scoreboard players set #cond guikit.tmp 0
+execute if data storage guikit:cond {type:"biome"} unless data storage guikit:cond biome run return 0
 execute if data storage guikit:cond {type:"all"} run function guikit:cond/t_all
 execute if data storage guikit:cond {type:"any"} run function guikit:cond/t_any
 execute if data storage guikit:cond {type:"score"} run function guikit:cond/t_score
@@ -35,5 +46,15 @@ execute if data storage guikit:cond {type:"predicate"} if data storage guikit:co
 execute if data storage guikit:cond {type:"level"} run function guikit:cond/t_level
 execute if data storage guikit:cond {type:"dimension"} if data storage guikit:cond dim run function guikit:cond/t_dimension with storage guikit:cond
 execute if data storage guikit:cond {type:"weather"} if data storage guikit:cond weather run function guikit:cond/t_weather with storage guikit:cond
+execute if data storage guikit:cond {type:"biome"} if data storage guikit:cond biome run function guikit:cond/t_biome with storage guikit:cond
+execute if data storage guikit:cond {type:"health"} run function guikit:cond/t_health
+execute if data storage guikit:cond {type:"food"} run function guikit:cond/t_food
+execute if data storage guikit:cond {type:"air"} run function guikit:cond/t_air
+execute if data storage guikit:cond {type:"on_fire"} run function guikit:cond/t_on_fire
+execute if data storage guikit:cond {type:"on_ground"} run function guikit:cond/t_on_ground
+execute if data storage guikit:cond {type:"sneaking"} run function guikit:cond/t_sneaking
+execute if data storage guikit:cond {type:"sprinting"} run function guikit:cond/t_sprinting
+execute if data storage guikit:cond {type:"swimming"} run function guikit:cond/t_swimming
+execute if data storage guikit:cond {type:"fall_flying"} run function guikit:cond/t_fall_flying
 execute if data storage guikit:cond {not:1b} run function guikit:cond/negate
 return run scoreboard players get #cond guikit.tmp

@@ -22,7 +22,6 @@ The following packs are **temporarily archived** and not currently maintained:
 - `packs/guikit-datapack`
 - `packs/guikit-demo`
 - `packs/RTWrapper`
-- `packs/RTWrapper-1.21.1`
 - `packs/RTWrapper-v1.0.1`
 
 No active development, bug fixes, or security patches are planned for these

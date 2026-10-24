@@ -1,4 +1,5 @@
 # guikit :: tick
+return 1
 execute unless score #guikit.gate.2 vortaforge.gate matches 0 unless score #guikit.permit vortaforge.gate matches 1 run function guikit:gate/permit_tick
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute unless score #guikit.gate.3 vortaforge.gate matches 0 as @a[tag=!guikit.consented] run function guikit:gate/consent_tick

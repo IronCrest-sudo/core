@@ -22,7 +22,6 @@
 >    both be satisfied as things stand.
 >
 > Related: `packs/RTWrapper-v1.0.1` (format 122, in `merge-manifest.json`) and
-> `packs/RTWrapper-1.21.1` (format 48) are separate generations of the same API.
 > The three naming schemes — no suffix, `-1.21.1` (Minecraft version) and
 > `-v1.0.1` (semver) — are not consistent with each other.
 

@@ -4,6 +4,7 @@ execute store result score #slot guikit.tmp run data get storage guikit:work w.s
 execute if score #slot guikit.tmp >= @s guikit.slots run return 0
 execute if data storage guikit:work w{kind:"tab"} run function guikit:play/tab_visual
 execute if data storage guikit:work w{kind:"toggle"} run function guikit:play/visual_toggle
+execute if data storage guikit:work w{kind:"indicator"} run function guikit:play/indicator_visual
 function guikit:internal/clear/w
 data modify storage guikit:w slot set from storage guikit:work w.slot
 data modify storage guikit:w item set from storage guikit:work w.item

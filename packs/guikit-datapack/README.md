@@ -1,32 +1,42 @@
-# guikit — in-game GUI editor
+# guikit — storage-authored GUI engine
 
-Menus are built **in the world**, not by writing `.mcfunction` files.
-A chest minecart is the screen. Left-click is the click. Definitions live in
-`storage guikit:lib` (saved with the world) and survive `/reload`.
+Menus are defined in `storage guikit:lib` (saved with the world, survives `/reload`),
+not written as `.mcfunction` files. A chest minecart is the screen.
+
+There is **no in-game editor anymore** — the old operator editor, the dialog-based
+slot builder and the in-game "browse published menus" list have all been removed.
+Author menus by writing directly to `storage guikit:lib` (see "How it is stored"
+below), then point `/trigger guikit.open` at the one you want with
+`storage guikit:cfg default_menu`.
 
 Target: Minecraft Java **26.3** (`min_format` / `max_format` **121**).
 
-**New in v6:**
+**New widget kinds:**
 
-- Ten new `guikit:cond` button conditions: `biome`, `health`, `food`, `air`,
+- `indicator` — a non-clickable icon whose item/name/lore swap based on which range
+  a score falls into (`states:[{matches, item, name, lore}, ...]`). Falls back to the
+  widget's own item/name/lore when no state matches.
+- `random` — rolls a weighted reward from `rewards:[{weight, cmd, msg}, ...]`
+  (ties resolved by list order; `cmd` can be `function ns:name` to run several commands).
+
+**Already present:**
+
+- Ten `guikit:cond` button conditions: `biome`, `health`, `food`, `air`,
   `on_fire`, `on_ground`, `sneaking`, `sprinting`, `swimming`, and `fall_flying`.
-- Page links can be configured as tabs, which highlight when their target page is open.
-
-**Already in v5:**
-
+- Page links configurable as tabs, which highlight when their target page is open.
 - `/trigger guikit.last` — reopens the most recent menu you opened (survives `/reload`; cleared
   automatically if that menu gets deleted).
-- `/trigger guikit.close` — closes your own open menu immediately (no operator, no waiting for the
-  timeout). For map makers there is also `function guikit:api/close_all` to close every open menu at once.
-- Two new `guikit:cond` button conditions: `dimension` and `weather` (see below).
+- `/trigger guikit.close` — closes your own open menu immediately. For map makers there is also
+  `function guikit:api/close_all` to close every open menu at once.
+- `dimension` and `weather` button conditions.
 
-The cart / click / redraw engine underneath is the old guikit runtime. Authoring
-moved off the `#guikit:fill` / `#guikit:probe` framework and into an editor.
+The cart / click / redraw engine underneath is unchanged — only the authoring layer moved.
 
 ## Install
 
 Drop this pack in the world's `datapacks` folder and `/reload`.
-On first load it seeds a published **Welcome** menu so there is something to open.
+On first load it seeds a published **Welcome** menu (`guikit:m1`) and points
+`storage guikit:cfg default_menu` at it, so there is something to open immediately.
 
 ## Play
 
@@ -36,7 +46,12 @@ Anyone (no operator permission):
 /trigger guikit.open
 ```
 
-That opens the list of **published** menus. A one-time chat line suggests the same command.
+Opens whichever menu `storage guikit:cfg default_menu` names. Change it with:
+
+```
+/data modify storage guikit:cfg default_menu set value "ns:id"
+```
+
 Joining players are told once. Two more player triggers:
 
 ```
@@ -44,46 +59,34 @@ Joining players are told once. Two more player triggers:
 /trigger guikit.close   # close your own open menu right now
 ```
 
-`guikit.last` remembers the last menu opened through the list, a "go to another menu" button,
-or a preview. If that menu is deleted in the editor, the pointer is cleaned up and the trigger
-says so instead of opening nothing.
+`guikit.last` remembers the last menu you opened. If that menu is deleted, the pointer
+is cleaned up and the trigger says so instead of opening nothing.
 
-## Edit (operators)
+## Author a menu
 
-`/function` is permission level 2, so the editor is operator-only:
+There is no in-game builder. Write the menu into `storage guikit:lib` directly — see
+"How it is stored" below for the exact shape, and `data/guikit/function/runtime/seed.mcfunction`
+for a complete worked example (the seeded Welcome menu).
 
-```
-/function guikit:editor/open
-/function guikit:help
-```
-
-1. **Menu list** — emerald creates a menu, a book opens it.
-2. **Editor chest** — slots 0–25 are the menu. The bottom-right book is **Tools**
-   (not part of the menu). Slot 26 of a real 27-slot menu is edited from Tools → Edit slot 26.
-3. Hold the item you want as the icon, left-click a slot, pick an action in the dialog.
-4. Tools: pages, rename, container, timeout, publish / hide, preview, delete.
-
-Preview is the real menu. Chat suggests `/function guikit:editor/resume` to come back.
-
-### What a click can do
-
-| Action | Effect |
+| Widget kind | Effect |
 | --- | --- |
-| Decoration | Icon only, not clickable |
-| Give held item | Gives that item, optional fixed cost (diamond / emerald / gold / iron) |
-| Message | Plain tellraw (`interpret:false`) |
-| Close | Closes the menu |
-| Go to page | Pages `0`–`8` |
-| Page tab | Navigates to a page and highlights its icon while that page is open |
-| Open another menu | Picker, no typed ids |
-| Toggle | Per-player on/off, gray dye when off |
-| Counter +1 | Per-player score, clamped, value printed in chat |
-| Sound | One of six built-in sounds, only the clicking player hears it |
-| Web link | Clickable `https` link in chat; the menu closes so chat is visible |
-| Command | Stored command, see trust model below |
-| Click rules | Confirm (second click within 2 seconds), per-player cooldown (3 / 10 / 30 seconds), or a required tag (`vip`, `member`, `staff`) |
+| `tell` | Icon only, not clickable; shows a message when clicked |
+| `give` | Gives an item, optional fixed cost |
+| `close` | Closes the menu |
+| `page` | Goes to another page |
+| `tab` | Goes to a page and highlights while that page is open |
+| `open` | Opens another menu |
+| `toggle` | Per-player on/off |
+| `add` | Per-player counter, clamped or wrapping |
+| `sound` | Plays a built-in sound, only the clicking player hears it |
+| `link` | Clickable `https` link in chat; the menu closes so chat is visible |
+| `cmd` | Stored command, see trust model below |
+| `meter` | Clickable progress bar (several cells, set a score by clicking a cell) |
+| `indicator` | Non-clickable icon that swaps by score range — new, see above |
+| `random` | Rolls a weighted reward — new, see above |
 
-Click rules are on the slot dialog, after the action is placed. **Keep** leaves a rule as it is. Tags are not typed: an operator grants them with `/tag <player> add vip` (or `member` / `staff`). A button can have more than one rule. While a cooldown is running the icon is a barrier.
+Cost / cooldown / confirm rules on a `cmd` widget are read from `storage guikit:btn defs`
+(see `internal/btn/click.mcfunction` for the exact keys).
 
 ## Button conditions (`guikit:cond`)
 
@@ -128,17 +131,21 @@ A menu cart follows its owner. While anyone else is within 8 blocks, a `minecraf
 
 Container presets: chest, hopper (5 slots), barrel, ender chest, trapped chest, shulker box, copper chest.
 Themed chests are still a `chest_minecart` with a different pane and title — Minecraft has no barrel entity to summon.
-A hopper menu only has slots 0–4; the editor marks the rest red.
+A hopper menu only has slots 0–4.
 
-Timeout is how long the menu stays open (15–180 seconds). The editor itself uses a long timeout so a dialog does not eat it.
+Timeout is how long the menu stays open (`timer` field, in ticks).
 
 ## Trust model
 
-- Building menus requires `/function` (operator).
-- **Give / message / sound / page / toggle / counter** do not run arbitrary commands.
-- A **command** widget runs at datapack function permission (default 2), **as the clicking player, for any player who can open the menu**. Same trust as a command block behind a button. Do not put player-typed text in it. The command dialog rejects nothing by itself: do not put an apostrophe (`'`) in the command, or the save line will not parse.
-- Names, messages and lore must not contain `"` or `\`. Dialog text is escaped into the function call; the function stores it as a string and later shows messages with `interpret:false`.
-- Menu ids are generated (`m1`, `m2`, …). Players never type them.
+- Writing to `storage guikit:lib` requires operator / `/data` access — same trust level the
+  old editor required, now exercised directly instead of through a dialog UI.
+- **Give / message / sound / page / toggle / counter / indicator** do not run arbitrary commands.
+- A **cmd** (and **random** reward) widget runs at datapack function permission (default 2),
+  **as the clicking player, for any player who can open the menu**. Same trust as a command
+  block behind a button. Never source `cmd` text from player input.
+- Names, messages and lore must not contain `"` or `\` unescaped — they are plain SNBT/JSON
+  text components, shown with `interpret:false`.
+- Menu ids are whatever key you give them under `storage guikit:lib menus`. Players never type them.
 
 Backup / inspect:
 
@@ -158,9 +165,8 @@ storage guikit:lib
 registered again from `guikit:lib` by `guikit:runtime/register`. Do not `data remove storage guikit:lib`.
 
 `storage guikit:mem` holds small per-player memories (world save): `last.m<pid>` is the menu id
-`/trigger guikit.last` reopens. Deleting a menu in the editor sweeps the stale pointers.
-
-Per-player editor state is `storage guikit:ed p<pid>` and is not wiped on close, so a dialog can resume the editor.
+`/trigger guikit.last` reopens. Deleting a menu from `guikit:lib` and re-registering sweeps
+the stale pointers on the next open attempt.
 
 ## Opening a menu from a command block
 
@@ -180,11 +186,11 @@ function guikit:api/close_all
 
 `#guikit:register`, `#guikit:fill`, `#guikit:probe`, `#guikit:clear_tags` and `#guikit:on_close`
 still exist and are **not** `replace: true`, so another pack can still add a listener.
-`#guikit:on_open` is new: it runs after the cart is bound and before the first redraw.
-The editor's fill/probe no-op unless this open set `guikit:ed pending`.
+`#guikit:on_open` runs after the cart is bound and before the first redraw.
 
-Widget helpers (`guikit:widget/*`) are what the editor draws with. Drawn icons also store `own` (the opener's uid) so a stolen stack can be stripped.
-Prefer the editor for new menus. A hand-written `#guikit:fill` pack still works beside it;
+Widget helpers (`guikit:widget/*`) are what `guikit:play/draw_one` draws every widget kind with.
+Drawn icons also store `own` (the opener's uid) so a stolen stack can be stripped.
+A hand-written `#guikit:fill` pack still works beside `storage guikit:lib` menus;
 do not clear `guikit:lib` from that pack.
 
 Click detection is still “the widget item landed in the inventory”.
@@ -194,13 +200,15 @@ Click detection is still “the widget item landed in the inventory”.
 
 - Not verified in a live 26.3 client. Load the pack and read `latest.log`.
   `mecha` is not a substitute; it does not validate macro lines.
-- Editor slot 26 is the Tools button. The stored widget for slot 26 still shows in play / preview.
 - Icons are item ids, not full stacks (no enchantments copied off the held item).
 - Hopper menus: slots 5+ are not shown.
-- Command widgets and links are macro-expanded. Quotes in a name, or an apostrophe in a command, fail that save instead of injecting a second command (vanilla has no command separator, but a broken macro line is still a failed save).
-- Dialog buttons run as the player, so they need operator permission. That is why editing is `/function` and playing is a chest click / trigger.
-- Two operators editing the same menu: last write wins.
+- Command widgets and links are macro-expanded. Quotes or a backslash in a name/message/command
+  will fail to parse — write `storage guikit:lib` carefully (vanilla has no command separator).
+- Two people editing `storage guikit:lib` at once: last write wins, same as any shared NBT.
 - Donkey / mule containers are still registered by the engine and still refused (unchanged).
+- `indicator`'s `matches` ranges are not validated against each other — overlapping ranges
+  resolve to whichever state comes first in the list.
+- `random`'s weights must be positive integers; a non-positive or missing weight is treated as 1.
 - The interaction lock is not a substitute for a live 26.3 test. `F3+B` shows the guard box while someone else is within 8 blocks.
 - A player who already has the chest open when the guard appears is not force-closed. Do not kill the cart to kick them; that closes the owner as well.
 - Click-rule tags are only `vip`, `member`, and `staff`. There is no free-typed tag.

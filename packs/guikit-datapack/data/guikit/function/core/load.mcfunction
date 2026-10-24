@@ -18,16 +18,10 @@ scoreboard objectives add guikit.drop minecraft.custom:minecraft.drop
 scoreboard objectives add guikit.pid dummy
 scoreboard objectives add guikit.var dummy
 scoreboard objectives add guikit.open trigger
-scoreboard objectives add guikit.goto trigger
-scoreboard objectives add guikit.sort trigger
-scoreboard objectives add guikit.filter trigger
 scoreboard objectives add guikit.arm dummy
 scoreboard objectives add guikit.armt dummy
 scoreboard objectives add guikit.gmsg dummy
 scoreboard objectives add guikit.ack trigger
-scoreboard objectives add guikit.bpage dummy
-scoreboard objectives add guikit.bsort dummy
-scoreboard objectives add guikit.bfilt dummy
 scoreboard objectives add guikit.rf dummy
 scoreboard objectives add guikit.rfiv dummy
 scoreboard objectives add guikit.last trigger
@@ -55,3 +49,7 @@ function guikit:internal/summon/builtin
 data modify storage guikit:cont bound set value {}
 data modify storage guikit:btn defs set value {}
 function #guikit:register
+
+# /trigger guikit.open always opens THIS menu now (no more in-game browsable list).
+# Point it elsewhere with: /data modify storage guikit:cfg default_menu set value "ns:id"
+execute unless data storage guikit:cfg default_menu run data modify storage guikit:cfg default_menu set value "guikit:m1"

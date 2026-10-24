@@ -17,4 +17,5 @@ execute if data storage guikit:work w{kind:"toggle"} run function guikit:play/ac
 execute if data storage guikit:work w{kind:"add"} run function guikit:play/act/add
 execute if data storage guikit:work w{kind:"cmd"} run function guikit:play/act/cmd
 execute if data storage guikit:work w{kind:"link"} run function guikit:play/act/link
+execute if data storage guikit:work w{kind:"random"} run function guikit:play/act/random
 execute if score #acted guikit.tmp matches 1.. run function guikit:play/act/cd_arm

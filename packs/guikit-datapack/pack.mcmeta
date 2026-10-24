@@ -1,6 +1,6 @@
 {
   "pack": {
-    "description": "guikit v6 - in-game GUI editor (chest_minecart + left-click)",
+    "description": "guikit v7 - storage-authored GUI engine (chest_minecart + left-click)",
     "min_format": 121,
     "max_format": 121
   },

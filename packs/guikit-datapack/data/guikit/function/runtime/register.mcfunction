@@ -1,12 +1,9 @@
 # guikit :: runtime/register     #guikit:register, after the built-in containers
-# Menus authored in-game live in storage guikit:lib (world save). The registry is rebuilt every reload.
+# In-game editing is gone: menus in storage guikit:lib are now authored by hand
+# (/data modify storage guikit:lib ...) instead of through the old operator editor.
+# The registry is rebuilt every reload.
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0
-data modify storage guikit:reg containers.gk_editor set value {entity:"chest_minecart",slots:27,pad:"minecraft:black_stained_glass_pane",title:{text:"GUI Editor",color:"gold",italic:false}}
-data modify storage guikit:reg menus."guikit:editor" set value {alias:"editor",container:"gk_editor"}
-data modify storage guikit:reg containers.gk_browse set value {entity:"chest_minecart",slots:27,pad:"minecraft:gray_stained_glass_pane",title:{text:"Menus",italic:false}}
-data modify storage guikit:reg menus."guikit:browse" set value {alias:"browse",container:"gk_browse"}
-
 execute unless data storage guikit:lib order run data modify storage guikit:lib order set value []
 execute unless data storage guikit:lib menus run data modify storage guikit:lib menus set value {}
 execute unless data storage guikit:lib seeded run function guikit:runtime/seed

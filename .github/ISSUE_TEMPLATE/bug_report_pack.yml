@@ -10,7 +10,6 @@ body:
         - InteractionClickDetection
         - LeftClickDetection
         - RTWrapper
-        - RTWrapper-1.21.1
         - RTWrapper-v1.0.1
         - TunnelScript
         - cmdTunnel-datapack

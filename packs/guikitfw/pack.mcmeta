@@ -1,0 +1,7 @@
+{
+  "pack": {
+    "description": "guikit — storage-authored GUI framework (chest minecart runtime)",
+    "min_format": 121,
+    "max_format": 122
+  }
+}

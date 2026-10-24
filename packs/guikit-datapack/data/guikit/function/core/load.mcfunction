@@ -1,5 +1,6 @@
 # [TEMPORARILY ARCHIVED] This pack is paused for maintenance. See README.md for status.
 # guikit :: load
+tellraw @a {"text":"[guikit] This pack is archived, use guikitfw instead.","color":"yellow"}
 return 1
 function guikit:gate/version
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0

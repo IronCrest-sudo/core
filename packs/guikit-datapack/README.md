@@ -1,5 +1,12 @@
 # guikit — storage-authored GUI engine
 
+> **Archived.** This pack is no longer maintained. No active
+> development, bug fixes, or security patches are planned.
+> Superseded by [`guikitfw`](../guikitfw), a restructured rewrite
+> of the same GUI kit functionality.
+
+---
+
 Menus are defined in `storage guikit:lib` (saved with the world, survives `/reload`),
 not written as `.mcfunction` files. A chest minecart is the screen.
 

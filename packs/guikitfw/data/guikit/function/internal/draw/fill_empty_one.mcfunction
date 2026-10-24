@@ -1,3 +1,5 @@
 # macro $(slot) $(filler)
 data modify storage guikit:work item set from storage guikit:work filler
-$execute unless items entity @e[type=#guikit:container,tag=guikit.me,limit=1] container.$(slot) * run item replace entity @e[type=#guikit:container,tag=guikit.me,limit=1] container.$(slot) with $(filler)[custom_data={guikit:{widget:1,type:"separator",id:"fill_$(slot)",pack:"guikit"}},max_stack_size=1]
+execute if score @s guikit.mode matches 1 run function guikit:internal/container/load_pos
+execute if score @s guikit.mode matches 1 run function guikit:internal/draw/fill_empty_block with storage guikit:work
+execute unless score @s guikit.mode matches 1 run function guikit:internal/draw/fill_empty_entity with storage guikit:work

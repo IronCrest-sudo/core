@@ -179,3 +179,19 @@ Public domain (Unlicense) — see [LICENSE](LICENSE).
 ## Contributing
 
 Issues and PRs welcome. Keep the framework **menu-free**; ship demos as separate packs.
+
+
+## Block containers (kiosk)
+
+```snbt
+{
+  name: "Kiosk",
+  container: "barrel",
+  pos: [100, 64, -20],
+  timer: 1200,
+  pages: [{widgets: [...]}]
+}
+```
+
+Supported: `chest`, `trapped_chest`, `barrel`, `hopper`, `dropper`, `dispenser`, `ender_chest`, `large_chest`.  
+Shared kiosk: block is removed only when the last player closes. Distance close default 8.

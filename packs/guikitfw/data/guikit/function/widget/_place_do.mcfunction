@@ -1,2 +1,4 @@
-# macro $(slot) $(item) $(id) $(type) $(menu)
-$item replace entity @e[type=#guikit:container,tag=guikit.me,limit=1] container.$(slot) with $(item)[custom_data={guikit:{widget:1,type:"$(type)",id:"$(id)",pack:"guikit",menu:"$(menu)"}},max_stack_size=1]
+# macro $(slot) $(item) $(id) $(type) $(menu) — also uses work x y z when mode=1
+execute if score @s guikit.mode matches 1 run function guikit:internal/container/load_pos
+execute if score @s guikit.mode matches 1 run function guikit:widget/_place_do_block with storage guikit:work
+execute unless score @s guikit.mode matches 1 run function guikit:widget/_place_do_entity with storage guikit:work

@@ -11,6 +11,10 @@ scoreboard objectives add guikit.dirty dummy
 scoreboard objectives add guikit.tmp dummy
 scoreboard objectives add guikit.const dummy
 scoreboard objectives add guikit.cd dummy
+scoreboard objectives add guikit.mode dummy
+scoreboard objectives add guikit.bz dummy
+scoreboard objectives add guikit.by dummy
+scoreboard objectives add guikit.bx dummy
 scoreboard objectives add guikit.var dummy
 scoreboard objectives add guikit.drop minecraft.custom:minecraft.drop
 scoreboard objectives add guikit.last trigger

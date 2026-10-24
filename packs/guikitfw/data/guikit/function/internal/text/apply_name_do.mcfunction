@@ -1,2 +1,4 @@
 # macro $(slot) $(item) $(id) $(type) $(menu) $(ntext)
-$item replace entity @e[type=#guikit:container,tag=guikit.me,limit=1] container.$(slot) with $(item)[custom_name={"text":"$(ntext)","italic":false},custom_data={guikit:{widget:1,type:"$(type)",id:"$(id)",pack:"guikit",menu:"$(menu)"}},max_stack_size=1]
+execute if score @s guikit.mode matches 1 run function guikit:internal/container/load_pos
+execute if score @s guikit.mode matches 1 run function guikit:internal/text/apply_name_block with storage guikit:work
+execute unless score @s guikit.mode matches 1 run function guikit:internal/text/apply_name_entity with storage guikit:work

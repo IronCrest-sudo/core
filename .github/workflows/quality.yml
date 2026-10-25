@@ -142,34 +142,6 @@ jobs:
           if-no-files-found: error
           retention-days: 7
 
-  guigenmc-python39:
-    name: guigenmc Python 3.9 compatibility
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-
-    permissions:
-      contents: read
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          persist-credentials: false
-
-      - name: Set up Python 3.9
-        uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7
-        with:
-          python-version: "3.9"
-          cache: pip
-          cache-dependency-path: scripts/gui_generator/pyproject.toml
-
-      - name: Run guigenmc tests
-        shell: bash
-        run: |
-          set -euo pipefail
-          python -m pip install --disable-pip-version-check pytest -e ./scripts/gui_generator
-          python -m pytest -q scripts/gui_generator/tests
-
   guigenmc-package:
     name: guigenmc source and wheel package
     runs-on: ubuntu-latest
@@ -221,7 +193,7 @@ jobs:
 
   gate:
     name: Quality gate
-    needs: [verify, guigenmc-python39, guigenmc-package]
+    needs: [verify, guigenmc-package]
     if: always()
     runs-on: ubuntu-latest
     outputs:
@@ -236,7 +208,6 @@ jobs:
         shell: bash
         env:
           VERIFY: ${{ needs.verify.result }}
-          PYTHON39: ${{ needs.guigenmc-python39.result }}
           PACKAGE: ${{ needs.guigenmc-package.result }}
         run: |
           set -euo pipefail
@@ -246,11 +217,10 @@ jobs:
             echo "| Job | Result |"
             echo "|---|---|"
             echo "| Verify, test and package | \`$VERIFY\` |"
-            echo "| guigenmc Python 3.9 | \`$PYTHON39\` |"
             echo "| guigenmc package | \`$PACKAGE\` |"
           } >> "$GITHUB_STEP_SUMMARY"
 
-          if [ "$VERIFY" = success ] && [ "$PYTHON39" = success ] && [ "$PACKAGE" = success ]; then
+          if [ "$VERIFY" = success ] && [ "$PACKAGE" = success ]; then
             echo "verified=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi

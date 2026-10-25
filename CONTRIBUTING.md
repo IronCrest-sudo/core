@@ -3,8 +3,8 @@
 Thanks for your interest in contributing to this project.
 
 **Read [NOTICE.md](NOTICE.md) before opening a PR.** It covers the
-Gradle/datapack split in this monorepo (what's built by `buildAll` and what
-isn't), what a PR should contain, and what will get a PR closed
+Gradle/datapack split in this monorepo (what's covered by `ci`/`buildAll`
+and what isn't), what a PR should contain, and what will get a PR closed
 (obfuscated code, undisclosed behavior, misuse of the macro/command
 tooling for griefing or exploit purposes). This guide assumes you've
 already read it.
@@ -21,11 +21,15 @@ already read it.
    ```
 
 3. Make your changes.
-4. Build and lint before opening a PR:
+4. Run the canonical local CI graph before opening a PR:
    ```bash
-   ./gradlew buildAll
-   ./gradlew lint
+   ./gradlew ci -PconfirmZip=yes
    ```
+   This runs `verifyProject` (provenance, repository audit, offline tests,
+   dpgen tests, datapack syntax, pack/archive metadata) and `packageProject`
+   (subprojects plus the individual/merged pack archives). `buildAll` and
+   `lint` are still available as narrower, faster compatibility tasks if you
+   only touched `mods/` or only want the Checkstyle pass.
 
 ## Branch naming
 
@@ -66,8 +70,8 @@ probably two commits. Reference related issues or PRs in the body
 ## Pull requests
 
 - Open a PR against the `main` branch.
-- Make sure the **`CI`** workflow is green before requesting review. Inside its `Verify & package` job the steps that can fail you are `Build all subprojects` (`./gradlew buildAll`), `Gradle lint` (`./gradlew lint`) and `Lint datapacks` (`scripts/lint_datapacks.sh`, Mecha); `Release gate` then blocks publishing if any of them failed.
-- Describe what changed and why in the PR description — and whether the change touches `mods/`, `packs/`, or both, since only the former is covered by `buildAll`.
+- Make sure the **`CI`** workflow is green before requesting review. Inside its `Verify, test and package` job, the one step that can fail you is `Run canonical project CI task graph` (`./gradlew ci -PconfirmZip=yes`), which runs `verifyProject` and `packageProject`; `publish` then only runs after that job succeeds on a `main` push.
+- Describe what changed and why in the PR description — and whether the change touches `mods/`, `packs/`, or both; `ci` covers both, while `buildAll` alone only covers `mods/`.
 - Run through the checklist at the bottom of [NOTICE.md](NOTICE.md) before requesting review.
 
 ## Security

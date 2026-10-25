@@ -8,9 +8,9 @@ Context the AI agent reads on every run. Keep it short and factual.
 - `packs/` contains the individual datapacks; `packs/merge-manifest.json` drives the `mergeDatapacks` task.
 
 ## Checks available to the agent
-- `verifyProject`: `./gradlew verifyProject` (canonical offline repository validation; requires its Python/Node tools)
-- `audit`: `./gradlew auditRepository` or `python3 scripts/audit_repo.py` (repository structure audit)
-- `lint`: `./gradlew lintDatapacks` or `bash scripts/lint_datapacks.sh` (datapack syntax lint)
+- `verifyProject`: `./gradlew verifyProject` (canonical offline repository validation; requires its Python/Node tools; includes the repository audit and datapack lint below)
+- `audit`: `python3 scripts/audit_repo.py` (repository structure audit)
+- `lint`: `./gradlew lint` or `bash scripts/lint_datapacks.sh` (datapack syntax lint)
 - `packageProject`: `./gradlew packageProject -PconfirmZip=yes` (module and pack release artifacts)
 
 ## Rules

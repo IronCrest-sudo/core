@@ -12,26 +12,26 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 9
 
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 9
 
   # Pip (Python) dependency updates. The only requirements.txt /
   # pyproject.toml in the tree live in scripts/gui_generator, so "/" never
   # matched anything.
   - package-ecosystem: "pip"
-    directory: "/scripts/gui_generator"
+    directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 9
 
   # npm: scripts/dpgen has a package.json + lockfile that no other entry covers.
   - package-ecosystem: "npm"
-    directory: "/scripts/dpgen"
+    directory: "/"
     schedule:
       interval: "weekly"
-    open-pull-requests-limit: 0
+    open-pull-requests-limit: 9

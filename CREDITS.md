@@ -464,3 +464,24 @@ Decision (maintainer): the project is Unlicense; older repos that carried MIT ar
 - **Not covered:** `RTWrapper-1.21.1`'s separate `vortacraftmc:core/load` function was left untouched (out of the requested scope).
 - **Verified:** nothing run; these are comment/doc-only changes.
 - **Not verified:** nothing was run in a Minecraft server (not applicable — no executable logic changed).
+
+## Archive notice reverted (unarchive)
+
+**Tool:** Claude (Anthropic), working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+The archive pass above was never finished: `archived/archive.json` was never
+given entries for these packs, and `SECURITY.md` / `NOTICE.md` already stated
+that nothing under `packs/` is archived. This pass completes the reversal.
+
+| Path | Change |
+|---|---|
+| `README.md` | Removed the "Project status (maintenance paused)" section; added a note that `guikitfw` is the active successor to `guikit-datapack`. |
+| `packs/macroEngine-Datapack-v26.3/.../function/setup.mcfunction` | Removed the `# [TEMPORARILY ARCHIVED] ...` comment line. |
+| `packs/guikit-datapack/.../function/core/load.mcfunction` | Removed the comment line **and** the `tellraw`/`return 1` pair that had been blocking the function's own gate/registry logic from ever running. |
+| `packs/RTWrapper/datapack/RTWrapper-Datapack/.../function/core/load.mcfunction` | Removed the comment line. |
+| `packs/RTWrapper-v1.0.1/.../function/core/load.mcfunction` | Removed the comment line. |
+
+- **`packs/guikit-demo/` and `packs/RTWrapper-1.21.1/`:** the previous pass above records edits to these two paths, but neither exists anywhere in this repository (`git log --all --diff-filter=A` for either returns nothing). Whatever those edits landed on, it was never part of this monorepo's `packs/` tree; no corresponding cleanup was possible or needed here. Other mentions of `guikit-demo` in this file's table above are kept as a historical record of that earlier, apparently unmerged work rather than edited to look consistent after the fact.
+- **Scope:** reverts the comment-only edits above, plus the two extra lines in `guikit-datapack`'s load function noted above. No scoring, gating, or data-storage logic was changed beyond that.
+- **Verified:** `scripts/check_archive.py` (passes: `1 project(s), 0 error(s)` — the single `archived/archive.json` entry is `runtoolkit/suite`, unaffected by this change).
+- **Not verified:** `./gradlew checkArchive` was not run (no network access to `services.gradle.org` to fetch the Gradle distribution in this environment); nothing was run in a Minecraft server.

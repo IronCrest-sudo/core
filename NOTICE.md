@@ -10,15 +10,16 @@ This is a **monorepo**, not a single Gradle project with some extra files
 next to it:
 
 - `mods/` — Fabric mods. Each subproject is built and linted through the
-  root Gradle build (`./gradlew buildAll` / `./gradlew lint`). Changes
-  here must build cleanly across **all** subprojects, not just the one you
-  touched — a shared dependency bump or API change can silently break a
-  sibling mod.
-- `packs/` — Datapacks. These are **not** part of the Gradle build. There is
-  nothing to compile; validity is checked by loading the pack plus the
-  syntax/reference tooling listed in `SECURITY.md` § "Validation tooling"
-  (Mecha lint, `checkPacks`, `mergeDatapacks`), not by `buildAll`. Don't
-  assume a green Gradle run says anything about a datapack change.
+  root Gradle build (`./gradlew ci -PconfirmZip=yes`, which runs
+  `verifyProject` + `packageProject`; the narrower `buildAll` / `lint`
+  tasks still work for a quick local pass). Changes here must build
+  cleanly across **all** subprojects, not just the one you touched — a
+  shared dependency bump or API change can silently break a sibling mod.
+- `packs/` — Datapacks. These are checked by `verifyProject` as part of
+  the same `ci` graph (syntax/reference tooling listed in `SECURITY.md`
+  § "Validation tooling": Mecha lint, `checkPacks`, `mergeDatapacks`), but
+  are not Gradle-*compiled* — there is nothing to build for them, so
+  `buildAll` alone says nothing about a datapack change.
 - `scripts/` — Helper tooling, lower trust by default. Review before
   running locally.
 - `examples/` — Templates and sample code. Not shipped, not covered by the
@@ -27,26 +28,26 @@ next to it:
 
 If your change spans both a mod and a pack (e.g. a Fabric mod that reads
 data from a companion datapack), say so explicitly in the PR description —
-this is the case most likely to be missed by CI, since `buildAll` only
-covers the Gradle side.
+`ci` covers both `mods/` and `packs/`, but calling it out still helps
+review.
 
 ## Gradle specifics
 
 - JDK 25, wrapper included — don't add a second build system or bypass the
   wrapper.
-- `./gradlew buildAll` and `./gradlew lint` must both pass before you
-  request review. CI does enforce **both of these** on every push and PR —
-  the steps are marked `continue-on-error` so the diagnostics can still run,
-  but the "Final summary" step re-fails the job if either one did not
-  succeed (see `.github/workflows/build.yml`).
-- CI's separate **datapack** lint (Mecha, `scripts/lint_datapacks.sh`) is
-  also enforced: the script propagates Mecha's exit status, so a syntax
-  error in any `.mcfunction` fails the job and blocks the release gate.
-  Note that Mecha only validates command *syntax* — it never loads the
-  pack, so the "you've validated the pack loads correctly" checkbox below
-  still applies. Paths listed in the script's `IGNORE_PATHS` are skipped.
+- `./gradlew ci -PconfirmZip=yes` must pass before you request review.
+  This is the exact task graph CI runs, in the single "Run canonical
+  project CI task graph" step of the `Verify, test and package` job (see
+  `.github/workflows/quality.yml`); there is no separate `buildAll`/`lint`
+  step in CI to pass independently.
+- `ci` already runs the **datapack** lint (Mecha, via `verifyProject`): a
+  syntax error in any `.mcfunction` fails the task graph and blocks the
+  release gate. Note that Mecha only validates command *syntax* — it never
+  loads the pack, so the "you've validated the pack loads correctly"
+  checkbox below still applies. Paths listed in `scripts/lint_datapacks.sh`'s
+  `IGNORE_PATHS` are skipped.
 - Building a single subproject during iteration is fine
-  (`./gradlew :mods:<subproject-name>:build`), but run the full `buildAll`
+  (`./gradlew :mods:<subproject-name>:build`), but run the full `ci`
   before opening the PR — cross-subproject breakage is the most common
   thing missed by scoped builds.
 - Avoid adding dependencies unless necessary; every added dependency is
@@ -99,8 +100,7 @@ or clearly malicious cases, the contributor being blocked from the repo.
 
 > **⚠️ Warning:** the CI job `ward.yml` starts an isolated, loopback-only Minecraft test server to run Ward datapack tests (see `SECURITY.md`, "Validation tooling"). Do not start a server yourself for a PR check, and never run `scripts/ward_ci.sh` outside GitHub Actions.
 
-- [ ] `./gradlew buildAll` passes
-- [ ] `./gradlew lint` passes
+- [ ] `./gradlew ci -PconfirmZip=yes` passes
 - [ ] If you touched `packs/`, you've validated the pack loads correctly
       (Gradle passing does not cover this)
 - [ ] PR description explains **what** changed and **why**, and says

@@ -14,23 +14,10 @@ vortacraftmc ecosystem."), which is circular - the organization *is*
 the project name, so the description said nothing about what is in here.
 -->
 
-## Project status (maintenance paused)
-
-The following packs are **temporarily archived** and not currently maintained:
-
-- `packs/macroEngine-Datapack-v26.3`
-- `packs/guikit-datapack`
-- `packs/guikit-demo`
-- `packs/RTWrapper`
-- `packs/RTWrapper-v1.0.1`
-
-No active development, bug fixes, or security patches are planned for these
-packs until further notice.
-
 ## Structure
 
 - `mods/`        — Fabric mods (Gradle subprojects, auto-discovered by `settings.gradle`)
-- `packs/`       — Datapacks / resource packs
+- `packs/`       — Datapacks / resource packs. `guikitfw` is the active successor to `guikit-datapack`.
 - `scripts/`     — Helper scripts and tools
 - `examples/`    — Templates, example Fabric mods, example datapacks, test files
 - `build-logic/` — Shared Gradle script (`shared-fabric-mod.gradle`) applied by the mod subprojects

@@ -7,7 +7,7 @@
       "kind": "other",
       "status": "archived",
       "archived_on": "2026-09-21",
-      "reason": "The runtoolkit organization was retired in favor of vortacraftmc; the monorepo was archived (read-only) and its content continues in vortaforge/core.",
+      "reason": "The runtoolkit organization was retired; its projects moved to vortacraftmc and then to vortaforge. The monorepo was archived (read-only) and its content continues in vortaforge/core.",
       "last_version": "main",
       "license": "Unlicense",
       "deploy": "not_recommended",

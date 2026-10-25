@@ -1,7 +1,4 @@
-# [TEMPORARILY ARCHIVED] This pack is paused for maintenance. See README.md for status.
 # guikit :: load
-tellraw @a {"text":"[guikit] This pack is archived, use guikitfw instead.","color":"yellow"}
-return 1
 function guikit:gate/version
 execute unless score #guikit.open vortaforge.gate matches 1 run return 0
 execute if entity @s[type=minecraft:player] unless entity @s[tag=guikit.consented] unless score #guikit.gate.3 vortaforge.gate matches 0 run return 0

@@ -1,4 +1,3 @@
-# [TEMPORARILY ARCHIVED] This pack is paused for maintenance. See README.md for status.
 # RTWrapper core bootstrap.
 # Scoreboards are intentionally stable fake-player state; existing values are not overwritten.
 

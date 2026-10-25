@@ -1,4 +1,3 @@
-# [TEMPORARILY ARCHIVED] This pack is paused for maintenance. See README.md for status.
 # macroengine:setup — ordered load sequence (the old fake percentage output was removed:
 # it printed 20+ console lines per load and reported nothing real).
 

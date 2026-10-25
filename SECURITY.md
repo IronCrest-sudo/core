@@ -32,7 +32,7 @@ This repo consolidates multiple projects with different security postures:
 | Area | Status |
 |---|---|
 | `mods/` | Fabric mods. Compiled, type-safe. |
-| `packs/` | 14 live packs (datapacks + the macroEngine resource pack), all under active layout. **Not** archived: `archived/` currently holds no packs at all (see `archived/archive.json`, whose only entry is the retired `runtoolkit/suite` repo with `"path": null`). |
+| `packs/` | 12 live packs (datapacks + the macroEngine resource pack), all under active layout. **Not** archived: `archived/` currently holds no packs at all (see `archived/archive.json`, whose only entry is the retired `runtoolkit/suite` repo with `"path": null`). |
 | `scripts/` | Helper tooling. Treat as lower trust; review before running. |
 | `examples/` | Templates and sample code. Not intended for production use. |
 | `archived/` | Reserved for no-longer-maintained projects, kept for reference only — do not deploy on a live server without review. Tracked in `archived/archive.json`; see `archived/README.md`. |

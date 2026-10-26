@@ -33,6 +33,7 @@ IGNORE_PATHS=(
     # instead. List each pack's test folder explicitly so a glob can never swallow a
     # real function folder that happens to be called "test".
     "packs/DailyBonus/data/dailybonus/test"
+    "packs/macroEngine-Datapack-v26.3/data/macroengine/test"
 )
 
 echo "::group::🚫 Ignoring paths"

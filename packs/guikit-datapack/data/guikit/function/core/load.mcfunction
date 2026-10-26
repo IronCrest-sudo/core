@@ -52,3 +52,7 @@ function #guikit:register
 # /trigger guikit.open always opens THIS menu now (no more in-game browsable list).
 # Point it elsewhere with: /data modify storage guikit:cfg default_menu set value "ns:id"
 execute unless data storage guikit:cfg default_menu run data modify storage guikit:cfg default_menu set value "guikit:m1"
+# Stored menu commands run at function permission level, so they are off until
+# an operator sets guikit:cfg dynamic_cmd to 1b. See docs/dynamic-command-gate.md
+# in the repository root.
+execute unless data storage guikit:cfg dynamic_cmd run data modify storage guikit:cfg dynamic_cmd set value 0b

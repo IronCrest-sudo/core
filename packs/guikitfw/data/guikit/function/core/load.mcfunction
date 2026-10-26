@@ -33,6 +33,7 @@ execute unless data storage guikit:cfg container run data modify storage guikit:
 execute unless data storage guikit:cfg timer run data modify storage guikit:cfg timer set value 900
 execute unless data storage guikit:cfg distance_close run data modify storage guikit:cfg distance_close set value 8
 execute unless data storage guikit:cfg follow run data modify storage guikit:cfg follow set value 1b
+execute unless data storage guikit:cfg dynamic_cmd run data modify storage guikit:cfg dynamic_cmd set value 0b
 
 function guikit:internal/util/clear_scratch
 function #guikit:register

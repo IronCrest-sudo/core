@@ -12,5 +12,7 @@ $execute if data storage macroengine:engine permissions.$(player).$(perm) run da
 $execute if data storage macroengine:engine _pex_tmp{result:0b} run execute as @a if score @s macroengine.pid = $pex_pid macroengine.tmp run tellraw @s ["",{"text":"[MACROENGINE] ","color":"#00AAAA","bold":true},{"text":"✘ ","color":"red"},{"text":"$(perm)","color":"yellow"},{"text":" — you don't have this permission.","color":"red"}]
 execute if data storage macroengine:engine _pex_tmp{result:0b} run return 0
 
+# Dynamic commands are off by default (config dynamic_cmd). See docs/cmd_gate.md.
+execute unless data storage macroengine:engine config{dynamic_cmd:1b} run return 0
 $execute as @a if score @s macroengine.pid = $pex_pid macroengine.tmp at @s run $(cmd)
 data remove storage macroengine:engine _pex_tmp

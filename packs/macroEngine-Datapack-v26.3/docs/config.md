@@ -124,6 +124,18 @@ Public functions of a disabled module return 0 without doing anything. Tick scan
 | `title_stay` | int | `70` | 0 - 72000 | default stay ticks for api/title/show_p |
 | `title_fade_out` | int | `20` | 0 - 1200 | default fade-out ticks for api/title/show_p |
 
+## Dynamic commands (stored command strings)
+
+Everything that macro-executes a command *string from storage* (the queue, hooks, wands, triggers,
+`multi_cmd`, `once_cmd`, region watchers and the command-block runners) is gated by
+`macroengine:systems/cmd_gate/check`; the `api/cmd/*` string runners read the same switch.
+Full contract, blocklist and permission examples: [cmd_gate.md](cmd_gate.md).
+
+| Key | Type | Default | Range | Effect |
+|---|---|---|---|---|
+| `dynamic_cmd` | bool | `0b` | 0b / 1b | master switch for stored-string command execution; 0b makes every gated executor return 0 |
+| `dynamic_cmd_max_len` | int | `256` | 1 - 4096 | longest command string the gate accepts |
+
 ## Not configurable (on purpose)
 
 - `systems/validate/safe_name` rules other than the length limit, and the macro-injection guards in `api/store`: turning them off would let untrusted text into commands.

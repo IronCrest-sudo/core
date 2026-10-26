@@ -19,6 +19,7 @@ the project name, so the description said nothing about what is in here.
 - `mods/`        — Fabric mods (Gradle subprojects, auto-discovered by `settings.gradle`)
 - `packs/`       — Datapacks / resource packs. `guikitfw` is the active successor to `guikit-datapack`.
 - `scripts/`     — Helper scripts and tools
+- `docs/`        — Cross-pack design and security notes
 - `examples/`    — Templates, example Fabric mods, example datapacks, test files
 - `build-logic/` — Shared Gradle script (`shared-fabric-mod.gradle`) applied by the mod subprojects
 - `archived/`    — Reserved for projects no longer developed but kept for reference (registry: `archived/archive.json`, validate with `scripts/check_archive.py`)
@@ -91,6 +92,17 @@ The datapack lint still skips the paths listed in `IGNORE_PATHS` at the top of
 26.x `time query` files in `macroEngine-Datapack-v26.3`). Mecha only checks
 command *syntax* — it does not load the pack, so a green run is not proof that a
 datapack behaves correctly.
+
+### Release ZIPs for the packs
+
+`python3 scripts/build_release.py` writes one deterministic ZIP per pack to
+`build/release/`: the release copy is minified (comments and blank lines
+dropped), the source tree is never touched and nothing is renamed, so a
+release ZIP is byte-for-byte reproducible from this repository
+(`SHA256SUMS.txt` is written next to the ZIPs). The same run inventories every
+place a pack executes a command string that is not literal source text
+(`dynamic-surfaces.json`); those surfaces are gated off by default in every
+pack that has them - see [docs/dynamic-command-gate.md](docs/dynamic-command-gate.md).
 
 ## History
 

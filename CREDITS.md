@@ -3,6 +3,35 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-27 - feat: default-off dynamic command gate + deterministic release build
+
+**Tool:** Arena.ai Agent Mode, working from a prompt by the maintainer. Review status: _pending - update when reviewed_.
+
+| Path | Change |
+|---|---|
+| `packs/macroEngine-Datapack-v26.3/data/macroengine/function/systems/cmd_gate/` | New fail-closed gate for stored-string command execution: config switch, `cmd.dynamic` permission via `api/perm/require`, length/control-character checks, and a developer-controlled root-token blocklist (`blocklist.mcfunction`, seeded only when missing). The command string is only ever handled as storage data - no macro line in the gate touches it. |
+| `packs/macroEngine-Datapack-v26.3/data/macroengine/function/api/perm/group/`, `.../core/internal/api/perm/group/` | Permission groups on top of the existing `perm.<name>` tags: admin-only create / grant-perm / assign / remove / list, every name checked with `systems/validate/safe_name` before it reaches a macro line. |
+| `packs/macroEngine-Datapack-v26.3/` (executors + config) | All stored-string executors (queue, hooks, wand, triggers, `multi_cmd`, `once_cmd`, region watchers, command-block runners) now call the gate; `api/cmd/*` string runners and `api/perm/run|exec` read the same new config keys `dynamic_cmd` (default `0b`) and `dynamic_cmd_max_len` (`config_rev` bumped to 3). The fake "safely executed via pipeline" step in `multi_cmd/exec_macro` now runs the real check. Supporting docs in `docs/cmd_gate.md` and `docs/config.md`; two Ward tests under `data/macroengine/test/`. |
+| `packs/guikit-datapack/`, `packs/guikitfw/` | Stored menu commands are off until an operator sets `guikit:cfg dynamic_cmd` to `1b` (default seeded in `core/load`). |
+| `packs/RTWrapper-v1.0.1/`, `packs/RTWrapper/` | The single wrapper dispatch is off by default (`#dynamic`, `rtw.config`); `rtwrapper:api/dynamic/on|off` toggles it. |
+| `packs/TunnelScript/`, `packs/cmdTunnel-datapack/` | The legacy command-block runners are off by default (`#dynamic_enabled` / `#dynamic`), on top of the existing trusted-tag and confirmation gates; pre-macro syntax only, so the packs stay loadable on their target versions. |
+| `scripts/build_release.py`, `scripts/tests/test_build_release.py` | New release pipeline: one deterministic ZIP per pack (release copy minified, source untouched, nothing renamed, `_vc_origin` kept verbatim, Ward `test/` folders excluded) plus `SHA256SUMS.txt` and a line-by-line inventory of dynamic command-execution surfaces. No obfuscation or encryption by design. |
+| `docs/dynamic-command-gate.md`, `README.md`, `SECURITY.md`, `scripts/lint_datapacks.sh` | Cross-pack inventory of every dynamic surface (including the code-supplied `$(invoke)` helpers and prefix-constrained dispatches reviewed and deliberately not gated, and the packs with no surface), enable instructions per pack, and the new lint ignore for the macroEngine Ward tests. |
+
+- **Verified:** `scripts/lint_datapacks.sh` (Mecha 0.101.0) passed; `./gradlew :checkPacks` on Temurin 25
+  (`--configure-on-demand`, memory-capped) checked 12 packs / 3217 functions with 0 errors and 0 warnings;
+  `python3 -m unittest discover scripts/tests` - 28 tests OK (including the new build_release tests);
+  `python3 scripts/origin_watermarks.py --check` passed; `python3 scripts/audit_repo.py` reports only the two
+  pre-existing `pack.format-mixed` notes; `python3 scripts/build_release.py --check` passed and all 12 release
+  ZIPs were built and spot-checked; every static `function` reference in the changed files resolves.
+  The finished diff was also written out as a `.patch`, applied to a fresh clone with `git apply`, and the
+  same checks re-run there (the patch file itself is not part of the tree).
+- **Not verified:** no Minecraft server was started (CLAUDE.md rule 7). The two new Ward tests are written but
+  unrun - their first execution is the `ward.yml` CI job. The gate's runtime semantics (permission, blocklist,
+  group assign/remove against live players) still need the in-world acceptance pass from `NOTICE.md`. The full
+  `verifyProject`/`ci` graph was not run: configuring the Fabric Loom subprojects exhausts the sandbox's
+  2 GiB of RAM, so only `checkPacks` ran in isolation.
+
 ## 2026-10-23 - feat: add ten guikit condition types
 
 **Tool:** Copilot SDK in VS Code, working from a prompt by the maintainer. Review status: _pending - update

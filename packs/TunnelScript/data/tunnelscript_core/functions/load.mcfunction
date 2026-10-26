@@ -18,6 +18,9 @@ execute unless score #input_captured tunnelscript.vars = #input_captured tunnels
 execute unless score #input_executed tunnelscript.vars = #input_executed tunnelscript.vars run scoreboard players set #input_executed tunnelscript.vars 0
 # Dry-run, command log and repeat state.
 execute unless score #dryrun tunnelscript.vars = #dryrun tunnelscript.vars run scoreboard players set #dryrun tunnelscript.vars 0
+# Stored command strings do not execute until an operator enables them
+# (ts:config/dynamic_on); the trusted tag and confirmation gate still apply.
+execute unless score #dynamic_enabled tunnelscript.vars = #dynamic_enabled tunnelscript.vars run scoreboard players set #dynamic_enabled tunnelscript.vars 0
 execute unless score #dryrun_count tunnelscript.vars = #dryrun_count tunnelscript.vars run scoreboard players set #dryrun_count tunnelscript.vars 0
 execute unless score #log_enabled tunnelscript.vars = #log_enabled tunnelscript.vars run scoreboard players set #log_enabled tunnelscript.vars 0
 execute unless score #log_max tunnelscript.vars = #log_max tunnelscript.vars run scoreboard players set #log_max tunnelscript.vars 64

@@ -50,6 +50,7 @@ actually runs, and what each tool does and does not prove:
 | Tool | Invoked by | Checks | Does **not** check |
 |---|---|---|---|
 | `scripts/lint_datapacks.sh` (Mecha 0.101.0) | `build.yml`, step `Lint datapacks` - enforced | `.mcfunction` **command syntax** for every pack not in `IGNORE_PATHS` | Whether the pack **loads**, whether references resolve, whether behaviour is correct |
+| `python3 scripts/build_release.py --check` | manual (not a CI step yet) | release ZIPs are deterministic and the release minifier is idempotent; the build also inventories dynamic command-execution surfaces (`docs/dynamic-command-gate.md`) | Runtime behaviour; whether a listed surface is reachable by an untrusted player |
 | `./gradlew checkPacks` | `build.yml` via `check` | `pack.mcmeta` shape and format range, JSON validity, cross-references between packs | Command semantics |
 | `./gradlew checkOriginWatermarks` | `build.yml` via `zipPacks` | every pack carries `data/<namespace>/function/_vc_origin.mcfunction` | Content of the watermark (covered by the next row) |
 | `python3 scripts/origin_watermarks.py --check` | `build.yml`, step `Check provenance watermark content` | every watermark equals what the template generates for its pack and namespace, and contains only comments (a no-op) | That the pack's code is what the watermark claims; it proves consistency, not authorship |

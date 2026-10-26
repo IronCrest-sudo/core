@@ -40,18 +40,18 @@ execute if score $fn_v macroengine.tmp matches ..999 run return 0
 execute if score $fn_v macroengine.tmp matches 1000..999999 run data modify storage macroengine:output suffix set value "k"
 execute if score $fn_v macroengine.tmp matches 1000..999999 run scoreboard players set $fn_div macroengine.tmp 100
 execute if score $fn_v macroengine.tmp matches 1000..999999 run scoreboard players operation $fn_v macroengine.tmp /= $fn_div macroengine.tmp
-execute if score $fn_v macroengine.tmp matches 1000..999999 run execute store result storage macroengine:output short int 1 run scoreboard players get $fn_v macroengine.tmp
+execute store result storage macroengine:output short int 1 run scoreboard players get $fn_v macroengine.tmp
 execute if score $fn_v macroengine.tmp matches 1000..999999 run return 0
 
 # 1_000_000 – 999_999_999 → M
 execute if score $fn_v macroengine.tmp matches 1000000..999999999 run data modify storage macroengine:output suffix set value "M"
 execute if score $fn_v macroengine.tmp matches 1000000..999999999 run scoreboard players set $fn_div macroengine.tmp 100000
 execute if score $fn_v macroengine.tmp matches 1000000..999999999 run scoreboard players operation $fn_v macroengine.tmp /= $fn_div macroengine.tmp
-execute if score $fn_v macroengine.tmp matches 1000000..999999999 run execute store result storage macroengine:output short int 1 run scoreboard players get $fn_v macroengine.tmp
+execute store result storage macroengine:output short int 1 run scoreboard players get $fn_v macroengine.tmp
 execute if score $fn_v macroengine.tmp matches 1000000..999999999 run return 0
 
 # >= 1_000_000_000 → B
 execute if score $fn_v macroengine.tmp matches 1000000000.. run data modify storage macroengine:output suffix set value "B"
 execute if score $fn_v macroengine.tmp matches 1000000000.. run scoreboard players set $fn_div macroengine.tmp 100000000
 execute if score $fn_v macroengine.tmp matches 1000000000.. run scoreboard players operation $fn_v macroengine.tmp /= $fn_div macroengine.tmp
-execute if score $fn_v macroengine.tmp matches 1000000000.. run execute store result storage macroengine:output short int 1 run scoreboard players get $fn_v macroengine.tmp
+execute store result storage macroengine:output short int 1 run scoreboard players get $fn_v macroengine.tmp

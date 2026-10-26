@@ -7,7 +7,7 @@ execute if entity @s[type=minecraft:player] unless entity @s[tag=macroengine.con
 $execute if data storage macroengine:engine color._names.$(color) run data modify storage macroengine:output result set value 1b
 
 # Hex shorthand: valid if the string is non-empty and its first character is "#".
-data modify storage macroengine:engine _color_hex_probe set value "$(color)"
+$data modify storage macroengine:engine _color_hex_probe set value "$(color)"
 execute store result score #cv_hexlen macroengine.tmp run data get storage macroengine:engine _color_hex_probe
 execute if score #cv_hexlen macroengine.tmp matches 1.. run data modify storage macroengine:engine _color_hex_probe set string storage macroengine:engine _color_hex_probe 0 1
 execute if data storage macroengine:engine {_color_hex_probe:"#"} run data modify storage macroengine:output result set value 1b

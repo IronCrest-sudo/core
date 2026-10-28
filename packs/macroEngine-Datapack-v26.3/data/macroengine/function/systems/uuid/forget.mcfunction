@@ -2,7 +2,7 @@
 # macroengine:systems/uuid/forget
 # Deletes a UUID entry from the cache
 #
-# KULLANIM:
+# USAGE:
 # data modify storage macroengine:input key set value "benim_anahtarim"
 # function macroengine:systems/uuid/forget
 #

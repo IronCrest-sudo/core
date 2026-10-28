@@ -10,7 +10,11 @@ scoreboard players enable @s macroengine.dlg_no
 execute if score @s macroengine.dlg_yes matches 1 run function macroengine:gate/consent_grant
 execute if entity @s[tag=!macroengine.consented] if score @s macroengine.dlg_no matches 1 run function macroengine:gate/consent_decline
 execute if entity @s[tag=!macroengine.consented] if score @s macroengine.consent matches 1 run function macroengine:gate/consent_dialog
-scoreboard players reset @s macroengine.consent
-scoreboard players reset @s macroengine.dlg_yes
-scoreboard players reset @s macroengine.dlg_no
+
+# Reset a trigger only after it was used (value other than 0). Resetting an unused one removes its score,
+# which leaves it disabled between ticks, and /trigger then fails with "You cannot trigger this objective yet".
+execute unless score @s macroengine.consent matches 0 run scoreboard players reset @s macroengine.consent
+execute unless score @s macroengine.dlg_yes matches 0 run scoreboard players reset @s macroengine.dlg_yes
+execute unless score @s macroengine.dlg_no matches 0 run scoreboard players reset @s macroengine.dlg_no
+
 execute if entity @s[tag=!macroengine.consented,tag=!macroengine.prompted] run function macroengine:gate/consent_prompt

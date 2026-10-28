@@ -136,6 +136,18 @@ Full contract, blocklist and permission examples: [cmd_gate.md](cmd_gate.md).
 | `dynamic_cmd` | bool | `0b` | 0b / 1b | master switch for stored-string command execution; 0b makes every gated executor return 0 |
 | `dynamic_cmd_max_len` | int | `256` | 1 - 4096 | longest command string the gate accepts |
 
+## Permissions
+
+Full description, switches and examples: [perm.md](perm.md).
+
+| Key | Type | Default | Range | Effect |
+|---|---|---|---|---|
+| `perm_enforce` | bool | value of `perm_default` (ships `1b`) | 0b / 1b | 0b makes `api/perm/require` and `api/perm/check` pass for everybody; `systems/cmd_gate` ignores this switch |
+| `perm_cmd` | bool | `0b` | 0b / 1b | 1b makes every `api/cmd/<name>` wrapper also need the permission `cmd.<name>` (only while `perm_enforce` is 1b) |
+
+`perm_default` is not part of `config` on purpose, so `core/config/reset` keeps it: it is the value
+`perm_enforce` gets when it is created or reset (`api/toggle/perm/default_on|default_off`).
+
 ## Not configurable (on purpose)
 
 - `systems/validate/safe_name` rules other than the length limit, and the macro-injection guards in `api/store`: turning them off would let untrusted text into commands.

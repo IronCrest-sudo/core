@@ -2,7 +2,7 @@
 # macroengine:systems/uuid/recall
 # Retrieves UUID string from the cache
 #
-# KULLANIM:
+# USAGE:
 # data modify storage macroengine:input key set value "benim_anahtarim"
 # function macroengine:systems/uuid/recall
 #
@@ -10,7 +10,7 @@
 # macroengine:input key → key name used with uuid/store
 #
 # OUTPUT:
-# macroengine:input value → UUID hex string
+# macroengine:output uuid → UUID hex string
 # (value unchanged if key not found)
 # ============================================================
 execute unless score #macroengine.open vortaforge.gate matches 1 run return 0

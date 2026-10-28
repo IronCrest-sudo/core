@@ -3,7 +3,7 @@
 # Builds a standard UUID string from 16 hex field values
 #
 # Call: function macroengine:core/internal/systems/uuid/concat with storage macroengine:uuid _tmp
-# Output: macroengine:input value → "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# Output: macroengine:output uuid → "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 #
 # UUID byte order (big-endian):
 # Segment 1 (8 hex): int0 MSB→LSB = [3][2][1][0]
@@ -14,4 +14,4 @@
 # ============================================================
 execute unless score #macroengine.open vortaforge.gate matches 1 run return 0
 execute if entity @s[type=minecraft:player] unless entity @s[tag=macroengine.consented] unless score #macroengine.gate.3 vortaforge.gate matches 0 run return 0
-$data modify storage macroengine:input value set value "$(3)$(2)$(1)$(0)-$(7)$(6)-$(5)$(4)-$(b)$(a)-$(9)$(8)$(f)$(e)$(d)$(c)"
+$data modify storage macroengine:output uuid set value "$(3)$(2)$(1)$(0)-$(7)$(6)-$(5)$(4)-$(b)$(a)-$(9)$(8)$(f)$(e)$(d)$(c)"

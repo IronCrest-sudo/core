@@ -2,7 +2,7 @@
 # macroengine:systems/uuid/cache_clear
 # Clears all cache (all entries saved with uuid/store)
 #
-# KULLANIM:
+# USAGE:
 # function macroengine:systems/uuid/cache_clear
 #
 # Warning: This operation is irreversible. All stored UUIDs are deleted.

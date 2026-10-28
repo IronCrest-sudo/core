@@ -2,7 +2,7 @@
 # macroengine:systems/uuid/from_array
 # Converts int array in macroengine:input value to UUID string
 #
-# KULLANIM:
+# USAGE:
 # data modify storage macroengine:input value set value [I; a, b, c, d]
 # function macroengine:systems/uuid/from_array
 #
@@ -10,9 +10,9 @@
 # macroengine:input value → [I; int0, int1, int2, int3]
 #
 # OUTPUT:
-# macroengine:input value → "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# macroengine:output uuid → "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 #
-# Output is written to macroengine:input value (AME standard)
+# The input array in macroengine:input value is left as it was.
 # ============================================================
 
 # Read int[4] array directly from macroengine:input value

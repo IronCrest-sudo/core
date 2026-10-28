@@ -18,7 +18,7 @@ execute store result storage macroengine:hook placed.tick int 1 run scoreboard p
 
 # Get player UUID and name via macroengine modules
 execute as @s run function macroengine:systems/uuid/from_entity
-data modify storage macroengine:hook placed.uuid set from storage macroengine:input value
+data modify storage macroengine:hook placed.uuid set from storage macroengine:output uuid
 
 execute as @s run function macroengine:player/get_name
 data modify storage macroengine:hook placed.name set from storage macroengine:names temp.NAME

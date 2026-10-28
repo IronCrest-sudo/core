@@ -47,7 +47,7 @@ execute if data storage macroengine:engine modules{cmd:0b} run return 0
 execute unless data storage macroengine:engine config{dynamic_cmd:1b} run data modify storage macroengine:cmd_gate out.error set value "dynamic commands are disabled (config dynamic_cmd)"
 execute unless data storage macroengine:engine config{dynamic_cmd:1b} run return 0
 
-data modify storage macroengine:perm_require in.perm set value "cmd.dynamic"
+data modify storage macroengine:perm_require in set value {perm:"cmd.dynamic",strict:1b}
 execute store result score #macroengine.cg_perm macroengine.tmp run function macroengine:api/perm/require
 execute unless score #macroengine.cg_perm macroengine.tmp matches 1 run data modify storage macroengine:cmd_gate out.error set value "missing permission cmd.dynamic"
 execute unless score #macroengine.cg_perm macroengine.tmp matches 1 run return 0

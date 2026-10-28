@@ -2,13 +2,13 @@
 # macroengine:systems/uuid/from_entity
 # Converts the current entity's (@s) UUID to a hex string
 #
-# KULLANIM:
+# USAGE:
 # execute as <entity> run function macroengine:systems/uuid/from_entity
 #
 # OUTPUT:
-# macroengine:input value → "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# macroengine:output uuid → "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 #
-# Output is written to macroengine:input value (AME standard)
+# The result is written to macroengine:output uuid. macroengine:input is never touched.
 # Direct NBT read on each call — always up to date
 # Negative byte error is fixed (see extract_bytes)
 # ============================================================

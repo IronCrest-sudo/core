@@ -8,6 +8,8 @@
 scoreboard objectives add vortaforge.gate dummy
 scoreboard objectives add macroengine.permit trigger
 scoreboard objectives add macroengine.consent trigger
+scoreboard objectives add macroengine.dlg_yes trigger
+scoreboard objectives add macroengine.dlg_no trigger
 execute unless score #macroengine.gate.1 vortaforge.gate = #macroengine.gate.1 vortaforge.gate run scoreboard players set #macroengine.gate.1 vortaforge.gate 1
 execute unless score #macroengine.gate.2 vortaforge.gate = #macroengine.gate.2 vortaforge.gate run scoreboard players set #macroengine.gate.2 vortaforge.gate 1
 execute unless score #macroengine.gate.3 vortaforge.gate = #macroengine.gate.3 vortaforge.gate run scoreboard players set #macroengine.gate.3 vortaforge.gate 1

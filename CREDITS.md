@@ -3,6 +3,19 @@
 This file records which parts of the repository were written or changed with AI assistance, so that
 AI involvement is visible in the repository itself and not only through commit authorship.
 
+## 2026-10-28 - fix: macroEngine test findings (uuid output, summon_cbm position, consent screen, permission switches)
+
+**Tool:** Claude (Anthropic), claude.ai chat, working from the maintainer's written test report (five findings, tested on Minecraft 26.3 with two accounts). Review status: _pending - update when reviewed_.
+**Not verified:** nothing here was run in a Minecraft server (repo rule: no server tests by an agent). Checked statically only: Mecha lint (`scripts/lint_datapacks.sh`, passed), `origin_watermarks.py --check` (ok), `audit_repo.py` (two findings that were already there: `pack.format-mixed` in RTWrapper and guikitfw). Mecha skips the `$` lines of macro functions, so those lines were read, not validated; the other lines of all macro functions were checked in a temporary copy with the `$` lines removed.
+
+| Path | Change |
+|---|---|
+| `packs/macroEngine-Datapack-v26.3/.../systems/uuid/*`, `.../core/internal/systems/uuid/*`, `.../systems/hook/raycast/found.mcfunction` | `uuid/from_entity`, `from_array`, `recall` and `match` now put their result in `macroengine:output uuid` (`recall_array`: `macroengine:output uuid_array`) instead of overwriting `macroengine:input value`. **Breaking for outside code that read `macroengine:input value` after these calls.** Internal readers (`store`, `match`, hook `placed.uuid`) were moved. Two Turkish `KULLANIM` headers translated. |
+| `.../input/summon_cbm.mcfunction` | The command block minecart is killed/summoned `at @s`, so `execute as <player> run function macroengine:input/summon_cbm` places it at that player and not at whoever typed the command. |
+| `.../gate/consent_route.mcfunction` (new), `gate/permit_grant`, `gate/approve` | After the pack is approved, the consent screen opens only for the approver (or the `execute as` target). Other unconsented players get a chat notice with a click action; players who join later still get the screen. A console/command-block approval opens no screen. |
+| `.../api/perm/require`, `api/perm/check`, `config.mcfunction`, `core/config/{apply,ensure}`, `systems/cmd_gate/check`, `api/toggle/perm/*` (new: `enforce_on/off`, `default_on/off`, `cmd_on/off`, `status`), `docs/perm.md` (new), `docs/config.md` | New config keys `perm_enforce` (follows `perm_default`, ships on) and `perm_cmd` (ships off); `config_rev` 3 -> 4. With enforcement or `module_perm` off, `require`/`check` pass for everybody (before, `module_perm` off made every `require` fail). `cmd_gate` calls `require` with `in.strict` and is never opened by these switches. Toggle functions accept a no-entity executor or the `macroengine.admin` tag. |
+| `.../api/cmd/**` (121 wrappers) | Each wrapper gets two lines that require the permission `cmd.<name>` when `perm_cmd` is on. Skipped: `empty`, `run_with_cb`, `data_remove_storage`. Default is off, so behaviour does not change until a server enables it. |
+
 ## 2026-10-27 - feat: default-off dynamic command gate + deterministic release build
 
 **Tool:** Arena.ai Agent Mode, working from a prompt by the maintainer. Review status: _pending - update when reviewed_.

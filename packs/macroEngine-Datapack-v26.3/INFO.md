@@ -6,6 +6,8 @@ This page is linked from the consent screen that macroEngine shows each player b
 
 macroEngine, its runtime data, and everything that flows through it (text typed on signs, in books, on name tags, in anvil renames, in chat, and the contents of any other datapack, mod or resource pack in the same world) is **third-party content**. It is **not audited, verified or endorsed by Mojang, Microsoft or VortaForge**. Nothing on this page is a security guarantee. You are responsible for checking what you install and what you type.
 
+This pack runs under the authority of whoever operates this server. **The server owner controls what the pack does, what data it stores, and how it behaves on this installation** — Mojang, Microsoft and VortaForge have no oversight over any specific server's configuration. Trust this content only to the extent you trust the server operator.
+
 ## 2. The consent screen
 
 - **Open INFO.md** opens this page.
@@ -19,6 +21,10 @@ Limits, stated plainly:
 - The Submit button runs `/trigger macroengine.dlg_<your text> set 1` as you. `/trigger` is used because it works for non-operators; `/function` would not. Only `macroengine.dlg_yes` and `macroengine.dlg_no` exist, so any other text is a failed command.
 - A trigger is not authenticated. Anyone can type `/trigger macroengine.dlg_yes set 1` in chat and skip the screens. The screens make the notice hard to miss; they do not force anyone to read it.
 - A datapack is plain text and its checks can be deleted by whoever installs it. This is a safeguard, not a sandbox. Enforcement that cannot be bypassed belongs in a mod.
+
+## 2a. No screen from this pack is an official Mojang/Microsoft screen
+
+Every dialog macroEngine shows is rendered by this server-side datapack, inside the game's own UI. It is **not** an official Mojang, Microsoft or Minecraft system screen, however it looks. **No legitimate dialog — from this pack, or from any other pack or server — will ever ask for your Microsoft account email, password, verification code, or any other account credential.** If a dialog asks for that, close it immediately, do not type anything into it, and report it (Section 6).
 
 ## 3. How to review the pack (server owners and admins)
 
@@ -46,7 +52,7 @@ This applies to signs, writable books, lecterns, name tags, anvil renames, comma
 - **Macro and syntax characters:** `$`, `$(`, `{`, `}`, `[`, `]`, `"`, `'`, `\`, `:` and `@a`/`@e`/`@p`/`@r`/`@s` selectors, unless an interface explicitly asks for them. These are exactly what `input/validate/check` rejects for `tag_safe`.
 - **JSON or NBT:** raw text components, item components or other structured data meant to be parsed later.
 - **Instructions aimed at AI tools:** phrases such as "ignore previous instructions", "you are now...", "system:", "run the following", fake tool or admin messages, or text formatted to look like a prompt or a tool result. This is prompt injection. It is an abuse of this project and will be treated as malicious.
-- **Secrets and personal data:** passwords, tokens, API keys, addresses, real names. Captured text is saved in the world's storage and is readable by operators and by anything with data access.
+- **Secrets and personal data:** passwords, tokens, API keys, addresses, real names. Captured text is saved in the world's storage and is readable by operators and by anything with data access. This includes **your Microsoft account credentials** — no screen in this pack will ever legitimately ask for them (see Section 2a).
 - **Anything in the consent box other than `yes` or `no`.** The box is part of a command, not a chat field.
 
 If you are unsure whether something is safe to type, do not type it.

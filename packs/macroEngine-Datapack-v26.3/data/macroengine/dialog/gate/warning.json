@@ -34,6 +34,21 @@
       "width": 380,
       "contents": [
         {
+          "text": "SERVER OWNER CONTROL\n",
+          "color": "yellow",
+          "bold": true
+        },
+        {
+          "text": "This datapack runs under the authority of this server's operator. The server owner controls what this pack does, what data it stores, and how it behaves — Mojang, Microsoft and VortaForge have no oversight over this specific server's configuration. Trust this content only to the extent you trust the server operator.",
+          "color": "white"
+        }
+      ]
+    },
+    {
+      "type": "minecraft:plain_message",
+      "width": 380,
+      "contents": [
+        {
           "text": "⚠ ",
           "color": "red",
           "bold": true
